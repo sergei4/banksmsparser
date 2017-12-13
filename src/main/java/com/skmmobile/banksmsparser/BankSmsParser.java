@@ -184,7 +184,8 @@ public class BankSmsParser {
     private static String[] systemSmsTemplate = new String[]{
             "Задолженность по налогу.*",
             "Vhod v Tinkoff.ru.*",
-            "Вход в Сбербанк Онлайн для Android.*"
+            "Вход в Сбербанк Онлайн для Android.*",
+            ".*пароль:\\s\\d+.*"
     };
 
     public static boolean isSystemBankSms(String text) {

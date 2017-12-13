@@ -9,11 +9,16 @@ public class BankParserTests extends Assert {
 
     private static final String RESULT_IS_NULL = "Не удалось разобрать строку";
 
+    private void isSystemSms(String text){
+        Assert.assertTrue("Не удалось распознать служебное смс", BankSmsParser.isSystemBankSms(text));
+    }
+
     @Test
     public void IsSystemSmsTest() {
-        Assert.assertTrue("Не удалось распознать смс", BankSmsParser.isSystemBankSms("Задолженность по налогу на транспорт"));
-        Assert.assertTrue("Не удалось распознать смс", BankSmsParser.isSystemBankSms("Vhod v Tinkoff.ru uspeshno vypolnen"));
-        Assert.assertTrue("Не удалось распознать смс", BankSmsParser.isSystemBankSms("Вход в Сбербанк Онлайн для Android 19:32 02.12.17"));
+        isSystemSms("Задолженность по налогу на транспорт");
+        isSystemSms("Vhod v Tinkoff.ru uspeshno vypolnen");
+        isSystemSms("Вход в Сбербанк Онлайн для Android 19:32 02.12.17");
+        isSystemSms("Списание средств: Tinkoff Bank (RUB 15000.00); пароль: 244265. Не сообщайте пароль НИКОМУ. Только мошенники запрашивают пароли");
     }
 
     @Test
@@ -77,6 +82,14 @@ public class BankParserTests extends Assert {
         amount = new BigDecimal("25000");
         assertTrue(result.getAmount().compareTo(amount) == 0);
         assertEquals("", result.getDetails());
+
+        result = parser.parseSms("Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru");
+        assertNotNull(RESULT_IS_NULL, result);
+        assertEquals("perevod_card", result.getType());
+        assertEquals("9930", result.getCardIdStr());
+        amount = new BigDecimal("1000");
+        assertTrue(result.getAmount().compareTo(amount) == 0);
+        assertEquals("", result.getDetails());
     }
 
     @Test
@@ -122,6 +135,14 @@ public class BankParserTests extends Assert {
         assertEquals("zachislenie", result.getType());
         assertEquals("VISA6168", result.getCardIdStr());
         amount = new BigDecimal("10000");
+        assertTrue(result.getAmount().compareTo(amount) == 0);
+        assertEquals("", result.getDetails());
+
+        result = parser.parseSms("VISA6168 11.12.17 18:13 зачисление 6300р с Вашего вклада. Баланс: 8982.45р");
+        assertNotNull(RESULT_IS_NULL, result);
+        assertEquals("zachislenie", result.getType());
+        assertEquals("VISA6168", result.getCardIdStr());
+        amount = new BigDecimal("6300");
         assertTrue(result.getAmount().compareTo(amount) == 0);
         assertEquals("", result.getDetails());
     }

@@ -44,5 +44,13 @@ public class TinkoffSmsParser extends BankSmsParser {
         operation.setAmountRex("(?<=Summa\\s)\\d+\\.?\\d{1,2}");
         //operation.setDetailRex("(RUB|USD|EUR).\\s(.*)\\.\\s\\d{2}\\.\\d{2}", 2);
         addOperationTemplate(operation);
+
+        // Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru
+        operation = new Operation("perevod_card");
+        operation.setTypePattern("Perevod na kartu.*");
+        operation.setCardIdRex("(?<=(Karta\\s\\*))\\d{4}");
+        operation.setAmountRex("(?<=Summa\\s)\\d+\\.?\\d{1,2}");
+        //operation.setDetailRex("(RUB|USD|EUR).\\s(.*)\\.\\s\\d{2}\\.\\d{2}", 2);
+        addOperationTemplate(operation);
     }
 }
