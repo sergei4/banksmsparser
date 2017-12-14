@@ -1,5 +1,7 @@
 package com.skmmobile.banksmsparser;
 
+import org.w3c.dom.Document;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -16,6 +18,10 @@ public class BankSmsParser {
 
     protected void addOperationTemplate(Operation operation) {
         operationSet.add(operation);
+    }
+
+    public int getOperationCount(){
+        return operationSet.size();
     }
 
     public Result parseSms(String text) {
@@ -178,6 +184,13 @@ public class BankSmsParser {
         public void setDecDelim(CharSequence decDelim) {
             this.decDelim = decDelim;
         }
+    }
+
+    public static BankSmsParser obtain(Document document, String bankName){
+        return XmlBankParser.Builder.newInstance()
+                .setXmlDocument(document)
+                .setBankName(bankName)
+                .build();
     }
 
     // Шаблоны системных sms для исключения

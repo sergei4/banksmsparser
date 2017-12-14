@@ -1,5 +1,12 @@
 package com.skmmobile.banksmsparser;
 
+import org.w3c.dom.Document;
+
+/**
+ * Статический шаблон для обработки смс банка Tinkoff.
+ * шаблоны перенесены в xml
+ */
+
 public class TinkoffSmsParser extends BankSmsParser {
 
     public TinkoffSmsParser() {

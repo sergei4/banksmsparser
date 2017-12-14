@@ -2,8 +2,13 @@ package com.skmmobile.banksmsparser;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
 
+import java.io.File;
 import java.math.BigDecimal;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class BankParserTests extends Assert {
 
@@ -21,168 +26,367 @@ public class BankParserTests extends Assert {
         isSystemSms("Списание средств: Tinkoff Bank (RUB 15000.00); пароль: 244265. Не сообщайте пароль НИКОМУ. Только мошенники запрашивают пароли");
     }
 
+    private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
+        BankSmsParser.Result result;
+        BigDecimal amount;
+
+        result = parser.parseSms(smsText);
+        assertNotNull(RESULT_IS_NULL, result);
+        assertEquals(type, result.getType());
+        assertEquals(cardId, result.getCardIdStr());
+        amount = new BigDecimal(amountStr);
+        assertTrue("Проверьте сумму. Ожидалось: " + result.getAmount().toPlainString(),result.getAmount().compareTo(amount) == 0);
+        assertEquals(details, result.getDetails());
+    }
+
     @Test
     public void TinkoffParserTest() {
-        BankSmsParser parser = new TinkoffSmsParser();
-        BankSmsParser.Result result;
-        BigDecimal amount;
-
-        result = parser.parseSms("Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("167.90");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("PYATEROCHKA, CHELYABINSK", result.getDetails());
-
-        result = parser.parseSms("Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("0380", result.getCardIdStr());
-        amount = new BigDecimal("126");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("YANDEX.GOODS", result.getDetails());
-
-        result = parser.parseSms("Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("175");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("GRANDVERA", result.getDetails());
-
-        result = parser.parseSms("Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("jur.perevod", result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("3270.63");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("iBank", result.getDetails());
-
-        result = parser.parseSms("Popolnenie. Karta *9930. Summa 8000 RUB. Card2Card. 07.12.2017 15:31. Dostupno 61967.41 RUB. Tinkoff.ru");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("popolnenie", result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("8000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("Card2Card", result.getDetails());
-
-        result = parser.parseSms("Покупка. Карта *0380. 38 RUB. YANDEX.GOODS. Доступно 20225 RUB");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("0380", result.getCardIdStr());
-        amount = new BigDecimal("38");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("YANDEX.GOODS", result.getDetails());
-
-        result = parser.parseSms("Vnutrenniy perevod sebe. Karta *9930. Summa 25000 RUB. mBank. 09.12.2017 05:20. Dostupno 61972.03 RUB. Tinkoff.ru");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("perevod", result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("25000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
-
-        result = parser.parseSms("Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("perevod_card", result.getType());
-        assertEquals("9930", result.getCardIdStr());
-        amount = new BigDecimal("1000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        TinkoffParserTestImpl(new TinkoffSmsParser());
     }
 
     @Test
-    public void SberbankParserTest() {
-        BankSmsParser parser = new SberbankSmsParser();
-        BankSmsParser.Result result;
-        BigDecimal amount;
+    public void XmlTinkoffParserTest() throws Exception{
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
 
-        result = parser.parseSms("VISA6168 06.12.17 11:30 списание 700р Баланс: 2682.45р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("spisanie", result.getType());
-        assertEquals("VISA6168", result.getCardIdStr());
-        amount = new BigDecimal("700");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        TinkoffParserTestImpl(BankSmsParser.obtain(xmlDocument, "tinkoff"));
+    }
 
-        result = parser.parseSms("VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("VISA6470", result.getCardIdStr());
-        amount = new BigDecimal("200");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("MTS OAO", result.getDetails());
+    private void TinkoffParserTestImpl(BankSmsParser parser){
+        // <editor-fold desc="12.12.2017">
+        checkBankSms(
+                parser,
+                "Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "9930",
+                "167.90",
+                "PYATEROCHKA, CHELYABINSK"
+        );
 
-        result = parser.parseSms("VISA6168 02.12.17 19:32 списание 30000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 3382.45р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("spisanie", result.getType());
-        assertEquals("VISA6168", result.getCardIdStr());
-        amount = new BigDecimal("30000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        checkBankSms(
+                parser,
+                "Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "0380",
+                "126",
+                "YANDEX.GOODS"
+        );
 
-        result = parser.parseSms("VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("zachislenie_ATM", result.getType());
-        assertEquals("VISA6168", result.getCardIdStr());
-        amount = new BigDecimal("30000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("ATM 335417", result.getDetails());
+        checkBankSms(
+                parser,
+                "Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "9930",
+                "175",
+                "GRANDVERA"
+        );
 
-        result = parser.parseSms("VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("zachislenie", result.getType());
-        assertEquals("VISA6168", result.getCardIdStr());
-        amount = new BigDecimal("10000");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        checkBankSms(
+                parser,
+                "Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru",
+                "jur.perevod",
+                "9930",
+                "3270.63",
+                "iBank"
+        );
 
-        result = parser.parseSms("VISA6168 11.12.17 18:13 зачисление 6300р с Вашего вклада. Баланс: 8982.45р");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("zachislenie", result.getType());
-        assertEquals("VISA6168", result.getCardIdStr());
-        amount = new BigDecimal("6300");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        checkBankSms(
+                parser,
+                "Popolnenie. Karta *9930. Summa 8000 RUB. Card2Card. 07.12.2017 15:31. Dostupno 61967.41 RUB. Tinkoff.ru",
+                "popolnenie",
+                "9930",
+                "8000",
+                "Card2Card"
+        );
+
+        checkBankSms(
+                parser,
+                "Покупка. Карта *0380. 38 RUB. YANDEX.GOODS. Доступно 20225 RUB",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "0380",
+                "38",
+                "YANDEX.GOODS"
+        );
+
+        checkBankSms(
+                parser,
+                "Vnutrenniy perevod sebe. Karta *9930. Summa 25000 RUB. mBank. 09.12.2017 05:20. Dostupno 61972.03 RUB. Tinkoff.ru",
+                "perevod",
+                "9930",
+                "25000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru",
+                "perevod_card",
+                "9930",
+                "1000",
+                ""
+        );
+        //</editor-fold>
     }
 
     @Test
-    public void AlfaBankParserTest() {
-        BankSmsParser parser = new AlfaBankSmsParser();
-        BankSmsParser.Result result;
-        BigDecimal amount;
+    public void SberbankParserTest(){
+        SberbankParserTestImpl(new SberbankSmsParser());
+    }
 
-        result = parser.parseSms("5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("9857", result.getCardIdStr());
-        amount = new BigDecimal("110");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("RU/CHELYABINSK/SOKOL FIT DER NOVOE PO", result.getDetails());
+    @Test
+    public void XmlSberbankParserTest() throws Exception{
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
 
-        result = parser.parseSms("4*0537; Pokupka; Uspeshno; Summa: 5141,00 RUR; Ostatok: 130731,27 RUR; RU/CHELYABINSK/LENTA 212; 05.12.2017 19:46:57");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals(BankSmsParser.CATEGORY_EXPENSE, result.getType());
-        assertEquals("0537", result.getCardIdStr());
-        amount = new BigDecimal("5141");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("RU/CHELYABINSK/LENTA 212", result.getDetails());
+        SberbankParserTestImpl(BankSmsParser.obtain(xmlDocument, "sberbank"));
+    }
 
-        result = parser.parseSms("5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("popolnenie", result.getType());
-        assertEquals("9857", result.getCardIdStr());
-        amount = new BigDecimal("1300");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+    private void SberbankParserTestImpl(BankSmsParser parser) {
 
-        result = parser.parseSms("Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02");
-        assertNotNull(RESULT_IS_NULL, result);
-        assertEquals("perevod", result.getType());
-        assertEquals("408*32167", result.getCardIdStr());
-        amount = new BigDecimal("1500");
-        assertTrue(result.getAmount().compareTo(amount) == 0);
-        assertEquals("", result.getDetails());
+        //<editor-fold desc="12.12.2017">
+        checkBankSms(
+                parser,
+                "VISA6168 06.12.17 11:30 списание 700р Баланс: 2682.45р",
+                "spisanie",
+                "VISA6168",
+                "700",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "VISA6470",
+                "200",
+                "MTS OAO"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6168 02.12.17 19:32 списание 30000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 3382.45р",
+                "spisanie",
+                "VISA6168",
+                "30000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р",
+                "zachislenie_ATM",
+                "VISA6168",
+                "30000",
+                "ATM 335417"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р",
+                "zachislenie",
+                "VISA6168",
+                "10000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6168 11.12.17 18:13 зачисление 6300р с Вашего вклада. Баланс: 8982.45р",
+                "zachislenie",
+                "VISA6168",
+                "6300",
+                ""
+        );
+        //</editor-fold>
+
+        checkBankSms(
+                parser,
+                "MIR-3075 12.12.17 19:31 покупка 171.76р PYATEROCHKA 8456 Баланс: 2476.46р",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "MIR-3075",
+                "171.76",
+                "PYATEROCHKA 8456"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA5538 13.12.17 16:18 покупка 558р SUPERMARKET EVROPA Баланс: 3256.88р",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "VISA5538",
+                "558",
+                "SUPERMARKET EVROPA"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA5538 11.12.17 20:46 покупка 557.90р BURGER KING 0287 Баланс: 279.88р",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "VISA5538",
+                "557.90",
+                "BURGER KING 0287"
+        );
+
+        checkBankSms(
+                parser,
+                "MAES0515 11.12.17 12:24 зачисление пенсии 10471.91р Баланс: 12934.80р",
+                "zachislenie",
+                "MAES0515",
+                "10471.91",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "MAES0515 11.12.17 12:27 списание 12000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 934.80р",
+                "spisanie",
+                "MAES0515",
+                "12000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "MAES0515 10.12.17 05:43 зачисление 1856.68р SO VKLADA N*013008564017-1856.68RUR Баланс: 2462.89р",
+                "zachislenie",
+                "MAES0515",
+                "1856.68",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ORPS5161 09.12.17 11:44 списание 2000р Баланс: 229.11р",
+                "spisanie",
+                "ORPS5161",
+                "2000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ORPS5161 08.12.17 16:25 списание 1р Баланс: 2229.11р",
+                "spisanie",
+                "ORPS5161",
+                "1",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ORPS5161 08.12.17 16:12 зачисление 1р Баланс: 2309.21р",
+                "zachislenie",
+                "ORPS5161",
+                "1",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ORPS5161 08.12.17 16:10 зачисление 5000р с Вашего вклада. Баланс: 6020.21р",
+                "zachislenie",
+                "ORPS5161",
+                "5000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "MIR-3075 13.12.17 22:51 зачисление 31600р Баланс: 32474.66р",
+                "zachislenie",
+                "MIR-3075",
+                "31600",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ECMC8559 13.12.17 16:49 зачисление 15000р ATM 10853020 Баланс: 0",
+                "zachislenie_ATM",
+                "ECMC8559",
+                "15000",
+                "ATM 10853020"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97682.45р",
+                "vida4a_ATM",
+                "VISA6168",
+                "5000",
+                "ATM 861320"
+        );
+
+        checkBankSms(
+                parser,
+                "VISA0000 10.12.17 оплата Мобильного банка за 10/12/2017-09/01/2018 60р Баланс: 00000.00р",
+                "pay_iBank",
+                "VISA0000",
+                "60",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA0000: перевод 400р. на карту получателя ВЕРОНИКА АЛЕКСАНДРОВНА П. выполнен. Подробнее в выписке по карте http://sberbank.ru/sms/h2/",
+                "perevod",
+                "VISA0000",
+                "400",
+                ""
+        );
+
+    }
+
+    @Test
+    public void AlfaBankParserTest(){
+        AlfaBankParserTestImpl(new AlfaBankSmsParser());
+    }
+
+    @Test
+    public void XmlAlfaBankParserTest() throws Exception{
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
+
+        AlfaBankParserTestImpl(BankSmsParser.obtain(xmlDocument, "alfabank"));
+    }
+
+    private void AlfaBankParserTestImpl(BankSmsParser parser) {
+        checkBankSms(
+                parser,
+                "5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "9857",
+                "110",
+                "RU/CHELYABINSK/SOKOL FIT DER NOVOE PO"
+        );
+
+        checkBankSms(
+                parser,
+                "4*0537; Pokupka; Uspeshno; Summa: 5141,00 RUR; Ostatok: 130731,27 RUR; RU/CHELYABINSK/LENTA 212; 05.12.2017 19:46:57",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "0537",
+                "5141",
+                "RU/CHELYABINSK/LENTA 212"
+        );
+
+        checkBankSms(
+                parser,
+                "5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app",
+                "popolnenie",
+                "9857",
+                "1300",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02",
+                "perevod",
+                "408*32167",
+                "1500",
+                ""
+        );
     }
 }

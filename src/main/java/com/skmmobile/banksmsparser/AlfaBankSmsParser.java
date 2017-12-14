@@ -1,5 +1,10 @@
 package com.skmmobile.banksmsparser;
 
+/**
+ * Статический шаблон для обработки смс банка Альфа-Банк.
+ * шаблоны перенесены в xml
+ */
+
 public class AlfaBankSmsParser extends BankSmsParser {
 
     public AlfaBankSmsParser() {
