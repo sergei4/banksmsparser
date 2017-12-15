@@ -8,6 +8,8 @@
     decimal_group_char - символ разделителя разрядов (по-умолчанию "")
 -->
 <content>
+    <version>1</version>
+    <updated>2017.12.15</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>

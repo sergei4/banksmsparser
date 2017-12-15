@@ -100,10 +100,9 @@ public class XmlBankParser extends BankSmsParser {
     }
 
     public static BankSmsParser obtain(Document document, String bankName){
-        return XmlBankParser.Builder.newInstance()
-                .setXmlDocument(document)
-                .setBankName(bankName)
-                .build();
+        XmlBankParser xmlBankParser = new XmlBankParser();
+        xmlBankParser.init(document, bankName);
+        return xmlBankParser;
     }
 
     public void init(Document document, String bankName){
@@ -159,31 +158,6 @@ public class XmlBankParser extends BankSmsParser {
                     }
                 }
             }
-        }
-    }
-
-    public static class Builder {
-        private String bankName;
-        private Document document;
-
-        public static Builder newInstance(){
-            return new Builder();
-        }
-
-        public Builder setXmlDocument(Document document){
-            this.document = document;
-            return this;
-        }
-
-        public Builder setBankName(String bankName){
-            this.bankName = bankName;
-            return this;
-        }
-
-        public XmlBankParser build(){
-            XmlBankParser instance = new XmlBankParser();
-            instance.init(document, bankName);
-            return instance;
         }
     }
 
