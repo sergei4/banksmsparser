@@ -34,14 +34,21 @@ public class LoadXmlParserTests extends Assert{
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
 
+        System.out.println("Список банков:");
         List<String> ids = XmlBankParser.obtainBankIdList(xmlDocument);
         for(String id: ids)
             System.out.println(id);
 
         assertTrue("Шаблон не содержит данных", ids.size() > 0);
 
+        System.out.println("\nСписок телефонов:");
         Map<String, String> phones = XmlBankParser.obtainBankPhoneMap(xmlDocument);
         for(String phone: phones.keySet())
             System.out.println(phone + ": " + phones.get(phone));
+
+        System.out.println("\nСписок системных смс:");
+        List<String> systemSms = XmlBankParser.obtainSystemSmsPatternList(xmlDocument);
+        for(String sms: systemSms)
+            System.out.println(sms);
     }
 }
