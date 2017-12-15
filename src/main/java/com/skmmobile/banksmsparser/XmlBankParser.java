@@ -4,27 +4,34 @@ package com.skmmobile.banksmsparser;
 import com.sun.org.apache.xerces.internal.dom.DeferredCDATASectionImpl;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class XmlBankParser extends BankSmsParser {
 
     private static final String ATTR_ID       = "id";
+    private static final String ATTR_BANK_ID  = "bankId";
     private static final String ATTR_NAME     = "name";
     private static final String ATTR_CATEGORY = "category";
     private static final String ATTR_GROUP    = "group";
 
-    private static final String NODE_BANK     = "bank";
-    private static final String NODE_PATTERN  = "pattern";
-    private static final String NODE_MATCH    = "match";
-    private static final String NODE_CARD_ID  = "cardId";
-    private static final String NODE_AMOUNT   = "amount";
-    private static final String NODE_DETAIL   = "detail";
-    private static final String NODE_DEC_CHAR = "decimal_char";
+    private static final String NODE_BANKS      = "banks";
+    private static final String NODE_BANK       = "bank";
+    private static final String NODE_PHONES     = "bank_phones";
+    private static final String NODE_PHONE      = "phone";
+    private static final String NODE_SYSTEM_SMS = "system_sms";
+    private static final String NODE_PATTERNS   = "patterns";
+    private static final String NODE_PATTERN    = "pattern";
+    private static final String NODE_MATCH      = "match";
+    private static final String NODE_CARD_ID    = "cardId";
+    private static final String NODE_AMOUNT     = "amount";
+    private static final String NODE_DETAIL     = "detail";
+    private static final String NODE_DEC_CHAR   = "decimal_char";
     private static final String NODE_DEC_GROUP_CAHR = "decimal_group_char";
 
     private String bankName;
@@ -50,7 +57,6 @@ public class XmlBankParser extends BankSmsParser {
             if(node.getNodeType() == Node.CDATA_SECTION_NODE){
                 patternParameter.patternStr = ((DeferredCDATASectionImpl) node).getData();
             }
-
         }
         return patternParameter;
     }
@@ -65,12 +71,47 @@ public class XmlBankParser extends BankSmsParser {
         return result;
     }
 
-    public void init(Document document, String bankName){
-        NodeList bankList = document.getElementsByTagName(NODE_BANK);
+    public static Map<String, String> obtainBankPhoneMap(Document document){
+        Map<String, String> phoneMap = new HashMap<>();
+        NodeList bankList = document.getElementsByTagName(NODE_PHONE);
         int count = bankList.getLength();
         for (int i = 0; i < count; i++) {
-            Node bank = bankList.item(i);
-            String xBankName = getAttribute(bank, ATTR_ID);
+            String phone = bankList.item(i).getFirstChild().getNodeValue();
+            phoneMap.put(phone, getAttribute(bankList.item(i), ATTR_BANK_ID));
+        }
+        return phoneMap;
+    }
+
+    public static List<String> obtainSystemSmsPatternList(Document document) {
+        NodeList smsNodeList = document.getElementsByTagName(NODE_SYSTEM_SMS);
+        List<String> result = new ArrayList<>();
+        int count = smsNodeList.getLength();
+        for (int i = 0; i < count; i++) {
+            NodeList smsNodeParams = smsNodeList.item(i).getChildNodes();
+            int itemCount = smsNodeParams.getLength();
+            for(int j=0; j<itemCount; j++) {
+                Node node = smsNodeParams.item(j);
+                if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
+                    result.add(((DeferredCDATASectionImpl) node).getData());
+                }
+            }
+        }
+        return result;
+    }
+
+    public static BankSmsParser obtain(Document document, String bankName){
+        return XmlBankParser.Builder.newInstance()
+                .setXmlDocument(document)
+                .setBankName(bankName)
+                .build();
+    }
+
+    public void init(Document document, String bankName){
+        NodeList bankPatternsList = document.getElementsByTagName(NODE_PATTERNS);
+        int count = bankPatternsList.getLength();
+        for (int i = 0; i < count; i++) {
+            Node bank = bankPatternsList.item(i);
+            String xBankName = getAttribute(bank, ATTR_BANK_ID);
             if (xBankName.equals(bankName)) {
                 this.bankName = xBankName;
                 NodeList bankChildNodes = bank.getChildNodes();

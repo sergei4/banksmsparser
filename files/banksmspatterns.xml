@@ -11,7 +11,27 @@
     <operations>
         <operation name="expense">expense</operation>
     </operations>
-    <bank id="tinkoff" name="Tinkoff">
+    <banks>
+        <bank id="tinkoff">Tinkoff</bank>
+        <bank id="alfabank">Альфа-Банк</bank>
+        <bank id="sberbank">Сбербанк России</bank>
+    </banks>
+    <bank_phones>
+        <phone bankId="tinkoff">Tinkoff</phone>
+        <phone bankId="tinkoff">tinkoff</phone>
+        <phone bankId="sberbank">900</phone>
+        <phone bankId="alfabank">Alfa-Bank</phone>
+        <phone bankId="alfabank">2265</phone>
+        <phone bankId="alfabank">+79037672265</phone>
+    </bank_phones>
+    <system>
+        <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*пароль:\s\d+.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(Сбербанк Онлайн).*(перевел).*]]></system_sms>
+    </system>
+    <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
         <pattern category="expense">
             <match><![CDATA[Pokupka.*]]></match>
@@ -53,8 +73,8 @@
             <cardId group="0"><![CDATA[(?<=(Karta\s\*))\d{4}]]></cardId>
             <amount group="0"><![CDATA[(?<=Summa\s)\d+\.?\d{1,2}]]></amount>
         </pattern>
-    </bank>
-    <bank id="alfabank" name="Альфа-Банк">
+    </patterns>
+    <patterns bankId="alfabank">
         <!-- 5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
         <pattern category="expense">
             <match><![CDATA[.*\sPokupka\;.*]]></match>
@@ -77,8 +97,8 @@
             <amount group="1"><![CDATA[na summu\s(.*)\sRUR]]></amount>
             <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
-    </bank>
-    <bank id="sberbank" name="Сбербанк России">
+    </patterns>
+    <patterns bankId="sberbank">
         <!--VISA6168 06.12.17 11:30 списание 700р Баланс: 2682.45р-->
         <pattern category="spisanie">
             <match><![CDATA[.*списание\s\d.*]]></match>
@@ -132,5 +152,5 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="0"><![CDATA[(?<=перевод\s)\d*\.?\d{1,2}]]></amount>
         </pattern>
-    </bank>
+    </patterns>
 </content>

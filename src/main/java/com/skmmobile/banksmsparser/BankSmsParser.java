@@ -186,19 +186,13 @@ public class BankSmsParser {
         }
     }
 
-    public static BankSmsParser obtain(Document document, String bankName){
-        return XmlBankParser.Builder.newInstance()
-                .setXmlDocument(document)
-                .setBankName(bankName)
-                .build();
-    }
-
     // Шаблоны системных sms для исключения
     private static String[] systemSmsTemplate = new String[]{
-            "Задолженность по налогу.*",
-            "Vhod v Tinkoff.ru.*",
-            "Вход в Сбербанк Онлайн для Android.*",
-            ".*пароль:\\s\\d+.*"
+            "Задолженность по налогу.*"
+            ,"Vhod v Tinkoff.ru.*"
+            ,"Вход в Сбербанк Онлайн для Android.*"
+            ,".*пароль:\\s\\d+.*"
+            ,"(Сбербанк Онлайн).*(перевел).*"
     };
 
     public static boolean isSystemBankSms(String text) {
