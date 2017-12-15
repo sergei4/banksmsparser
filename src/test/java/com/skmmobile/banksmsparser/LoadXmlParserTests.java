@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,5 +37,11 @@ public class LoadXmlParserTests extends Assert{
         List<String> ids = XmlBankParser.obtainBankIdList(xmlDocument);
         for(String id: ids)
             System.out.println(id);
+
+        assertTrue("Шаблон не содержит данных", ids.size() > 0);
+
+        Map<String, String> phones = XmlBankParser.obtainBankPhoneMap(xmlDocument);
+        for(String phone: phones.keySet())
+            System.out.println(phone + ": " + phones.get(phone));
     }
 }
