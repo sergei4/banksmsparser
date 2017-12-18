@@ -20,6 +20,10 @@ public class BankSmsParser {
         operationSet.add(operation);
     }
 
+    public String getBankName() {
+        return "indefinite";
+    }
+
     public int getOperationCount(){
         return operationSet.size();
     }

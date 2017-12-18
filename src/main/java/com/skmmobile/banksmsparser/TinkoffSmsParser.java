@@ -9,6 +9,11 @@ import org.w3c.dom.Document;
 
 public class TinkoffSmsParser extends BankSmsParser {
 
+    @Override
+    public String getBankName() {
+        return "tinkoff";
+    }
+
     public TinkoffSmsParser() {
         Operation operation;
         // Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru

@@ -17,6 +17,7 @@
         <bank id="tinkoff">Tinkoff</bank>
         <bank id="alfabank">Альфа-Банк</bank>
         <bank id="sberbank">Сбербанк России</bank>
+        <bank id="vtb24">ВТБ-24</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -25,6 +26,7 @@
         <phone bankId="alfabank">Alfa-Bank</phone>
         <phone bankId="alfabank">2265</phone>
         <phone bankId="alfabank">+79037672265</phone>
+        <phone bankId="vtb24">VTB24</phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -153,6 +155,15 @@
             <match><![CDATA[..*перевод.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="0"><![CDATA[(?<=перевод\s)\d*\.?\d{1,2}]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="vtb24">
+        <!--Karta *0000: Oplata 303.50 RUR; VREMYA ZDOROVYA; 14.11.2017 19:41, dostupno сумма RUR. VTB24-->
+        <pattern category="expense">
+            <match><![CDATA[.*Oplata.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Oplata\s(\d+\.\d{2})]]></amount>
+            <detail group="1"><![CDATA[.*;\s(.*);\s\d]]></detail>
         </pattern>
     </patterns>
 </content>

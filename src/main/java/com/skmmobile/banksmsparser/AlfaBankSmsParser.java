@@ -6,6 +6,10 @@ package com.skmmobile.banksmsparser;
  */
 
 public class AlfaBankSmsParser extends BankSmsParser {
+    @Override
+    public String getBankName() {
+        return "alfabank";
+    }
 
     public AlfaBankSmsParser() {
         Operation operation;

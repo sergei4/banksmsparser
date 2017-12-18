@@ -18,21 +18,20 @@ public class LoadXmlParserTests extends Assert{
     public void loadXmlParser() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
+        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
 
         XmlBankParser bankParser = new XmlBankParser();
         bankParser.init(xmlDocument, "alfabank");
 
         assertEquals("alfabank", bankParser.getBankName());
         assertTrue("Шаблон не содержит данных", bankParser.getOperationCount() > 0);
-
     }
 
     @Test
     public void getBankIdListTest() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse (new File("banksmsparser/files/banksmspatterns.xml"));
+        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
 
         System.out.println("Список банков:");
         List<String> ids = XmlBankParser.obtainBankIdList(xmlDocument);

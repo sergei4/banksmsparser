@@ -6,6 +6,10 @@ package com.skmmobile.banksmsparser;
  */
 
 public class SberbankSmsParser extends BankSmsParser {
+    @Override
+    public String getBankName() {
+        return "sberbank";
+    }
 
     public SberbankSmsParser() {
         Operation operation;
