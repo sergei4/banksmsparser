@@ -18,3 +18,36 @@ task sourceJar(type: Jar) {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+// загрузка файла на сервер
+apply plugin: 'org.hidetake.ssh'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.hidetake:gradle-ssh-plugin:2.9.0'
+    }
+}
+
+remotes {
+    webServer {
+        host = rootProject.ext.uploadConfig.host
+        user = rootProject.ext.uploadConfig.user
+        password = rootProject.ext.uploadConfig.pwd
+    }
+}
+
+def desResource  = rootProject.ext.uploadConfig.resFolder
+
+task uploadXmlOnServer {
+    doLast {
+        ssh.run {
+            session(remotes.webServer) {
+                put from: file("files/banksmspatterns.xml"), into: desResource
+            }
+        }
+    }
+}

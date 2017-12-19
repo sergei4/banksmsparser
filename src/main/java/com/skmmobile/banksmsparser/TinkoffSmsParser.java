@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
  * шаблоны перенесены в xml
  */
 
+@Deprecated
 public class TinkoffSmsParser extends BankSmsParser {
 
     @Override

@@ -3,8 +3,10 @@ package com.skmmobile.banksmsparser;
 import org.w3c.dom.Document;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -191,13 +193,19 @@ public class BankSmsParser {
     }
 
     // Шаблоны системных sms для исключения
-    private static String[] systemSmsTemplate = new String[]{
-            "Задолженность по налогу.*"
-            ,"Vhod v Tinkoff.ru.*"
-            ,"Вход в Сбербанк Онлайн для Android.*"
-            ,".*пароль:\\s\\d+.*"
-            ,"(Сбербанк Онлайн).*(перевел).*"
-    };
+    private static final List<String> systemSmsTemplate = new ArrayList<>();
+    static {
+        systemSmsTemplate.add("Задолженность по налогу.*");
+        systemSmsTemplate.add("Vhod v Tinkoff.ru.*");
+        systemSmsTemplate.add("Вход в Сбербанк Онлайн для Android.*");
+        systemSmsTemplate.add(".*пароль:\\s\\d+.*");
+        systemSmsTemplate.add("(Сбербанк Онлайн).*(перевел).*");
+    }
+
+    public static void initSystemSms(List<String> list){
+        systemSmsTemplate.clear();
+        systemSmsTemplate.addAll(list);
+    }
 
     public static boolean isSystemBankSms(String text) {
         Pattern p;

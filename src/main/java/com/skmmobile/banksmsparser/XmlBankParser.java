@@ -1,8 +1,5 @@
 package com.skmmobile.banksmsparser;
 
-
-import com.sun.org.apache.xerces.internal.dom.DeferredCDATASectionImpl;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -55,7 +52,7 @@ public class XmlBankParser extends BankSmsParser {
         for(int i=0; i<count; i++){
             Node node = childNodeList.item(i);
             if(node.getNodeType() == Node.CDATA_SECTION_NODE){
-                patternParameter.patternStr = ((DeferredCDATASectionImpl) node).getData();
+                patternParameter.patternStr = node.getNodeValue();
             }
         }
         return patternParameter;
@@ -92,7 +89,7 @@ public class XmlBankParser extends BankSmsParser {
             for(int j=0; j<itemCount; j++) {
                 Node node = smsNodeParams.item(j);
                 if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
-                    result.add(((DeferredCDATASectionImpl) node).getData());
+                    result.add(node.getNodeValue());
                 }
             }
         }

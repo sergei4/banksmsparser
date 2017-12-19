@@ -5,6 +5,7 @@ package com.skmmobile.banksmsparser;
  * шаблоны перенесены в xml
  */
 
+@Deprecated
 public class AlfaBankSmsParser extends BankSmsParser {
     @Override
     public String getBankName() {
