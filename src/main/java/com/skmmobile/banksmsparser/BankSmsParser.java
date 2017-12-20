@@ -216,4 +216,18 @@ public class BankSmsParser {
         }
         return false;
     }
+
+    /**
+     * Проверка, что в наборе нет одинаковых шаблонов
+     * @return
+     */
+    public boolean check(){
+        Set<String> matches = new HashSet<>();
+        for(Operation op: operationSet){
+            if(matches.contains(op.typeRex.pattern()))
+                return false;
+            matches.add(op.typeRex.pattern());
+        }
+        return true;
+    }
 }

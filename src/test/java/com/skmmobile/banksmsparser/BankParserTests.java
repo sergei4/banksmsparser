@@ -41,6 +41,7 @@ public class BankParserTests extends Assert {
         isSystemSms("Списание средств: Tinkoff Bank (RUB 15000.00); пароль: 244265. Не сообщайте пароль НИКОМУ. Только мошенники запрашивают пароли");
         isSystemSms("Сбербанк Онлайн. ЕВГЕНИЙ АЛЕКСАНДРОВИЧ У. перевел(а) Вам 3040.00 RUB");
         isSystemSms("VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA");
+        isSystemSms("Uspeshnaja otmena operacii: 5*9857; Summa: 150000,00 RUR; Vydacha nalichnyh Otmena; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:46:39. Alfa-bank.");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -57,13 +58,18 @@ public class BankParserTests extends Assert {
         assertEquals(details, result.getDetails());
     }
 
+    private void checkParser(BankSmsParser parser, String bankName){
+        assertEquals(bankName, parser.getBankName());
+        assertTrue("BankSmsParser содержит дубликаты", parser.check());
+    }
+
     @Test
     public void TinkoffParserTest() {
         TinkoffParserTestImpl(new TinkoffSmsParser(), false);
     }
 
     @Test
-    public void XmlTinkoffParserTest() throws Exception{
+    public void XmlTinkoffParserTest() throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
@@ -71,11 +77,11 @@ public class BankParserTests extends Assert {
         TinkoffParserTestImpl(XmlBankParser.obtain(xmlDocument, "tinkoff"), true);
     }
 
-    private void TinkoffParserTestImpl(BankSmsParser parser, boolean xml){
-        assertEquals("tinkoff", parser.getBankName());
+    private void TinkoffParserTestImpl(BankSmsParser parser, boolean ext){
+        checkParser(parser, "tinkoff");
         TinkoffBaseParserTestImpl(parser);
-        if(xml)
-            TinkoffXmlBaseParserTestImpl(parser);
+        if(ext)
+            TinkoffExtBaseParserTestImpl(parser);
     }
 
     private void TinkoffBaseParserTestImpl(BankSmsParser parser){
@@ -154,7 +160,7 @@ public class BankParserTests extends Assert {
         //</editor-fold>
     }
 
-    private void TinkoffXmlBaseParserTestImpl(BankSmsParser parser){
+    private void TinkoffExtBaseParserTestImpl(BankSmsParser parser){
         checkBankSms(
                 parser,
                 "Платеж. Карта *7733. 100 RUB. Megafon. Баланс *** RUB",
@@ -176,7 +182,7 @@ public class BankParserTests extends Assert {
 
     @Test
     public void SberbankParserTest(){
-        SberbankParserTestImpl(new SberbankSmsParser());
+        SberbankParserTestImpl(new SberbankSmsParser(), false);
     }
 
     @Test
@@ -185,11 +191,18 @@ public class BankParserTests extends Assert {
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
 
-        SberbankParserTestImpl(XmlBankParser.obtain(xmlDocument, "sberbank"));
+        SberbankParserTestImpl(XmlBankParser.obtain(xmlDocument, "sberbank"), true);
     }
 
-    private void SberbankParserTestImpl(BankSmsParser parser) {
-        assertEquals("sberbank", parser.getBankName());
+    private void SberbankParserTestImpl(BankSmsParser parser, boolean ext){
+        checkParser(parser, "sberbank");
+        SberbankBaseParserTestImpl(parser);
+        if(ext)
+            SberbankExtParserTestImpl(parser);
+
+    }
+
+    private void SberbankBaseParserTestImpl(BankSmsParser parser) {
         //<editor-fold desc="12.12.2017">
         checkBankSms(
                 parser,
@@ -401,9 +414,38 @@ public class BankParserTests extends Assert {
 
     }
 
+    private void SberbankExtParserTestImpl(BankSmsParser parser) {
+        checkBankSms(
+                parser,
+                "VISA0000 20.12.17 08:47 зачисление зарплаты 10000.00р Баланс: 00000.00р",
+                "zachislenie",
+                "VISA0000",
+                "10000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р",
+                "commission",
+                "VISA0000",
+                "3",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA0000. Списание в сумме 2 923.55 RUR с карт.счета в погашение Вашего долга по другой карте. 2017-12-18 00:00:00",
+                "own_debit_pay",
+                "VISA0000",
+                "2923.55",
+                ""
+        );
+    }
+
     @Test
     public void AlfaBankParserTest(){
-        AlfaBankParserTestImpl(new AlfaBankSmsParser());
+        AlfaBankParserTestImpl(new AlfaBankSmsParser(), false);
     }
 
     @Test
@@ -412,11 +454,17 @@ public class BankParserTests extends Assert {
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
 
-        AlfaBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "alfabank"));
+        AlfaBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "alfabank"), true);
     }
 
-    private void AlfaBankParserTestImpl(BankSmsParser parser) {
-        assertEquals("alfabank", parser.getBankName());
+    private void AlfaBankParserTestImpl(BankSmsParser parser, boolean ext){
+        checkParser(parser, "alfabank");
+        AlfaBankBaseParserTestImpl(parser);
+        if(ext)
+            AlfaBankExtParserTestImpl(parser);
+    }
+
+    private void AlfaBankBaseParserTestImpl(BankSmsParser parser) {
         checkBankSms(
                 parser,
                 "5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17",
@@ -454,6 +502,17 @@ public class BankParserTests extends Assert {
         );
     }
 
+    private void AlfaBankExtParserTestImpl(BankSmsParser parser){
+        checkBankSms(
+                parser,
+                "5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45",
+                "cash_ATM",
+                "9857",
+                "25200",
+                "RU/CHELYABINSK/Alfa Acq"
+        );
+    }
+
     @Test
     public void XmlVtb24BankParserTest() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -464,7 +523,7 @@ public class BankParserTests extends Assert {
     }
 
     private void Vtb24BankParserTestImpl(BankSmsParser parser) {
-        assertEquals("vtb24", parser.getBankName());
+        checkParser(parser, "vtb24");
         checkBankSms(
                 parser,
                 "Karta *0000: Oplata 303.50 RUR; VREMYA ZDOROVYA; 14.11.2017 19:41, dostupno сумма RUR. VTB24",
@@ -485,7 +544,7 @@ public class BankParserTests extends Assert {
     }
 
     private void GarpromBankParserTestImpl(BankSmsParser parser) {
-        assertEquals("gazprom", parser.getBankName());
+        checkParser(parser, "gazprom");
         checkBankSms(
                 parser,
                 "Telecard; Card8381; Oplata; Summa 559 RUR; 17.12.17 09:19:32; MONETKA; dostupno: 1790.52 RUR",

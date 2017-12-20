@@ -1,5 +1,5 @@
 group 'com.skmmobile'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
@@ -9,10 +9,6 @@ targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
 }
 
 dependencies {
@@ -48,6 +44,24 @@ task uploadXmlOnServer {
             session(remotes.webServer) {
                 put from: file("files/banksmspatterns.xml"), into: desResource
             }
+        }
+    }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    repositories {
+        maven {
+            url rootProject.ext.uploadConfig.marverRepo
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
         }
     }
 }
