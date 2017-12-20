@@ -427,6 +427,15 @@ public class BankParserTests extends Assert {
 
         checkBankSms(
                 parser,
+                "MIR-3075 20.12.17 17:03 зачисление зарплаты 40933р Баланс: 41251.13р",
+                "zachislenie",
+                "MIR-3075",
+                "40933",
+                ""
+        );
+
+        checkBankSms(
+                parser,
                 "VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р",
                 "commission",
                 "VISA0000",
