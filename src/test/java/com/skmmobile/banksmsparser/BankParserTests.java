@@ -42,6 +42,7 @@ public class BankParserTests extends Assert {
         isSystemSms("Сбербанк Онлайн. ЕВГЕНИЙ АЛЕКСАНДРОВИЧ У. перевел(а) Вам 3040.00 RUB");
         isSystemSms("VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA");
         isSystemSms("Uspeshnaja otmena operacii: 5*9857; Summa: 150000,00 RUR; Vydacha nalichnyh Otmena; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:46:39. Alfa-bank.");
+        isSystemSms("VTB24-Online: Obrabotano rasporyazhenie 434233798 (Mezhdu svoimi schetami / obmen valyuti)");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -531,6 +532,33 @@ public class BankParserTests extends Assert {
                 "0000",
                 "303.5",
                 "VREMYA ZDOROVYA"
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *1020: vnesenie 1000.00 RUR; D. 1, MKR. SOLNECHNYI; 14.12.2017 12:59, dostupno 200.00 RUR",
+                "popolnenie",
+                "1020",
+                "1000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *1020: spisanie 600.00 RUR; 35, MYASNITSKAYA; 14.12.2017 16:43, dostupno 620.00 RUR",
+                "spisanie",
+                "1020",
+                "600",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 100.00 RUR.",
+                "spisanie",
+                "1020",
+                "100",
+                ""
         );
     }
 

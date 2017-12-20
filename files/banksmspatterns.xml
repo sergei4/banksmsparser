@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.20 13:34</updated>
+    <updated>2017.12.20 17:04</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -41,6 +41,8 @@
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
+        <!--VTB24-Online: Obrabotano rasporyazhenie 000000000 (Mezhdu svoimi schetami / obmen valyuti)-->
+        <system_sms bankId="alfabank"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie\s\d+\s\(Mezhdu svoimi schetami \/ obmen valyuti\)]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -207,6 +209,19 @@
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Oplata\s(\d+\.\d{2})]]></amount>
             <detail group="1"><![CDATA[.*;\s(.*);\s\d]]></detail>
+        </pattern>
+        <!--Karta *1020: vnesenie 1000.00 RUR; D. 1, MKR. SOLNECHNYI; 14.12.2017 12:59, dostupno 200.00 RUR.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*vnesenie.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[vnesenie\s(\d+\.\d{2})]]></amount>
+        </pattern>
+        <!--Karta *1020: spisanie 600.00 RUR; 35, MYASNITSKAYA; 14.12.2017 16:43, dostupno 620.00 RUR-->
+        <!--Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 100.00 RUR.-->
+        <pattern category="spisanie">
+            <match><![CDATA[.*spisanie.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[spisanie\s(\d+\.\d{2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="gazprom">
