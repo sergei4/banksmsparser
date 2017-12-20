@@ -591,4 +591,25 @@ public class BankParserTests extends Assert {
                 ""
         );
     }
+
+    @Test
+    public void XmlQiwiBankParserTest() throws Exception{
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
+
+        QiwiBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "qiwi"));
+    }
+
+    private void QiwiBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "qiwi");
+        checkBankSms(
+                parser,
+                "Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 340.48 RUR",
+                "spisanie",
+                "1020",
+                "100",
+                ""
+        );
+    }
 }

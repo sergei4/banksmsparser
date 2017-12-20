@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.20 17:04</updated>
+    <updated>2017.12.20 18:31</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -19,6 +19,7 @@
         <bank id="sberbank">Сбербанк России</bank>
         <bank id="vtb24">ВТБ-24</bank>
         <bank id="gazprom" info="Telecart">Газпром</bank>
+        <bank id="qiwi">QIWI</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -31,6 +32,7 @@
         <phone bankId="gazprom">Telecart</phone>
         <phone bankId="gazprom">telecart</phone>
         <phone bankId="gazprom">83532273</phone>
+        <phone bankId="qiwi">QIWIWallet</phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -237,6 +239,14 @@
             <match><![CDATA[.*Poluchen perevod.*]]></match>
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="qiwi">
+        <!--Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 340.48 RUR-->
+        <pattern category="spisanie">
+            <match><![CDATA[.*spisanie.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[spisanie\s(\d+\.\d{2})]]></amount>
         </pattern>
     </patterns>
 </content>
