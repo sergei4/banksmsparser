@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.20 18:31</updated>
+    <updated>2017.12.21 11:03</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -29,6 +29,7 @@
         <phone bankId="alfabank">2265</phone>
         <phone bankId="alfabank">+79037672265</phone>
         <phone bankId="vtb24">VTB24</phone>
+        <phone bankId="vtb24">88224</phone>
         <phone bankId="gazprom">Telecart</phone>
         <phone bankId="gazprom">telecart</phone>
         <phone bankId="gazprom">83532273</phone>
@@ -37,6 +38,7 @@
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*пароль:\s\d+.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[(Сбербанк Онлайн).*(перевел).*]]></system_sms>
@@ -45,6 +47,10 @@
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
         <!--VTB24-Online: Obrabotano rasporyazhenie 000000000 (Mezhdu svoimi schetami / obmen valyuti)-->
         <system_sms bankId="alfabank"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie\s\d+\s\(Mezhdu svoimi schetami \/ obmen valyuti\)]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia smeny parolia.*Nikomu ne soobshchaite.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -225,14 +231,20 @@
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[spisanie\s(\d+\.\d{2})]]></amount>
         </pattern>
+        <!--Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*postuplenie zarabotnoy plati.*]]></match>
+            <cardId group="0"><![CDATA[Schet\s\*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[postuplenie zarabotnoy plati (\d+\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="gazprom">
         <!--Telecard; Card8381; Oplata; Summa 559 RUR; 17.12.17 09:19:32; MONETKA; dostupno: 1790.52 RUR-->
         <pattern category="expense">
             <match><![CDATA[.*Oplata.*]]></match>
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
-            <detail group="1"><![CDATA[\:\d{2};\s(.*);]]></detail>
+            <amount group="2"><![CDATA[Oplata;(\sSumma)?\s(\d+\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
         </pattern>
         <!--Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR-->
         <pattern category="cardToCard">
@@ -242,11 +254,11 @@
         </pattern>
     </patterns>
     <patterns bankId="qiwi">
-        <!--Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 340.48 RUR-->
+        <!--Spisanie c +79036423128 na summu 50.00 rub.-->
         <pattern category="spisanie">
-            <match><![CDATA[.*spisanie.*]]></match>
-            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[spisanie\s(\d+\.\d{2})]]></amount>
+            <match><![CDATA[Spisanie.*]]></match>
+            <cardId group="1"><![CDATA[([+\d]+)\sna]]></cardId>
+            <amount group="1"><![CDATA[na summu\s(\d+\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
 </content>

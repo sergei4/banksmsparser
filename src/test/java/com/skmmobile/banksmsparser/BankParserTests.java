@@ -43,6 +43,10 @@ public class BankParserTests extends Assert {
         isSystemSms("VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA");
         isSystemSms("Uspeshnaja otmena operacii: 5*9857; Summa: 150000,00 RUR; Vydacha nalichnyh Otmena; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:46:39. Alfa-bank.");
         isSystemSms("VTB24-Online: Obrabotano rasporyazhenie 434233798 (Mezhdu svoimi schetami / obmen valyuti)");
+        isSystemSms("Odnorazovyi kod dlia smeny parolia v Visa QIWI Wallet 9327. Nikomu ne soobshchaite.");
+        isSystemSms("Karta 4890*2285, kod 201, ostalnye rekvizity karty na http://w.qiwi.com");
+        isSystemSms("Summa 1000.00 RUB. Poluchatel: Google AdWords. Kod: 377329. Nikomu ego ne soobshchaite.");
+        isSystemSms("Nikomu ne govorite etot kod! SMS-kod: 7738 Operatsiya: platezh QIWI Wallet na summu 900.00 RUB. Tinkoff.ru");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -569,13 +573,22 @@ public class BankParserTests extends Assert {
                 "100",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob",
+                "zachislenie",
+                "Schet *3318",
+                "9200",
+                ""
+        );
     }
 
     @Test
-    public void XmlGazpromBankParserTest() throws Exception{
+    public void XmlGazpromBankParserTest() throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
 
         GarpromBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "gazprom"));
     }
@@ -593,6 +606,15 @@ public class BankParserTests extends Assert {
 
         checkBankSms(
                 parser,
+                "Telecard; Card1091; 15.05.14 12:31:11; SUPERMARKET TECHNO; Oplata; 9150 RUB; dostupno: 49794.88 RUB",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "1091",
+                "9150",
+                "SUPERMARKET TECHNO"
+        );
+
+        checkBankSms(
+                parser,
                 "Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR",
                 "cardToCard",
                 "1745",
@@ -602,10 +624,10 @@ public class BankParserTests extends Assert {
     }
 
     @Test
-    public void XmlQiwiBankParserTest() throws Exception{
+    public void XmlQiwiBankParserTest() throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
 
         QiwiBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "qiwi"));
     }
@@ -614,10 +636,10 @@ public class BankParserTests extends Assert {
         checkParser(parser, "qiwi");
         checkBankSms(
                 parser,
-                "Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 340.48 RUR",
+                "Spisanie c +79036423128 na summu 50.00 rub.",
                 "spisanie",
-                "1020",
-                "100",
+                "+79036423128",
+                "50",
                 ""
         );
     }
