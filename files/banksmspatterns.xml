@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.21 11:03</updated>
+    <updated>2017.12.22 19:52</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -20,6 +20,7 @@
         <bank id="vtb24">ВТБ-24</bank>
         <bank id="gazprom" info="Telecart">Газпром</bank>
         <bank id="qiwi">QIWI</bank>
+        <bank id="minbank">ПАО МИнБанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -31,9 +32,10 @@
         <phone bankId="vtb24">VTB24</phone>
         <phone bankId="vtb24">88224</phone>
         <phone bankId="gazprom">Telecart</phone>
-        <phone bankId="gazprom">telecart</phone>
-        <phone bankId="gazprom">83532273</phone>
+        <phone bankId="gazprom">Telecard</phone>
         <phone bankId="qiwi">QIWIWallet</phone>
+        <phone bankId="minbank">MInB</phone>
+        <phone bankId="minbank">6462</phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -50,7 +52,8 @@
         <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia smeny parolia.*Nikomu ne soobshchaite.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Уважаемый.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -133,7 +136,7 @@
             <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
         <!--5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
-        <pattern category="cash_ATM">
+        <pattern category="vida4a_ATM">
             <match><![CDATA[.*Vydacha nalichnyh.*]]></match>
             <cardId group="2"><![CDATA[(4|5)\*(\d{4});]]></cardId>
             <amount group="1"><![CDATA[Summa:\s(\d*\,?\d{1,2})]]></amount>
@@ -241,9 +244,16 @@
     <patterns bankId="gazprom">
         <!--Telecard; Card8381; Oplata; Summa 559 RUR; 17.12.17 09:19:32; MONETKA; dostupno: 1790.52 RUR-->
         <pattern category="expense">
-            <match><![CDATA[.*Oplata.*]]></match>
+            <match><![CDATA[.*Oplata;.*]]></match>
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
             <amount group="2"><![CDATA[Oplata;(\sSumma)?\s(\d+\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
+        </pattern>
+        <!--Card8381; Oplata v I-net; Summa 165 RUR; 21.12.17 14:46:31; GOOGLE *androidmarket; dostupno: 112.36 RUR-->
+        <pattern category="expense">
+            <match><![CDATA[.*Oplata v I\-net;.*]]></match>
+            <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
         </pattern>
         <!--Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR-->
@@ -252,6 +262,13 @@
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Telecard; Card8381; Snyatie nalichnih; Summa 14900 RUR; 14.12.17 13:23:35; GAZPROMBANK; dostupno: 11599.23 RUR-->
+        <pattern category="vida4a_ATM">
+            <match><![CDATA[.*Snyatie nalichnih;.*]]></match>
+            <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
+        </pattern>
     </patterns>
     <patterns bankId="qiwi">
         <!--Spisanie c +79036423128 na summu 50.00 rub.-->
@@ -259,6 +276,14 @@
             <match><![CDATA[Spisanie.*]]></match>
             <cardId group="1"><![CDATA[([+\d]+)\sna]]></cardId>
             <amount group="1"><![CDATA[na summu\s(\d+\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="minbank">
+        <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
+        <pattern category="spisanie">
+            <match><![CDATA[Platezh cherez Telebank.*]]></match>
+            <cardId group="1"><![CDATA[Id.klienta.*(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
 </content>

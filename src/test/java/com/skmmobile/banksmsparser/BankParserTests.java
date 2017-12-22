@@ -47,6 +47,8 @@ public class BankParserTests extends Assert {
         isSystemSms("Karta 4890*2285, kod 201, ostalnye rekvizity karty na http://w.qiwi.com");
         isSystemSms("Summa 1000.00 RUB. Poluchatel: Google AdWords. Kod: 377329. Nikomu ego ne soobshchaite.");
         isSystemSms("Nikomu ne govorite etot kod! SMS-kod: 7738 Operatsiya: platezh QIWI Wallet na summu 900.00 RUB. Tinkoff.ru");
+        isSystemSms("Vash kod (#1):7322 Summa:255.00RUB TELE2 Deistvuet 10 minut");
+        isSystemSms("Уважаемый ЕВГЕНИЙ СЕРГЕЕВИЧ! ПАО МИнБанк поздравляет Вас с Днем Рождения и желает крепкого здоровья и финансового благополучия!");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -520,7 +522,7 @@ public class BankParserTests extends Assert {
         checkBankSms(
                 parser,
                 "5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45",
-                "cash_ATM",
+                "vida4a_ATM",
                 "9857",
                 "25200",
                 "RU/CHELYABINSK/Alfa Acq"
@@ -621,6 +623,42 @@ public class BankParserTests extends Assert {
                 "8000",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "Telecard; Card1745; Oplata; Summa 370 RUR; 22.12.17 08:36:33; YALYA; dostupno: 5953.47 RUR; ispolzovano: 64046.53 RUR",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "1745",
+                "370",
+                "YALYA"
+        );
+
+        checkBankSms(
+                parser,
+                "Telecard; Card1745; Oplata; Summa 237 RUR; 22.12.17 08:28:22; MOROSHKA; dostupno: 6323.47 RUR; ispolzovano: 63676.53 RUR",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "1745",
+                "237",
+                "MOROSHKA"
+        );
+
+        checkBankSms(
+                parser,
+                "Card8381; Oplata v I-net; Summa 165 RUR; 21.12.17 14:46:31; GOOGLE *androidmarket; dostupno: 112.36 RUR",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "8381",
+                "165",
+                "GOOGLE *androidmarket"
+        );
+
+        checkBankSms(
+                parser,
+                "Telecard; Card8381; Snyatie nalichnih; Summa 14900 RUR; 14.12.17 13:23:35; GAZPROMBANK; dostupno: 11599.23 RUR",
+                "vida4a_ATM",
+                "8381",
+                "14900",
+                "GAZPROMBANK"
+        );
     }
 
     @Test
@@ -640,6 +678,27 @@ public class BankParserTests extends Assert {
                 "spisanie",
                 "+79036423128",
                 "50",
+                ""
+        );
+    }
+
+    @Test
+    public void XmlMinbankBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        MinbankBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "minbank"));
+    }
+
+    private void MinbankBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "minbank");
+        checkBankSms(
+                parser,
+                "Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01",
+                "spisanie",
+                "0967",
+                "260.89",
                 ""
         );
     }
