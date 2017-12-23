@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.23 09:33</updated>
+    <updated>2017.12.23 15:11</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -289,24 +289,26 @@
         </pattern>
     </patterns>
     <patterns bankId="sbsibank">
-        <!--Karta 4.5614 18.12.2017 19:10:25 Retail -11.05 BYN UBER TRIP OK. Dostupno 74.46 BYN-->
+        <!--Karta 4.5614 22.12.2017 15:53:16 Retail -10.52 BYN REST. "PAPARATS-KVETKA"BP MINSK BLR OK. Dostupno 45.86 BYN-->
         <pattern category="expense">
             <match><![CDATA[.*Retail.*]]></match>
             <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
             <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
-            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
+            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)(?=\sDostupno)]]></detail>
         </pattern>
+        <!--Karta 4.5614 18.12.2017 18:08:01 Popolnenie +81.28 BYN RKC6 K1 MINSK BLR OK. Dostupno 93.03 BYN-->
         <pattern category="popolnenie">
             <match><![CDATA[.*Popolnenie.*]]></match>
             <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
-            <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
-            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
+            <amount group="1"><![CDATA[Popolnenie \+(\d*\.?\d{1,2})]]></amount>
+            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)(?=\sDostupno)]]></detail>
         </pattern>
+        <!--Karta 4.5614 16.12.2017 15:12:11 ATM -100.00 BYN ATMTBK HO27 SKALA MINSK BLR OK. Dostupno 11.75 BYN-->
         <pattern category="cash_ATM">
-            <match><![CDATA[.*cash_ATM.*]]></match>
+            <match><![CDATA[.*\d{2}:\d{2}:\d{2}\sATM.*]]></match>
             <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
-            <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
-            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
+            <amount group="1"><![CDATA[ATM -(\d*\.?\d{1,2})]]></amount>
+            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)(?=\sDostupno)]]></detail>
         </pattern>
     </patterns>
 </content>
