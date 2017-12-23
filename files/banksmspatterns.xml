@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.22 19:52</updated>
+    <updated>2017.12.23 09:33</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -21,6 +21,7 @@
         <bank id="gazprom" info="Telecart">Газпром</bank>
         <bank id="qiwi">QIWI</bank>
         <bank id="minbank">ПАО МИнБанк</bank>
+        <bank id="sbsibank">ТЕХНОБАНК (Республика Беларусь)</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -36,6 +37,7 @@
         <phone bankId="qiwi">QIWIWallet</phone>
         <phone bankId="minbank">MInB</phone>
         <phone bankId="minbank">6462</phone>
+        <phone bankId="sbsibank">SBSIBANK.BY</phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -74,8 +76,8 @@
         <!-- Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru-->
         <pattern category="jur.perevod">
             <match><![CDATA[Jur. perevod.*]]></match>
-            <cardId group="0"><![CDATA[(?<=(Karta\s\*))\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=Summa\s)(\d+\.\d{2})]]></amount>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
             <detail group="2"><![CDATA[(RUB|USD|EUR).\s(.*)\.\s\d{2}\.\d{2}]]></detail>
         </pattern>
         <!-- Popolnenie. Karta *9930. Summa 8000 RUB. Card2Card. 07.12.2017 15:31. Dostupno 61967.41 RUB. Tinkoff.ru-->
@@ -279,6 +281,14 @@
         </pattern>
     </patterns>
     <patterns bankId="minbank">
+        <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
+        <pattern category="spisanie">
+            <match><![CDATA[Platezh cherez Telebank.*]]></match>
+            <cardId group="1"><![CDATA[Id.klienta.*(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="sbsibank">
         <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
         <pattern category="spisanie">
             <match><![CDATA[Platezh cherez Telebank.*]]></match>

@@ -185,6 +185,15 @@ public class BankParserTests extends Assert {
                 "3000",
                 "ATM 450704 180-1"
         );
+
+        checkBankSms(
+                parser,
+                "Jur. perevod. Karta *9930. Summa 6500 RUB. mBank. 23.12.2017 05:44. Dostupno 67592 RUB. Tinkoff.ru",
+                "jur.perevod",
+                "9930",
+                "6500",
+                "mBank"
+        );
     }
 
     @Test
@@ -693,6 +702,27 @@ public class BankParserTests extends Assert {
 
     private void MinbankBankParserTestImpl(BankSmsParser parser) {
         checkParser(parser, "minbank");
+        checkBankSms(
+                parser,
+                "Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01",
+                "spisanie",
+                "0967",
+                "260.89",
+                ""
+        );
+    }
+
+    @Test
+    public void XmlSbsIbankBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        SbsIbankBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "sbsibank"));
+    }
+
+    private void SbsIbankBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "sbsibank");
         checkBankSms(
                 parser,
                 "Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01",
