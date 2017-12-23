@@ -725,10 +725,10 @@ public class BankParserTests extends Assert {
         checkParser(parser, "sbsibank");
         checkBankSms(
                 parser,
-                "Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01",
-                "spisanie",
-                "0967",
-                "260.89",
+                "Karta 4.5614 18.12.2017 19:10:25 Retail -11.05 BYN UBER TRIP OK. Dostupno 74.46 BYN",
+                "expense",
+                "5614",
+                "11.05",
                 ""
         );
     }

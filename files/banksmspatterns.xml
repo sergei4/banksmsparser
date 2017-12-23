@@ -289,11 +289,24 @@
         </pattern>
     </patterns>
     <patterns bankId="sbsibank">
-        <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
-        <pattern category="spisanie">
-            <match><![CDATA[Platezh cherez Telebank.*]]></match>
-            <cardId group="1"><![CDATA[Id.klienta.*(\d{4})\s]]></cardId>
-            <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
+        <!--Karta 4.5614 18.12.2017 19:10:25 Retail -11.05 BYN UBER TRIP OK. Dostupno 74.46 BYN-->
+        <pattern category="expense">
+            <match><![CDATA[.*Retail.*]]></match>
+            <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
+        </pattern>
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Popolnenie.*]]></match>
+            <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
+        </pattern>
+        <pattern category="cash_ATM">
+            <match><![CDATA[.*cash_ATM.*]]></match>
+            <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Retail -(\d*\.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>-->
         </pattern>
     </patterns>
 </content>
