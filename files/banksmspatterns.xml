@@ -9,7 +9,7 @@
 -->
 <content>
     <version>1</version>
-    <updated>2017.12.23 15:11</updated>
+    <updated>2017.12.23 23:22</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -51,7 +51,7 @@
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
         <!--VTB24-Online: Obrabotano rasporyazhenie 000000000 (Mezhdu svoimi schetami / obmen valyuti)-->
         <system_sms bankId="alfabank"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie\s\d+\s\(Mezhdu svoimi schetami \/ obmen valyuti\)]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia smeny parolia.*Nikomu ne soobshchaite.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia.*Nikomu ne soobshchaite.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
