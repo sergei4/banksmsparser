@@ -8,8 +8,8 @@
     decimal_group_char - символ разделителя разрядов (по-умолчанию "")
 -->
 <content>
-    <version>1</version>
-    <updated>2017.12.23 23:22</updated>
+    <version>2</version>
+    <updated>2017/12/26 18:40</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -22,6 +22,8 @@
         <bank id="qiwi">QIWI</bank>
         <bank id="minbank">ПАО МИнБанк</bank>
         <bank id="sbsibank">ТЕХНОБАНК (Республика Беларусь)</bank>
+        <!--26.12.2017-->
+        <bank id="ubrr">УБРиР</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -38,14 +40,21 @@
         <phone bankId="minbank">MInB</phone>
         <phone bankId="minbank">6462</phone>
         <phone bankId="sbsibank">SBSIBANK.BY</phone>
+        <!--Начиная с v2-->
+        <service_phone bankId="sberbank">900,+79262000900,+79165723900,+79219039831,SBERBANK,6470</service_phone>
+        <service_phone bankId="ubrr">+79655499990,+79126240101,UBRR</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Zavtra budet vypolnena regulyarnaya operatsiya.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*пароль:\s\d+.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[(Сбербанк Онлайн).*(перевел).*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Совершен вход в Ваш Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Пароль для входа в Сбербанк Онлайн.*]]></system_sms>
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
@@ -180,7 +189,7 @@
         <pattern category="zachislenie">
             <match><![CDATA[.*зачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="2"><![CDATA[зачисление\s(пенсии\s|зарплаты\s)?(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[зачисление.*\s(\d*\.?\d{1,2}).*Баланс]]></amount>
         </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="vida4a_ATM">
@@ -214,6 +223,12 @@
             <amount group="1"><![CDATA[Списание в сумме\s([0-9\s]*\.?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
         </pattern>
+        <!--VISA4812 19.12.17 возврат покупки 126.07р YM*AE Баланс: 316.31р-->
+        <pattern category="vozvrat">
+            <match><![CDATA[.*возврат покупки.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[возврат покупки\s([0-9\s]*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="vtb24">
         <!--Karta *0000: Oplata 303.50 RUR; VREMYA ZDOROVYA; 14.11.2017 19:41, dostupno сумма RUR. VTB24-->
@@ -237,10 +252,17 @@
             <amount group="1"><![CDATA[spisanie\s(\d+\.\d{2})]]></amount>
         </pattern>
         <!--Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
-        <pattern category="zachislenie">
-            <match><![CDATA[.*postuplenie zarabotnoy plati.*]]></match>
+        <!--Schet *4135: postuplenie 190.00 RUB; perevod 25.12.2017 06:43:33; dostupno 227.66 RUB (sobstv. sredstva: 227.66 RUB). http://p.vtb24.ru/smartb-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*postuplenie.*]]></match>
             <cardId group="0"><![CDATA[Schet\s\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[postuplenie zarabotnoy plati (\d+\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[postuplenie[\w\s]*\s(\d+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *7398: snyatie 900.00 RUB; D. 26, PR-KT SHAHTEROV; 24.12.2017 09:52, dostupno 3407.44 RUB (sobstv. sredstva 3407.44 ).-->
+        <pattern category="cash_ATM">
+            <match><![CDATA[.*snyatie.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[snyatie\s(\d+\.\d{2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="gazprom">

@@ -17,18 +17,19 @@ public class XmlBankParser extends BankSmsParser {
     private static final String ATTR_CATEGORY = "category";
     private static final String ATTR_GROUP    = "group";
 
-    private static final String NODE_BANKS      = "banks";
-    private static final String NODE_BANK       = "bank";
-    private static final String NODE_PHONES     = "bank_phones";
-    private static final String NODE_PHONE      = "phone";
-    private static final String NODE_SYSTEM_SMS = "system_sms";
-    private static final String NODE_PATTERNS   = "patterns";
-    private static final String NODE_PATTERN    = "pattern";
-    private static final String NODE_MATCH      = "match";
-    private static final String NODE_CARD_ID    = "cardId";
-    private static final String NODE_AMOUNT     = "amount";
-    private static final String NODE_DETAIL     = "detail";
-    private static final String NODE_DEC_CHAR   = "decimal_char";
+    private static final String NODE_BANKS          = "banks";
+    private static final String NODE_BANK           = "bank";
+    private static final String NODE_PHONES         = "bank_phones";
+    private static final String NODE_PHONE          = "phone";
+    private static final String NODE_SERVICE_PHONE  = "service_phone";
+    private static final String NODE_SYSTEM_SMS     = "system_sms";
+    private static final String NODE_PATTERNS       = "patterns";
+    private static final String NODE_PATTERN        = "pattern";
+    private static final String NODE_MATCH          = "match";
+    private static final String NODE_CARD_ID        = "cardId";
+    private static final String NODE_AMOUNT         = "amount";
+    private static final String NODE_DETAIL         = "detail";
+    private static final String NODE_DEC_CHAR       = "decimal_char";
     private static final String NODE_DEC_GROUP_CAHR = "decimal_group_char";
 
     private String bankName;
@@ -70,11 +71,25 @@ public class XmlBankParser extends BankSmsParser {
 
     public static Map<String, String> obtainBankPhoneMap(Document document){
         Map<String, String> phoneMap = new HashMap<>();
-        NodeList bankList = document.getElementsByTagName(NODE_PHONE);
-        int count = bankList.getLength();
+        NodeList bankList;
+        int count = 0;
+        // версия 1
+        bankList = document.getElementsByTagName(NODE_PHONE);
+        count = bankList.getLength();
         for (int i = 0; i < count; i++) {
+            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
             String phone = bankList.item(i).getFirstChild().getNodeValue();
-            phoneMap.put(phone, getAttribute(bankList.item(i), ATTR_BANK_ID));
+            phoneMap.put(phone, bankId);
+        }
+        // версия 2
+        bankList = document.getElementsByTagName(NODE_SERVICE_PHONE);
+        count = bankList.getLength();
+        for (int i = 0; i < count; i++) {
+            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
+            String phoneStr = bankList.item(i).getFirstChild().getNodeValue();
+            String[] phoneList = phoneStr.split(",");
+            for(String phone: phoneList)
+                phoneMap.put(phone, bankId);
         }
         return phoneMap;
     }

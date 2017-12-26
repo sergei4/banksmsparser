@@ -49,6 +49,10 @@ public class BankParserTests extends Assert {
         isSystemSms("Nikomu ne govorite etot kod! SMS-kod: 7738 Operatsiya: platezh QIWI Wallet na summu 900.00 RUB. Tinkoff.ru");
         isSystemSms("Vash kod (#1):7322 Summa:255.00RUB TELE2 Deistvuet 10 minut");
         isSystemSms("Уважаемый ЕВГЕНИЙ СЕРГЕЕВИЧ! ПАО МИнБанк поздравляет Вас с Днем Рождения и желает крепкого здоровья и финансового благополучия!");
+        isSystemSms("Совершен вход в Ваш Сбербанк Онлайн 14:12 25.12.17. Если вход произведен не Вами, обратитесь в контактный центр");
+        isSystemSms("Пароль для входа в Сбербанк Онлайн: 66666. НИКОМУ не сообщайте пароль.");
+        isSystemSms("Zavtra budet vypolnena regulyarnaya operatsiya: MTS, 300 RUB www.tinkoff.ru");
+        isSystemSms("Vypolnena regulyarnaya operatsiya: MTS, 300 RUB www.tinkoff.ru");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -430,6 +434,7 @@ public class BankParserTests extends Assert {
 
     }
 
+    // расширенный набор тестов для Сбербанка
     private void SberbankExtParserTestImpl(BankSmsParser parser) {
         checkBankSms(
                 parser,
@@ -464,6 +469,24 @@ public class BankParserTests extends Assert {
                 "own_debit_pay",
                 "VISA0000",
                 "2923.55",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "VISA4812 19.12.17 возврат покупки 126.07р YM*AE Баланс: 316.31р",
+                "vozvrat",
+                "VISA4812",
+                "126.07",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "ECMC1391 26.12.17 10:51 зачисление премии 20000.00р Баланс: 00000.00р",
+                "zachislenie",
+                "ECMC1391",
+                "20000",
                 ""
         );
     }
@@ -588,9 +611,27 @@ public class BankParserTests extends Assert {
         checkBankSms(
                 parser,
                 "Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob",
-                "zachislenie",
+                "popolnenie",
                 "Schet *3318",
                 "9200",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Schet *4135: postuplenie 190.00 RUB; perevod 25.12.2017 06:43:33; dostupno 227.66 RUB (sobstv. sredstva: 227.66 RUB). http://p.vtb24.ru/smartb",
+                "popolnenie",
+                "Schet *4135",
+                "190",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *7398: snyatie 900.00 RUB; D. 26, PR-KT SHAHTEROV; 24.12.2017 09:52, dostupno 3407.44 RUB (sobstv. sredstva 3407.44 ).",
+                "cash_ATM",
+                "7398",
+                "900",
                 ""
         );
     }
