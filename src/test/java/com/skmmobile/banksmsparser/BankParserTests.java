@@ -53,6 +53,8 @@ public class BankParserTests extends Assert {
         isSystemSms("Пароль для входа в Сбербанк Онлайн: 66666. НИКОМУ не сообщайте пароль.");
         isSystemSms("Zavtra budet vypolnena regulyarnaya operatsiya: MTS, 300 RUB www.tinkoff.ru");
         isSystemSms("Vypolnena regulyarnaya operatsiya: MTS, 300 RUB www.tinkoff.ru");
+        isSystemSms("Parol: 9827. Podtverdite oplatu shtrafov GIBDD na summu 250.00 RUR");
+        isSystemSms("Vam vistavlen schet na summu 250.00 RUR ot GIBDD po avtoplatezhu 7431928825. Podtverdite schet na click.alfabank.ru. Alfa-Bank.");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){

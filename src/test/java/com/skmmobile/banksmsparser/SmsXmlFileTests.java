@@ -8,6 +8,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,14 +17,13 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class LoadXmlParserTests extends Assert{
+public class SmsXmlFileTests extends Assert{
 
     private static String getAttribute(Node node, String name){
         Node attr = node.getAttributes().getNamedItem(name);
         return attr == null ? "" : attr.getNodeValue();
     }
 
-    @Test
     public void loadXmlParser() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -35,7 +36,6 @@ public class LoadXmlParserTests extends Assert{
         assertTrue("Шаблон не содержит данных", bankParser.getOperationCount() > 0);
     }
 
-    @Test
     public void getBankIdListTest() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -59,7 +59,6 @@ public class LoadXmlParserTests extends Assert{
             System.out.println(sms);
     }
 
-    @Test
     public void impBankInfo() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -69,6 +68,36 @@ public class LoadXmlParserTests extends Assert{
         while (iterator.hasNext()){
             Node node = iterator.next();
             System.out.println(getAttribute(node, "caption")+": " + getAttribute(node, "serv_numbers"));
+        }
+    }
+
+    @Test
+    public void checkDuplicatePhones() throws Exception {
+
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
+        NodeList bankPhoneList = xmlDocument.getElementsByTagName("service_phone");
+        Map<String, String[]> bankPhonesMap = new HashMap<>();
+        Iterator<Node> iterator = XmlNodeIterator.obtain(bankPhoneList);
+        while (iterator.hasNext()){
+            Node phones = iterator.next();
+            String bankId = getAttribute(phones, "bankId");
+            String phoneStr = phones.getFirstChild().getNodeValue();
+            bankPhonesMap.put(bankId, phoneStr.split(","));
+        }
+
+        for(String bank1: bankPhonesMap.keySet()){
+            String[] phones1 = bankPhonesMap.get(bank1);
+            for(String phone1: phones1){
+                for(String bank2: bankPhonesMap.keySet()){
+                    if(!bank2.equals(bank1)){
+                        String[] phones2 = bankPhonesMap.get(bank2);
+                        for (String phone2 : phones2)
+                            assertNotEquals(bank1 + " и " + bank2 + " содержат тел: " + phone1, phone1, phone2);
+                    }
+                }
+            }
         }
     }
 
