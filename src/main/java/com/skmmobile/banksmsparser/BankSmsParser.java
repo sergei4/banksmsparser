@@ -30,7 +30,8 @@ public class BankSmsParser {
         return operationSet.size();
     }
 
-    public Result parseSms(String text) {
+    public Result parseSms(String text1) {
+        String text = text1.replace("\n", "");
         Result result = null;
         for (Operation operation : operationSet) {
             if (operation.typeRex.matcher(text).matches()) {

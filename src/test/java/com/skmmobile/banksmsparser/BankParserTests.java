@@ -795,4 +795,32 @@ public class BankParserTests extends Assert {
                 "ATMTBK HO27 SKALA MINSK BLR OK."
         );
     }
+
+    @Test
+    public void XmlUbrrBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        UbrrBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "ubrr"));
+    }
+
+    private void UbrrBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "ubrr");
+        checkBankSms(
+                parser,
+                "Pokupka \n" +
+                        "4301****2661 \n" +
+                        "Summa: 1737.96 RUB \n" +
+                        "Ostatok: 9906.21 RUB \n" +
+                        "Term: 474  KIROVSKIY \n" +
+                        "MCC: 5411 \n" +
+                        "24.12.17 18:43",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "4301****2661",
+                "1737.96",
+                ""
+        );
+    }
 }
+

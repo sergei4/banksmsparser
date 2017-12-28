@@ -517,4 +517,18 @@
             <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)(?=\sDostupno)]]></detail>
         </pattern>
     </patterns>
+    <patterns bankId="ubrr">
+        <!--Pokupka
+        4301****2661
+        Summa: 1737.96 RUB
+        Ostatok: 9906.21 RUB
+        Term: 474  KIROVSKIY
+        MCC: 5411
+        24.12.17 18:43-->
+        <pattern category="expense">
+            <match><![CDATA[Pokupka.*]]></match>
+            <cardId group="1"><![CDATA[Pokupka\s([\d\*]+)\s]]></cardId>
+            <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
 </content>
