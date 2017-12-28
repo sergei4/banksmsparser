@@ -563,6 +563,7 @@ public class BankParserTests extends Assert {
         );
     }
 
+    //ВТБ24
     @Test
     public void XmlVtb24BankParserTest() throws Exception{
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -634,6 +635,15 @@ public class BankParserTests extends Assert {
                 "cash_ATM",
                 "7398",
                 "900",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *6634: 27.12 16:28 postuplenie zarabotnoy plati11000.00 RUR. Dostupno 11196.4 RUR. Vipiska po karte v VTB24-Online p.vtb24.ru/mob ",
+                "popolnenie",
+                "6634",
+                "11000",
                 ""
         );
     }
