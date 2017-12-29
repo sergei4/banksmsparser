@@ -491,6 +491,15 @@ public class BankParserTests extends Assert {
                 "20000",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "VISA4696 25.12.17 09:10 зачисление аванса 19000р Баланс: 45654.73р",
+                "zachislenie",
+                "VISA4696",
+                "19000",
+                ""
+        );
     }
 
     @Test
@@ -552,6 +561,7 @@ public class BankParserTests extends Assert {
         );
     }
 
+    // расширенный набор для Альфа-Банка
     private void AlfaBankExtParserTestImpl(BankSmsParser parser){
         checkBankSms(
                 parser,
@@ -560,6 +570,14 @@ public class BankParserTests extends Assert {
                 "9857",
                 "25200",
                 "RU/CHELYABINSK/Alfa Acq"
+        );
+        checkBankSms(
+                parser,
+                "5*7654; Vydacha nalichnyh; Uspeshno; Summa: 300,00 RUR; Ostatok: 7073,49 RUR; RU/ROSTOV-ON-DON/Alfa Iss; 28.12.2017 20:44:03",
+                "vida4a_ATM",
+                "7654",
+                "300",
+                "RU/ROSTOV-ON-DON/Alfa Iss"
         );
     }
 
