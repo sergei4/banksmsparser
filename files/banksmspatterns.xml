@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2017/12/28 16:00</updated>
+    <updated>2017/12/29 18:15</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -261,10 +261,17 @@
         <!-- Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB-->
         <!-- Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB-->
         <pattern category="expense">
-            <match><![CDATA[Покупка.*]]></match>
-            <cardId group="0"><![CDATA[(?<=(Карта\s\*))\d{4}]]></cardId>
+            <match><![CDATA[Покупка. Карта \*\d{4}\.\s\d.*]]></match>
+            <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
+        </pattern>
+        <!--Покупка. Карта *0380. Сумма 195 RUB. PROFKOSMETIK. 29.12.2017 14:44. Доступно 1455.03 RUB. Tinkoff.ru-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка.*Сумма.*]]></match>
+            <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Сумма\s(\d*.?\d{1,2})]]></amount>
+            <detail group="2"><![CDATA[(RUB|USD|EUR)\.\s(.*)\.\s\d{2}]]></detail>
         </pattern>
         <!-- Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru-->
         <pattern category="jur.perevod">
@@ -285,6 +292,12 @@
             <match><![CDATA[Vnutrenniy perevod sebe.*]]></match>
             <cardId group="0"><![CDATA[(?<=(Karta\s\*))\d{4}]]></cardId>
             <amount group="0"><![CDATA[(?<=Summa\s)\d+\.?\d{1,2}]]></amount>
+        </pattern>
+        <!--Перевод. Карта *9930. 100 RUB. . Баланс 63385.26 RUB-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод.*]]></match>
+            <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s(RUB|USD|EUR)]]></amount>
         </pattern>
         <!-- Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru-->
         <pattern category="perevod_card">

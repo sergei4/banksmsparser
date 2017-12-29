@@ -200,6 +200,24 @@ public class BankParserTests extends Assert {
                 "6500",
                 "mBank"
         );
+
+        checkBankSms(
+                parser,
+                "Перевод. Карта *9930. 100 RUB. . Баланс 63385.26 RUB",
+                "perevod",
+                "9930",
+                "100",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Покупка. Карта *0380. Сумма 195 RUB. PROFKOSMETIK. 29.12.2017 14:44. Доступно 1455.03 RUB. Tinkoff.ru",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "0380",
+                "195",
+                "PROFKOSMETIK"
+        );
     }
 
     @Test
