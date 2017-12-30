@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2017/12/29 18:15</updated>
+    <updated>2017/12/30 15:30</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -232,9 +232,15 @@
         <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*пароль:\s\d+.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(Сбербанк Онлайн).*(перевел).*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*перевел.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Совершен вход в Ваш Сбербанк Онлайн.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Пароль для входа в Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*выполнена регистрация в приложении Android.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Пароль для регистрации Android.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Вы успешно прошли регистрацию в Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Ваш пароль для регистрации в Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*успешно привязана в мобильное устройство.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*введите код.*]]></system_sms>
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
@@ -249,6 +255,13 @@
         <system_sms bankId="qiwi"><![CDATA[Summa.*Kod:\s\d+.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Уважаемый.*]]></system_sms>
+        <!--Otklyuchen SMS-paket "Bazoviy".-->
+        <system_sms bankId="vtb24"><![CDATA[Otklyuchen SMS-paket.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Уважаемый клиент.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Kod .*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[.*k Samsung Pay.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -460,6 +473,12 @@
             <match><![CDATA[Karta.*postuplenie.*]]></match>
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[postuplenie[\w\s][^\d]*(\d+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *0755: zachislenie 9205.00 RUR; 35, MIYASNITSKAYA; 28.12.2017 12:13, dostupno 160988.72 RUR (v tom chisle kred. 160988.72 RUR).-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Karta.*zachislenie.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[zachislenie[\w\s][^\d]*(\d+\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *7398: snyatie 900.00 RUB; D. 26, PR-KT SHAHTEROV; 24.12.2017 09:52, dostupno 3407.44 RUB (sobstv. sredstva 3407.44 ).-->
         <pattern category="cash_ATM">

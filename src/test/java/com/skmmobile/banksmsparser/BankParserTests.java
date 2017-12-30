@@ -55,6 +55,20 @@ public class BankParserTests extends Assert {
         isSystemSms("Vypolnena regulyarnaya operatsiya: MTS, 300 RUB www.tinkoff.ru");
         isSystemSms("Parol: 9827. Podtverdite oplatu shtrafov GIBDD na summu 250.00 RUR");
         isSystemSms("Vam vistavlen schet na summu 250.00 RUR ot GIBDD po avtoplatezhu 7431928825. Podtverdite schet na click.alfabank.ru. Alfa-Bank.");
+        isSystemSms("Otklyuchen SMS-paket \"Bazoviy\".");
+        isSystemSms("Уважаемый клиент, устройство iPhone отключено от Push-кодов");
+        isSystemSms("Уважаемый клиент, устройство Samsung SM-G930F подключено к Push-кодам");
+        isSystemSms("Kod 036227. Vhod v VTB24-Online. VTB24");
+        isSystemSms("Сбербанк Онлайн. 16.12.2017 19:18:15 АЛЕКСЕЙ НИКОЛАЕВИЧ, выполнена регистрация в приложении Android. Не вводите и никому не сообщайте свой номер телефона, данные паспорта или карт.");
+        isSystemSms("Пароль для регистрации Android - 50248. Никому не сообщайте пароль. Если вы не совершали регистрацию, позвоните по номеру 900.");
+        isSystemSms("16.12.2017 19:17:48 АЛЕКСЕЙ НИКОЛАЕВИЧ, Вы успешно прошли регистрацию в Сбербанк Онлайн! Совершайте операции по картам, вкладам, кредитам. К вашим услугам переводы и платежи в адрес более 50 тысяч поставщиков!");
+        isSystemSms("Ваш пароль для регистрации в Сбербанк Онлайн: 10648. Никому не сообщайте пароль. Если вы не совершали регистрацию, позвоните по номеру 900");
+        isSystemSms("Karta 5*6163; Podkluchenie k Samsung Pay SMS code: 259536");
+        isSystemSms("Vasha karta 4*0755 podkluchena k Samsung Pay. Esli vy ne sovershali operaciu srochno svyagites s VTB24 po ukazannomu na karte telefonu.");
+        isSystemSms("АЛЕКСЕЙ НИКОЛАЕВИЧ, карта VISA4575 успешно привязана в мобильное устройство. Теперь Вы можете совершать покупки с помощью приложения.");
+        isSystemSms("АЛЕКСЕЙ НИКОЛАЕВИЧ, для привязки карты VISA4575 в мобильном устройстве введите код 141811 в приложение.");
+        isSystemSms("Nikomu ne soobshaite etot kod: 0414 - Vhod v Smart SMS");
+        isSystemSms("Do 20.12.2017 neobhodimo vnesti na schet karty *0755 summu 11217.41 RUR. (minimal'nyj platyozh na 10.12.2017). VTB24");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -518,6 +532,15 @@ public class BankParserTests extends Assert {
                 "19000",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "VISA4575 26.12.17 10:50 зачисление зарплаты 8132.35р Баланс: 8857.54р",
+                "zachislenie",
+                "VISA4575",
+                "8132.35",
+                ""
+        );
     }
 
     @Test
@@ -680,6 +703,24 @@ public class BankParserTests extends Assert {
                 "popolnenie",
                 "6634",
                 "11000",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Karta *0755: zachislenie 9205.00 RUR; 35, MIYASNITSKAYA; 28.12.2017 12:13, dostupno 160988.72 RUR (v tom chisle kred. 160988.72 RUR).",
+                "popolnenie",
+                "0755",
+                "9205",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Schet *3100: postuplenie 100.00 RUB; 21.12.2017 12:07:47; dostupno 100.00 RUB (sobstv. sredstva: 100.00 RUB). http://p.vtb24.ru/smartb",
+                "popolnenie",
+                "Schet *3100",
+                "100",
                 ""
         );
     }
