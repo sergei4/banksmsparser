@@ -69,6 +69,8 @@ public class BankParserTests extends Assert {
         isSystemSms("АЛЕКСЕЙ НИКОЛАЕВИЧ, для привязки карты VISA4575 в мобильном устройстве введите код 141811 в приложение.");
         isSystemSms("Nikomu ne soobshaite etot kod: 0414 - Vhod v Smart SMS");
         isSystemSms("Do 20.12.2017 neobhodimo vnesti na schet karty *0755 summu 11217.41 RUR. (minimal'nyj platyozh na 10.12.2017). VTB24");
+        isSystemSms("Vasha karta *5884.Kod dlya provedeniya tranzakcii 8979. http://www.kinomax.ru. Summa 240.00 RUB. Nikomu ne govorite kod! ");
+        isSystemSms("ECMC9886 28.12.17 07:19 отмена авторизации 939р Баланс: 972.03р");
     }
 
     private void checkBankSms(BankSmsParser parser, String smsText, String type, String cardId, String amountStr, String details){
@@ -906,6 +908,110 @@ public class BankParserTests extends Assert {
                 BankSmsParser.CATEGORY_EXPENSE,
                 "4301****2661",
                 "1737.96",
+                "474  KIROVSKIY"
+        );
+    }
+
+    @Test
+    public void XmlBinbankBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        BinbankBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "binbank"));
+    }
+
+    private void BinbankBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "binbank");
+        checkBankSms(
+                parser,
+                "Покупка по карте: *8512 1870.00 RUR Место KAZAN MYASNAYA KULINARIYA ITLE 06.12.17 21:23 Баланс: 5488.68 RUR i.binbank.ru",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "8512",
+                "1870",
+                "KAZAN MYASNAYA KULINARIYA ITLE"
+        );
+    }
+
+    @Test
+    public void XmlRaiffeisenBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        RaiffeisenBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "raiffeisen"));
+    }
+
+    private void RaiffeisenBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "raiffeisen");
+        checkBankSms(
+                parser,
+                "Karta *5884;\n" +
+                        "Pokupka:780 RUR; RUS/MOSCOW/KINOMAX; Data: 2018-01-02;\n" +
+                        "Dostupny Ostatok: 44452.19\n" +
+                        "RUR. Raiffeisenbank",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "5884",
+                "780",
+                "RUS/MOSCOW/KINOMAX"
+        );
+        checkBankSms(
+                parser,
+                "Karta *5884;\n" +
+                        "Pokupka:324.74 RUR; RUS/KRASNOYARSK/VKUSOMANIYA; Data: 2018-01-05;\n" +
+                        "Dostupny Ostatok: 35233.45\n" +
+                        "RUR. Raiffeisenbank",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "5884",
+                "324.74",
+                "RUS/KRASNOYARSK/VKUSOMANIYA"
+        );
+        checkBankSms(
+                parser,
+                "Karta *5884;\n" +
+                        "Pokupka:1894 RUR; RUS/KRASNOYARSK/PEOPLES; Data: 2018-01-04;\n" +
+                        "Dostupny Ostatok: 35558.19\n" +
+                        "RUR. Raiffeisenbank",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "5884",
+                "1894",
+                "RUS/KRASNOYARSK/PEOPLES"
+        );
+    }
+
+    @Test
+    public void XmlMTSBankParserTest() throws Exception {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
+
+        MTSBankParserTestImpl(XmlBankParser.obtain(xmlDocument, "mtsbank"));
+    }
+
+    private void MTSBankParserTestImpl(BankSmsParser parser) {
+        checkParser(parser, "mtsbank");
+        checkBankSms(
+                parser,
+                "Оплата VP *9707; 07.01 15:18; PYATEROCHKA 9114>EKATERINBURG RU; 699,25 RUB; Остаток: 655,74 RUB",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "9707",
+                "699.25",
+                "PYATEROCHKA 9114>EKATERINBURG RU"
+        );
+        checkBankSms(
+                parser,
+                "Приход по счету карты VP *9707; 73,07 RUB; Остаток: 126,85 RUB",
+                "popolnenie",
+                "9707",
+                "73.07",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "ПАО \"МТС-Банк\"уведомляет о переводе со счета 40817***3838 на карту 4042 XXXX XXXX 9707: 1,300.00 RUR; Остаток: 296,500.00 RUR; 06.01.2018 17:25",
+                "perevod",
+                "40817***3838",
+                "1300",
                 ""
         );
     }

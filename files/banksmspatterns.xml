@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2017/12/30 15:30</updated>
+    <updated>2018/01/07 20:00</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -17,7 +17,7 @@
         <bank id="tinkoff">Тинькофф</bank>
         <bank id="alfabank">Альфа-Банк</bank>
         <bank id="sberbank">Сбербанк России</bank>
-        <bank id="vtb24">ВТБ-24</bank>
+        <bank id="vtb24" comment="Бывший VTB24">ВТБ</bank>
         <bank id="gazprom" info="Telecart">Газпромбанк</bank>
         <bank id="qiwi">QIWI</bank>
         <bank id="minbank">ПАО МИнБанк</bank>
@@ -25,8 +25,8 @@
         <!--26.12.2017-->
         <bank id="ubrr">УБРиР</bank>
         <bank id="raiffeisen">Райффайзенбанк</bank>
-        <!--<bank id="unicreditbank">UniCredit Bank</bank>-->
-        <!--<bank id="binbank">БинБанк</bank>-->
+        <bank id="unicreditbank">UniCredit Bank</bank>
+        <bank id="binbank">БинБанк</bank>
         <!--<bank id="sber_povolzie">Сбербанк-Maestro Поволжье</bank>-->
         <!--<bank id="gazprom_nu">Газпромбанк Новый Уренгой</bank>-->
         <!--<bank id="skbbank">СКБ-Банк</bank>-->
@@ -57,17 +57,17 @@
         <!--<bank id="ksbank">КС-Банк</bank>-->
         <!--<bank id="fareastbank">Дальневосточный Банк</bank>-->
         <!--<bank id="vozrogdenie">Возрождение Банк</bank>-->
-        <!--<bank id="mtsbank">МТС банк</bank>-->
+        <bank id="mtsbank">МТС банк</bank>
         <!--<bank id="raiffeisen_avil">Райффайзенбанк Аваль</bank>-->
         <!--<bank id="ukrsibbank">УкрСибБанк</bank>-->
         <!--<bank id="privatbank">ПриватБанк</bank>-->
         <!--<bank id="rosselhoz">РоссельхозБанк</bank>-->
-        <!--<bank id="rsb">Русский Стандарт</bank>-->
+        <bank id="rsb">Русский Стандарт</bank>
         <!--<bank id="masterbank">Мастербанк</bank>-->
         <!--<bank id="solidarnost">Солидарность</bank>-->
         <!--<bank id="erstebank">ErsteBank</bank>-->
         <!--<bank id="uralprombank">УралПромБанк</bank>-->
-        <!--<bank id="kukuruza">Кукуруза</bank>-->
+        <bank id="kukuruza">Кукуруза</bank>
         <!--<bank id="otkritie">Открытие</bank>-->
         <!--<bank id="yandexmoney">Яндекс.Деньги</bank>-->
         <!--<bank id="alfabank_ukr">Альфа-Банк Украина</bank>-->
@@ -90,7 +90,7 @@
         <!--<bank id="trastbank">Трастбанк</bank>-->
         <!--<bank id="vyatkabank">Вятка-банк</bank>-->
         <!--<bank id="khmb">Ханты-Мансийский Банк</bank>-->
-        <!--<bank id="chelinvest">Челябинвестбанк</bank>-->
+        <bank id="chelinvest">Челябинвестбанк</bank>
         <!--<bank id="kredobank">КРЕДОБАНК</bank>-->
         <!--<bank id="uralfd">Урал ФД</bank>-->
         <!--<bank id="florabank">Флора-Москва</bank>-->
@@ -130,7 +130,7 @@
         <service_phone bankId="tinkoff">Tinkoff,tinkoff</service_phone>
         <service_phone bankId="sberbank">900,+79262000900,+79165723900,+79219039831,SBERBANK</service_phone>
         <service_phone bankId="alfabank">+79037672265,2265,Alfa-Bank</service_phone>
-        <service_phone bankId="vtb24">+00004,+79104353500,5211,VTB24,BankVTB</service_phone>
+        <service_phone bankId="vtb24">+00004,+79104353500,5211,VTB24,BankVTB,VTB</service_phone>
         <service_phone bankId="gazprom">Gazprombank,+79126859709,+79126036578,+79037976222,+79262942051,+79169126372,+79032287482,Telecard</service_phone>
         <service_phone bankId="qiwi">7494,QIWI,QIWI Wallet,QIWIWallet,QIWI BANK</service_phone>
         <service_phone bankId="minbank">6462,MInB</service_phone>
@@ -138,8 +138,8 @@
         <!--26.12.2017-->
         <service_phone bankId="ubrr">+79655499990,+79126240101,UBRR</service_phone>
         <service_phone bankId="raiffeisen">7243,raiffeisen,Raiffeisen</service_phone>
-        <!--<service_phone bankId="unicreditbank">4626,+79165904505,UniCredit</service_phone>-->
-        <!--<service_phone bankId="binbank">89021111003,binbank.ru</service_phone>-->
+        <service_phone bankId="unicreditbank">4626,+79165904505,UniCredit</service_phone>
+        <service_phone bankId="binbank">89021111003,binbank.ru,BINBANK</service_phone>
         <!--<service_phone bankId="sber_povolzie">+79277575757,+79037676767</service_phone>-->
         <!--<service_phone bankId="gazprom_nu">+79037976061,+79028204747,TelecardNU</service_phone>-->
         <!--<service_phone bankId="skbbank">SKB-BANK</service_phone>-->
@@ -170,17 +170,17 @@
         <!--<service_phone bankId="ksbank">+79200294444,9008</service_phone>-->
         <!--<service_phone bankId="fareastbank">+79025577070,+79020700300</service_phone>-->
         <!--<service_phone bankId="vozrogdenie">2640,+79037976264,vbank.ru</service_phone>-->
-        <!--<service_phone bankId="mtsbank">+79167773331,MBRR,MTS-Bank</service_phone>-->
+        <service_phone bankId="mtsbank">+79167773331,MBRR,MTS-Bank</service_phone>
         <!--<service_phone bankId="raiffeisen_avil">10901,050,10068</service_phone>-->
         <!--<service_phone bankId="ukrsibbank">729,+380931777755</service_phone>-->
         <!--<service_phone bankId="privatbank">10060</service_phone>-->
         <!--<service_phone bankId="rosselhoz">+79037976020,RSHB</service_phone>-->
-        <!--<service_phone bankId="rsb">rsb.ru</service_phone>-->
+        <service_phone bankId="rsb">rsb.ru</service_phone>
         <!--<service_phone bankId="masterbank">MasterBank</service_phone>-->
         <!--<service_phone bankId="solidarnost">+79272020098,1711</service_phone>-->
         <!--<service_phone bankId="erstebank">ErsteBank</service_phone>-->
         <!--<service_phone bankId="uralprombank">+79048122142</service_phone>-->
-        <!--<service_phone bankId="kukuruza">1231,KYKYRYZA.RU</service_phone>-->
+        <service_phone bankId="kukuruza">1231,KYKYRYZA.RU</service_phone>
         <!--<service_phone bankId="otkritie">+79037672727,OTKRITIE</service_phone>-->
         <!--<service_phone bankId="yandexmoney">YandexMoney</service_phone>-->
         <!--<service_phone bankId="alfabank_ukr">AlfaBank</service_phone>-->
@@ -203,7 +203,7 @@
         <!--<service_phone bankId="trastbank">711</service_phone>-->
         <!--<service_phone bankId="vyatkabank">+79021111003</service_phone>-->
         <!--<service_phone bankId="khmb">KHMB</service_phone>-->
-        <!--<service_phone bankId="chelinvest">+79028929802,+79026121212</service_phone>-->
+        <service_phone bankId="chelinvest">+79028929802,+79026121212</service_phone>
         <!--<service_phone bankId="kredobank">10912</service_phone>-->
         <!--<service_phone bankId="uralfd">+79630133444,UralFD</service_phone>-->
         <!--<service_phone bankId="florabank">FLORABANK</service_phone>-->
@@ -241,6 +241,7 @@
         <system_sms bankId="sberbank"><![CDATA[Ваш пароль для регистрации в Сбербанк Онлайн.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*успешно привязана в мобильное устройство.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*введите код.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*отмена авторизации.*]]></system_sms>
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
@@ -262,6 +263,8 @@
         <system_sms bankId="vtb24"><![CDATA[.*k Samsung Pay.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
+        <!--Vasha karta *5884.Kod dlya provedeniya tranzakcii 8979. http://www.kinomax.ru. Summa 240.00 RUB. Nikomu ne govorite kod!-->
+        <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -567,6 +570,49 @@
             <match><![CDATA[Pokupka.*]]></match>
             <cardId group="1"><![CDATA[Pokupka\s([\d\*]+)\s]]></cardId>
             <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[Term: ([\d\s\w]*)\sMCC:]]></detail>
+        </pattern>
+    </patterns>
+    <patterns bankId="binbank">
+        <!--Покупка по карте: *8512 870.00 RUR Место KAZAN MYASNAYA KULINARIYA ITLE 06.12.17 21:23 Баланс: 5488.68 RUR i.binbank.ru-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка по карте.*]]></match>
+            <cardId group="1"><![CDATA[Покупка по карте: \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\*\d+\s(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[Место ([\w\s\d]*)\s\d{2}\.\d{2}\.\d{2}]]></detail>
+        </pattern>
+    </patterns>
+    <patterns bankId="raiffeisen">
+        <!--Karta *5884;Pokupka:780 RUR; RUS/MOSCOW/KINOMAX; Data: 2018-01-02;Dostupny Ostatok: 44452.19RUR. Raiffeisenbank-->
+        <pattern category="expense">
+            <match><![CDATA[.*Pokupka.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Pokupka:\s?(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[; (.*); Data]]></detail>
+        </pattern>
+    </patterns>
+    <patterns bankId="mtsbank">
+        <!--Оплата VP *9707; 07.01 15:18; PYATEROCHKA 9114>EKATERINBURG RU; 699,25 RUB; Остаток: 655,74 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[Оплата.*]]></match>
+            <cardId group="1"><![CDATA[VP\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[(\d*,?\d{1,2})\s[\w]*;\sОстаток]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--Приход по счету карты VP *9707; 73,07 RUB; Остаток: 126,85 RUB-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Приход по счету карты.*]]></match>
+            <cardId group="1"><![CDATA[VP\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[(\d*,?\d{1,2})\s[\w]*;\sОстаток]]></amount>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--ПАО "МТС-Банк"уведомляет о переводе со счета 40817***3838 на карту 4042 XXXX XXXX 9707: 300.00 RUR; Остаток: 16,500.00 RUR; 06.01.2018 17:25-->
+        <pattern category="perevod">
+            <match><![CDATA[.*о переводе со счета.*]]></match>
+            <cardId group="1"><![CDATA[со счета ([\d\*]*)]]></cardId>
+            <amount group="1"><![CDATA[([\d\,]*.?\d{1,2})\s[\w]*;\sОстаток]]></amount>
+            <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
     </patterns>
 </content>
