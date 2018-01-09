@@ -44,7 +44,7 @@ public class BankSmsParser {
                         result.cardIdStr = m.group(operation.cardIdRexGroup);
                     }
                     else
-                        result.cardIdStr = "";
+                        result.cardIdStr = operation.defCardId;
                 }
                 if (operation.amountRex != null) {
                     m = operation.amountRex.matcher(text);
@@ -81,7 +81,7 @@ public class BankSmsParser {
             }
         }
 
-        if (result != null && (result.cardIdStr.equals("") | result.amount.compareTo(BigDecimal.ZERO) == 0)) {
+        if (result != null && (result.cardIdStr.equals(Operation.INDEFINITE_CARD_ID) | result.amount.compareTo(BigDecimal.ZERO) == 0)) {
             return null;
         }
         else
@@ -132,6 +132,8 @@ public class BankSmsParser {
     }
 
     public static class Operation {
+        private static final String INDEFINITE_CARD_ID = "";
+
         private String type;
         private Pattern typeRex;
         private Pattern cardIdRex;
@@ -142,6 +144,7 @@ public class BankSmsParser {
         private int amountRexGroup = 0;
         private int dateRexGroup = 0;
         private int detailRexGroup = 0;
+        private String defCardId = INDEFINITE_CARD_ID;
         private CharSequence decChar = ".";
         private CharSequence decDelim = "";
 
@@ -191,6 +194,10 @@ public class BankSmsParser {
         public void setDecDelim(CharSequence decDelim) {
             this.decDelim = decDelim;
         }
+
+        public void setDefCardId(String defCardId) {
+            this.defCardId = defCardId;
+        }
     }
 
     // Шаблоны системных sms для исключения
@@ -208,7 +215,8 @@ public class BankSmsParser {
         systemSmsTemplate.addAll(list);
     }
 
-    public static boolean isSystemBankSms(String text) {
+    public static boolean isSystemBankSms(String text1) {
+        String text = text1.replace("\n", "");
         Pattern p;
         for (String s : systemSmsTemplate) {
             p = Pattern.compile(s);

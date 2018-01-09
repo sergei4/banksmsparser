@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/07 20:00</updated>
+    <updated>2018/01/09 16:40</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -60,7 +60,7 @@
         <bank id="mtsbank">МТС банк</bank>
         <!--<bank id="raiffeisen_avil">Райффайзенбанк Аваль</bank>-->
         <!--<bank id="ukrsibbank">УкрСибБанк</bank>-->
-        <!--<bank id="privatbank">ПриватБанк</bank>-->
+        <bank id="privatbank">ПриватБанк</bank>
         <!--<bank id="rosselhoz">РоссельхозБанк</bank>-->
         <bank id="rsb">Русский Стандарт</bank>
         <!--<bank id="masterbank">Мастербанк</bank>-->
@@ -110,6 +110,10 @@
         <!--<bank id="brokbizbank">БРОКБИЗНЕСБАНК</bank>-->
         <!--<bank id="mosoblbank">МосОблБанк</bank>-->
         <!--<bank id="prominvest">Проминвестбанк</bank>-->
+        <bank id="oschadbank">Ощадбанк</bank>
+        <bank id="kaspibank">Kaspi Bank</bank>
+        <bank id="halykbank">HALYK BANK</bank>
+        <bank id="qazkom">Казкоммерцбанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -173,7 +177,7 @@
         <service_phone bankId="mtsbank">+79167773331,MBRR,MTS-Bank</service_phone>
         <!--<service_phone bankId="raiffeisen_avil">10901,050,10068</service_phone>-->
         <!--<service_phone bankId="ukrsibbank">729,+380931777755</service_phone>-->
-        <!--<service_phone bankId="privatbank">10060</service_phone>-->
+        <service_phone bankId="privatbank">10060</service_phone>
         <!--<service_phone bankId="rosselhoz">+79037976020,RSHB</service_phone>-->
         <service_phone bankId="rsb">rsb.ru</service_phone>
         <!--<service_phone bankId="masterbank">MasterBank</service_phone>-->
@@ -223,6 +227,10 @@
         <!--<service_phone bankId="brokbizbank">+380504473315,+380503570778,BankbbCom</service_phone>-->
         <!--<service_phone bankId="mosoblbank">MOSOBLBANK</service_phone>-->
         <!--<service_phone bankId="prominvest">PROMINVEST</service_phone>-->
+        <service_phone bankId="oschadbank">Oschadbank</service_phone>
+        <service_phone bankId="kaspibank">KaspiBank,KaspiGold</service_phone>
+        <service_phone bankId="halykbank">5959</service_phone>
+        <service_phone bankId="qazkom">7000</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -265,6 +273,8 @@
         <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
         <!--Vasha karta *5884.Kod dlya provedeniya tranzakcii 8979. http://www.kinomax.ru. Summa 240.00 RUB. Nikomu ne govorite kod!-->
         <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -330,10 +340,16 @@
         </pattern>
         <!--Снятие. Карта *7733. 3000 RUB. ATM 450704 180-1. Доступно **** RUB-->
         <pattern category="cash_ATM">
-            <match><![CDATA[Снятие.*ATM.*]]></match>
+            <match><![CDATA[Снятие.*]]></match>
             <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s(RUB|USD|EUR)]]></amount>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
+        </pattern>
+        <!--Vyplata protsentov po vkladu 3416762155. Protsenty v razmere 339.73 RUB zachisleny na kartu. Summa vklada: 50000 RUB. Tinkoff.ru-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Vyplata protsentov po vkladu.*]]></match>
+            <cardId group="1"><![CDATA[Vyplata protsentov po vkladu (\d+)]]></cardId>
+            <amount group="1"><![CDATA[Protsenty v razmere\s(\d*.?\d{1,2})\s]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="alfabank">
@@ -568,7 +584,7 @@
         24.12.17 18:43-->
         <pattern category="expense">
             <match><![CDATA[Pokupka.*]]></match>
-            <cardId group="1"><![CDATA[Pokupka\s([\d\*]+)\s]]></cardId>
+            <cardId group="1"><![CDATA[Pokupka\s+([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Term: ([\d\s\w]*)\sMCC:]]></detail>
         </pattern>
@@ -613,6 +629,108 @@
             <cardId group="1"><![CDATA[со счета ([\d\*]*)]]></cardId>
             <amount group="1"><![CDATA[([\d\,]*.?\d{1,2})\s[\w]*;\sОстаток]]></amount>
             <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
+    </patterns>
+    <patterns bankId="unicreditbank">
+        <!--Карта 1139 07.01.2018 11:34 Покупка 1850.00 RUB. Доступно: 37203.74 RUR LUKOIL.AZS 87 59P CHUSOVOY-->
+        <pattern category="expense">
+            <match><![CDATA[.*Покупка.*]]></match>
+            <cardId group="1"><![CDATA[Карта (\d+)]]></cardId>
+            <amount group="1"><![CDATA[Покупка (\d*\.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[; (.*); Data]]></detail>-->
+        </pattern>
+    </patterns>
+    <patterns bankId="oschadbank">
+        <!--04.01.18 19:38
+        Card:5167-6111
+        Sum:-191.99 UAH
+        Dom_Moskovs_013
+        Balance=5,526.49 UAH
+        Detali-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Card.*Sum.*]]></match>
+            <cardId group="1"><![CDATA[Card:([\d-]+)]]></cardId>
+            <amount group="1"><![CDATA[Sum:[-\+]?([\d\,]*.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
+            <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
+    </patterns>
+    <patterns bankId="kaspibank">
+        <!--Покупка: 6707т
+        MAGNUM AF 19-5
+        Доступно: 139 296,44т-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка.*]]></match>
+            <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Покупка: (\d+\,?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--Перевод: 6000т
+        На Kaspi Gold
+        Доступно: 133 296,44т-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод.*]]></match>
+            <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Перевод: (\d+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--Kaspi Депозит D-007
+        Перевод: 8000т
+        На Kaspi Gold
+        На Депозите: 17  751,96т-->
+        <pattern category="perevod_card">
+            <match><![CDATA[Kaspi Депозит.*Перевод.*]]></match>
+            <cardId group="1"><![CDATA[Депозит (\w+-\d+)]]></cardId>
+            <amount group="1"><![CDATA[Перевод: (\d+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Kaspi Депозит D-007
+        Пополнение: 20 000т
+        В Kaspi Терминале
+        На Депозите: 17 608 751,96т-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Kaspi Депозит.*Пополнение.*]]></match>
+            <cardId group="1"><![CDATA[Депозит (\w+-\d+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение: ([\d\s]+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Kaspi Депозит D-007
+        Проценты за декабрь: +201 569,73т
+        На Депозите: 17 588 751,96т-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Kaspi Депозит.*Проценты за.*]]></match>
+            <cardId group="1"><![CDATA[Депозит (\w+-\d+)]]></cardId>
+            <amount group="1"><![CDATA[: \+([\d\s]+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
+    </patterns>
+    <patterns bankId="halykbank">
+        <!--1192 Shotty tolyktyru/Popolnenie scheta. 14466.00 KZT; 16044000716101 NAO Gosudarstvennaa korporacia "Pravitel'stvo dla grajdan"; 04.12.2017 00:00. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 28609.66 KZT-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Popolnenie scheta.*]]></match>
+            <cardId group="1"><![CDATA[^(\d+)\s]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie scheta.\s(\d*.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="qazkom">
+        <!--2017-12-31 12:27:59 Operaciya po karte Retail 1669.00 KZT YUBILEINYI SUPERMARKET 4**493 Dostupnaya summa:78649.63 KZT-->
+        <pattern category="expense">
+            <match><![CDATA[.*Retail.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[Retail\s(\d*.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
+        </pattern>
+        <!--2018-01-05 15:02:45 Popolnenie 59535.00 KZT K**928 Dostupnaya summa:132446.63 KZT-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Popolnenie.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie\s(\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
 </content>

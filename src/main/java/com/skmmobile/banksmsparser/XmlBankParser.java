@@ -16,6 +16,7 @@ public class XmlBankParser extends BankSmsParser {
     private static final String ATTR_NAME     = "name";
     private static final String ATTR_CATEGORY = "category";
     private static final String ATTR_GROUP    = "group";
+    private static final String ATTR_DEFAULT  = "default";
 
     private static final String NODE_BANKS          = "banks";
     private static final String NODE_BANK           = "bank";
@@ -74,13 +75,13 @@ public class XmlBankParser extends BankSmsParser {
         NodeList bankList;
         int count = 0;
         // версия 1
-        bankList = document.getElementsByTagName(NODE_PHONE);
-        count = bankList.getLength();
-        for (int i = 0; i < count; i++) {
-            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
-            String phone = bankList.item(i).getFirstChild().getNodeValue();
-            phoneMap.put(phone, bankId);
-        }
+//        bankList = document.getElementsByTagName(NODE_PHONE);
+//        count = bankList.getLength();
+//        for (int i = 0; i < count; i++) {
+//            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
+//            String phone = bankList.item(i).getFirstChild().getNodeValue();
+//            phoneMap.put(phone, bankId);
+//        }
         // версия 2
         bankList = document.getElementsByTagName(NODE_SERVICE_PHONE);
         count = bankList.getLength();
@@ -146,6 +147,7 @@ public class XmlBankParser extends BankSmsParser {
                                     case NODE_CARD_ID:
                                         parameter = obtainPatternParameter(parameterNode);
                                         operation.setCardIdRex(parameter.patternStr, parameter.group);
+                                        operation.setDefCardId(getAttribute(parameterNode, ATTR_DEFAULT));
                                         break;
                                     case NODE_AMOUNT:
                                         parameter = obtainPatternParameter(parameterNode);
