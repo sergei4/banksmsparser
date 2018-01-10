@@ -23,6 +23,34 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
                 "6707",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Перевод: 6000тНа Kaspi GoldДоступно: 133 296,44т",
+                "perevod",
+                "kaspigold",
+                "6000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Пополнение: 8000т\n" +
+                        "С Kaspi Депозита \n" +
+                        "Доступно: 146 003,44т",
+                "popolnenie",
+                "kaspigold",
+                "8000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Снятие: 10 000т\n" +
+                        "В Банкомате ATM VN ALMATY SAMAL-2 D 111\n" +
+                        "Доступно: 173 721,18т",
+                "cash_ATM",
+                "kaspigold",
+                "10000",
+                ""
+        );
         // Kapibank
         checkBankSms(
                 parser,

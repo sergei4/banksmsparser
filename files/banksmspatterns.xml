@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/09 16:40</updated>
+    <updated>2018/01/10 12:20</updated>
     <operations>
         <operation name="expense">expense</operation>
     </operations>
@@ -37,8 +37,8 @@
         <!--<bank id="bankmoskow">Банк Москвы</bank>-->
         <!--<bank id="nomosbank">Номос Банк</bank>-->
         <!--<bank id="smpbank">СМП Банк</bank>-->
-        <!--<bank id="mkb">Московский кредитный</bank>-->
-        <!--<bank id="promsvyazbank">Промсвязьбанк</bank>-->
+        <bank id="mkb">Московский кредитный банк</bank>
+        <bank id="promsvyazbank">Промсвязьбанк</bank>
         <!--<bank id="petrokommerc">Банк Петрокоммерц</bank>-->
         <!--<bank id="sber_book">Сбер.книжка</bank>-->
         <!--<bank id="bank24">Банк24.ru</bank>-->
@@ -61,14 +61,14 @@
         <!--<bank id="raiffeisen_avil">Райффайзенбанк Аваль</bank>-->
         <!--<bank id="ukrsibbank">УкрСибБанк</bank>-->
         <bank id="privatbank">ПриватБанк</bank>
-        <!--<bank id="rosselhoz">РоссельхозБанк</bank>-->
+        <bank id="rosselhoz">РоссельхозБанк</bank>
         <bank id="rsb">Русский Стандарт</bank>
         <!--<bank id="masterbank">Мастербанк</bank>-->
         <!--<bank id="solidarnost">Солидарность</bank>-->
         <!--<bank id="erstebank">ErsteBank</bank>-->
         <!--<bank id="uralprombank">УралПромБанк</bank>-->
         <bank id="kukuruza">Кукуруза</bank>
-        <!--<bank id="otkritie">Открытие</bank>-->
+        <bank id="otkritie">Открытие</bank>
         <!--<bank id="yandexmoney">Яндекс.Деньги</bank>-->
         <!--<bank id="alfabank_ukr">Альфа-Банк Украина</bank>-->
         <!--<bank id="guta">ГУТА Банк</bank>-->
@@ -94,7 +94,7 @@
         <!--<bank id="kredobank">КРЕДОБАНК</bank>-->
         <!--<bank id="uralfd">Урал ФД</bank>-->
         <!--<bank id="florabank">Флора-Москва</bank>-->
-        <!--<bank id="akbars">АкБарс</bank>-->
+        <bank id="akbars">АкБарс</bank>
         <!--<bank id="homecredit">Хоум Кредит</bank>-->
         <!--<bank id="bveb">БелВнешЭкономБанк</bank>-->
         <!--<bank id="belinvest">Белинвестбанк</bank>-->
@@ -154,8 +154,8 @@
         <!--<service_phone bankId="bankmoskow">8000,BankMoskvy</service_phone>-->
         <!--<service_phone bankId="nomosbank">NOMOSBANK</service_phone>-->
         <!--<service_phone bankId="smpbank">SMP BANK,SMS-BANKING</service_phone>-->
-        <!--<service_phone bankId="mkb">MKB</service_phone>-->
-        <!--<service_phone bankId="promsvyazbank">4556,PSB</service_phone>-->
+        <service_phone bankId="mkb">MKB</service_phone>
+        <service_phone bankId="promsvyazbank">4556,PSB</service_phone>
         <!--<service_phone bankId="petrokommerc">+79163771234,PKB.Card,PKB.CARD</service_phone>-->
         <!--<service_phone bankId="sber_book">9000</service_phone>-->
         <!--<service_phone bankId="bank24">Bank24.ru,0883</service_phone>-->
@@ -178,14 +178,14 @@
         <!--<service_phone bankId="raiffeisen_avil">10901,050,10068</service_phone>-->
         <!--<service_phone bankId="ukrsibbank">729,+380931777755</service_phone>-->
         <service_phone bankId="privatbank">10060</service_phone>
-        <!--<service_phone bankId="rosselhoz">+79037976020,RSHB</service_phone>-->
+        <service_phone bankId="rosselhoz">+79037976020,RSHB</service_phone>
         <service_phone bankId="rsb">rsb.ru</service_phone>
         <!--<service_phone bankId="masterbank">MasterBank</service_phone>-->
         <!--<service_phone bankId="solidarnost">+79272020098,1711</service_phone>-->
         <!--<service_phone bankId="erstebank">ErsteBank</service_phone>-->
         <!--<service_phone bankId="uralprombank">+79048122142</service_phone>-->
         <service_phone bankId="kukuruza">1231,KYKYRYZA.RU</service_phone>
-        <!--<service_phone bankId="otkritie">+79037672727,OTKRITIE</service_phone>-->
+        <service_phone bankId="otkritie">+79037672727,OTKRITIE</service_phone>
         <!--<service_phone bankId="yandexmoney">YandexMoney</service_phone>-->
         <!--<service_phone bankId="alfabank_ukr">AlfaBank</service_phone>-->
         <!--<service_phone bankId="guta">+79037976059,GUTABANK</service_phone>-->
@@ -207,11 +207,11 @@
         <!--<service_phone bankId="trastbank">711</service_phone>-->
         <!--<service_phone bankId="vyatkabank">+79021111003</service_phone>-->
         <!--<service_phone bankId="khmb">KHMB</service_phone>-->
-        <service_phone bankId="chelinvest">+79028929802,+79026121212</service_phone>
+        <service_phone bankId="chelinvest">+79028929802,+79026121212,CHELINVEST</service_phone>
         <!--<service_phone bankId="kredobank">10912</service_phone>-->
         <!--<service_phone bankId="uralfd">+79630133444,UralFD</service_phone>-->
         <!--<service_phone bankId="florabank">FLORABANK</service_phone>-->
-        <!--<service_phone bankId="akbars">3299,AKBARS</service_phone>-->
+        <service_phone bankId="akbars">3299,AKBARS</service_phone>
         <!--<service_phone bankId="homecredit">HomeCredit</service_phone>-->
         <!--<service_phone bankId="bveb">BVEB.BY</service_phone>-->
         <!--<service_phone bankId="belinvest">1240</service_phone>-->
@@ -275,6 +275,8 @@
         <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
+        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
+        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -674,6 +676,26 @@
             <match><![CDATA[Перевод.*]]></match>
             <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
             <amount group="1"><![CDATA[Перевод: (\d+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--Пополнение: 8000т
+        С Kaspi Депозита
+        Доступно: 146 003,44т-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Пополнение.*]]></match>
+            <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Пополнение: (\d+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char optional="true">,</decimal_char>
+        </pattern>
+        <!--Снятие: 10 000т
+        В Банкомате ATM VN ALMATY SAMAL-2 D 111
+        Доступно: 173 721,18т-->
+        <pattern category="cash_ATM">
+            <match><![CDATA[Снятие.*]]></match>
+            <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Снятие: ([\d\s]+\,?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
             <decimal_char optional="true">,</decimal_char>
         </pattern>
