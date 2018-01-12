@@ -25,5 +25,21 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 "5526.49",
                 ""
         );
+        checkBankSms(
+                parser,
+                "PO DEPOZYTU N 12345678 VYPLACHENO VIDSOTKI U SUMI 100.00 UAH. DOVIDKA 0800210800",
+                "zachislenie",
+                "12345678",
+                "100",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "DEPOZYT N 12345678 POPOVNENO NA SUMU 5,000.12 UAH. DOVIDKA 0800210800",
+                "popolnenie",
+                "12345678",
+                "5000.12",
+                ""
+        );
     }
 }

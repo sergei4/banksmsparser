@@ -9,11 +9,12 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/12 09:25</updated>
+    <updated>2018/01/12 14:30</updated>
     <operations>
-        <operation name="unknown">Unknown</operation>
-        <operation name="expense">Expense</operation>
-        <operation name="zachislenie">Zachislenie</operation>
+        <operation name="unknown">Неизвестная операция</operation>
+        <operation name="expense">Расход, покакупка, оплата</operation>
+        <operation name="zachislenie">Зачисление (например, заработной платы, процентов)</operation>
+        <operation name="cash_ATM">Снятие наличных в банкомате</operation>
     </operations>
     <banks>
         <bank id="tinkoff">Тинькофф</bank>
@@ -358,6 +359,13 @@
             <cardId group="1"><![CDATA[Vyplata protsentov po vkladu (\d+)]]></cardId>
             <amount group="1"><![CDATA[Protsenty v razmere\s(\d*.?\d{1,2})\s]]></amount>
         </pattern>
+        <!--Пополнение. Карта *9930. 5000 RUB. Рапида. Доступно 44469.61 RUB-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Пополнение.*]]></match>
+            <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
+            <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
+        </pattern>
     </patterns>
     <patterns bankId="alfabank">
         <!-- 5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
@@ -685,6 +693,20 @@
             <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
             <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
+        <!--PO DEPOZYTU N 00000000 VYPLACHENO VIDSOTKI U SUMI 00.00 UAH. DOVIDKA 0800210800-->
+        <pattern category="zachislenie">
+            <match><![CDATA[PO DEPOZYTU.*VYPLACHENO VIDSOTKI.*]]></match>
+            <cardId group="1"><![CDATA[PO DEPOZYTU N (\d+)]]></cardId>
+            <amount group="1"><![CDATA[U SUMI ([\d\,]*.?\d{1,2})]]></amount>
+            <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
+        <!--DEPOZYT N 00000000 POPOVNENO NA SUMU 00.00 UAH. DOVIDKA 0800210800-->
+        <pattern category="popolnenie">
+            <match><![CDATA[DEPOZYT.*POPOVNENO.*]]></match>
+            <cardId group="1"><![CDATA[DEPOZYT N (\d+)]]></cardId>
+            <amount group="1"><![CDATA[NA SUMU ([\d\,]*.?\d{1,2})]]></amount>
+            <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
     </patterns>
     <patterns bankId="kaspibank">
         <!--Покупка: 6707т
@@ -693,7 +715,7 @@
         <pattern category="expense">
             <match><![CDATA[Покупка.*]]></match>
             <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[Покупка: (\d+\,?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Покупка: ([\d\s]+\,?\d{1,2})]]></amount>
             <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
             <decimal_group_char optional="true"> </decimal_group_char>
             <decimal_char optional="true">,</decimal_char>
@@ -704,7 +726,7 @@
         <pattern category="perevod">
             <match><![CDATA[Перевод.*]]></match>
             <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[Перевод: (\d+\,?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Перевод: ([\d\s]+\,?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
             <decimal_char optional="true">,</decimal_char>
         </pattern>
@@ -714,7 +736,7 @@
         <pattern category="popolnenie">
             <match><![CDATA[Пополнение.*]]></match>
             <cardId group="0" default="kaspigold"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[Пополнение: (\d+\,?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Пополнение: ([\d\s]+\,?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
             <decimal_char optional="true">,</decimal_char>
         </pattern>

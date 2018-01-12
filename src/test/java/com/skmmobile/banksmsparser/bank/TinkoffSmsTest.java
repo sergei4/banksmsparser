@@ -146,5 +146,14 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "3000",
                 "WSCB Malygin"
         );
+
+        checkBankSms(
+                parser,
+                "Пополнение. Карта *9930. 5000 RUB. Рапида. Доступно 44469.61 RUB",
+                "popolnenie",
+                "9930",
+                "5000",
+                "Рапида"
+        );
     }
 }

@@ -24,4 +24,5 @@
 Список банков (Казахстан):
 * KaspiBank
 * Qazkom
+* Halyk Bank
 

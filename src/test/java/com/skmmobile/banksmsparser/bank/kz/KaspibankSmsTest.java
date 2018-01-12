@@ -53,6 +53,16 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
+                "Пополнение: 112 000т\n" +
+                        "В Kaspi Терминале \n" +
+                        "Доступно: 146 003,44т",
+                "popolnenie",
+                "kaspigold",
+                "112000",
+                ""
+        );
+        checkBankSms(
+                parser,
                 "Снятие: 10 000т\n" +
                         "В Банкомате ATM VN ALMATY SAMAL-2 D 111\n" +
                         "Доступно: 173 721,18т",
