@@ -9,9 +9,11 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/10 12:20</updated>
+    <updated>2018/01/12 09:25</updated>
     <operations>
-        <operation name="expense">expense</operation>
+        <operation name="unknown">Unknown</operation>
+        <operation name="expense">Expense</operation>
+        <operation name="zachislenie">Zachislenie</operation>
     </operations>
     <banks>
         <bank id="tinkoff">Тинькофф</bank>
@@ -114,6 +116,7 @@
         <bank id="kaspibank">Kaspi Bank</bank>
         <bank id="halykbank">HALYK BANK</bank>
         <bank id="qazkom">Казкоммерцбанк</bank>
+        <bank id="belarusbank">ОАО "АСБ БЕЛАРУСБАНК"</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -231,6 +234,7 @@
         <service_phone bankId="kaspibank">KaspiBank,KaspiGold</service_phone>
         <service_phone bankId="halykbank">5959</service_phone>
         <service_phone bankId="qazkom">7000</service_phone>
+        <service_phone bankId="belarusbank">ASB</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
@@ -277,6 +281,7 @@
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
+        <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -422,6 +427,12 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[зачисление.*\s(\d*\.?\d{1,2}).*Баланс]]></amount>
         </pattern>
+        <!--MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*перечисление процентов.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[перечисление процентов.*\s(\d*\.?\d{1,2}).*Баланс]]></amount>
+        </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="vida4a_ATM">
             <match><![CDATA[.*выдача\s\d.*ATM.*]]></match>
@@ -525,7 +536,7 @@
         </pattern>
         <!--Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR-->
         <pattern category="cardToCard">
-            <match><![CDATA[.*Poluchen perevod.*]]></match>
+            <match><![CDATA[.*PEREVOD MEZHDU KARTAMI.*]]></match>
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
         </pattern>
@@ -535,6 +546,18 @@
             <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
+        </pattern>
+        <!--Telecard; Card5621;Card1691;CUP Standard;Card1963;Card9047; 10.01.18 12:52:12; Zachislenie; 21162.48 RUR; dostupno: 46786.71 RUR-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Zachislenie;.*]]></match>
+            <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Zachislenie; (\d+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Telecard; Card9047; Perevod; Summa 9000 RUR; 09.01.18 18:09:02; PEREVOD NA KARTU; dostupno: 44603.23 RUR-->
+        <pattern category="perevod">
+            <match><![CDATA[.*PEREVOD NA KARTU;.*]]></match>
+            <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="qiwi">
@@ -640,6 +663,12 @@
             <cardId group="1"><![CDATA[Карта (\d+)]]></cardId>
             <amount group="1"><![CDATA[Покупка (\d*\.?\d{1,2})]]></amount>
             <!--<detail group="1"><![CDATA[; (.*); Data]]></detail>-->
+        </pattern>
+        <!--Карта 1139 11.01.2018 11:21 Баланс карты увеличен на 3108.43 RUB. Доступно: 16487.57 RUR-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Баланс карты увеличен.*]]></match>
+            <cardId group="1"><![CDATA[Карта (\d+)]]></cardId>
+            <amount group="1"><![CDATA[Баланс карты увеличен на (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="oschadbank">
@@ -753,6 +782,28 @@
             <match><![CDATA[.*Popolnenie.*]]></match>
             <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
             <amount group="1"><![CDATA[Popolnenie\s(\d*.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="belarusbank">
+        <pattern category="zachislenie">
+            <!--ZACHISLENIE 123.45 BYN KARTA #1234-->
+            <match><![CDATA[ZACHISLENIE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
+            <amount group="1"><![CDATA[ZACHISLENIE\s(\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--OPLATA 123.45 BYN KARTA #1234 DATA 01.01.2018 10:30:30 PARIKMAHERSKAYZ"DEVORA"BAPB>GOMEL>BY OSTATOK 0.00 BYN-->
+        <pattern category="expense">
+            <match><![CDATA[OPLATA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
+            <amount group="1"><![CDATA[OPLATA\s(\d*.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\d{2}:\d{2}:\d{2} (.*) OSTATOK]]></detail>
+        </pattern>
+        <!--NALICHNYE 123.45 BYN KARTA #1234 DATA 01.01.2018 10:30:30 ATM 039 TH RECHICKI>GOMEL>BY OSTATOK 123.45 BYN-->
+        <pattern category="cash_ATM">
+            <match><![CDATA[NALICHNYE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
+            <amount group="1"><![CDATA[NALICHNYE\s(\d*.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\d{2}:\d{2}:\d{2} (.*) OSTATOK]]></detail>
         </pattern>
     </patterns>
 </content>

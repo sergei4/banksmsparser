@@ -1,19 +1,30 @@
 package com.skmmobile.banksmsparser;
 
-import com.skmmobile.banksmsparser.bank.*;
+import com.skmmobile.banksmsparser.bank.AlfabankSmsTest;
+import com.skmmobile.banksmsparser.bank.BinbankSmsTest;
+import com.skmmobile.banksmsparser.bank.GazpromSmsTest;
+import com.skmmobile.banksmsparser.bank.MTSSmsTest;
+import com.skmmobile.banksmsparser.bank.QiwiSmsTest;
+import com.skmmobile.banksmsparser.bank.RaiffeisenSmsTest;
+import com.skmmobile.banksmsparser.bank.SberbankSmsTest;
+import com.skmmobile.banksmsparser.bank.TinkoffSmsTest;
+import com.skmmobile.banksmsparser.bank.UbrrSmsTest;
+import com.skmmobile.banksmsparser.bank.UnicreditSmsTest;
+import com.skmmobile.banksmsparser.bank.Vtb24SmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.MinbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.SbsIbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.HalykbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.KaspibankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.QazkomSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.OschadbankSmsTest;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
 import java.io.File;
-import java.math.BigDecimal;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -109,6 +120,7 @@ public class BankParserTests extends Assert {
         new KaspibankSmsTest(xmlDocument){}.check();
         new HalykbankSmsTest(xmlDocument){}.check();
         new QazkomSmsTest(xmlDocument){}.check();
+        new BelarusbankSmsTest(xmlDocument){}.check();
     }
 }
 

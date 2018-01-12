@@ -15,6 +15,16 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
         // Kapigold
         checkBankSms(
                 parser,
+                "Покупка: 4134т\n" +
+                        "GAZOILPROM AZS\n" +
+                        "Доступно: 2852т",
+                BankSmsParser.CATEGORY_EXPENSE,
+                "kaspigold",
+                "4134",
+                ""
+        );
+        checkBankSms(
+                parser,
                 "Покупка: 6707т\n" +
                         "MAGNUM AF 19-5\n" +
                         "Доступно: 139 296,44т",
@@ -51,6 +61,7 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
                 "10000",
                 ""
         );
+
         // Kapibank
         checkBankSms(
                 parser,

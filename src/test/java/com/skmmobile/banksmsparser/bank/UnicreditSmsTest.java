@@ -27,5 +27,13 @@ public class UnicreditSmsTest extends AbsXmlBankSmsTest {
                 "170",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Карта 1139 11.01.2018 11:21 Баланс карты увеличен на 3108.43 RUB. Доступно: 16487.57 RUR",
+                "zachislenie",
+                "1139",
+                "3108.43",
+                ""
+        );
     }
 }

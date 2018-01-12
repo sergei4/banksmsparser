@@ -290,5 +290,14 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "8132.35",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р",
+                "zachislenie",
+                "MAES3781",
+                "277.41",
+                ""
+        );
     }
 }
