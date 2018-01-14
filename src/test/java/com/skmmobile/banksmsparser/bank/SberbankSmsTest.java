@@ -299,5 +299,21 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "277.41",
                 ""
         );
+        checkBankSms(
+                parser,
+                "ECMC4773: пополнение Копилки на \"Пополняй ОнЛ йн 3м - 6м руб. \" на сумму 277.41руб. Дата следующего платежа 15.01.18",
+                "popolnenie",
+                "ECMC4773",
+                "277.41",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "VISA1224 14.01.18 10:22 зачисление 3000р ITT 352056 Баланс: 4000р",
+                "zachislenie",
+                "VISA1224",
+                "3000",
+                ""
+        );
     }
 }

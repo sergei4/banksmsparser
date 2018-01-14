@@ -104,5 +104,15 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
                 "201569.73",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Kaspi Депозит D-006\n" +
+                        "Платеж на Kaspi.kz: 2000т\n" +
+                        "На Депозите: 49 023,74т",
+                "oplata",
+                "D-006",
+                "2000",
+                ""
+        );
     }
 }

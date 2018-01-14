@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/12 14:30</updated>
+    <updated>2018/01/14 15:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покакупка, оплата</operation>
@@ -238,11 +238,21 @@
         <service_phone bankId="belarusbank">ASB</service_phone>
     </bank_phones>
     <system>
+        <system_sms bankId="all"><![CDATA[.*Samsung Pay.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*Уважаемый клиент.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Zavtra budet vypolnena regulyarnaya operatsiya.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot SMS-kod.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Ваше кодовое слово изменено.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vash bonus po aktsii.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*мы позвоним вам и сообщим ПИН-код.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Spasibo, chto vybrali nas.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*время встречи с представителем.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*priedet predstavitel banka.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*naznachena vstrecha po adresu.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*пароль:\s\d+.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*перевел.*]]></system_sms>
@@ -255,6 +265,9 @@
         <system_sms bankId="sberbank"><![CDATA[.*успешно привязана в мобильное устройство.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*введите код.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*отмена авторизации.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*карта разблокирована.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*карта заблокирована банком.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*отклонена как подозрительная.*]]></system_sms>
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
@@ -271,9 +284,7 @@
         <system_sms bankId="minbank"><![CDATA[Уважаемый.*]]></system_sms>
         <!--Otklyuchen SMS-paket "Bazoviy".-->
         <system_sms bankId="vtb24"><![CDATA[Otklyuchen SMS-paket.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Уважаемый клиент.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Kod .*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[.*k Samsung Pay.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
         <!--Vasha karta *5884.Kod dlya provedeniya tranzakcii 8979. http://www.kinomax.ru. Summa 240.00 RUB. Nikomu ne govorite kod!-->
@@ -283,6 +294,7 @@
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
+        <system_sms bankId="unicreditbank"><![CDATA[.*Получите.*в кредит под.*ежемесячный платеж.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -404,28 +416,28 @@
         <pattern category="spisanie">
             <match><![CDATA[.*списание\s\d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=списание\s)\d*\.?\d{1,2}]]></amount>
+            <amount group="1"><![CDATA[списание[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р-->
         <pattern category="expense">
             <match><![CDATA[.*оплата\s\d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=оплата\s)\d*\.?\d{1,2}]]></amount>
-            <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
+            <amount group="1"><![CDATA[оплата[\D]+(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--MIR-3075 13.12.17 17:39 покупка 1200р VNUKOVO.AIRLINES AEROP Баланс: 1276.46р-->
         <pattern category="expense">
             <match><![CDATA[.*покупка\s\d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=покупка\s)\d*\.?\d{1,2}]]></amount>
-            <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
+            <amount group="1"><![CDATA[покупка[\D]+(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р-->
         <pattern category="zachislenie_ATM">
             <match><![CDATA[.*зачисление\s\d.*ATM.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=зачисление\s)\d*\.?\d{1,2}]]></amount>
-            <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
+            <amount group="1"><![CDATA[зачисление[\D]+(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р-->
         <!--MAES0515 11.12.17 12:24 зачисление пенсии 10471.91р Баланс: 12934.80р-->
@@ -433,19 +445,19 @@
         <pattern category="zachislenie">
             <match><![CDATA[.*зачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[зачисление.*\s(\d*\.?\d{1,2}).*Баланс]]></amount>
+            <amount group="1"><![CDATA[зачисление[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р-->
         <pattern category="zachislenie">
             <match><![CDATA[.*перечисление процентов.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[перечисление процентов.*\s(\d*\.?\d{1,2}).*Баланс]]></amount>
+            <amount group="1"><![CDATA[перечисление процентов\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="vida4a_ATM">
             <match><![CDATA[.*выдача\s\d.*ATM.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="0"><![CDATA[(?<=выдача\s)\d*\.?\d{1,2}]]></amount>
+            <amount group="1"><![CDATA[выдача[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
         </pattern>
         <!--VISA0000 10.12.17 оплата Мобильного банка за 10/12/2017-09/01/2018 60р Баланс: 00000.00р-->
@@ -470,14 +482,20 @@
         <pattern category="own_debit_pay">
             <match><![CDATA[.*погашение Вашего долга по другой карте.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[Списание в сумме\s([0-9\s]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Списание в сумме\s([\d\s]*\.?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
         </pattern>
         <!--VISA4812 19.12.17 возврат покупки 126.07р YM*AE Баланс: 316.31р-->
         <pattern category="vozvrat">
             <match><![CDATA[.*возврат покупки.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[возврат покупки\s([0-9\s]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[возврат покупки\s([\d\s]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--ECMC4773: пополнение Копилки на "Пополняй ОнЛ йн 3м - 6м руб. " на сумму 500руб. Дата следующего платежа 15.01.18-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*пополнение.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[на сумму\s([\d\s]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="vtb24">
@@ -779,6 +797,16 @@
             <match><![CDATA[Kaspi Депозит.*Проценты за.*]]></match>
             <cardId group="1"><![CDATA[Депозит (\w+-\d+)]]></cardId>
             <amount group="1"><![CDATA[: \+([\d\s]+\,?\d{1,2})]]></amount>
+            <decimal_group_char optional="true"> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Kaspi Депозит D-006
+        Платеж на Kaspi.kz: 2000т
+        На Депозите: 49 023,74т-->
+        <pattern category="oplata">
+            <match><![CDATA[Kaspi Депозит.*Платеж на Kaspi\.kz.*]]></match>
+            <cardId group="1"><![CDATA[Депозит (\w+-\d+)]]></cardId>
+            <amount group="1"><![CDATA[Платеж на Kaspi\.kz: ([\d\s]+\,?\d{1,2})]]></amount>
             <decimal_group_char optional="true"> </decimal_group_char>
             <decimal_char>,</decimal_char>
         </pattern>

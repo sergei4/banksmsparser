@@ -94,6 +94,20 @@ public class BankParserTests extends Assert {
                 "08.01.18 18:19:39 \n" +
                 "Vitaemo! Vy uspishno uvijshly do WEB(Mobile)-bankingu.\n" +
                 "Detali 0800210800");
+        isSystemSms("Михаил Сергеевич, новый автомобиль ждет Вас! Получите 2407000р. в кредит под 11.8%, ежемесячный платеж 42234р. Или воспользуйтесь 10% скидкой на новое авто по одной из программ: \"Первый\" или \"Семейный\"! Подробнее: https://goo.gl/hsguxq АО ЮниКредит Банк. 88007002636");
+        isSystemSms("Nikomu ne govorite etot SMS-kod: 8867. Vy vhodite v mobil'niy bank 11:24 12.01.2018 IP217.118.93.160. Esli vhod proizvodite ne vy, pozvonite v bank: 88005551010");
+        isSystemSms("Ваше кодовое слово изменено. Если изменения вносили не вы, перезвоните нам: 88005551010. Tinkoff.ru");
+        isSystemSms("Samsung Pay подключен для карты *3402");
+        isSystemSms("Vash bonus po aktsii Privedi Druga 3 mesyatsa obsluzhivaniya po debetovoy karte aktivirovan. Vash Tinkoff Bank Tinkoff.ru");
+        isSystemSms("ECMC4773: 11.01.18 13:59 карта разблокирована. Если Вы не совершали данную операцию, обратитесь в Контактный центр Сбербанка");
+        isSystemSms("ECMC4773: В связи с подозрением на компрометацию карты и для сохранности Ваших средств карта заблокирована банком. Для получения рекомендаций, как восстановить работоспособность карты, обратитесь в Контактный центр Сбербанка");
+        isSystemSms("EUROPAY4773:11.01.18,13:47. Покупка на 33000.00 RUB, TINKOFF BANK CARD2CARDRUS, отклонена как подозрительная. В течение 30 минут банк проведет проверку операции и вы получите смс с результатом.");
+        isSystemSms("1733: Уважаемый клиент! Проверка завершена, вы можете провести операцию повторно. Приносим извинения за доставленные неудобства. Сбербанк");
+        isSystemSms("Сейчас мы позвоним вам и сообщим ПИН-код по вашей карте. Перезвоните, если пропустите звонок: 88005551010. Tinkoff.ru");
+        isSystemSms("Spasibo, chto vybrali nas! Vasha karta *3402 gotova k ispolzovaniyu, nikomu ne soobschayte ee rekvizity i PIN-kod. Tinkoff.ru");
+        isSystemSms("Максим Иванович, время встречи с представителем банка изменено. Встреча состоится сегодня с 11:00 до 13:00. Tinkoff.ru");
+        isSystemSms("Segodnya v period s 13:00 do 15:00 k vam priedet predstavitel banka Dmitriy, +79278681761. Predstavitel sfotografiruet vas i dokumenty. Tinkoff.ru");
+        isSystemSms("Zavtra s 13:00 do 15:00 naznachena vstrecha po adresu LENINSKOGO KOMSOMOLA d.56 kv.45. Vozmite pasport. 88005552273. Tinkoff.ru");
     }
 
     @Test
