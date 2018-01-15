@@ -108,6 +108,7 @@ public class BankParserTests extends Assert {
         isSystemSms("Максим Иванович, время встречи с представителем банка изменено. Встреча состоится сегодня с 11:00 до 13:00. Tinkoff.ru");
         isSystemSms("Segodnya v period s 13:00 do 15:00 k vam priedet predstavitel banka Dmitriy, +79278681761. Predstavitel sfotografiruet vas i dokumenty. Tinkoff.ru");
         isSystemSms("Zavtra s 13:00 do 15:00 naznachena vstrecha po adresu LENINSKOGO KOMSOMOLA d.56 kv.45. Vozmite pasport. 88005552273. Tinkoff.ru");
+        isSystemSms("Сбербанк Онлайн. Изменение настроек оповещений - Пароль для подтверждения изменений - 12164");
     }
 
     @Test

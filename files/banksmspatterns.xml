@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/14 15:05</updated>
+    <updated>2018/01/15 09:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покакупка, оплата</operation>
@@ -268,6 +268,7 @@
         <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*карта разблокирована.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[MIR-|VISA|MAES|ORPS|ECMC\d{4}.*карта заблокирована банком.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*отклонена как подозрительная.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Изменение настроек оповещений.*]]></system_sms>
         <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
