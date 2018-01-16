@@ -14,7 +14,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA6168 06.12.17 11:30 списание 700р Баланс: 2682.45р",
-                "spisanie",
+                "payment",
                 "VISA6168",
                 "700",
                 ""
@@ -23,7 +23,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "VISA6470",
                 "200",
                 "MTS OAO"
@@ -32,7 +32,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA6168 02.12.17 19:32 списание 30000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 3382.45р",
-                "spisanie",
+                "payment",
                 "VISA6168",
                 "30000",
                 ""
@@ -41,7 +41,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р",
-                "zachislenie_ATM",
+                "zachislenie",
                 "VISA6168",
                 "30000",
                 "ATM 335417"
@@ -104,7 +104,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "MAES0515 11.12.17 12:27 списание 12000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 934.80р",
-                "spisanie",
+                "payment",
                 "MAES0515",
                 "12000",
                 ""
@@ -122,7 +122,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "ORPS5161 09.12.17 11:44 списание 2000р Баланс: 229.11р",
-                "spisanie",
+                "payment",
                 "ORPS5161",
                 "2000",
                 ""
@@ -131,7 +131,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "ORPS5161 08.12.17 16:25 списание 1р Баланс: 2229.11р",
-                "spisanie",
+                "payment",
                 "ORPS5161",
                 "1",
                 ""
@@ -167,7 +167,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "ECMC8559 13.12.17 16:49 зачисление 15000р ATM 10853020 Баланс: 0",
-                "zachislenie_ATM",
+                "zachislenie",
                 "ECMC8559",
                 "15000",
                 "ATM 10853020"
@@ -176,7 +176,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97682.45р",
-                "vida4a_ATM",
+                "cash_atm",
                 "VISA6168",
                 "5000",
                 "ATM 861320"
@@ -185,7 +185,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA0000 10.12.17 оплата Мобильного банка за 10/12/2017-09/01/2018 60р Баланс: 00000.00р",
-                "pay_iBank",
+                "service_pay",
                 "VISA0000",
                 "60",
                 ""
@@ -240,7 +240,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р",
-                "commission",
+                "service_pay",
                 "VISA0000",
                 "3",
                 ""
@@ -249,7 +249,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "VISA0000. Списание в сумме 2 923.55 RUR с карт.счета в погашение Вашего долга по другой карте. 2017-12-18 00:00:00",
-                "own_debit_pay",
+                "payment",
                 "VISA0000",
                 "2923.55",
                 ""

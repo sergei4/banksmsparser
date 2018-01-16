@@ -77,7 +77,7 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Perevod na kartu. Karta *9930. Summa 1000 RUB. TINKOFF BANK CARD2CARD. 12.12.2017 18:06. Dostupno 56706 RUB. Tinkoff.ru",
-                "perevod_card",
+                "perevod",
                 "9930",
                 "1000",
                 ""
@@ -96,7 +96,7 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Снятие. Карта *7733. 3000 RUB. ATM 450704 180-1. Доступно **** RUB",
-                "cash_ATM",
+                "cash_atm",
                 "7733",
                 "3000",
                 "ATM 450704 180-1"
@@ -141,7 +141,7 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Снятие. Карта *7733. 3000 RUB. WSCB Malygin. Доступно ***.67 RUB",
-                "cash_ATM",
+                "cash_atm",
                 "7733",
                 "3000",
                 "WSCB Malygin"

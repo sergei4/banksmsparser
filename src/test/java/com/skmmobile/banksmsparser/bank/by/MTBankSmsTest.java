@@ -25,5 +25,39 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "6.48",
                 ""
         );
+
+        checkBankSms(
+                parser,
+                "KARTA:5351*1179\n" +
+                        "05/12/17 20:05\n" +
+                        "OPLATA 479.00 BYN\n" +
+                        "I.-SHOP \"21VEK.BY\" BAP, , MINSK\n" +
+                        "OST.DB 0.00 BYN\n" +
+                        "OST.CR 464.37 BYN\n" +
+                        "KOD AVT.075807 (WWW.MTBINGO.BY)\n" +
+                        "Spr.:5099999",
+                "expense",
+                "5351*1179",
+                "479",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999",
+                "service_pay",
+                "5351*7458",
+                "2.50",
+                ""
+        );
+
+        checkBankSms(
+                parser,
+                "Uvazhaemyj klient! Na Vash schet BY75MTBK*******6349 postupilo 7,61 BYN. Vash MTBank!",
+                "popolnenie",
+                "BY75MTBK*******6349",
+                "7.61",
+                ""
+        );
     }
 }
