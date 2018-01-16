@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/15 09:50</updated>
+    <updated>2018/01/16 18:45</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покакупка, оплата</operation>
@@ -89,7 +89,7 @@
         <!--<bank id="vabbank">VAB Банк</bank>-->
         <!--<bank id="kubank">Кольцо Урала</bank>-->
         <!--<bank id="kedr">Кедр</bank>-->
-        <!--<bank id="priorbank">Приорбанк</bank>-->
+        <bank id="priorbank">Приорбанк</bank>
         <!--<bank id="trastbank">Трастбанк</bank>-->
         <!--<bank id="vyatkabank">Вятка-банк</bank>-->
         <!--<bank id="khmb">Ханты-Мансийский Банк</bank>-->
@@ -118,6 +118,7 @@
         <bank id="halykbank">HALYK BANK</bank>
         <bank id="qazkom">Казкоммерцбанк</bank>
         <bank id="belarusbank">ОАО "АСБ БЕЛАРУСБАНК"</bank>
+        <bank id="mtbank">МТБанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -207,7 +208,7 @@
         <!--<service_phone bankId="vabbank">VABBANK</service_phone>-->
         <!--<service_phone bankId="kubank">KUBANK</service_phone>-->
         <!--<service_phone bankId="kedr">4345</service_phone>-->
-        <!--<service_phone bankId="priorbank">1211,1212</service_phone>-->
+        <service_phone bankId="priorbank">1211,1212,Priorbank</service_phone>
         <!--<service_phone bankId="trastbank">711</service_phone>-->
         <!--<service_phone bankId="vyatkabank">+79021111003</service_phone>-->
         <!--<service_phone bankId="khmb">KHMB</service_phone>-->
@@ -236,6 +237,7 @@
         <service_phone bankId="halykbank">5959</service_phone>
         <service_phone bankId="qazkom">7000</service_phone>
         <service_phone bankId="belarusbank">ASB</service_phone>
+        <service_phone bankId="mtbank">MTBank,MTBANK</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*Samsung Pay.*]]></system_sms>
@@ -561,6 +563,13 @@
             <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
         </pattern>
+        <!--Telecard; Card1691; Predauth; Summa 525 RUR; 15.01.18 17:16:56; YANDEX.TAXI; dostupno: 406651.48 RUR-->
+        <pattern category="expense">
+            <match><![CDATA[.*Predauth;.*]]></match>
+            <cardId group="1"><![CDATA[Card(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa\s(\d+\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
+        </pattern>
         <!--Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR-->
         <pattern category="cardToCard">
             <match><![CDATA[.*PEREVOD MEZHDU KARTAMI.*]]></match>
@@ -623,7 +632,14 @@
             <match><![CDATA[.*\d{2}:\d{2}:\d{2}\sATM.*]]></match>
             <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
             <amount group="1"><![CDATA[ATM -(\d*\.?\d{1,2})]]></amount>
-            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)(?=\sDostupno)]]></detail>
+            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)\sDostupno]]></detail>
+        </pattern>
+        <!--Karta 4.5614 13.01.2018 00:53:35 SOA Debit -5.35 BYN Unitarnoe predpriiatie "Velkom" Ibank BLR OK. Dostupno 22.34 BYN-->
+        <pattern category="expense">
+            <match><![CDATA[.*\d{2}:\d{2}:\d{2}\sSOA Debit.*]]></match>
+            <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
+            <amount group="1"><![CDATA[Debit -(\d*\.?\d{1,2})]]></amount>
+            <detail group="2"><![CDATA[(BYN|USD|RUB|EUR)\s(.*)\sDostupno]]></detail>
         </pattern>
     </patterns>
     <patterns bankId="ubrr">
@@ -836,8 +852,8 @@
         </pattern>
     </patterns>
     <patterns bankId="belarusbank">
+        <!--ZACHISLENIE 123.45 BYN KARTA #1234-->
         <pattern category="zachislenie">
-            <!--ZACHISLENIE 123.45 BYN KARTA #1234-->
             <match><![CDATA[ZACHISLENIE.*]]></match>
             <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
             <amount group="1"><![CDATA[ZACHISLENIE\s(\d*.?\d{1,2})]]></amount>
@@ -855,6 +871,27 @@
             <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
             <amount group="1"><![CDATA[NALICHNYE\s(\d*.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\d{2}:\d{2}:\d{2} (.*) OSTATOK]]></detail>
+        </pattern>
+    </patterns>
+    <patterns bankId="priorbank">
+        <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->
+        <pattern category="expense">
+            <match><![CDATA[.*Oplata.*]]></match>
+            <cardId group="1"><![CDATA[Karta ([\*\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Oplata\s(\d*.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="mtbank">
+        <!--KARTA:4177*5654
+        16/01/18 13:52
+        OPLATA 6.48 BYN
+        MTB INTERNET POS, PR. PARTIZANSKIY 6A, MINSK
+        OSTATOK 19.75 BYN
+        Spr.:5099999-->
+        <pattern category="expense">
+            <match><![CDATA[.*OPLATA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
+            <amount group="1"><![CDATA[OPLATA\s(\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
 </content>

@@ -12,7 +12,9 @@ import com.skmmobile.banksmsparser.bank.UbrrSmsTest;
 import com.skmmobile.banksmsparser.bank.UnicreditSmsTest;
 import com.skmmobile.banksmsparser.bank.Vtb24SmsTest;
 import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.MTBankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.MinbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.PriorBankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.SbsIbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.HalykbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.KaspibankSmsTest;
@@ -136,6 +138,8 @@ public class BankParserTests extends Assert {
         new HalykbankSmsTest(xmlDocument){}.check();
         new QazkomSmsTest(xmlDocument){}.check();
         new BelarusbankSmsTest(xmlDocument){}.check();
+        new PriorBankSmsTest(xmlDocument){}.check();
+        new MTBankSmsTest(xmlDocument){}.check();
     }
 }
 

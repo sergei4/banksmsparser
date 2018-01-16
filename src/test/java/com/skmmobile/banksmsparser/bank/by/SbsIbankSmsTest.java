@@ -39,5 +39,23 @@ public class SbsIbankSmsTest extends AbsXmlBankSmsTest {
                 "100",
                 "ATMTBK HO27 SKALA MINSK BLR OK."
         );
+
+        checkBankSms(
+                parser,
+                "Karta 4.5614 13.01.2018 00:53:35 SOA Debit -5.35 BYN Unitarnoe predpriiatie \"Velkom\" Ibank BLR OK. Dostupno 22.34 BYN",
+                "expense",
+                "5614",
+                "5.35",
+                "Unitarnoe predpriiatie \"Velkom\" Ibank BLR OK."
+        );
+
+        checkBankSms(
+                parser,
+                "Karta 4.5614 15.01.2018 19:37:27 SOA Debit -20.00 BYN Obshchestvo s ogranichennoy otvetstvennost'iu \"Flaynet\" Ibank BLR OK. Dostupno 2.34 BYN",
+                "expense",
+                "5614",
+                "20",
+                "Obshchestvo s ogranichennoy otvetstvennost'iu \"Flaynet\" Ibank BLR OK."
+        );
     }
 }

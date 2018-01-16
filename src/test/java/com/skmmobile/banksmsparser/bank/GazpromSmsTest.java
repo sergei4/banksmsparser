@@ -14,7 +14,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Telecard; Card8381; Oplata; Summa 559 RUR; 17.12.17 09:19:32; MONETKA; dostupno: 1790.52 RUR",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "8381",
                 "559",
                 "MONETKA"
@@ -23,7 +23,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Telecard; Card1091; 15.05.14 12:31:11; SUPERMARKET TECHNO; Oplata; 9150 RUB; dostupno: 49794.88 RUB",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "1091",
                 "9150",
                 "SUPERMARKET TECHNO"
@@ -41,7 +41,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Telecard; Card1745; Oplata; Summa 370 RUR; 22.12.17 08:36:33; YALYA; dostupno: 5953.47 RUR; ispolzovano: 64046.53 RUR",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "1745",
                 "370",
                 "YALYA"
@@ -50,7 +50,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Telecard; Card1745; Oplata; Summa 237 RUR; 22.12.17 08:28:22; MOROSHKA; dostupno: 6323.47 RUR; ispolzovano: 63676.53 RUR",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "1745",
                 "237",
                 "MOROSHKA"
@@ -59,7 +59,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Card8381; Oplata v I-net; Summa 165 RUR; 21.12.17 14:46:31; GOOGLE *androidmarket; dostupno: 112.36 RUR",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "8381",
                 "165",
                 "GOOGLE *androidmarket"
@@ -90,6 +90,15 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "9047",
                 "9000",
                 ""
+        );
+
+        checkBankSms(
+                parser,
+                "Telecard; Card1691; Predauth; Summa 525 RUR; 15.01.18 17:16:56; YANDEX.TAXI; dostupno: 406651.48 RUR",
+                "expense",
+                "1691",
+                "525",
+                "YANDEX.TAXI"
         );
     }
 }
