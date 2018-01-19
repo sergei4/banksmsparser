@@ -15,15 +15,15 @@ public class UbrrSmsTest extends AbsXmlBankSmsTest {
                 parser,
                 "Pokupka \n" +
                         "4301****2661 \n" +
-                        "Summa: 1737.96 RUB \n" +
-                        "Ostatok: 9906.21 RUB \n" +
-                        "Term: 474  KIROVSKIY \n" +
-                        "MCC: 5411 \n" +
-                        "24.12.17 18:43",
-                BankSmsParser.CATEGORY_EXPENSE,
+                        "Summa: 314.00 RUB \n" +
+                        "Ostatok: 7002.36 RUB \n" +
+                        "Term: GAZPROMNEFT AZS 100     > \n" +
+                        "MCC: 5541 \n" +
+                        "27.12.17 13:18",
+                "expense",
                 "4301****2661",
-                "1737.96",
-                "474  KIROVSKIY"
+                "314",
+                "GAZPROMNEFT AZS 100     >"
         );
     }
 }

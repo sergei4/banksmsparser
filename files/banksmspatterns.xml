@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/17 00:20</updated>
+    <updated>2018/01/19 15:00</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -301,6 +301,8 @@
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Получите.*в кредит под.*ежемесячный платеж.*]]></system_sms>
+        <system_sms bankId="binbank"><![CDATA[Vy zashli v Binbank online.*]]></system_sms>
+        <system_sms bankId="binbank"><![CDATA[Вход в мобильное приложение.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -657,7 +659,7 @@
             <match><![CDATA[Pokupka.*]]></match>
             <cardId group="1"><![CDATA[Pokupka\s+([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
-            <detail group="1"><![CDATA[Term: ([\d\s\w]*)\sMCC:]]></detail>
+            <detail group="1"><![CDATA[Term: ([\d\s\w\>]*)\sMCC:]]></detail>
         </pattern>
     </patterns>
     <patterns bankId="binbank">
@@ -667,6 +669,12 @@
             <cardId group="1"><![CDATA[Покупка по карте: \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[\*\d+\s(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Место ([\w\s\d]*)\s\d{2}\.\d{2}\.\d{2}]]></detail>
+        </pattern>
+        <!--Пополнение карты *8512: BINBANK CARD2CARD 2000.00 RUR 10.01.18 18:34. Баланс: 4105.68 RUR. i.binbank.ru-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Пополнение карты.*]]></match>
+            <cardId group="1"><![CDATA[Пополнение карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[CARD2CARD (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="raiffeisen">
