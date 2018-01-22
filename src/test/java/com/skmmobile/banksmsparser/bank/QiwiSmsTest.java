@@ -19,5 +19,13 @@ public class QiwiSmsTest extends AbsXmlBankSmsTest {
                 "50",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Spisanie c +79036423128 na summu 1.00 rub.",
+                "spisanie",
+                "+79036423128",
+                "1",
+                ""
+        );
     }
 }
