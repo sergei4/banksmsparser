@@ -9,6 +9,7 @@ import com.skmmobile.banksmsparser.bank.OtkritieSmsTest;
 import com.skmmobile.banksmsparser.bank.QiwiSmsTest;
 import com.skmmobile.banksmsparser.bank.RaiffeisenSmsTest;
 import com.skmmobile.banksmsparser.bank.RosbankSmsTest;
+import com.skmmobile.banksmsparser.bank.RosselhozSmsTest;
 import com.skmmobile.banksmsparser.bank.SberbankSmsTest;
 import com.skmmobile.banksmsparser.bank.TinkoffSmsTest;
 import com.skmmobile.banksmsparser.bank.UbrrSmsTest;
@@ -30,6 +31,10 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,7 +42,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class BankParserTests extends Assert {
 
     private void isSystemSms(String text){
-        Assert.assertTrue("Не удалось распознать служебное смс", BankSmsParser.isSystemBankSms(text));
+        Assert.assertTrue("Не удалось распознать служебное смс:\n" + text, BankSmsParser.isSystemBankSms(text));
     }
 
     @Before
@@ -50,7 +55,7 @@ public class BankParserTests extends Assert {
     }
 
     @Test
-    public void XmlIsSystemSmsTest() throws Exception{
+    public void XmlIsSystemSmsTest() throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
@@ -224,6 +229,31 @@ public class BankParserTests extends Assert {
         isSystemSms("Otkaz. Karta *0380. Summa 3420.00 RUB. Prevyshen rashodniy limit. MAXIMILIANS, CHELYABINSK. 30.11.2017 20:56. Dostupno s uchetom rashodnogo limita 1995.12 RUB. Tinkoff.ru");
         isSystemSms("Отказ DOROGAYA YA. Карта *7788. Неправильный ПИН-код");
         isSystemSms("Никому не сообщайте Ваш ключ: 2633. Перевод c карты Visa Classic + 489042******5665 на счет 40817810950500126989. Сумма 10000.00 RUR");
+        isSystemSms("Гузель Хайдаровна, с наступающим Новым годом и Рождеством! Желаем постоянного движения вперед и достижения всех Ваших целей! Ваш Альфа-Банк");
+        isSystemSms("Vam vistavlen schet 6572924 na summu 37891.54 RUR ot oblako.travel. Podtverdite schet na click.alfabank.ru ili Alfa-Mobile. Alfa-Bank");
+        isSystemSms("Максим Валерьевич! Ваша заявка на кредитную карту \"Visa Classic 100 дней без %\" предварительно одобрена. Ожидайте звонка сотрудника банка для уточнения дополнительной информации.");
+        isSystemSms("Людмила Рустамовна, ваш одноразовый код доступа – 3084. Сообщите его сотруднику Альфа-Банка для идентификации");
+        isSystemSms("Для внесения в банкомате Альфа-Банка на счет 408*632 код 2369");
+        isSystemSms("Экономьте свое время – совершайте платежи по карте Сбербанка по SMS.\n" +
+                "Отправьте на номер 900:\n" +
+                "Для оплаты своего мобильного на 100р БЕЗ КОМИССИИ: «100».\n" +
+                "Для перевода 500р  на карту получателя по номеру его телефона: «ПЕРЕВОД 9ХХХХХХХХХ 500»");
+
+        // загружаем данные из файла
+        File file = new File(ConstTests.SYSTEM_SMS);
+        FileReader fileReader = new FileReader(file);
+
+        StringBuilder cmdStrBuilder = new StringBuilder();
+
+        int i;
+        while ((i = fileReader.read()) != -1) {
+            cmdStrBuilder.append((char) i);
+        }
+
+        String[] system_sms = cmdStrBuilder.toString().split("\n\n");
+        for(String sms: system_sms){
+            isSystemSms(sms);
+        }
     }
 
     @Test
@@ -256,6 +286,7 @@ public class BankParserTests extends Assert {
         new OtkritieSmsTest(xmlDocument).check();
         new MKBSmsTest(xmlDocument).check();
         new RosbankSmsTest(xmlDocument).check();
+        new RosselhozSmsTest(xmlDocument).check();
     }
 }
 

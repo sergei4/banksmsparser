@@ -28,7 +28,7 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "PO DEPOZYTU N 12345678 VYPLACHENO VIDSOTKI U SUMI 100.00 UAH. DOVIDKA 0800210800",
-                "zachislenie",
+                "popolnenie",
                 "12345678",
                 "100",
                 ""
@@ -39,6 +39,27 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "12345678",
                 "5000.12",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "11.01.2018 \n" +
+                        "Acnt:130-262545-56\n" +
+                        "Sum:8,455.67 UAH \n" +
+                        "Zarakhuvannia na rakhunok \n" +
+                        "Balance=8,646.80 UAH\n" +
+                        "Detali www.oschadbank.ua/ib",
+                "popolnenie",
+                "130-262545-56",
+                "8455.67",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Z DEPOZYTU N148713013 ZNYATO SUMU 8455.67 UAH. DOVIDKA 0800210800",
+                "unknown",
+                "148713013",
+                "8455.67",
                 ""
         );
     }

@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/01/22 16:30</updated>
+    <updated>2018/01/23 14:40</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -37,7 +37,7 @@
         <!--<bank id="gazprom_nu">Газпромбанк Новый Уренгой</bank>-->
         <!--<bank id="skbbank">СКБ-Банк</bank>-->
         <!--<bank id="bsgv">BSGV</bank>-->
-        <!--<bank id="avangard">Авангард</bank>-->
+        <bank id="avangard">Авангард</bank>
         <!--<bank id="citibank">Сити Банк</bank>-->
         <!--<bank id="bankspb">Банк Санкт-Петербург</bank>-->
         <!--<bank id="bankmoskow">Банк Москвы</bank>-->
@@ -65,7 +65,7 @@
         <!--<bank id="vozrogdenie">Возрождение Банк</bank>-->
         <bank id="mtsbank">МТС банк</bank>
         <!--<bank id="raiffeisen_avil">Райффайзенбанк Аваль</bank>-->
-        <!--<bank id="ukrsibbank">УкрСибБанк</bank>-->
+        <bank id="ukrsibbank">УкрСибБанк</bank>
         <bank id="privatbank">ПриватБанк</bank>
         <bank id="rosselhoz">РоссельхозБанк</bank>
         <bank id="rsb">Русский Стандарт</bank>
@@ -78,7 +78,7 @@
         <!--<bank id="yandexmoney">Яндекс.Деньги</bank>-->
         <!--<bank id="alfabank_ukr">Альфа-Банк Украина</bank>-->
         <!--<bank id="guta">ГУТА Банк</bank>-->
-        <!--<bank id="chelind">Челиндбанк</bank>-->
+        <bank id="chelind">Челиндбанк</bank>
         <!--<bank id="sdmbank">SDM-Bank</bank>-->
         <!--<bank id="otpbank">ОТП Банк</bank>-->
         <!--<bank id="banksouz">СОЮЗ Банк</bank>-->
@@ -157,7 +157,7 @@
         <!--<service_phone bankId="gazprom_nu">+79037976061,+79028204747,TelecardNU</service_phone>-->
         <!--<service_phone bankId="skbbank">SKB-BANK</service_phone>-->
         <!--<service_phone bankId="bsgv">BSGV</service_phone>-->
-        <!--<service_phone bankId="avangard">Avangard</service_phone>-->
+        <service_phone bankId="avangard">Avangard,AVANGARD</service_phone>
         <!--<service_phone bankId="citibank">Citibank,Citialert</service_phone>-->
         <!--<service_phone bankId="bankspb">+79213295050,89213295050,79213295050</service_phone>-->
         <!--<service_phone bankId="bankmoskow">8000,BankMoskvy</service_phone>-->
@@ -185,7 +185,7 @@
         <!--<service_phone bankId="vozrogdenie">2640,+79037976264,vbank.ru</service_phone>-->
         <service_phone bankId="mtsbank">+79167773331,MBRR,MTS-Bank</service_phone>
         <!--<service_phone bankId="raiffeisen_avil">10901,050,10068</service_phone>-->
-        <!--<service_phone bankId="ukrsibbank">729,+380931777755</service_phone>-->
+        <service_phone bankId="ukrsibbank">729,+380931777755</service_phone>
         <service_phone bankId="privatbank">10060</service_phone>
         <service_phone bankId="rosselhoz">+79037976020,RSHB</service_phone>
         <service_phone bankId="rsb">rsb.ru</service_phone>
@@ -198,7 +198,7 @@
         <!--<service_phone bankId="yandexmoney">YandexMoney</service_phone>-->
         <!--<service_phone bankId="alfabank_ukr">AlfaBank</service_phone>-->
         <!--<service_phone bankId="guta">+79037976059,GUTABANK</service_phone>-->
-        <!--<service_phone bankId="chelind">CHELIND</service_phone>-->
+        <service_phone bankId="chelind">CHELIND</service_phone>
         <!--<service_phone bankId="sdmbank">SDM-BANK</service_phone>-->
         <!--<service_phone bankId="otpbank">5927,OTP_Bank,+380931777711</service_phone>-->
         <!--<service_phone bankId="banksouz">BANK SOUZ</service_phone>-->
@@ -265,6 +265,15 @@
         <system_sms bankId="all"><![CDATA[.*(у|У)ведомляем.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Неизвестный смс-запрос.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*(v|V)itaemo.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*с наступающим (н|Н)овым годом.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(и|И)нформация.*карте.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(м|М)инимальный платеж.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(о|О)дноразовый код.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Для.*отправьте код.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(к|К)од подтверждения.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*odnorazovyj kod operatsii.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(в|В)аша карта.*доставлена.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(в|В)аш.*промо[-\s]код.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
@@ -301,26 +310,32 @@
         <system_sms bankId="sberbank"><![CDATA[.*(и|И)зменение настроек оповещений.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(к|К)анал доставки оповещений изменен.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*Внимательно проверьте реквизиты операции.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Для.*отправьте код.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*будет исполнен.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Не удалось исполнить Автоплатеж.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*(отключен|изменен).*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*произвел проверку.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*начислен налог.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*успешно подключен автоплатеж.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*целях безопасности.*установлен лимит.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте код.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте (SMS|sms|СМС|смс).*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*Вам отправлено письмо.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Сообщение доставлено.*]]></system_sms>
-        <!--VISA5538 19.12.17 09:11 ОТКАЗ (недостаточно средств) покупка 1432р OOO SEMEYNAYA APTEKA-->
+        <system_sms bankId="sberbank"><![CDATA[.*(о|О)тправьте на номер 900.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(о|О)отправьте сообщение с кодом.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
-        <!--ECMC4553 05.01.18 20:33 отмена покупки 1р Баланс: 22061.80р-->
         <system_sms bankId="sberbank"><![CDATA[.*отмена покупки.*]]></system_sms>
-        <!--VISA4881 03.01.18 19:25 отмена оплаты услуг 300р Баланс: 21401.53р-->
         <system_sms bankId="sberbank"><![CDATA[.*отмена оплаты.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Формат уведомления.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*сумма досрочного погашения по кредиту.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Сбербанк напомнит Вам о регулярном переводе.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*сертификат на покупку.*может стать Вашим.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Новый год с «Пятёрочкой».*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*ваше обращение.*принято в работу.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
-        <!--VTB24-Online: Obrabotano rasporyazhenie 000000000 (Mezhdu svoimi schetami / obmen valyuti)-->
-        <system_sms bankId="alfabank"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie\s\d+\s\(Mezhdu svoimi schetami \/ obmen valyuti\)]]></system_sms>
-        <!--Vam vistavlen schet na summu 250.00 RUR ot GIBDD po avtoplatezhu 7431928825. Podtverdite schet na click.alfabank.ru. Alfa-Bank.-->
-        <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet na summu.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[.*Ваша заявка на кредитную карту.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[Для внесения в банкомате.*код.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia.*Nikomu ne soobshchaite.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[.*(s|S)umma.*Kod: \d+.*]]></system_sms>
@@ -328,7 +343,7 @@
         <system_sms bankId="qiwi"><![CDATA[.*код для регистрации.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Карта.*подключена к услуге.*]]></system_sms>
-        <!--Otklyuchen SMS-paket "Bazoviy".-->
+        <system_sms bankId="vtb24"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Otklyuchen SMS-paket.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Kod .*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
@@ -341,10 +356,9 @@
         <system_sms bankId="vtb24"><![CDATA[Ocherednoj platezh po Vashemu kreditu sostavlyaet.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Dlya vhoda v VTB-Online.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Vi voshli v mobilnoe prilozhenie VTB24-Online.*]]></system_sms>
-        <!--Vasha karta *5884.Kod dlya provedeniya tranzakcii 8979. http://www.kinomax.ru. Summa 240.00 RUB. Nikomu ne govorite kod!-->
-        <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Dlya vidnovlennya zvernitsja v kontakt-centr.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
@@ -371,9 +385,21 @@
         <system_sms bankId="promsvyazbank"><![CDATA[.*vhod v internet-bank.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения.*не говорите этот код.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[Выполнен вход в систему.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*(n|N)ikomu ne soobschajte.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*(и|И)спользуйте этот код.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения платежа.*]]></system_sms>
         <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Vy zabyli kartu.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[.*оформить.*кредит.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[.*отправьте свою кредитку на платежные каникулы.*]]></system_sms>
+        <system_sms bankId="kaspibank"><![CDATA[Kaspi Депозит.*Продление.*]]></system_sms>
+        <system_sms bankId="rosselhoz"><![CDATA[Кредит на любые цели.*]]></system_sms>
+        <system_sms bankId="rsb"><![CDATA[Внесите платеж.*]]></system_sms>
     </system>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->
@@ -534,7 +560,7 @@
         </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="cash_atm">
-            <match><![CDATA[.*выдача[\D]+\d.*ATM.*]]></match>
+            <match><![CDATA[.*выдача[\D]+\d.*(ATM|OSB).*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[выдача[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
@@ -928,6 +954,31 @@
             <amount group="1"><![CDATA[Pokupka:\s?(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[; (.*); Data]]></detail>
         </pattern>
+        <!--Karta *1118; Provedena tranzakcija: 3596 RUB; Data: 31/12/2017; OODJI Dostupny Ostatok: 135449.62 RUB. Raiffeisenbank-->
+        <pattern category="expense">
+            <match><![CDATA[.*Provedena tranzakcija.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Provedena tranzakcija: (\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[Data: [\d\/]+; (.*) Dostupny]]></detail>
+        </pattern>
+        <!--Zachislena zarplata 8869.18 RUR na schet *4849. Balans 55122.34 RUR. Raiffeisenbank-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Zachislena zarplata.*]]></match>
+            <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Zachislena zarplata (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Zachislenie summy 52978.4 RUR s deposita na schet *0123. Balans 0 RUR. Raiffeisenbank-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Zachislenie summy.*]]></match>
+            <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Zachislenie summy (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *0853; Snyatie nalichnih: 6000 RUR; RUS/VORONEZH/GAZPROMBANK; Data: 2018-01-10; Dostupny Ostatok: 69636.73 RUR. Raiffeisenbank-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Snyatie nalichnih.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnih: ?(\d*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="mtsbank">
         <!--Оплата VP *9707; 07.01 15:18; PYATEROCHKA 9114>EKATERINBURG RU; 699,25 RUB; Остаток: 655,74 RUB-->
@@ -983,7 +1034,7 @@
             <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
         <!--PO DEPOZYTU N 00000000 VYPLACHENO VIDSOTKI U SUMI 00.00 UAH. DOVIDKA 0800210800-->
-        <pattern category="zachislenie">
+        <pattern category="popolnenie">
             <match><![CDATA[PO DEPOZYTU.*VYPLACHENO VIDSOTKI.*]]></match>
             <cardId group="1"><![CDATA[PO DEPOZYTU N (\d+)]]></cardId>
             <amount group="1"><![CDATA[U SUMI ([\d\,]*.?\d{1,2})]]></amount>
@@ -994,6 +1045,26 @@
             <match><![CDATA[DEPOZYT.*POPOVNENO.*]]></match>
             <cardId group="1"><![CDATA[DEPOZYT N (\d+)]]></cardId>
             <amount group="1"><![CDATA[NA SUMU ([\d\,]*.?\d{1,2})]]></amount>
+            <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
+        <!--11.01.2018
+        Acnt:130-262545-56
+        Sum:8,455.67 UAH
+        Zarakhuvannia na rakhunok
+        Balance=8,646.80 UAH
+        Detali www.oschadbank.ua/ib-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Zarakhuvannia na rakhunok.*]]></match>
+            <cardId group="1"><![CDATA[Acnt:([\d-]+)]]></cardId>
+            <amount group="1"><![CDATA[Sum:[-\+]?([\d\,]*.?\d{1,2})]]></amount>
+            <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
+            <decimal_group_char optional="true">,</decimal_group_char>
+        </pattern>
+        <!--Z DEPOZYTU N148713013 ZNYATO SUMU 8455.67 UAH. DOVIDKA 0800210800-->
+        <pattern category="unknown">
+            <match><![CDATA[Z DEPOZYTU.*ZNYATO.*]]></match>
+            <cardId group="1"><![CDATA[Z DEPOZYTU N(\d+)]]></cardId>
+            <amount group="1"><![CDATA[ZNYATO SUMU ([\d\,]*.?\d{1,2})]]></amount>
             <decimal_group_char optional="true">,</decimal_group_char>
         </pattern>
     </patterns>
@@ -1219,6 +1290,57 @@
             <cardId group="0"><![CDATA[\d\*\d{4}(?=\sPOPOLNENIE)]]></cardId>
             <amount group="1"><![CDATA[POPOLNENIE: ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
+        </pattern>
+    </patterns>
+    <patterns bankId="rosselhoz">
+        <!--RSHB 18/01 22:46:29 oplata uslug 58.32 RUR s karty *7329 v VISA QIWI WALLET MOSCOW RU-->
+        <pattern category="expense">
+            <match><![CDATA[.*oplata uslug.*]]></match>
+            <cardId group="1"><![CDATA[karty \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[oplata uslug ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--RSHB 20/01 13:16:23 pokupka 1,892.00 RUR odobr. karta *7329 WILDBERRIES KOSTROMA RU-->
+        <pattern category="expense">
+            <match><![CDATA[.*pokupka.*]]></match>
+            <cardId group="1"><![CDATA[karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[pokupka ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--РСХБ 16/01 05:48:06 покупка 760.10 RUR одобр. Доступно 3,582.10 карта *7888 IRIS-SOVETSKAYA USSURIYSK RU-->
+        <pattern category="expense">
+            <match><![CDATA[.*покупка.*]]></match>
+            <cardId group="1"><![CDATA[карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[покупка ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--РСХБ 15/01 10:27:17 SMS сервис для телефона 79244395128 счет *4657 оплачен,сумма 59.00 дост. 173.26-->
+        <pattern category="expense">
+            <match><![CDATA[.*SMS сервис для телефона.*оплачен.*]]></match>
+            <cardId group="0"><![CDATA[счет \*\d+]]></cardId>
+            <amount group="1"><![CDATA[сумма ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--РСХБ 15/01 11:19:49 счет *4657 пополнение 4,168.94 RUR одобр. Доступно 4,342.20-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*пополнение.*]]></match>
+            <cardId group="0"><![CDATA[счет \*\d+]]></cardId>
+            <amount group="1"><![CDATA[пополнение ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--РСХБ 17/01 16:17:30 АТМ выдача наличных 3,500.00 RUR одобр. Доступно 82.10 карта *7888 ATM 1601 USSURIYSK RU-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*выдача наличных.*]]></match>
+            <cardId group="1"><![CDATA[карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[выдача наличных ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--RSHB 14/01 00:00:18 perevod ispolnen 5,227.97 RUR s karty *3692 na kartu *6329-->
+        <pattern category="perevod">
+            <match><![CDATA[.*perevod.*s karty.*na kartu.*]]></match>
+            <cardId group="1"><![CDATA[s karty \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[perevod ispolnen ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
         </pattern>
     </patterns>
 </content>

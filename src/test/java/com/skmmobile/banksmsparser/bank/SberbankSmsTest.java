@@ -381,5 +381,14 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "400",
                 "ATM 971126"
         );
+        checkBankSms(
+                parser,
+                "ECMC4756 18.01.18 06:14 выдача 282.96р OSB 8603 0061 Баланс: 22100.74р",
+                "cash_atm",
+                "ECMC4756",
+                "282.96",
+                "OSB 8603 0061"
+        );
+
     }
 }
