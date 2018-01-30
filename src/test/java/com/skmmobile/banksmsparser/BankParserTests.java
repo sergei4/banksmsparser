@@ -6,8 +6,10 @@ import com.skmmobile.banksmsparser.bank.GazpromSmsTest;
 import com.skmmobile.banksmsparser.bank.MKBSmsTest;
 import com.skmmobile.banksmsparser.bank.MTSSmsTest;
 import com.skmmobile.banksmsparser.bank.OtkritieSmsTest;
+import com.skmmobile.banksmsparser.bank.PromsvyazbankSmsTest;
 import com.skmmobile.banksmsparser.bank.QiwiSmsTest;
 import com.skmmobile.banksmsparser.bank.RaiffeisenSmsTest;
+import com.skmmobile.banksmsparser.bank.RocketBankSmsTest;
 import com.skmmobile.banksmsparser.bank.RosbankSmsTest;
 import com.skmmobile.banksmsparser.bank.RosselhozSmsTest;
 import com.skmmobile.banksmsparser.bank.SberbankSmsTest;
@@ -17,7 +19,7 @@ import com.skmmobile.banksmsparser.bank.UnicreditSmsTest;
 import com.skmmobile.banksmsparser.bank.Vtb24SmsTest;
 import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.MTBankSmsTest;
-import com.skmmobile.banksmsparser.bank.MinbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.MinbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.PriorBankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.SbsIbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.HalykbankSmsTest;
@@ -31,10 +33,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -219,8 +218,8 @@ public class BankParserTests extends Assert {
                 "Skachajte prilozhenie p.vtb24.ru/mob ili zajdite na online.vtb.ru\n");
         isSystemSms("Karta *6929: spisanie  otkloneno  (nehvatka sredstv)4000.00 RUR; CARD2CARD ALFA_MOBILE; 17.01.2018 15:10, dostupno 2928.55 RUR.\n");
         isSystemSms("Vi voshli v mobilnoe prilozhenie VTB24-Online, 20.12.2017 18:49.");
-        isSystemSms("11.01.18 08:47:59 \n" +
-                "Vitaemo! Vy actyvuvaly kartky 4790-2998.\n" +
+        isSystemSms("11.01.18 08:47:59 \r\n" +
+                "Vitaemo! Vy actyvuvaly kartky 4790-2998.\r\n" +
                 "Detali 0800210800");
         isSystemSms("Pervaya chast' koda dlya snyatiya nalichnyh: 39758. Vtoraya chast' otpravlena na nomer 7012422225");
         isSystemSms("Konfidencialno. Kod podtverzhdenija: 5262. Vhod v Raiffeisen-Online. Po voprosam zvonite 88007000072. Raiffeisenbank");
@@ -234,10 +233,14 @@ public class BankParserTests extends Assert {
         isSystemSms("Максим Валерьевич! Ваша заявка на кредитную карту \"Visa Classic 100 дней без %\" предварительно одобрена. Ожидайте звонка сотрудника банка для уточнения дополнительной информации.");
         isSystemSms("Людмила Рустамовна, ваш одноразовый код доступа – 3084. Сообщите его сотруднику Альфа-Банка для идентификации");
         isSystemSms("Для внесения в банкомате Альфа-Банка на счет 408*632 код 2369");
-        isSystemSms("Экономьте свое время – совершайте платежи по карте Сбербанка по SMS.\n" +
-                "Отправьте на номер 900:\n" +
-                "Для оплаты своего мобильного на 100р БЕЗ КОМИССИИ: «100».\n" +
+        isSystemSms("Экономьте свое время – совершайте платежи по карте Сбербанка по SMS.\r\n" +
+                "Отправьте на номер 900:" +
+                "Для оплаты своего мобильного на 100р БЕЗ КОМИССИИ: «100»." +
                 "Для перевода 500р  на карту получателя по номеру его телефона: «ПЕРЕВОД 9ХХХХХХХХХ 500»");
+        isSystemSms("15.01.2018; Информация по кредитной карте 5570****2518:  Минимальный " +
+                "платеж не оплачен в сумме: 802.10RUR Срок платежа: до 25.01.2018. Обращаем " +
+                "Ваше внимание! При погашении кредита через банкоматы, киоски или систему " +
+                "Телебанк, денежные средства поступят на счет на следующий рабочий день. ");
 
         // загружаем данные из файла
         File file = new File(ConstTests.SYSTEM_SMS);
@@ -287,6 +290,8 @@ public class BankParserTests extends Assert {
         new MKBSmsTest(xmlDocument).check();
         new RosbankSmsTest(xmlDocument).check();
         new RosselhozSmsTest(xmlDocument).check();
+        new PromsvyazbankSmsTest(xmlDocument).check();
+        new RocketBankSmsTest(xmlDocument).check();
     }
 }
 

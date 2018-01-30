@@ -1,4 +1,4 @@
-package com.skmmobile.banksmsparser.bank;
+package com.skmmobile.banksmsparser.bank.by;
 
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
 import org.w3c.dom.Document;
@@ -31,6 +31,20 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "payment",
                 "1889",
                 "130.49",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Платеж через Телебанк в TELE2\n" +
+                        "Дата: 25/01 11:18\n" +
+                        "Ид.клиента: ****8305\n" +
+                        "Сумма: 100.00RUB\n" +
+                        "Комиссия: 0.50RUB\n" +
+                        "Доступно: 6606.23RUB\n" +
+                        "Терминал: TBank_v2",
+                "payment",
+                "8305",
+                "100.00",
                 ""
         );
         checkBankSms(

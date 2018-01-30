@@ -1,7 +1,5 @@
 package com.skmmobile.banksmsparser;
 
-import org.w3c.dom.Document;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +16,21 @@ public class BankSmsParser {
 
     private final Set<Operation> operationSet = new HashSet<>();
 
+    private static String wrapEscape(String src){
+        char[] chars = src.toCharArray();
+        int size = chars.length;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            char c = chars[i];
+            if (c == '\n' | c == '\r') {
+                result.append(" ");
+            }
+            else
+                result.append(c);
+        }
+        return result.toString();
+    }
+
     protected void addOperationTemplate(Operation operation) {
         operationSet.add(operation);
     }
@@ -31,7 +44,7 @@ public class BankSmsParser {
     }
 
     public Result parseSms(String text1) {
-        String text = text1.replace("\n", "");
+        String text = wrapEscape(text1);
         Result result = null;
         for (Operation operation : operationSet) {
             if (operation.typeRex.matcher(text).matches()) {
@@ -216,7 +229,7 @@ public class BankSmsParser {
     }
 
     public static boolean isSystemBankSms(String text1) {
-        String text = text1.replace("\n", "");
+        String text = wrapEscape(text1);
         Pattern p;
         for (String s : systemSmsTemplate) {
             p = Pattern.compile(s);

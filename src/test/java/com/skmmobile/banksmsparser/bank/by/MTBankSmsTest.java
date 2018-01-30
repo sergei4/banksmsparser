@@ -25,7 +25,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "6.48",
                 ""
         );
-
         checkBankSms(
                 parser,
                 "KARTA:5351*1179\n" +
@@ -41,7 +40,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "479",
                 ""
         );
-
         checkBankSms(
                 parser,
                 "PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999",
@@ -50,13 +48,25 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "2.50",
                 ""
         );
-
         checkBankSms(
                 parser,
                 "Uvazhaemyj klient! Na Vash schet BY75MTBK*******6349 postupilo 7,61 BYN. Vash MTBank!",
                 "popolnenie",
                 "BY75MTBK*******6349",
                 "7.61",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "KARTA:5351*3320\n" +
+                        "18/01/18 16:01\n" +
+                        "POPOLNENIE 50.00 BYN\n" +
+                        "247195 MTB BELPOST, UNKNOWN, ZHLOBIN 5\n" +
+                        "OSTATOK 50.00 BYN\n" +
+                        "Spr.:5099999",
+                "popolnenie",
+                "5351*3320",
+                "50.00",
                 ""
         );
     }

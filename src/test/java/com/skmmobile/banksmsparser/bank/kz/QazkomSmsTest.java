@@ -15,7 +15,7 @@ public class QazkomSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "2017-12-31 12:27:59 Operaciya po karte Retail 1669.00 KZT YUBILEINYI SUPERMARKET 4**493 Dostupnaya summa:78649.63 KZT",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "4**493",
                 "1669.00",
                 ""
@@ -23,7 +23,7 @@ public class QazkomSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "2017-12-31 13:49:59 Operaciya po karte Retail 4030.12 KZT MON AMIE SHOP 4**493 Dostupnaya summa:74619.63 KZT",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "4**493",
                 "4030.12",
                 ""
@@ -34,6 +34,14 @@ public class QazkomSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "K**928",
                 "59535.01",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "2018-01-17 19:41:22 Operaciya po karte ATM 5000.00 KZT ATM 1270 SM 5 MINUT 4**446 Dostupnaya summa:37391.93 KZT",
+                "cash_atm",
+                "4**446",
+                "5000.00",
                 ""
         );
     }

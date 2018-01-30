@@ -45,6 +45,14 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
+                "Karta *2134 Spisanie, 70.00 RUR za 2 poezdki MOSGORTRANS v dekabre (N bileta 2119696) 29.01.18 10:49 MSK Ostatok 51964.28 RUR",
+                "payment",
+                "2134",
+                "70",
+                ""
+        );
+        checkBankSms(
+                parser,
                 "Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob",
                 "popolnenie",
                 "Schet *3318",

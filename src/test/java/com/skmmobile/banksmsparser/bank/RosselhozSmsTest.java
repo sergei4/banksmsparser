@@ -68,10 +68,10 @@ public class RosselhozSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
-                "RSHB 14/01 00:00:18 perevod ispolnen 5,227.97 RUR s karty *3692 na kartu *6329",
-                "perevod",
-                "3692",
-                "5227.97",
+                "RSHB 22/01 17:57:29 pokupka 300.00 RUR odobr. karta *7329 PYATEROCHKA 6625 KOSTROMA RU",
+                "expense",
+                "7329",
+                "300",
                 ""
         );
     }

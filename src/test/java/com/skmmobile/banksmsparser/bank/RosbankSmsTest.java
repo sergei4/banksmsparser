@@ -34,5 +34,21 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "36.02",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Karta **1234.Proizvedeno snjatie 100.00 RUR v ATM. ATM 751689 3 KOLLONTAY. Ostatok: 1765.77 RUR. 25/01/18.",
+                "cash_atm",
+                "1234",
+                "100",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Karta **9253.Proizvedeno snyatie 6200.00 RUR v ATM.CHAPAEVA, 5.So scheta spisano 6200.00 RUR.Ostatok:17.03 RUR.26/01/18.",
+                "cash_atm",
+                "9253",
+                "6200",
+                ""
+        );
     }
 }

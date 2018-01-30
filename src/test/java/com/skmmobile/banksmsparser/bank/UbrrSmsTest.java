@@ -22,7 +22,7 @@ public class UbrrSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "4301****2661",
                 "314",
-                "GAZPROMNEFT AZS 100     >"
+                "GAZPROMNEFT AZS 100     > "
         );
         checkBankSms(
                 parser,

@@ -27,5 +27,21 @@ public class QiwiSmsTest extends AbsXmlBankSmsTest {
                 "1",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Oplata po karte 4150****9159 SUM: 45.00 RUB (45,00 RUR). BAL: 8389.25 RUR PRODUKTY PUSHKINA 2A",
+                "payment",
+                "4150****9159",
+                "45",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Oplata po karte 4150****9159 SUM: 750.00 RUB (750,00 RUR). BAL: 8434.25 RUR OAO Centralnaya PPK",
+                "payment",
+                "4150****9159",
+                "750",
+                ""
+        );
     }
 }

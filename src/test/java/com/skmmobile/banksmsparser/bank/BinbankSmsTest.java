@@ -21,6 +21,14 @@ public class BinbankSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
+                "Pokupka po karte: *7858 1.01 RUR Mesto MOSCOW YANDEX.MONEY 26.01.18 18:58 Balans: 648.17 RUR i.binbank.ru",
+                "expense",
+                "7858",
+                "1.01",
+                "MOSCOW YANDEX.MONEY"
+        );
+        checkBankSms(
+                parser,
                 "Пополнение карты *8512: BINBANK CARD2CARD 2000.00 RUR 10.01.18 18:34. Баланс: 4105.68 RUR. i.binbank.ru",
                 "popolnenie",
                 "8512",

@@ -389,6 +389,13 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "282.96",
                 "OSB 8603 0061"
         );
-
+        checkBankSms(
+                parser,
+                "Сбербанк Онлайн. С Вашей карты **** 7919 произведен перевод на сумму 2500,00 RUB.",
+                "payment",
+                "7919",
+                "2500",
+                ""
+        );
     }
 }
