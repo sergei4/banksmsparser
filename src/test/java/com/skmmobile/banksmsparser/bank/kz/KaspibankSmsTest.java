@@ -43,6 +43,16 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
+                "Перевод: 6000т\n" +
+                        "На Kaspi Gold\n" +
+                        "Доступно: 133 296,44т",
+                "perevod",
+                "kaspigold",
+                "6000",
+                ""
+        );
+        checkBankSms(
+                parser,
                 "Пополнение: 8000т\n" +
                         "С Kaspi Депозита \n" +
                         "Доступно: 146 003,44т",
@@ -75,16 +85,6 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
         // Kapibank
         checkBankSms(
                 parser,
-                "Перевод: 6000т\n" +
-                        "На Kaspi Gold\n" +
-                        "Доступно: 133 296,44т",
-                "perevod",
-                "kaspigold",
-                "6000",
-                ""
-        );
-        checkBankSms(
-                parser,
                 "Kaspi Депозит D-007\n" +
                         "Пополнение: 20 000т\n" +
                         "В Kaspi Терминале\n" +
@@ -112,6 +112,27 @@ public class KaspibankSmsTest extends AbsXmlBankSmsTest {
                 "oplata",
                 "D-006",
                 "2000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Kaspi Депозит D-006\n" +
+                        "Оплата кредита: 48 000т\n" +
+                        "На Депозите: 1023,74т",
+                "payment",
+                "D-006",
+                "48000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Kaspi Депозит D-005\n" +
+                        "Перевод: 3USD\n" +
+                        "На Депозит D-004\n" +
+                        "На Депозите: 1739USD",
+                "perevod",
+                "D-005",
+                "3",
                 ""
         );
     }

@@ -20,6 +20,15 @@ public class RocketBankSmsTest extends AbsXmlBankSmsTest {
                 "10",
                 ""
         );
-
+        checkBankSms(
+                parser,
+                "+5000 руб.\n" +
+                        "Пополнение с карты «Сбербанк ***5673»\n" +
+                        "Доступно: 5876 руб.",
+                "popolnenie",
+                "rocketbank",
+                "5000",
+                ""
+        );
     }
 }

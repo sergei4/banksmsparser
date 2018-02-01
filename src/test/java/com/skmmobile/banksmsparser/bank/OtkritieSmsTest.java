@@ -50,5 +50,21 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "27004",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Вы внесли 25 000 р. в банкомате DO 153 на карту *2368. Доступно 48 699.18 р.",
+                "popolnenie",
+                "2368",
+                "25000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Операция по карте *1698 на 24 117 р. Доступно 213.99 р.",
+                "unknown",
+                "1698",
+                "24117",
+                ""
+        );
     }
 }

@@ -57,5 +57,13 @@ public class SbsIbankSmsTest extends AbsXmlBankSmsTest {
                 "20",
                 "Obshchestvo s ogranichennoy otvetstvennost'iu \"Flaynet\" Ibank BLR OK."
         );
+        checkBankSms(
+                parser,
+                "Karta 4.5614 31.01.2018 13:51:52 SOA Credit +100.00 BYN SOA Credit Ibank BLR OK. Dostupno 108.28 BYN",
+                "popolnenie",
+                "5614",
+                "100.00",
+                ""
+        );
     }
 }

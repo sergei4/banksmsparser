@@ -69,5 +69,42 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "50.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "HALVA 5351*1179 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
+                "service_pay",
+                "5351*1179",
+                "1.80",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "ZP KARTA 4177*5654 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
+                "service_pay",
+                "4177*5654",
+                "1.80",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "KORONA 5351*4690 16/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 19.90 BYN Spravka 5099999",
+                "service_pay",
+                "5351*4690",
+                "19.90",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "KARTA:4649*7095\n" +
+                        "18/01/18 21:51\n" +
+                        "NALICHNYE 200.00 BYN\n" +
+                        "M6823027\n" +
+                        "OSTATOK 4 080.23 BYN\n" +
+                        "Spr.:5099999\n",
+                "cash_atm",
+                "4649*7095",
+                "200.00",
+                ""
+        );
     }
 }

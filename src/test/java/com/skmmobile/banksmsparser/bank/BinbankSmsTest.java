@@ -35,5 +35,29 @@ public class BinbankSmsTest extends AbsXmlBankSmsTest {
                 "2000",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Popolnenie karty *2651: BINBANK CARD2CARD 30000.00 RUR 20.01.18 13:05. Balans: 33687.20 RUR. i.binbank.ru",
+                "popolnenie",
+                "2651",
+                "30000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Zachislenie na kartu *7628: 40000.00 RUR 24.01.18 22:44,  Perevod schet-karta. Balans:102429.83 RUR. i.binbank.ru",
+                "zachislenie",
+                "7628",
+                "40000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Perevod s karty *2651 na schet 5000.00 RUR 21.01.18 23:22. Balans: 7648.33 RUR. i.binbank.ru",
+                "perevod",
+                "2651",
+                "5000",
+                ""
+        );
     }
 }

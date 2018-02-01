@@ -44,5 +44,13 @@ public class PriorBankSmsTest extends AbsXmlBankSmsTest {
                 "50",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Priorbank. Plata za uslugu SMS.PRO po karte 4***7241 za proshlyi mesyac = 1,5 BYN. Spravka 80172899292",
+                "payment",
+                "4***7241",
+                "1.5",
+                ""
+        );
     }
 }

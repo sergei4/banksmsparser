@@ -202,5 +202,21 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "3525.54",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Telecard; Card9284; Poluchen perevod; Summa 160 RUR; 19.01.18 13:45:37; GAZPROMBANK; dostupno: 224.42 RUR",
+                "popolnenie",
+                "Card9284",
+                "160",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Telecard; Card3086; Perevod; Summa 4500 RUR; 21.01.18 10:54:18; TINKOFF BANK CARD2CARD; dostupno: 1126.76 RUR",
+                "perevod",
+                "Card3086",
+                "4500",
+                ""
+        );
     }
 }
