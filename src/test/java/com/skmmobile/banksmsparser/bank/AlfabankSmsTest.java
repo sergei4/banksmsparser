@@ -14,7 +14,7 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "9857",
                 "110",
                 "RU/CHELYABINSK/SOKOL FIT DER NOVOE PO"
@@ -23,7 +23,7 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "4*0537; Pokupka; Uspeshno; Summa: 5141,00 RUR; Ostatok: 130731,27 RUR; RU/CHELYABINSK/LENTA 212; 05.12.2017 19:46:57",
-                BankSmsParser.CATEGORY_EXPENSE,
+                "expense",
                 "0537",
                 "5141",
                 "RU/CHELYABINSK/LENTA 212"
@@ -50,7 +50,7 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45",
-                "vida4a_ATM",
+                "cash_atm",
                 "9857",
                 "25200",
                 "RU/CHELYABINSK/Alfa Acq"
@@ -58,10 +58,26 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "5*7654; Vydacha nalichnyh; Uspeshno; Summa: 300,00 RUR; Ostatok: 7073,49 RUR; RU/ROSTOV-ON-DON/Alfa Iss; 28.12.2017 20:44:03",
-                "vida4a_ATM",
+                "cash_atm",
                 "7654",
                 "300",
                 "RU/ROSTOV-ON-DON/Alfa Iss"
+        );
+        // BYN
+        checkBankSms(
+                parser,
+                "Karta 5.3854\n" +
+                        "Perevod (Spisanie)\n" +
+                        "Uspeshno\n" +
+                        "Summa:27.28 BYN\n" +
+                        "Ostatok:22.72 BYN\n" +
+                        "Na vremya:16:16:11\n" +
+                        "BLR/INTERNET-BANK ALFA/Internet\n" +
+                        "05.02.2018 16:16:01",
+                "perevod",
+                "5.3854",
+                "27.28",
+                ""
         );
     }
 }

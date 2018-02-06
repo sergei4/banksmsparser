@@ -1,4 +1,4 @@
-package com.skmmobile.banksmsparser.bank.by;
+package com.skmmobile.banksmsparser.bank;
 
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
 import org.w3c.dom.Document;
@@ -101,6 +101,20 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "3504",
                 "1.00",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Покупка товара/услуги\n" +
+                        "Дата: 04/02 14:32\n" +
+                        "Карта: ****2518\n" +
+                        "Сумма: 818.80RUB\n" +
+                        "Комиссия: 0.00RUB\n" +
+                        "Доступно: 3831.11RUB\n" +
+                        "Терминал: RU170150,LUKOIL.DD 4289 33V,MUROM,RU",
+                "expense",
+                "2518",
+                "818.8",
                 ""
         );
         checkBankSms(
