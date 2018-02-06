@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/06 12:25</updated>
+    <updated>2018/02/06 16:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1739,7 +1739,7 @@
             <amount group="1"><![CDATA[ZACHISLENIE: (\d+.\d{1,2})]]></amount>
         </pattern>
         <!--CREDIT: 1.00 BYN KARTA #8586 DATA 29.01.2018 18:42:43 BR.312 CASH IN>ZHLOBIN>BY OSTATOK 673.80 BYN-->
-        <pattern category="cash_atm">
+        <pattern category="payment">
             <match><![CDATA[CREDIT.*CASH IN.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[CREDIT: (\d+.\d{1,2})]]></amount>
@@ -1749,6 +1749,12 @@
             <match><![CDATA[OPLATA.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[OPLATA: (\d+.\d{1,2})]]></amount>
+        </pattern>
+        <!--POPOLNENIE SCHETA: 5.00 BYN KARTA #8586 DATA 06.02.2018 13:11:56 BR.312 CASH IN>ZHLOBIN>BY OSTATOK 772.70 BYN-->
+        <pattern category="popolnenie">
+            <match><![CDATA[POPOLNENIE SCHETA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[POPOLNENIE SCHETA: (\d+.\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="belapb">

@@ -23,7 +23,7 @@ public class BelbankSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "CREDIT: 1.00 BYN KARTA #8586 DATA 29.01.2018 18:42:43 BR.312 CASH IN>ZHLOBIN>BY OSTATOK 673.80 BYN",
-                "cash_atm",
+                "payment",
                 "8586",
                 "1.00",
                 ""
@@ -34,6 +34,14 @@ public class BelbankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "8686",
                 "4.41",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "POPOLNENIE SCHETA: 5.00 BYN KARTA #8586 DATA 06.02.2018 13:11:56 BR.312 CASH IN>ZHLOBIN>BY OSTATOK 772.70 BYN",
+                "popolnenie",
+                "8586",
+                "5",
                 ""
         );
     }
