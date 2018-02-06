@@ -79,5 +79,20 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "27.28",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Karta 5.3854\n" +
+                        "Oplata tovarov/uslug\n" +
+                        "Uspeshno\n" +
+                        "Summa:73.34 BYN\n" +
+                        "Ostatok:83.39 BYN\n" +
+                        "Na vremya:18:43:30\n" +
+                        "BLR/MINSK/GIPPO TRADE CENTRE\n" +
+                        "05.02.2018 18:43:27",
+                "expense",
+                "5.3854",
+                "73.34",
+                ""
+        );
     }
 }

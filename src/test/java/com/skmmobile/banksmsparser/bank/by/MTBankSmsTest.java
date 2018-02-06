@@ -106,5 +106,18 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "200.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "KARTA:5351*1199\n" +
+                        "05/02/18 18:46\n" +
+                        "PEREVOD 20.00 BYN\n" +
+                        "P2P MTBANK, PEREVOD, MINSK\n" +
+                        "OSTATOK 36.08 BYN\n" +
+                        "Spr.:5099999",
+                "perevod",
+                "5351*1199",
+                "20.00",
+                ""
+        );
     }
 }

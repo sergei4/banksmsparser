@@ -20,5 +20,13 @@ public class BelapbSmsTest extends AbsXmlBankSmsTest {
                 "1.76",
                 ""
         );
+        checkBankSms(
+                parser,
+                "POPOLNENIE 30.00 BYN KARTA #1152 DATA 04.02.2018 14:18:00 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 30.00 BYN",
+                "popolnenie",
+                "1152",
+                "30",
+                ""
+        );
     }
 }

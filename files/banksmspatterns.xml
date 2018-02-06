@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/06 09:45</updated>
+    <updated>2018/02/06 12:25</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -555,6 +555,19 @@
         05.02.2018 16:16:01-->
         <pattern category="perevod">
             <match><![CDATA[.*Perevod \(Spisanie\).*]]></match>
+            <cardId group="1"><![CDATA[Karta ([\d\.]+)]]></cardId>
+            <amount group="1"><![CDATA[Summa:(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta 5.3854
+        Oplata tovarov/uslug
+        Uspeshno
+        Summa:73.34 BYN
+        Ostatok:83.39 BYN
+        Na vremya:18:43:30
+        BLR/MINSK/GIPPO TRADE CENTRE
+        05.02.2018 18:43:27-->
+        <pattern category="expense">
+            <match><![CDATA[.*Oplata tovarov/uslug.*]]></match>
             <cardId group="1"><![CDATA[Karta ([\d\.]+)]]></cardId>
             <amount group="1"><![CDATA[Summa:(\d*\.?\d{1,2})]]></amount>
         </pattern>
@@ -1497,6 +1510,17 @@
             <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
             <amount group="1"><![CDATA[NALICHNYE (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--KARTA:5351*1199
+        05/02/18 18:46
+        PEREVOD 20.00 BYN
+        P2P MTBANK, PEREVOD, MINSK
+        OSTATOK 36.08 BYN
+        Spr.:5099999-->
+        <pattern category="perevod">
+            <match><![CDATA[KARTA.*PEREVOD.*]]></match>
+            <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
+            <amount group="1"><![CDATA[PEREVOD (\d*.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="rosbank">
         <!--Karta **0368.Sovershena pokupka na summu 1000.00 RUR. YOTA. Ostatok: 2482.77 RUR. 18/01/18.-->
@@ -1720,6 +1744,12 @@
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[CREDIT: (\d+.\d{1,2})]]></amount>
         </pattern>
+        <!--OPLATA: 4.41 BYN KARTA #8686 DATA 05.02.2018 15:53:52 PT MAGAZIN N20 OAO KOMPANON>ZHLOBIN>BY OSTATOK 5.59 BYN-->
+        <pattern category="expense">
+            <match><![CDATA[OPLATA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[OPLATA: (\d+.\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="belapb">
         <!--OPLATA 1.76 BYN KARTA #1152 DATA 31.01.2018 15:14:08 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 0.00 BYN-->
@@ -1727,6 +1757,12 @@
             <match><![CDATA[OPLATA.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[^OPLATA (\d+.\d{1,2})]]></amount>
+        </pattern>
+        <!--POPOLNENIE 30.00 BYN KARTA #1152 DATA 04.02.2018 14:18:00 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 30.00 BYN-->
+        <pattern category="popolnenie">
+            <match><![CDATA[POPOLNENIE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[^POPOLNENIE (\d+.\d{1,2})]]></amount>
         </pattern>
     </patterns>
 </content>

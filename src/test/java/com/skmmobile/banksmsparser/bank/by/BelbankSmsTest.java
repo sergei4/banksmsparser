@@ -28,5 +28,13 @@ public class BelbankSmsTest extends AbsXmlBankSmsTest {
                 "1.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "OPLATA: 4.41 BYN KARTA #8686 DATA 05.02.2018 15:53:52 PT MAGAZIN N20 OAO KOMPANON>ZHLOBIN>BY OSTATOK 5.59 BYN",
+                "expense",
+                "8686",
+                "4.41",
+                ""
+        );
     }
 }
