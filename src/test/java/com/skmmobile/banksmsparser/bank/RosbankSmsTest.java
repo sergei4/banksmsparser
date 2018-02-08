@@ -50,5 +50,13 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "6200",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Schet A*123: Spisanie   15424.55 RUB; Dostupno: 23236.19 RUB; 07/02/18",
+                "payment",
+                "A*123",
+                "15424.55",
+                ""
+        );
     }
 }
