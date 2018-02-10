@@ -198,5 +198,18 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "298.63",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Зачисление на счет 40817***372\n" +
+                        "Дата: 09/02 10:26\n" +
+                        "Сумма: 716.23RUB\n" +
+                        "Комиссия: 0.00RUB\n" +
+                        "Доступно: 1578.34RUB\n" +
+                        "Кредит: 15000.00RUB",
+                "zachislenie",
+                "40817***372",
+                "716.23",
+                ""
+        );
     }
 }

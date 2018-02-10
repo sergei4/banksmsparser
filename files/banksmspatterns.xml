@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/08 09:40</updated>
+    <updated>2018/02/10 14:30</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -908,6 +908,17 @@
             <cardId group="1"><![CDATA[schet ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Зачисление на счет 40817***372
+        Дата: 09/02 10:26
+        Сумма: 716.23RUB
+        Комиссия: 0.00RUB
+        Доступно: 1578.34RUB
+        Кредит: 15000.00RUB-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Зачисление на счет.*]]></match>
+            <cardId group="1"><![CDATA[счет ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Списание со счета 40817***372
         Дата: 16/01 08:02
         Сумма: 298.63RUB
@@ -1176,6 +1187,12 @@
             <cardId group="1"><![CDATA[po karte ([\*\d]+)]]></cardId>
             <amount group="1"><![CDATA[\= (\d*\,?\d{1,2})\s]]></amount>
             <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Priorbank. Karta 4***6555. 09-02-18 18:41:19. Nalichnye v bankomate 10.00 BYN. BLR METRO BPSB ATM-42. Dostupno:1130.89BYN Spravka: 80172899292-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Nalichnye v bankomate.*]]></match>
+            <cardId group="1"><![CDATA[Karta ([\*\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Nalichnye v bankomate (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="promsvyazbank">

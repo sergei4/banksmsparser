@@ -69,6 +69,22 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
+                "VISA4936 09.02.18 11:56 покупка 258.60р PYATEROCHKA 12373 Баланс: 85.74р",
+                "expense",
+                "VISA4936",
+                "258.60",
+                "PYATEROCHKA 12373"
+        );
+        checkBankSms(
+                parser,
+                "VISA6043 09.02.18 12:30 покупка 1273.90р WWW.RZD.RU Баланс: 1418.04р",
+                "expense",
+                "VISA6043",
+                "1273.90",
+                "WWW.RZD.RU"
+        );
+        checkBankSms(
+                parser,
                 "VISA5538 13.12.17 16:18 покупка 558р SUPERMARKET EVROPA Баланс: 3256.88р",
                 "expense",
                 "VISA5538",
