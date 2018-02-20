@@ -211,5 +211,14 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "716.23",
                 ""
         );
+        checkBankSms(
+                parser,
+                "07.02.18 40702810***063 IntBank Spisanie 10000RUB Doc 11",
+                "payment",
+                "40702810***063",
+                "10000",
+                ""
+        );
+
     }
 }

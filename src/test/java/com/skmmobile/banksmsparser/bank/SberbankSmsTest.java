@@ -413,5 +413,13 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "2500",
                 ""
         );
+        checkBankSms(
+                parser,
+                "*4388: пополнение Копилки на \"Универсальный на 5 лет\" на сумму 700руб. Дата следующего платежа 23.02.18",
+                "popolnenie",
+                "*4388",
+                "700",
+                ""
+        );
     }
 }

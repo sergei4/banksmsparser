@@ -28,5 +28,13 @@ public class BelapbSmsTest extends AbsXmlBankSmsTest {
                 "30",
                 ""
         );
+        checkBankSms(
+                parser,
+                "NALICHNYE 400.00 BYN KARTA #1152 DATA 17.02.2018 13:34:07 MYASNOY PAVILYON BAPB ATM>ZHLOBIN>BY OSTATOK 353.64 BYN",
+                "cash_atm",
+                "1152",
+                "400.00",
+                ""
+        );
     }
 }

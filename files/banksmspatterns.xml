@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/10 14:30</updated>
+    <updated>2018/02/20 17:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -126,6 +126,7 @@
         <bank id="rocketbank">Рокетбанк</bank>
         <bank id="belapb">Белагропромбанка</bank>
         <bank id="belbank">Беларусбанк</bank>
+        <bank id="paritetbank">Паритетбанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -249,6 +250,7 @@
         <service_phone bankId="rocketbank">RocketBank,ROCKETBANK,rocketbank</service_phone>
         <service_phone bankId="belapb">BelAPB</service_phone>
         <service_phone bankId="belbank">Mbank</service_phone>
+        <service_phone bankId="paritetbank">PARITETBANK,paritetbank</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -346,6 +348,7 @@
         <system_sms bankId="sberbank"><![CDATA[.*Новый год с «Пятёрочкой».*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*ваше обращение.*принято в работу.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*привлекательное предложение по вкладу.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(в|В)ыполнена оплата услуги.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[.*Ваша заявка на кредитную карту.*]]></system_sms>
@@ -357,6 +360,7 @@
         <system_sms bankId="qiwi"><![CDATA[.*(s|S)umma.*Kod: \d+.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[Регистрация успешно завершена.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[.*код для регистрации.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[.*use one-time code.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Карта.*подключена к услуге.*]]></system_sms>
         <system_sms bankId="minbank"><![CDATA[Perevod mejdu svoimi schetami.*Id.klienta.*]]></system_sms>
@@ -375,6 +379,7 @@
         <system_sms bankId="vtb24"><![CDATA[Ocherednoj platezh po Vashemu kreditu sostavlyaet.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Dlya vhoda v VTB-Online.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Vi voshli v mobilnoe prilozhenie VTB24-Online.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[oplata SMS-paketa.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Dlya vidnovlennya zvernitsja v kontakt-centr.*]]></system_sms>
@@ -394,6 +399,7 @@
         <system_sms bankId="gazprom"><![CDATA[Telecard.*ZAPROS BALANSA;.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Telecard.*OTMENA;.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Telecard.*Отказ.*]]></system_sms>
+        <system_sms bankId="gazprom"><![CDATA[Telecard; USLUGA AKTIVIROVANA.*]]></system_sms>
         <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
         <system_sms bankId="ubrr"><![CDATA[Ваш код для входа в сервис.*]]></system_sms>
         <system_sms bankId="ubrr"><![CDATA[Otmena.*]]></system_sms>
@@ -516,6 +522,12 @@
             <match><![CDATA[POPOLNENIE.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[^POPOLNENIE (\d+.\d{1,2})]]></amount>
+        </pattern>
+        <!--NALICHNYE 400.00 BYN KARTA #1152 DATA 17.02.2018 13:34:07 MYASNOY PAVILYON BAPB ATM>ZHLOBIN>BY OSTATOK 353.64 BYN-->
+        <pattern category="cash_atm">
+            <match><![CDATA[NALICHNYE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[^NALICHNYE (\d+.\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="belarusbank">
@@ -930,6 +942,12 @@
             <cardId group="1"><![CDATA[счета ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--07.02.18 40702810***063 IntBank Spisanie 10000RUB Doc 11-->
+        <pattern category="payment">
+            <match><![CDATA[.*Spisanie.*]]></match>
+            <cardId group="1"><![CDATA[\d\s([\d\*]+) IntBank]]></cardId>
+            <amount group="1"><![CDATA[Spisanie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="mkb">
         <!--MKB: 11.01.2018 15:53 5*3758 POKUPKA: 100.00 RUB BEELINE SOTOVAYA SVYAZ. Balance: 239 870.15 RUB. Blokirovka kart - SMS "All" na +79037672667-->
@@ -1155,6 +1173,9 @@
             <amount group="1"><![CDATA[Вы внесли ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+    </patterns>
+    <patterns bankId="paritetbank">
+
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->
@@ -1538,10 +1559,11 @@
             <amount group="1"><![CDATA[возврат покупки\s([\d\s]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--ECMC4773: пополнение Копилки на "Пополняй ОнЛ йн 3м - 6м руб. " на сумму 500руб. Дата следующего платежа 15.01.18-->
+        <!--*4388: пополнение Копилки на "Универсальный на 5 лет" на сумму 700руб. Дата следующего платежа 23.02.18-->
         <pattern category="popolnenie">
-            <match><![CDATA[.*пополнение.*]]></match>
-            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[на сумму\s([\d\s]*\.?\d{1,2})]]></amount>
+            <match><![CDATA[.*пополнение Копилки.*]]></match>
+            <cardId group="0"><![CDATA[(\*|MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[на сумму ([\d\s]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="sbsibank">
@@ -1712,7 +1734,13 @@
         <pattern category="zachislenie">
             <match><![CDATA[.*Баланс карты увеличен.*]]></match>
             <cardId group="1"><![CDATA[Карта (\d+)]]></cardId>
-            <amount group="1"><![CDATA[Баланс карты увеличен на (\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[увеличен на (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--15.02.2018 Баланс карты 1139 увеличен на 204.58 RUB. Доступно: 44738.49 RUB-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Баланс карты \d+ увеличен.*]]></match>
+            <cardId group="1"><![CDATA[Баланс карты (\d+)]]></cardId>
+            <amount group="1"><![CDATA[увеличен на (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="vtb24">
