@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/20 17:05</updated>
+    <updated>2018/02/21 19:30</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -127,6 +127,7 @@
         <bank id="belapb">Белагропромбанка</bank>
         <bank id="belbank">Беларусбанк</bank>
         <bank id="paritetbank">Паритетбанк</bank>
+        <bank id="krediteuropabank">Кредит Европа Банк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -251,6 +252,7 @@
         <service_phone bankId="belapb">BelAPB</service_phone>
         <service_phone bankId="belbank">Mbank</service_phone>
         <service_phone bankId="paritetbank">PARITETBANK,paritetbank</service_phone>
+        <service_phone bankId="krediteuropabank">C.E.BANK</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -807,6 +809,14 @@
             <decimal_char>,</decimal_char>
         </pattern>
     </patterns>
+    <patterns bankId="krediteuropabank">
+        <!--Na kartu MEGACARD #6277 postupilo 650.00RUR 20/02/18 19:53 Dostupniy limit:90009.10RUR-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*postupilo.*]]></match>
+            <cardId group="1"><![CDATA[Na kartu (.*) postupilo]]></cardId>
+            <amount group="1"><![CDATA[postupilo (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
     <patterns bankId="minbank">
         <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
         <pattern category="payment">
@@ -1175,7 +1185,7 @@
         </pattern>
     </patterns>
     <patterns bankId="paritetbank">
-
+        <!---->
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->
@@ -1683,6 +1693,12 @@
             <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
+        </pattern>
+        <!--По карте *8534 начислено процентов 15.06 руб. Cashback: 97 руб-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*начислено процентов.*]]></match>
+            <cardId group="1"><![CDATA[По карте \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[начислено процентов (\d*.?\d{1,2})\s]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="ubrr">

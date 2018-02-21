@@ -148,5 +148,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "5000",
                 "Рапида"
         );
+        checkBankSms(
+                parser,
+                "По карте *8534 начислено процентов 15.06 руб. Cashback: 97 руб",
+                "popolnenie",
+                "8534",
+                "15.06",
+                ""
+        );
     }
 }

@@ -66,5 +66,14 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "24117",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Вы заплатили 850 р. в SERVISNYY TSENTR картой *4013. Доступно 4 657.48 р.",
+                "expense",
+                "4013",
+                "850",
+                ""
+        );
+
     }
 }
