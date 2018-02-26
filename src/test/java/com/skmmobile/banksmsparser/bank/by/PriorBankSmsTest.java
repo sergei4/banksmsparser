@@ -60,5 +60,13 @@ public class PriorBankSmsTest extends AbsXmlBankSmsTest {
                 "10.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Priorbank. Karta 4***6521. 15-02-18 13:15:41. Nalichnye v bankomate 10.00 BYN. BLR ATM 621. Dostupno:172.12BYN Spravka: 80172899292",
+                "cash_atm",
+                "4***6521",
+                "10.00",
+                ""
+        );
     }
 }

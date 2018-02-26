@@ -74,6 +74,13 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "850",
                 ""
         );
-
+        checkBankSms(
+                parser,
+                "Карта *4013 Зачислено 6.00 RUR Деньги станут доступны в течение часа 24.02.18",
+                "popolnenie",
+                "4013",
+                "6",
+                ""
+        );
     }
 }

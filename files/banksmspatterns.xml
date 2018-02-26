@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/21 19:30</updated>
+    <updated>2018/02/26 15:00</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -816,6 +816,12 @@
             <cardId group="1"><![CDATA[Na kartu (.*) postupilo]]></cardId>
             <amount group="1"><![CDATA[postupilo (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Pokupka po karte MEGACARD #6277 21/02/18 19:26 Summa: 100.00RUB Ballov nachisleno: 1.00 Itogo balli MEGA: 274.75BB Dostupniy limit: 89909.10RUR MOSMETRO.RU AKRASNOPRE MOSCOW-->
+        <pattern category="expense">
+            <match><![CDATA[Pokupka po karte.*]]></match>
+            <cardId group="1"><![CDATA[po karte (.*) \d{2}\/\d{2}]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="minbank">
         <!--Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01-->
@@ -1176,6 +1182,13 @@
             <amount group="1"><![CDATA[зачислено ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Карта *4013 Зачислено 6.00 RUR Деньги станут доступны в течение часа 24.02.18-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Карта.*Зачислено.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Зачислено ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Вы внесли 25 000 р. в банкомате DO 153 на карту *2368. Доступно 48 699.18 р.-->
         <pattern category="popolnenie">
             <match><![CDATA[Вы внесли.*]]></match>
@@ -1185,7 +1198,12 @@
         </pattern>
     </patterns>
     <patterns bankId="paritetbank">
-        <!---->
+        <!--OPLATA 5.00 BYN KARTA #7390 DATA 22.02.2018 20:17:43 PAV. CHTUP "DEDITSTAT" BSB>MINSK>BY OSTATOK 3.14 BYN-->
+        <pattern category="expense">
+            <match><![CDATA[OPLATA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#([\d]+)]]></cardId>
+            <amount group="1"><![CDATA[OPLATA ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->

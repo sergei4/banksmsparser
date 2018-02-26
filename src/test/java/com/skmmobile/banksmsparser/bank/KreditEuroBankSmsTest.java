@@ -18,6 +18,13 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 "650.00",
                 ""
         );
-
+        checkBankSms(
+                parser,
+                "Pokupka po karte MEGACARD #6277 21/02/18 19:26 Summa: 100.00RUB Ballov nachisleno: 1.00 Itogo balli MEGA: 274.75BB Dostupniy limit: 89909.10RUR MOSMETRO.RU AKRASNOPRE MOSCOW",
+                "expense",
+                "MEGACARD #6277",
+                "100",
+                ""
+        );
     }
 }
