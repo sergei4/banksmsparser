@@ -156,5 +156,21 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "15.06",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Пополнение. Карта *6430. 1000 RUB. Киберплат. Доступно 1038.13 RUB",
+                "popolnenie",
+                "6430",
+                "1000",
+                "Киберплат"
+        );
+        checkBankSms(
+                parser,
+                "Перевод. Карта *6430. 3000 RUB. Card2Card. Баланс 5155.13 RUB",
+                "perevod",
+                "6430",
+                "3000",
+                ""
+        );
     }
 }

@@ -148,3 +148,5 @@ In order to register Visa QIWI Wallet use one-time code 4720. Do not disclose it
 Telecard; USLUGA AKTIVIROVANA DLIA 1 KART
 
 900 (sberbank) Выполнена оплата услуги оповещений. Комиссия списана с карты VISA2809
+
+*4388: не удалось пополнить Копилку "Сберегательный счет" на 700руб., недостаточно средств. Дата следующего платежа 05.03.18

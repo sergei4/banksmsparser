@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/02/26 15:00</updated>
+    <updated>2018/02/26 17:30</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -340,7 +340,8 @@
         <system_sms bankId="sberbank"><![CDATA[Сообщение доставлено.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(о|О)тправьте на номер 900.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(о|О)отправьте сообщение с кодом.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(ОТКАЗ).*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*ОТКАЗ.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*недостаточно средств.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*отмена покупки.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*отмена оплаты.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Формат уведомления.*]]></system_sms>
