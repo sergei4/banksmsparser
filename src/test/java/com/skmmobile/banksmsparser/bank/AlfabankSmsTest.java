@@ -19,7 +19,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "110",
                 "RU/CHELYABINSK/SOKOL FIT DER NOVOE PO"
         );
-
         checkBankSms(
                 parser,
                 "4*0537; Pokupka; Uspeshno; Summa: 5141,00 RUR; Ostatok: 130731,27 RUR; RU/CHELYABINSK/LENTA 212; 05.12.2017 19:46:57",
@@ -28,6 +27,22 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "5141",
                 "RU/CHELYABINSK/LENTA 212"
         );
+        checkBankSms(
+                parser,
+                "**1175; Pokupka; Uspeshno; Summa: 155 RUR; Ostatok: 412,55 RUR; RU/Chelyabinsk/VKUSNYE PRODUKTY; 28.02.2018 15:32:35",
+                "expense",
+                "1175",
+                "155",
+                "RU/Chelyabinsk/VKUSNYE PRODUKTY"
+        );
+        checkBankSms(
+                parser,
+                "**7897; Pokupka; Uspeshno; Summa: 193,03 RUR; Ostatok: 4453,79 RUR; RU/SANKT-PETERBU/AO UK START; 28.02.2018 19:47:47",
+                "expense",
+                "7897",
+                "193.03",
+                "RU/SANKT-PETERBU/AO UK START"
+        );
 
         checkBankSms(
                 parser,
@@ -35,6 +50,14 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "9857",
                 "1300",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "**4228; Postupleniye; Summa: 1500 RUR; Ostatok: 1609,11 RUR; 28.02.2018; Podrobnosti v mobilnom banke alfabank.ru/app",
+                "popolnenie",
+                "4228",
+                "1500",
                 ""
         );
 
@@ -57,11 +80,11 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 parser,
-                "5*7654; Vydacha nalichnyh; Uspeshno; Summa: 300,00 RUR; Ostatok: 7073,49 RUR; RU/ROSTOV-ON-DON/Alfa Iss; 28.12.2017 20:44:03",
+                "**9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45",
                 "cash_atm",
-                "7654",
-                "300",
-                "RU/ROSTOV-ON-DON/Alfa Iss"
+                "9857",
+                "25200",
+                "RU/CHELYABINSK/Alfa Acq"
         );
         // BYN
         checkBankSms(

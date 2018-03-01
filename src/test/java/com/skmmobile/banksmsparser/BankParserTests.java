@@ -1,5 +1,6 @@
 package com.skmmobile.banksmsparser;
 
+import com.skmmobile.banksmsparser.bank.AkbarsSmsTest;
 import com.skmmobile.banksmsparser.bank.AlfabankSmsTest;
 import com.skmmobile.banksmsparser.bank.AvangardSmsTest;
 import com.skmmobile.banksmsparser.bank.BinbankSmsTest;
@@ -304,6 +305,7 @@ public class BankParserTests extends Assert {
         new BelapbSmsTest(xmlDocument).check();
         new ParitetbankSmsTest(xmlDocument).check();
         new KreditEuroBankSmsTest(xmlDocument).check();
+        new AkbarsSmsTest(xmlDocument).check();
     }
 }
 
