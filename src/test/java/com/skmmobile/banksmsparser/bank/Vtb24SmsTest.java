@@ -155,5 +155,13 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "11200.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Karta *6958: oplata SMS-paketa \"Karti+ SMS\" 59 RUR; 01.03.2018. Ustanovite prilozhenie dly ucheta I kontrilyi Vashih pokupok: http://vtb.ru/smartsms",
+                "payment",
+                "6958",
+                "59",
+                ""
+        );
     }
 }

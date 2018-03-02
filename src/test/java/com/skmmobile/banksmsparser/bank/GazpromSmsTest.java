@@ -29,7 +29,7 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
         checkBankSms(
                 parser,
                 "Telecard; Card1745; Poluchen perevod; Summa 8000 RUR; 14.12.17 10:04:38; PEREVOD MEZHDU KARTAMI; dostupno: 10099.38 RUR; ispolzovano: 59900.62 RUR",
-                "perevod",
+                "popolnenie",
                 "Card1745",
                 "8000",
                 ""
@@ -216,6 +216,14 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "perevod",
                 "Card3086",
                 "4500",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "*5818 -423р MAGAZIN GORIZONT 01.03.18 13:46 Доступно 7323.53р",
+                "expense",
+                "5818",
+                "423",
                 ""
         );
     }

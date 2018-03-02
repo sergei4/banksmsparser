@@ -6,10 +6,12 @@ import com.skmmobile.banksmsparser.bank.AvangardSmsTest;
 import com.skmmobile.banksmsparser.bank.BinbankSmsTest;
 import com.skmmobile.banksmsparser.bank.ChelinvestSmsTest;
 import com.skmmobile.banksmsparser.bank.GazpromSmsTest;
+import com.skmmobile.banksmsparser.bank.KartaSovestSmsTest;
 import com.skmmobile.banksmsparser.bank.KreditEuroBankSmsTest;
 import com.skmmobile.banksmsparser.bank.MKBSmsTest;
 import com.skmmobile.banksmsparser.bank.MTSSmsTest;
 import com.skmmobile.banksmsparser.bank.OtkritieSmsTest;
+import com.skmmobile.banksmsparser.bank.PochtaBankSmsTest;
 import com.skmmobile.banksmsparser.bank.PromsvyazbankSmsTest;
 import com.skmmobile.banksmsparser.bank.QiwiSmsTest;
 import com.skmmobile.banksmsparser.bank.RaiffeisenSmsTest;
@@ -306,6 +308,8 @@ public class BankParserTests extends Assert {
         new ParitetbankSmsTest(xmlDocument).check();
         new KreditEuroBankSmsTest(xmlDocument).check();
         new AkbarsSmsTest(xmlDocument).check();
+        new PochtaBankSmsTest(xmlDocument).check();
+        new KartaSovestSmsTest(xmlDocument).check();
     }
 }
 
