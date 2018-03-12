@@ -26,5 +26,13 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 "100",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Pokupka po karte #2013, schet nomer #1229 12.03.2018 08:57 Summa: 500.00 RUB Megafon. Platezhny limit: 13357.26 RUB",
+                "expense",
+                "#2013",
+                "500",
+                ""
+        );
     }
 }

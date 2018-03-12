@@ -172,5 +172,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "3000",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Покупка. Бесконтактная оплата. 785.9 RUB. PYATEROCHKA. Доступно 32504.63 RUB",
+                "expense",
+                "tinkoff",
+                "785.9",
+                ""
+        );
     }
 }

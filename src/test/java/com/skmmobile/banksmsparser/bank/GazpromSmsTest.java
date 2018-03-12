@@ -226,5 +226,21 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "423",
                 ""
         );
+        checkBankSms(
+                parser,
+                "*3193 +1500р  07.03.18 09:58 Доступно 10369.58р",
+                "popolnenie",
+                "3193",
+                "1500",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "*9047 +45824.88р 07.03.18 15:27 Доступно 46140.08р",
+                "popolnenie",
+                "9047",
+                "45824.88",
+                ""
+        );
     }
 }

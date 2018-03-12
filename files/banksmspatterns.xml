@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/02 20:00</updated>
+    <updated>2018/03/12 20:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -130,6 +130,7 @@
         <bank id="krediteuropabank">Кредит Европа Банк</bank>
         <bank id="pochtabank">ПочтаБанк</bank>
         <bank id="karta_sovest">Совесть (QiwiБанк)</bank>
+        <bank id="raiffeisen_uk">Райффайзенбанк АВАЛЬ (Украина)</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -257,6 +258,7 @@
         <service_phone bankId="krediteuropabank">C.E.BANK</service_phone>
         <service_phone bankId="pochtabank">POCHTABANK,pochtabank</service_phone>
         <service_phone bankId="karta_sovest">6838</service_phone>
+        <service_phone bankId="raiffeisen_uk">10901</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -717,6 +719,12 @@
             <cardId group="0"><![CDATA[(MC|Card)\d{4}]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--*3193 +1500р  07.03.18 09:58 Доступно 10369.58р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[^\*\d+ \+\d.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+) \+\d+]]></cardId>
+            <amount group="1"><![CDATA[^\*\d+ \+(\d+.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="halykbank">
         <!--1192 Shotty tolyktyru/Popolnenie scheta. 14466.00 KZT; 16044000716101 NAO Gosudarstvennaa korporacia "Pravitel'stvo dla grajdan"; 04.12.2017 00:00. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 28609.66 KZT-->
@@ -829,9 +837,10 @@
             <amount group="1"><![CDATA[postupilo (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Pokupka po karte MEGACARD #6277 21/02/18 19:26 Summa: 100.00RUB Ballov nachisleno: 1.00 Itogo balli MEGA: 274.75BB Dostupniy limit: 89909.10RUR MOSMETRO.RU AKRASNOPRE MOSCOW-->
+        <!--Pokupka po karte #2013, schet nomer #1229 12.03.2018 08:57 Summa: 500.00 RUB Megafon. Platezhny limit: 13357.26 RUB-->
         <pattern category="expense">
             <match><![CDATA[Pokupka po karte.*]]></match>
-            <cardId group="1"><![CDATA[po karte (.*) \d{2}\/\d{2}]]></cardId>
+            <cardId group="1"><![CDATA[po karte ([\w\s]*\#\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
@@ -924,6 +933,18 @@
         <pattern category="perevod">
             <match><![CDATA[Перевод через Телебанк на счет.*]]></match>
             <cardId group="1"><![CDATA[счет ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Перевод через Телебанк на карту ****6256
+        Дата: 07/03 21:48
+        Ид.клиента: ****8305
+        Сумма: 2300.00RUB
+        Комиссия: 50.00RUB
+        Доступно: 1138.95RUB
+        Терминал: Mbank_01-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод через Телебанк на карту.*]]></match>
+            <cardId group="1"><![CDATA[на карту \*+([\d]+)]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Perevod cherez Telebank na schet 40817***878
@@ -1224,6 +1245,34 @@
             <cardId group="1"><![CDATA[Счёт договора ([\d]+)]]></cardId>
             <amount group="1"><![CDATA[пополнен на ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Карта 4*8274
+        12.03.18 12:19
+        Покупка 155.00 RUB
+        OOO GLOBAL FUDS SANKT-PETERBU Russia
+        Доступно 891.96 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[.*Покупка.*]]></match>
+            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Покупка ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Операция выполнена 04.03.2018 17:44.
+        Платеж Yota.
+        Сумма 550.00 руб.
+        Подробнее my.pochtabank.ru. ПАО "Почта Банк"-->
+        <pattern category="payment">
+            <match><![CDATA[.*Платеж.*]]></match>
+            <cardId group="0" default="pochtabank"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Сумма ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Операция выполнена 10.03.2018 19:38.
+        Перевод в СЕВЕРО-ЗАПАДНОЕ ГУ БАНКА РОССИ, ГБДОУ детский сад 113 комбинированного вида Московского района СПб л/с 0591153.
+        Сумма 871.36 руб.
+        Подробнее my.pochtabank.ru. ПАО "Почта Банк"-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Перевод.*]]></match>
+            <cardId group="0" default="pochtabank"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Сумма ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->
@@ -1361,6 +1410,20 @@
             <match><![CDATA[.*Snyatie nalichnih.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Snyatie nalichnih: ?(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="raiffeisen_uk">
+        <!--Vasha operatsija: 28.02.2018 17:56:44 VISA Gold/6155 131.00 UAH McDonald's 041 dostupna suma 7031.24 UAH-->
+        <pattern category="unknown">
+            <match><![CDATA[Vasha operatsija.*]]></match>
+            <cardId group="0"><![CDATA[VISA [\w\d\/]+]]></cardId>
+            <amount group="1"><![CDATA[VISA [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--28.02.2018 na Vash rakhunok kartkovyi 1219648400(UAH) bulo zarakhovano sumu 7090.26 UAH-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*na Vash rakhunok kartkovyi.*bulo zarakhovano.*]]></match>
+            <cardId group="1"><![CDATA[rakhunok kartkovyi (\d+)]]></cardId>
+            <amount group="1"><![CDATA[sumu (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rocketbank">
@@ -1616,6 +1679,12 @@
             <cardId group="0"><![CDATA[(\*|MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[на сумму ([\d\s]*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р-->
+        <pattern category="payment">
+            <match><![CDATA[.*погашение кредита.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[погашение кредита (\d*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="sbsibank">
         <!--Karta 4.5614 22.12.2017 15:53:16 Retail -10.52 BYN REST. "PAPARATS-KVETKA"BP MINSK BLR OK. Dostupno 45.86 BYN-->
@@ -1682,6 +1751,12 @@
             <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
+        </pattern>
+        <!--Покупка. Бесконтактная оплата. 785.9 RUB. PYATEROCHKA. Доступно 32504.63 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка. Бесконтактная оплата.*]]></match>
+            <cardId group="0" default="tinkoff"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[Бесконтактная оплата. (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!-- Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru-->
         <pattern category="jur.perevod">

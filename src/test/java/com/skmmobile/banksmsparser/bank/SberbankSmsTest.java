@@ -421,5 +421,13 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "700",
                 ""
         );
+        checkBankSms(
+                parser,
+                "MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р",
+                "payment",
+                "MAES2561",
+                "2000",
+                ""
+        );
     }
 }

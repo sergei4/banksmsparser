@@ -36,6 +36,7 @@ import com.skmmobile.banksmsparser.bank.kz.KaspibankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.QazkomSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.OschadbankSmsTest;
 
+import com.skmmobile.banksmsparser.bank.uk.RaiffeisenUkSmsTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -310,6 +311,7 @@ public class BankParserTests extends Assert {
         new AkbarsSmsTest(xmlDocument).check();
         new PochtaBankSmsTest(xmlDocument).check();
         new KartaSovestSmsTest(xmlDocument).check();
+        new RaiffeisenUkSmsTest(xmlDocument).check();
     }
 }
 
