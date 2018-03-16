@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/12 20:35</updated>
+    <updated>2018/03/16 18:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -267,6 +267,7 @@
         <system_sms bankId="all"><![CDATA[.*Samsung Pay.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*Android Pay.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Уважаемый.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Уважаемая.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*Уважаемый клиент.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Добрый день.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*закажите карту.*]]></system_sms>
@@ -297,154 +298,160 @@
         <system_sms bankId="all"><![CDATA[.*выполнен вход.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*(в|В)ход в систему.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*необходимо внести платеж.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Zavtra budet vypolnena regulyarnaya operatsiya.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot SMS-kod.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Ваше кодовое слово изменено.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Vash bonus po aktsii.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[.*мы позвоним вам и сообщим ПИН-код.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Spasibo, chto vybrali nas.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[.*время встречи с представителем.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[.*priedet predstavitel banka.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[.*naznachena vstrecha po adresu.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Vypiska.*Tinkoff.ru]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Отказ.*Недостаточно средств]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Отмена.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Otkaz.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Отказ.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*перевел.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Совершен вход в Ваш Сбербанк Онлайн.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*выполнена регистрация в приложении Android.*]]></system_sms>-->
-        <system_sms bankId="sberbank"><![CDATA[.*Вы успешно прошли регистрацию в Сбербанк Онлайн.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*успешно привязана в мобильное устройство.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*введите код.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена авторизации.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*карта разблокирована.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*карта заблокирована банком.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*не удалось пополнить.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена выдачи наличных.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4} Баланс.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4} заблокирована.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*отклонена как подозрительная.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(и|И)зменение настроек оповещений.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(к|К)анал доставки оповещений изменен.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*Внимательно проверьте реквизиты операции.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*будет исполнен.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Не удалось исполнить Автоплатеж.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*(отключен|изменен).*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*произвел проверку.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*начислен налог.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*успешно подключен автоплатеж.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*целях безопасности.*установлен лимит.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте код.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте (SMS|sms|СМС|смс).*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*Вам отправлено письмо.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Сообщение доставлено.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(о|О)тправьте на номер 900.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(о|О)отправьте сообщение с кодом.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*ОТКАЗ.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*недостаточно средств.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*отмена покупки.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*отмена оплаты.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[Формат уведомления.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*сумма досрочного погашения по кредиту.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*Сбербанк напомнит Вам о регулярном переводе.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*сертификат на покупку.*может стать Вашим.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*Новый год с «Пятёрочкой».*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*ваше обращение.*принято в работу.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*привлекательное предложение по вкладу.*]]></system_sms>
-        <system_sms bankId="sberbank"><![CDATA[.*(в|В)ыполнена оплата услуги.*]]></system_sms>
-        <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
-        <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*ОТКАЗ.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(о|О)тказ.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*OTKAZ.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*OTMENA.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[.*Ваша заявка на кредитную карту.*]]></system_sms>
-        <system_sms bankId="alfabank"><![CDATA[Для внесения в банкомате.*код.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Вам отказано по заявке.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Ваш логин.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia.*Nikomu ne soobshchaite.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[.*(s|S)umma.*Kod: \d+.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[Регистрация успешно завершена.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[.*код для регистрации.*]]></system_sms>
-        <system_sms bankId="qiwi"><![CDATA[.*use one-time code.*]]></system_sms>
-        <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
-        <system_sms bankId="minbank"><![CDATA[Карта.*подключена к услуге.*]]></system_sms>
-        <system_sms bankId="minbank"><![CDATA[Perevod mejdu svoimi schetami.*Id.klienta.*]]></system_sms>
-        <system_sms bankId="minbank"><![CDATA[Vash kod.*Dejstvuet.*minut]]></system_sms>
-        <system_sms bankId="minbank"><![CDATA[Секретный код успешно сформирован.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Otklyuchen SMS-paket.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Kod .*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[VTB-Online: Obrabotano rasporyazhenie.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[.*Kod podtverzhdeniya.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[.*3DS SMS[\-\s]*code.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Karta.*(otklonena|otkloneno).*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Minimal'nyj  platezh po karte.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Ocherednoj platezh po Vashemu kreditu sostavlyaet.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Dlya vhoda v VTB-Online.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[Vi voshli v mobilnoe prilozhenie VTB24-Online.*]]></system_sms>
-        <system_sms bankId="vtb24"><![CDATA[oplata SMS-paketa.*]]></system_sms>
-        <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
-        <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
-        <system_sms bankId="oschadbank"><![CDATA[.*Dlya vidnovlennya zvernitsja v kontakt-centr.*]]></system_sms>
-        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
-        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
-        <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
-        <system_sms bankId="unicreditbank"><![CDATA[.*Получите.*в кредит под.*ежемесячный платеж.*]]></system_sms>
-        <system_sms bankId="unicreditbank"><![CDATA[Никому не сообщайте Ваш ключ.*]]></system_sms>
-        <system_sms bankId="binbank"><![CDATA[Vy zashli v Binbank online.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[Для внесения в банкомате.*код.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet.*]]></system_sms>
+        <system_sms bankId="akbars"><![CDATA[Для входа в приложение Ак Барс Онлайн необходимо ввести код.*]]></system_sms>
+        <system_sms bankId="akbars"><![CDATA[Отправьте.*в ответном SMS.*]]></system_sms>
+        <system_sms bankId="avangard"><![CDATA[.*INTERNET-BANK VHOD.*]]></system_sms>
+        <system_sms bankId="binbank"><![CDATA[.*vash kreditniy limit po karte.*uvelichen.*]]></system_sms>
         <system_sms bankId="binbank"><![CDATA[Вход в мобильное приложение.*]]></system_sms>
         <system_sms bankId="binbank"><![CDATA[Регистрация устройства.*]]></system_sms>
         <system_sms bankId="binbank"><![CDATA[Nedostatochno sredstv dlya operatsii.*]]></system_sms>
         <system_sms bankId="binbank"><![CDATA[Neobkhodimo vnesti.*]]></system_sms>
-        <system_sms bankId="binbank"><![CDATA[.*vash kreditniy limit po karte.*uvelichen.*]]></system_sms>
+        <system_sms bankId="binbank"><![CDATA[Vy zashli v Binbank online.*]]></system_sms>
+        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
+        <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Вы совершаете интернет-платеж.*]]></system_sms>
+        <system_sms bankId="gazprom"><![CDATA[^[\s\*\d]+.*Запрос баланса.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Перевод по произвольным реквизитам.*код авторизации.*]]></system_sms>
-        <system_sms bankId="gazprom"><![CDATA[Telecard.*ZAPROS BALANSA;.*]]></system_sms>
-        <system_sms bankId="gazprom"><![CDATA[Telecard.*OTMENA;.*]]></system_sms>
-        <system_sms bankId="gazprom"><![CDATA[Telecard.*Отказ.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Telecard; USLUGA AKTIVIROVANA.*]]></system_sms>
-        <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
-        <system_sms bankId="ubrr"><![CDATA[Ваш код для входа в сервис.*]]></system_sms>
-        <system_sms bankId="ubrr"><![CDATA[Otmena.*]]></system_sms>
-        <system_sms bankId="ubrr"><![CDATA[Password.*]]></system_sms>
-        <system_sms bankId="ubrr"><![CDATA[.*снижает ставки по кредитам.*]]></system_sms>
+        <system_sms bankId="gazprom"><![CDATA[Telecard.*Отказ.*]]></system_sms>
+        <system_sms bankId="gazprom"><![CDATA[Telecard.*OTMENA;.*]]></system_sms>
+        <system_sms bankId="gazprom"><![CDATA[Telecard.*ZAPROS BALANSA;.*]]></system_sms>
+        <system_sms bankId="kaspibank"><![CDATA[Оплата покупок в интернете с карты закрыта.*]]></system_sms>
+        <system_sms bankId="kaspibank"><![CDATA[Kaspi Депозит.*Продление.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Карта.*подключена к услуге.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Секретный код успешно сформирован.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Perevod mejdu svoimi schetami.*Id.klienta.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Vash kod.*Deistvuet.*]]></system_sms>
+        <system_sms bankId="minbank"><![CDATA[Vash kod.*Dejstvuet.*minut]]></system_sms>
+        <system_sms bankId="mkb"><![CDATA[MKB informiruet.*]]></system_sms>
         <system_sms bankId="mkb"><![CDATA[MKB Mobile: Odnorazoviy kod.*]]></system_sms>
         <system_sms bankId="mkb"><![CDATA[MKB Mobile: vhod v sistemu.*]]></system_sms>
         <system_sms bankId="mkb"><![CDATA[Ne soobschaite etot kod nikomu.*]]></system_sms>
-        <system_sms bankId="mkb"><![CDATA[MKB informiruet.*]]></system_sms>
+        <system_sms bankId="mtbank"><![CDATA[^\d+$]]></system_sms>
+        <system_sms bankId="mtsbank"><![CDATA[.*платите просроченную задолженность.*]]></system_sms>
         <system_sms bankId="mtsbank"><![CDATA[Введите код.*]]></system_sms>
         <system_sms bankId="mtsbank"><![CDATA[Код.*никому не сообщайте\.]]></system_sms>
-        <system_sms bankId="mtsbank"><![CDATA[.*платите просроченную задолженность.*]]></system_sms>
-        <system_sms bankId="promsvyazbank"><![CDATA[.*vhod v internet-bank.*]]></system_sms>
-        <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения.*не говорите этот код.*]]></system_sms>
-        <system_sms bankId="promsvyazbank"><![CDATA[Выполнен вход в систему.*]]></system_sms>
-        <system_sms bankId="promsvyazbank"><![CDATA[.*(n|N)ikomu ne soobschajte.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Dlya vidnovlennya zvernitsja v kontakt-centr.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
+        <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
+        <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Оплата по кредиту.*до.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*(и|И)спользуйте этот код.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*(n|N)ikomu ne soobschajte.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения платежа.*]]></system_sms>
-        <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
-        <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
-        <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
-        <system_sms bankId="qazkom"><![CDATA[Vy zabyli kartu.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения.*не говорите этот код.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[.*vhod v internet-bank.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[Выполнен вход в систему.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[.*Otmena operacii.*]]></system_sms>
-        <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
-        <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
-        <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
-        <system_sms bankId="raiffeisen"><![CDATA[.*оформить.*кредит.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Vy zabyli kartu.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[.*(s|S)umma.*Kod: \d+.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[.*код для регистрации.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[.*use one-time code.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Регистрация успешно завершена.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Karta.*ostalnye rekvizity karty.*]]></system_sms>
+        <system_sms bankId="qiwi"><![CDATA[Odnorazovyi kod dlia.*Nikomu ne soobshchaite.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[.*отправьте свою кредитку на платежные каникулы.*]]></system_sms>
-        <system_sms bankId="kaspibank"><![CDATA[Kaspi Депозит.*Продление.*]]></system_sms>
-        <system_sms bankId="kaspibank"><![CDATA[Оплата покупок в интернете с карты закрыта.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[.*оформить.*кредит.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
+        <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
+        <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
         <system_sms bankId="rosselhoz"><![CDATA[Кредит на любые цели.*]]></system_sms>
         <system_sms bankId="rsb"><![CDATA[Внесите платеж.*]]></system_sms>
-        <system_sms bankId="priorbank"><![CDATA[Оплата по кредиту.*до.*]]></system_sms>
-        <system_sms bankId="avangard"><![CDATA[INTERNET-BANK VHOD.*]]></system_sms>
-        <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
-        <system_sms bankId="mtbank"><![CDATA[^\d+$]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(в|В)ыполнена оплата услуги.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте (SMS|sms|СМС|смс).*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте код.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(и|И)зменение настроек оповещений.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(к|К)анал доставки оповещений изменен.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(о|О)отправьте сообщение с кодом.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*(о|О)тправьте на номер 900.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*ваше обращение.*принято в работу.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*введите код.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Внимательно проверьте реквизиты операции.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Вы успешно прошли регистрацию в Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*недостаточно средств.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Новый год с «Пятёрочкой».*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*отклонена как подозрительная.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*отмена оплаты.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*отмена покупки.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*привлекательное предложение по вкладу.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*Сбербанк напомнит Вам о регулярном переводе.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*сертификат на покупку.*может стать Вашим.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*сумма досрочного погашения по кредиту.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*успешно подключен автоплатеж.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*успешно привязана в мобильное устройство.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*целях безопасности.*установлен лимит.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4} Баланс.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4} заблокирована.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*карта заблокирована банком.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*карта разблокирована.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*не удалось пополнить.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена авторизации.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена выдачи наличных.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*(отключен|изменен).*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*будет исполнен.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*начислен налог.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*произвел проверку.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Вход в Сбербанк Онлайн для Android.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Не удалось исполнить Автоплатеж.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*Вам отправлено письмо.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*выполнена регистрация в приложении Android.*]]></system_sms>-->
+        <system_sms bankId="sberbank"><![CDATA[Сбербанк Онлайн.*перевел.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Совершен вход в Ваш Сбербанк Онлайн.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Сообщение доставлено.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[Формат уведомления.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*время встречи с представителем.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*мы позвоним вам и сообщим ПИН-код.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*naznachena vstrecha po adresu.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[.*priedet predstavitel banka.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Ваше кодовое слово изменено.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Задолженность по налогу.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Отказ.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Отказ.*Недостаточно средств]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Отмена.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot SMS-kod.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Otkaz.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Spasibo, chto vybrali nas.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vash bonus po aktsii.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vypiska.*Tinkoff.ru]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Zavtra budet vypolnena regulyarnaya operatsiya.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[.*снижает ставки по кредитам.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[Ваш код для входа в сервис.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[Otmena.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[Password.*]]></system_sms>
+        <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
+        <system_sms bankId="unicreditbank"><![CDATA[.*Получите.*в кредит под.*ежемесячный платеж.*]]></system_sms>
+        <system_sms bankId="unicreditbank"><![CDATA[Никому не сообщайте Ваш ключ.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[.*3DS SMS[\-\s]*code.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[.*Kod podtverzhdeniya.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[.*neobhodimo vnesti.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Dlya vhoda v VTB-Online.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Karta.*(otklonena|otkloneno).*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Kod .*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Minimal'nyj  platezh po karte.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Nikomu ne soobshaite etot kod.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Ocherednoj platezh po Vashemu kreditu sostavlyaet.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[oplata SMS-paketa.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Otklyuchen SMS-paket.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[Vi voshli v mobilnoe prilozhenie VTB24-Online.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[VTB-Online: Obrabotano rasporyazhenie.*]]></system_sms>
+        <system_sms bankId="vtb24"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie.*]]></system_sms>
     </system>
     <patterns bankId="alfabank">
         <!--5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
@@ -529,6 +536,38 @@
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[scheta karty -(\d+.?\d{1,2})]]></amount>
         </pattern>
+        <!--Karta *4692. Spisanie ezhemesyachnoj komissii za SMS Informirovanie -19.00 RUR.2018-03-07 21:17:04. Dostupno 65,68RUR-->
+        <pattern category="payment">
+            <match><![CDATA[.*Spisanie ezhemesyachnoj komissii za SMS Informirovanie.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[SMS Informirovanie -(\d+.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *7521. Pokupka 4381.00RUR.MOSCOW, TINKOFF BANK CARD2CARD. Zarezervirovano 4381.00RUR. 2018-03-06 16:30:40. Dostupno 0.00RUR.-->
+        <pattern category="expense">
+            <match><![CDATA[Karta.*Pokupka.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Pokupka (\d+.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *4692. Vydacha v ATM 1600.00RUR.ZAINSK, ABB 37A NEFTYANIKOV PR.. Zarezervirovano 1600.00RUR. 2018-02-27 13:53:42. Dostupno 84.68RUR.-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Karta.*Vydacha v ATM.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Vydacha v ATM (\d+.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Popolnenie scheta kontrakta *5351. ZACHISLENIE SOGLASNO VEDOMOSTI. Summa popolneniya 6000,00RUR. Date 20.02.2018 00:00. Dostupno 6000,00RUR-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popolnenie scheta kontrakta.*]]></match>
+            <cardId group="1"><![CDATA[Popolnenie scheta kontrakta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Summa popolneniya (\d+,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Karta *3839. Popolnenie karty na summu 3500.00RUR. Perevod ot ДАВЫДОВА Р.Н. 2018-03-04 11:39:37. Dostupno 3547.83RUR.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Karta.*Popolnenie karty na summu.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie karty na summu (\d+,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
+        </pattern>
     </patterns>
     <patterns bankId="belapb">
         <!--OPLATA 1.76 BYN KARTA #1152 DATA 31.01.2018 15:14:08 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 0.00 BYN-->
@@ -542,6 +581,12 @@
             <match><![CDATA[POPOLNENIE.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[^POPOLNENIE (\d+.\d{1,2})]]></amount>
+        </pattern>
+        <!--ZACHISLENIE 0.02 BYN KARTA #1152-->
+        <pattern category="popolnenie">
+            <match><![CDATA[ZACHISLENIE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[^ZACHISLENIE (\d+.\d{1,2})]]></amount>
         </pattern>
         <!--NALICHNYE 400.00 BYN KARTA #1152 DATA 17.02.2018 13:34:07 MYASNOY PAVILYON BAPB ATM>ZHLOBIN>BY OSTATOK 353.64 BYN-->
         <pattern category="cash_atm">
@@ -650,6 +695,12 @@
             <match><![CDATA[.*Popolnenie.*]]></match>
             <cardId group="1"><![CDATA[Karta: \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Popolnenie na (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--27.02.18 13:19 Poluchenie nalichnymi 700.00 RUB. Ostatok: 5361.01 RUB. Karta: *9770. Adres: Chelyabinsk, pl.Mopra, d.3-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Poluchenie nalichnymi.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Poluchenie nalichnymi (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="gazprom">
@@ -1416,8 +1467,8 @@
         <!--Vasha operatsija: 28.02.2018 17:56:44 VISA Gold/6155 131.00 UAH McDonald's 041 dostupna suma 7031.24 UAH-->
         <pattern category="unknown">
             <match><![CDATA[Vasha operatsija.*]]></match>
-            <cardId group="0"><![CDATA[VISA [\w\d\/]+]]></cardId>
-            <amount group="1"><![CDATA[VISA [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+            <cardId group="0"><![CDATA[(VISA|Visa) [\w\d\/]+]]></cardId>
+            <amount group="2"><![CDATA[(VISA|Visa) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--28.02.2018 na Vash rakhunok kartkovyi 1219648400(UAH) bulo zarakhovano sumu 7090.26 UAH-->
         <pattern category="popolnenie">

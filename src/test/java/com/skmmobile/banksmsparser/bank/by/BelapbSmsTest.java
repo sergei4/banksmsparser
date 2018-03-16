@@ -36,5 +36,13 @@ public class BelapbSmsTest extends AbsXmlBankSmsTest {
                 "400.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "ZACHISLENIE 0.02 BYN KARTA #1152",
+                "popolnenie",
+                "1152",
+                "0.02",
+                ""
+        );
     }
 }

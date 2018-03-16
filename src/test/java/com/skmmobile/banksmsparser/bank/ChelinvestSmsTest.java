@@ -26,5 +26,13 @@ public class ChelinvestSmsTest extends AbsXmlBankSmsTest {
                 "6000.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "27.02.18 13:19 Poluchenie nalichnymi 700.00 RUB. Ostatok: 5361.01 RUB. Karta: *9770. Adres: Chelyabinsk, pl.Mopra, d.3",
+                "cash_atm",
+                "9770",
+                "700",
+                ""
+        );
     }
 }

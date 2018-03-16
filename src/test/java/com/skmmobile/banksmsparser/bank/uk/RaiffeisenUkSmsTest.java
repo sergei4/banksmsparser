@@ -27,5 +27,21 @@ public class RaiffeisenUkSmsTest extends AbsXmlBankSmsTest {
                 "7090.26",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Vasha operatsija: 12.03.2018 20:03:58 Visa Gold/0013 56.51 UAH BeerMarket25Y113DA4AFZI0 dostupna suma 1647.17 UAH",
+                "unknown",
+                "Visa Gold/0013",
+                "56.51",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Vasha operatsija: 12.03.2018 17:53:33 Visa Fishka/8027 200.00 UAH Moskovskyi 9 korp. av., dostupna suma 1703.68 UAH",
+                "unknown",
+                "Visa Fishka/8027",
+                "200",
+                ""
+        );
     }
 }
