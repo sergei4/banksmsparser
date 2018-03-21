@@ -242,5 +242,37 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "45824.88",
                 ""
         );
+        checkBankSms(
+                parser,
+                "*1691 -111р YANDEX.TAXI 03.03.18 21:09 Доступно 2460.03р",
+                "expense",
+                "1691",
+                "111",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "*8381 -388.2р MAGNIT MK RIGODON 01.03.18 10:08 Доступно 28651.33р",
+                "expense",
+                "8381",
+                "388.2",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "*1691 -3900р Комиссия 19.5р PEREVOD NA KARTU 03.03.18 20:26 Доступно 2071.03р",
+                "expense",
+                "1691",
+                "3900",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "*1691 -5р YANDEX.TAXI 20.03.18 14:31 Доступно 7586.08р",
+                "expense",
+                "1691",
+                "5",
+                ""
+        );
     }
 }

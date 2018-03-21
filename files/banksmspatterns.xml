@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/21 09:40</updated>
+    <updated>2018/03/21 13:55</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -743,7 +743,7 @@
         <pattern category="expense">
             <match><![CDATA[^\*\d+ -\d.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+) -\d+]]></cardId>
-            <amount group="1"><![CDATA[^\*\d+ -(\d+.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[^\*\d+ -(\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card8381; Snyatie nalichnih; Summa 14900 RUR; 14.12.17 13:23:35; GAZPROMBANK; dostupno: 11599.23 RUR-->
         <pattern category="cash_atm">
