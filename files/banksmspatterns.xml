@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/16 18:50</updated>
+    <updated>2018/03/21 09:40</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -269,6 +269,7 @@
         <system_sms bankId="all"><![CDATA[Уважаемый.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Уважаемая.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*Уважаемый клиент.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Shanovnyj Kliente.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Добрый день.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*закажите карту.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*(о|О)ткройте вклад.*]]></system_sms>
@@ -302,6 +303,9 @@
         <system_sms bankId="all"><![CDATA[.*(о|О)тказ.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*OTKAZ.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*OTMENA.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[.*(н|Н)икому не сообщайте код.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Код:\s+\d+.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Kod:\s+\d+.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[.*Ваша заявка на кредитную карту.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Вам отказано по заявке.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Ваш логин.*]]></system_sms>
@@ -356,6 +360,9 @@
         <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Vy zabyli kartu.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Вы запустили перевод денег с карты.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[.*Prosim oplatit dolg.*]]></system_sms>
+        <system_sms bankId="qazkom"><![CDATA[Summa zadolzhennosti.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[.*(s|S)umma.*Kod: \d+.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[.*код для регистрации.*]]></system_sms>
         <system_sms bankId="qiwi"><![CDATA[.*use one-time code.*]]></system_sms>
@@ -368,6 +375,7 @@
         <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
+        <system_sms bankId="rocketbank"><![CDATA[Привет.*]]></system_sms>
         <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
         <system_sms bankId="rosselhoz"><![CDATA[Кредит на любые цели.*]]></system_sms>
         <system_sms bankId="rsb"><![CDATA[Внесите платеж.*]]></system_sms>
@@ -435,6 +443,10 @@
         <system_sms bankId="ubrr"><![CDATA[Ваш код для входа в сервис.*]]></system_sms>
         <system_sms bankId="ubrr"><![CDATA[Otmena.*]]></system_sms>
         <system_sms bankId="ubrr"><![CDATA[Password.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[.*предлагаем платеж.*перенести.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[Platezh perenesen.*]]></system_sms>
+        <system_sms bankId="ubrr"><![CDATA[.*Благодарим.*за использование.*]]></system_sms>
+        <system_sms bankId="ukrsibbank"><![CDATA[Neuspishniy perekaz.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Оформление по паспорту.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[.*Получите.*в кредит под.*ежемесячный платеж.*]]></system_sms>
         <system_sms bankId="unicreditbank"><![CDATA[Никому не сообщайте Ваш ключ.*]]></system_sms>
@@ -465,11 +477,13 @@
         </pattern>
         <!--5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app-->
         <!--**4228; Postupleniye; Summa: 1500 RUR; Ostatok: 1609,11 RUR; 28.02.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
+        <!--**7897; Postupleniye; Summa: 1 010 RUR; Ostatok: 1 253,43 RUR; 20.03.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
         <pattern category="popolnenie">
             <match><![CDATA[.*Postupleniye\;.*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: (\d*\,?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Summa: ([\d\s]*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!-- Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02-->
         <pattern category="perevod">
@@ -1071,6 +1085,27 @@
             <amount group="1"><![CDATA[POPOLNENIE: ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--MKB: 13.02.2018 16:20 4*2800 NALICHNIE: 50 000.00 RUB ATM 983 MKB 810. Balance: 13 616.24 RUB. Blokirovka kart - SMS "All" na +79037672667-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*NALICHNIE:.*]]></match>
+            <cardId group="0"><![CDATA[\d\*\d{4}(?=\sNALICHNIE)]]></cardId>
+            <amount group="1"><![CDATA[NALICHNIE: ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Oplata sms-informirovaniya po karte *0895 60 RUR.-->
+        <pattern category="payment">
+            <match><![CDATA[Oplata sms-informirovaniya po karte.*]]></match>
+            <cardId group="1"><![CDATA[po karte \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[po karte \*\d+ ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--MKB Online: Sovershen platezh na summu 500 RUR Blokirovanie dostupa v sistemu SMS "Online" na nomer +79037672667.-->
+        <pattern category="payment">
+            <match><![CDATA[MKB Online: Sovershen platezh.*]]></match>
+            <cardId group="0" default="mkb"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[platezh na summu ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
     </patterns>
     <patterns bankId="mtbank">
         <!--KARTA:4177*5654
@@ -1396,7 +1431,7 @@
     <patterns bankId="qazkom">
         <!--2017-12-31 12:27:59 Operaciya po karte Retail 1669.00 KZT YUBILEINYI SUPERMARKET 4**493 Dostupnaya summa:78649.63 KZT-->
         <pattern category="expense">
-            <match><![CDATA[.*Retail.*]]></match>
+            <match><![CDATA[.*Operaciya po karte Retail.*]]></match>
             <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
             <amount group="1"><![CDATA[Retail\s(\d*.?\d{1,2})]]></amount>
             <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
@@ -1413,6 +1448,31 @@
             <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
             <amount group="1"><![CDATA[Operaciya po karte ATM (\d*.?\d{1,2})]]></amount>
             <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
+        </pattern>
+        <!--2018-03-10 06:57:54 Card SMS Charge -200.00 KZT 4**446 Dostupnaya summa:184900.13 KZT-->
+        <!--2018-02-26 06:48:44 Client SMS Charge -300.00 KZT 4**073 Dostupnaya summa:164467.23 KZT-->
+        <pattern category="payment">
+            <match><![CDATA[.*SMS Charge.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[SMS Charge -(\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--2018-02-03 14:11:14 Operaciya po karte CH Debit 495.00 KZT P2P HOMEBANK 3D INNER 4**576 Dostupnaya summa:210808.86 KZT-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Operaciya po karte CH Debit.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[Operaciya po karte CH Debit (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--2018-02-20 11:44:45 Operaciya po karte CH Payment 4000.00 KZT P2P HB TO OWN CARD 4**576 Dostupnaya summa:7595.85 KZT-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Operaciya po karte CH Payment.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[Operaciya po karte CH Payment (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--2018-02-26 12:23:59 Provedena operaciya Note Acceptance 5000.00 KZT ATM 2398 DOM SVYAZI 3**031 Dostupnaya summa:687938.00 KZT-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Provedena operaciya Note Acceptance.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[Provedena operaciya Note Acceptance (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="qiwi">
@@ -1809,6 +1869,12 @@
             <cardId group="0" default="tinkoff"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[Бесконтактная оплата. (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--Регулярная покупка. Карта *9771. 4212.66 RUB. iHerb. Доступно 6983.56 RUB-->
+        <pattern category="payment">
+            <match><![CDATA[Регулярная покупка.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
+        </pattern>
         <!-- Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru-->
         <pattern category="jur.perevod">
             <match><![CDATA[Jur. perevod.*]]></match>
@@ -1882,6 +1948,16 @@
             <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Term: ([\d\s\w\>]*)\sMCC:]]></detail>
         </pattern>
+        <!--Покупка
+        2200*7800
+        Сумма 349.40 р
+        Остаток 53100.17 р
+        MEGAMART-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка.*]]></match>
+            <cardId group="1"><![CDATA[Покупка\s+([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Сумма (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Popolnenie karty
         4301****9962
         Summa: 5500.00 RUB
@@ -1903,6 +1979,51 @@
             <match><![CDATA[Vydacha nalichnyh.*]]></match>
             <cardId group="1"><![CDATA[Vydacha nalichnyh\s+([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Summa:\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Zachislenie zarabotnoy platy na schet 40817****0904 8600 rur. tel:88001000200 internet-bank: i.ubrr.ru-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Zachislenie.*]]></match>
+            <cardId group="1"><![CDATA[na schet ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[na schet [\d\*]+ (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="ukrsibbank">
+        <!--Oplata: 21600487 NOVA LINIYA, UA 19.02.2018 14:22. Kartka 5169***6047. Suma 240.00UAH. Dostupno 1544.64UAH-->
+        <pattern category="expense">
+            <match><![CDATA[Oplata.*]]></match>
+            <cardId group="1"><![CDATA[Kartka ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Suma (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Perekaz: MONO011  MONODirect, UA 24.01.2018 17:57 z kartky 5169***4474 na sumu 200.00UAH. Dostupno 710.00UAH.-->
+        <pattern category="perevod">
+            <match><![CDATA[Perekaz.*z kartky.*]]></match>
+            <cardId group="1"><![CDATA[z kartky ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[na sumu (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Perekaz: 24001010 WEBBANKING, UA 16.02.2018 18:33 na kartku 5169***4533 na sumu 8000.00UAH. Dostupno 14026.06UAH. -->
+        <pattern category="perevod">
+            <match><![CDATA[Perekaz.*na kartku.*]]></match>
+            <cardId group="1"><![CDATA[na kartku ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[na sumu (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Otrymannia gotivky: A0308682 UKRSIBBANK, UA 24.01.2018 19:13. Kartka 5169***4474. Suma 400.00UAH. Dostupno 310.00UAH-->
+        <pattern category="unknown">
+            <match><![CDATA[Otrymannia gotivky.*]]></match>
+            <cardId group="1"><![CDATA[Kartka ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Suma (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Popovnennya rakhunku: 22.02.2018 14:15:26, rakhunok 26256003660397 na sumu 2,750.28UAH. Dostupniy zalyshok 2750.28UAH.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popovnennya rakhunku.*rakhunok.*]]></match>
+            <cardId group="1"><![CDATA[rakhunok ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[na sumu ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--Popovnennia rakhunku: A0309359 UKRSIBBANK, UA 09.02.2018 19:12. Kartka 5169***0937. Suma 7200.00UAH. Dostupno 7375.69UAH-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popovnennia rakhunku.*Kartka.*]]></match>
+            <cardId group="1"><![CDATA[Kartka ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Suma ([\d\,]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="unicreditbank">

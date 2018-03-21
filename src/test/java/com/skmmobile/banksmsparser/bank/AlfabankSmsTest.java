@@ -1,6 +1,5 @@
 package com.skmmobile.banksmsparser.bank;
 
-import com.skmmobile.banksmsparser.BankSmsParser;
 import org.w3c.dom.Document;
 
 public class AlfabankSmsTest extends AbsXmlBankSmsTest {
@@ -43,7 +42,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "193.03",
                 "RU/SANKT-PETERBU/AO UK START"
         );
-
         checkBankSms(
                 parser,
                 "5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app",
@@ -60,7 +58,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "1500",
                 ""
         );
-
         checkBankSms(
                 parser,
                 "Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02",
@@ -69,7 +66,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "1500",
                 ""
         );
-
         checkBankSms(
                 parser,
                 "5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45",
@@ -85,6 +81,14 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "9857",
                 "25200",
                 "RU/CHELYABINSK/Alfa Acq"
+        );
+        checkBankSms(
+                parser,
+                "**7897; Postupleniye; Summa: 1 010 RUR; Ostatok: 1 253,43 RUR; 20.03.2018; Podrobnosti v mobilnom banke alfabank.ru/app",
+                "popolnenie",
+                "7897",
+                "1010",
+                ""
         );
         // BYN
         checkBankSms(
