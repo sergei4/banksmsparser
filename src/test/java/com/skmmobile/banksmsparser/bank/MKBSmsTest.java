@@ -34,5 +34,29 @@ public class MKBSmsTest extends AbsXmlBankSmsTest {
                 "10000.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "MKB: 13.02.2018 16:20 4*2800 NALICHNIE: 50 000.00 RUB ATM 983 MKB 810. Balance: 13 616.24 RUB. Blokirovka kart - SMS \"All\" na +79037672667\n",
+                "cash_atm",
+                "4*2800",
+                "50000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "MKB Online: Sovershen platezh na summu 500 RUR Blokirovanie dostupa v sistemu SMS \"Online\" na nomer +79037672667.",
+                "payment",
+                "mkb",
+                "500",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Oplata sms-informirovaniya po karte *0895 60 RUR.",
+                "payment",
+                "0895",
+                "60",
+                ""
+        );
     }
 }

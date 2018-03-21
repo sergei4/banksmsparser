@@ -164,3 +164,32 @@ OTMENA OPLATA 0.50 BYN KARTA #4487 DATA 10.03.2018 14:26:53 DRIVE&PAY>DRIVE&PAY>
 *9614 Отказ. Неуспешное завершение операции KOSMOBURGER 03.03.18 11:27
 
 *3905 Запрос баланса GPB 07.03.18 11:00:06 Доступно 7226.57р
+
+Вы запустили перевод денег с карты, код 60489. Колцентр Qazkom 7111
+
+Ваш код для установки mPin для QR платежей 71842. Никому не сообщайте код. Вводите его только в мобильном приложении
+
+Prosim oplatit dolg po kartochke v QAZKOMe. Ejednevno na zadoljennost nachislyaiutsya peni. V sluchae nepogasheniya Bank vprave prinyat mery soglasno dogovoru.
+
+Summa zadolzhennosti na 06.03.2018 sostavlyaet 13511.46 KZT, po procentam 4417.38 KZT, po pene 0 KZT. Itogo 17928.84 KZT.
+
+Анна Владимировна, предлагаем платеж 09.01.2018 по кредитному договору № KD121501000000270 в сумме 8072 руб., перенести на , выполнив бесплатную операцию "Перенос платежа" в интернет-банке либо в банкомате. Предложение действительно до 09.01.2018.
+
+Platezh perenesen. Grafik platezhey po kreditu KD121501000000270 budet otpravlen na 1064519@card.ubrr.ru i dostupen v ofisakh Banka i Internet-Banke.
+
+ЛЮДМИЛА РУСТАМОВНА! Благодарим Вас за использование карты Максимум! За покупки, совершенные в декабре 2017 г., Ваш доход составил 327.10, в том числе cash-back 327.10 рублей и возврат комиссии за обслуживание 0.00 рублей
+
+Привет, Ильмир! Вам звонил Рокетбанк. Можете перезвонить нам по номеру 8-800-350-10-87. Приятного дня :)
+
+Привет!
+Встречаемся сегодня с 10:00 до 19:00. Не забудьте паспорт. Если что-то изменилось, звоните: 8-800-350-10-87
+
+Shanovnyj Kliente! Minimalna suma popovnennya za kredytnoyu kartkoyu Shopping Card (dogovir 93345943000) stanovyt' 1409.11 UAH. Vy mayete popovnyty rahunok do 05.04.2018. UKRSIBBANK.
+
+Neuspishniy perekaz z kartky 5169***4533, CARD2CARD UA P2PSMS, UA. Dovidka 729
+
+Код:  74904
+
+Код:  40616
+
+Kod: 76400 - dlia pidtverdzhennia operatsii. Uvaga! Nikoly ne povidomliaite kod otrymanyi u SMS tretim osobam. Dovidka 729

@@ -44,5 +44,45 @@ public class QazkomSmsTest extends AbsXmlBankSmsTest {
                 "5000.00",
                 ""
         );
+        checkBankSms(
+                parser,
+                "2018-03-10 06:57:54 Card SMS Charge -200.00 KZT 4**446 Dostupnaya summa:184900.13 KZT",
+                "payment",
+                "4**446",
+                "200",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "2018-02-03 14:11:14 Operaciya po karte CH Debit 495.00 KZT P2P HOMEBANK 3D INNER 4**576 Dostupnaya summa:210808.86 KZT",
+                "unknown",
+                "4**576",
+                "495",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "2018-02-20 11:44:45 Operaciya po karte CH Payment 4000.00 KZT P2P HB TO OWN CARD 4**576 Dostupnaya summa:7595.85 KZT",
+                "unknown",
+                "4**576",
+                "4000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "2018-02-26 12:23:59 Provedena operaciya Note Acceptance 5000.00 KZT ATM 2398 DOM SVYAZI 3**031 Dostupnaya summa:687938.00 KZT",
+                "unknown",
+                "3**031",
+                "5000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "2018-02-26 06:48:44 Client SMS Charge -300.00 KZT 4**073 Dostupnaya summa:164467.23 KZT",
+                "payment",
+                "4**073",
+                "300",
+                ""
+        );
     }
 }

@@ -180,5 +180,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "785.9",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Регулярная покупка. Карта *9771. 4212.66 RUB. iHerb. Доступно 6983.56 RUB",
+                "payment",
+                "9771",
+                "4212.66",
+                ""
+        );
     }
 }
