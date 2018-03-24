@@ -29,8 +29,7 @@ public class SmsXmlFileTests extends Assert{
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
 
-        XmlBankParser bankParser = new XmlBankParser();
-        bankParser.init(xmlDocument, "alfabank");
+        BankSmsParser bankParser = XmlBankParser.obtain(xmlDocument, "alfabank");
 
         assertEquals("alfabank", bankParser.getBankName());
         assertTrue("Шаблон не содержит данных", bankParser.getOperationCount() > 0);

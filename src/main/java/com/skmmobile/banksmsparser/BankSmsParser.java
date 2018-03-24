@@ -1,11 +1,7 @@
 package com.skmmobile.banksmsparser;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,9 +10,9 @@ public class BankSmsParser {
 
     public static final String CATEGORY_EXPENSE = "expense";
 
-    private final Set<Operation> operationSet = new HashSet<>();
+    private final Set<SmsPattern> smsPatternSet = new HashSet<>();
 
-    private static String wrapEscape(String src){
+    private static String wrapEscape(String src) {
         char[] chars = src.toCharArray();
         int size = chars.length;
         StringBuilder result = new StringBuilder();
@@ -31,8 +27,8 @@ public class BankSmsParser {
         return result.toString();
     }
 
-    protected void addOperationTemplate(Operation operation) {
-        operationSet.add(operation);
+    protected void addSmsPattern(SmsPattern smsPattern) {
+        smsPatternSet.add(smsPattern);
     }
 
     public String getBankName() {
@@ -40,33 +36,35 @@ public class BankSmsParser {
     }
 
     public int getOperationCount(){
-        return operationSet.size();
+        return smsPatternSet.size();
     }
 
     public Result parseSms(String text1) {
         String text = wrapEscape(text1);
         Result result = null;
-        for (Operation operation : operationSet) {
-            if (operation.typeRex.matcher(text).matches()) {
-                result = new Result(operation.type);
+        for (SmsPattern smsPattern : smsPatternSet) {
+            if (smsPattern.typeRex.matcher(text).matches()) {
+                result = new Result(smsPattern.type);
                 Matcher m;
-                if (operation.cardIdRex != null) {
-                    m = operation.cardIdRex.matcher(text);
+                // определяем номер карты или счета
+                if (smsPattern.cardIdRex != null) {
+                    m = smsPattern.cardIdRex.matcher(text);
                     if (m.find()) {
                         //App.SystemLog(TAG, "account: " + m.group());
-                        result.cardIdStr = m.group(operation.cardIdRexGroup);
+                        result.cardIdStr = m.group(smsPattern.cardIdRexGroup);
                     }
                     else
-                        result.cardIdStr = operation.defCardId;
+                        result.cardIdStr = smsPattern.defCardId;
                 }
-                if (operation.amountRex != null) {
-                    m = operation.amountRex.matcher(text);
+                // определяем сумму операции, по-умолчанию = 0
+                if (smsPattern.amountRex != null) {
+                    m = smsPattern.amountRex.matcher(text);
                     if (m.find()) {
                         //App.SystemLog(TAG, "amount: " + m.group());
                         try {
-                            String src = m.group(operation.amountRexGroup);
-                            src = operation.decDelim.equals("")? src : src.replace(operation.decDelim, "");
-                            src = src.replace(operation.decChar, ".");
+                            String src = m.group(smsPattern.amountRexGroup);
+                            src = smsPattern.decDelimiter.equals("")? src : src.replace(smsPattern.decDelimiter, "");
+                            src = src.replace(smsPattern.decChar, ".");
                             result.amount = new BigDecimal(src);
                         }
                         catch (Exception e){
@@ -76,29 +74,60 @@ public class BankSmsParser {
                     else
                         result.amount = BigDecimal.ZERO;
                 }
-                if (operation.dateRex != null) {
-                    m = operation.dateRex.matcher(text);
+                // определяем сумму комиссии, по-умолчанию = 0, разделители как в сумме
+                // Todo: Решить: нужно ли определять отдельные настройки для комиссии?
+                if (smsPattern.commissionRex != null) {
+                    m = smsPattern.commissionRex.matcher(text);
                     if (m.find()) {
-                        //App.SystemLog(TAG, "date: " + m.group());
+                        //App.SystemLog(TAG, "amount: " + m.group());
+                        try {
+                            String src = m.group(smsPattern.commissionRexGroup);
+                            src = smsPattern.decDelimiter.equals("")? src : src.replace(smsPattern.decDelimiter, "");
+                            src = src.replace(smsPattern.decChar, ".");
+                            result.commission = new BigDecimal(src);
+                        }
+                        catch (Exception e){
+                            result.commission = BigDecimal.ZERO;
+                        }
                     }
+                    else
+                        result.commission = BigDecimal.ZERO;
                 }
-                if (operation.detailRex != null) {
-                    m = operation.detailRex.matcher(text);
+                else
+                    result.commission = BigDecimal.ZERO;
+                // Определяем валюту, по-умолчанию пустая строка "";
+                if(smsPattern.currencyRex != null){
+                    m = smsPattern.currencyRex.matcher(text);
+                    if (m.find()) {
+                        result.currency = m.group(smsPattern.currencyRexGroup);
+                    }
+                    else
+                        result.currency = "";
+                }
+                else
+                    result.currency = "";
+                // Определяем дополнительную информацию
+                if (smsPattern.detailRex != null) {
+                    m = smsPattern.detailRex.matcher(text);
                     if (m.find()) {
                         //App.SystemLog(TAG, "location: " + m.group());
-                        result.details = m.group(operation.detailRexGroup);
+                        result.details = m.group(smsPattern.detailRexGroup);
                     }
                     else
                         result.details = "indefinite";
                 }
+                // Определяем дату операции
+                if (smsPattern.dateRex != null) {
+                    m = smsPattern.dateRex.matcher(text);
+                    if (m.find()) {
+                        //App.SystemLog(TAG, "date: " + m.group());
+                    }
+                }
+                // сразу возвращаем результат
+                return result.cardIdStr.equals(SmsPattern.INDEFINITE_CARD_ID) | result.amount.compareTo(BigDecimal.ZERO) == 0 ? null : result;
             }
         }
-
-        if (result != null && (result.cardIdStr.equals(Operation.INDEFINITE_CARD_ID) | result.amount.compareTo(BigDecimal.ZERO) == 0)) {
-            return null;
-        }
-        else
-            return result;
+        return null;
     }
 
     public static class Result {
@@ -107,8 +136,10 @@ public class BankSmsParser {
         BigDecimal amount;
         Date date;
         String details;
+        BigDecimal commission;
+        String currency;
 
-        public Result(String type) {
+        Result(String type) {
             this.type = type;
         }
 
@@ -132,19 +163,29 @@ public class BankSmsParser {
             return details != null ? details : "";
         }
 
+        public BigDecimal getCommission() {
+            return commission;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
         @Override
         public String toString() {
             return getClass().getSimpleName() + ": "
-                    + "type: "     + type
-                    + " cardId: "  + (cardIdStr != null ? cardIdStr : "indefinite")
-                    + " amount: "  + (amount == null ? "indefinite" : amount.toPlainString())
-                    + " date: "    + (date != null ? date.toString() : "indefinite")
-                    + " details: " + (details != null ? details : "indefinite")
+                    + "type: "        + type
+                    + " cardId: "     + (cardIdStr != null ? cardIdStr : "indefinite")
+                    + " amount: "     + (amount == null ? "indefinite" : amount.toPlainString())
+                    + " commission: " + (commission == null ? "indefinite" : commission.toPlainString())
+                    + " date: "       + (date != null ? date.toString() : "indefinite")
+                    + " details: "    + (details != null ? details : "indefinite")
+                    + " currency: "   + (currency != null ? currency : "indefinite")
                     ;
         }
     }
 
-    public static class Operation {
+    public static class SmsPattern {
         private static final String INDEFINITE_CARD_ID = "";
 
         private String type;
@@ -153,15 +194,20 @@ public class BankSmsParser {
         private Pattern amountRex;
         private Pattern dateRex;
         private Pattern detailRex;
+        private Pattern commissionRex;
+        private Pattern currencyRex;
         private int cardIdRexGroup = 0;
         private int amountRexGroup = 0;
         private int dateRexGroup = 0;
         private int detailRexGroup = 0;
+        private int commissionRexGroup = 0;
+        private int currencyRexGroup = 0;
+        // значения по-умолчанию
         private String defCardId = INDEFINITE_CARD_ID;
         private CharSequence decChar = ".";
-        private CharSequence decDelim = "";
+        private CharSequence decDelimiter = "";
 
-        public Operation(String type) {
+        public SmsPattern(String type) {
             this.type = type;
         }
 
@@ -170,7 +216,7 @@ public class BankSmsParser {
         }
 
         public void setCardIdRex(String s) {
-            cardIdRex = Pattern.compile(s);
+            setCardIdRex(s, 0);
         }
 
         public void setCardIdRex(String s, int group) {
@@ -179,7 +225,7 @@ public class BankSmsParser {
         }
 
         public void setAmountRex(String s) {
-            amountRex = Pattern.compile(s);
+            setAmountRex(s, 0);
         }
 
         public void setAmountRex(String s, int group) {
@@ -188,11 +234,16 @@ public class BankSmsParser {
         }
 
         public void setDateRex(String s) {
+            setDateRex(s, 0);
+        }
+
+        public void setDateRex(String s, int group) {
             dateRex = Pattern.compile(s);
+            dateRexGroup = group;
         }
 
         public void setDetailRex(String s) {
-            detailRex = Pattern.compile(s);
+            setDetailRex(s, 0);
         }
 
         public void setDetailRex(String s, int group) {
@@ -200,39 +251,58 @@ public class BankSmsParser {
             detailRexGroup = group;
         }
 
+        public void setCurrencyRex(String s) {
+            setCurrencyRex(s, 0);
+        }
+
+        public void setCurrencyRex(String s, int group) {
+            currencyRex = Pattern.compile(s);
+            currencyRexGroup = group;
+        }
+
+        public void setCommissionRex(String s) {
+            setCommissionRex(s, 0);
+        }
+
+        public void setCommissionRex(String s, int group) {
+            commissionRex = Pattern.compile(s);
+            commissionRexGroup = group;
+        }
+
+        // Настройки для распознавания сумм
         public void setDecChar(CharSequence decChar) {
             this.decChar = decChar;
         }
 
-        public void setDecDelim(CharSequence decDelim) {
-            this.decDelim = decDelim;
+        public void setDecDelimiter(CharSequence decDelimiter) {
+            this.decDelimiter = decDelimiter;
         }
 
+        // Устанавливаем значение cardId по-умолчанию
         public void setDefCardId(String defCardId) {
             this.defCardId = defCardId;
         }
     }
 
     // Шаблоны системных sms для исключения
-    private static final List<String> systemSmsTemplate = new ArrayList<>();
+    private static final List<Pattern> systemSmsTemplate = new LinkedList<>();
     static {
-        systemSmsTemplate.add("Задолженность по налогу.*");
-        systemSmsTemplate.add("Vhod v Tinkoff.ru.*");
-        systemSmsTemplate.add("Вход в Сбербанк Онлайн для Android.*");
-        systemSmsTemplate.add(".*пароль:\\s\\d+.*");
-        systemSmsTemplate.add("(Сбербанк Онлайн).*(перевел).*");
+        systemSmsTemplate.add(Pattern.compile("Задолженность по налогу.*"));
+        systemSmsTemplate.add(Pattern.compile("Vhod v Tinkoff.ru.*"));
+        systemSmsTemplate.add(Pattern.compile("Вход в Сбербанк Онлайн для Android.*"));
+        systemSmsTemplate.add(Pattern.compile(".*пароль:\\s\\d+.*"));
+        systemSmsTemplate.add(Pattern.compile("(Сбербанк Онлайн).*(перевел).*"));
     }
 
     public static void initSystemSms(List<String> list){
         systemSmsTemplate.clear();
-        systemSmsTemplate.addAll(list);
+        for(String s: list)
+            systemSmsTemplate.add(Pattern.compile(s));
     }
 
     public static boolean isSystemBankSms(String text1) {
         String text = wrapEscape(text1);
-        Pattern p;
-        for (String s : systemSmsTemplate) {
-            p = Pattern.compile(s);
+        for (Pattern p : systemSmsTemplate) {
             if (p.matcher(text).matches())
                 return true;
         }
@@ -243,13 +313,18 @@ public class BankSmsParser {
      * Проверка, что в наборе нет одинаковых шаблонов
      * @return
      */
-    public boolean check(){
+    @Deprecated
+    public boolean check() {
         Set<String> matches = new HashSet<>();
-        for(Operation op: operationSet){
-            if(matches.contains(op.typeRex.pattern()))
+        for (SmsPattern op : smsPatternSet) {
+            if (matches.contains(op.typeRex.pattern()))
                 return false;
             matches.add(op.typeRex.pattern());
         }
         return true;
+    }
+
+    public boolean validate() {
+        return check();
     }
 }

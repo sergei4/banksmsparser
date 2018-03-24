@@ -30,8 +30,8 @@ public class XmlBankParser extends BankSmsParser {
     private static final String NODE_CARD_ID        = "cardId";
     private static final String NODE_AMOUNT         = "amount";
     private static final String NODE_DETAIL         = "detail";
-    private static final String NODE_DEC_CHAR       = "decimal_char";
-    private static final String NODE_DEC_GROUP_CAHR = "decimal_group_char";
+    private static final String NODE_DEC_DELIM_CHAR = "decimal_char";
+    private static final String NODE_DEC_GROUP_CHAR = "decimal_group_char";
 
     private String bankName;
 
@@ -73,16 +73,7 @@ public class XmlBankParser extends BankSmsParser {
     public static Map<String, String> obtainBankPhoneMap(Document document){
         Map<String, String> phoneMap = new HashMap<>();
         NodeList bankList;
-        int count = 0;
-        // версия 1
-//        bankList = document.getElementsByTagName(NODE_PHONE);
-//        count = bankList.getLength();
-//        for (int i = 0; i < count; i++) {
-//            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
-//            String phone = bankList.item(i).getFirstChild().getNodeValue();
-//            phoneMap.put(phone, bankId);
-//        }
-        // версия 2
+        int count;
         bankList = document.getElementsByTagName(NODE_SERVICE_PHONE);
         count = bankList.getLength();
         for (int i = 0; i < count; i++) {
@@ -118,7 +109,7 @@ public class XmlBankParser extends BankSmsParser {
         return xmlBankParser;
     }
 
-    public void init(Document document, String bankName){
+    private void init(Document document, String bankName){
         NodeList bankPatternsList = document.getElementsByTagName(NODE_PATTERNS);
         int count = bankPatternsList.getLength();
         for (int i = 0; i < count; i++) {
@@ -132,7 +123,7 @@ public class XmlBankParser extends BankSmsParser {
                     Node bankChildNode = bankChildNodes.item(j);
                     if(bankChildNode.getNodeType() == Node.ELEMENT_NODE && bankChildNode.getNodeName().equals(NODE_PATTERN)){
                         String category = getAttribute(bankChildNode, ATTR_CATEGORY);
-                        Operation operation = new Operation(category);
+                        SmsPattern smsPattern = new SmsPattern(category);
                         NodeList patternParams = bankChildNode.getChildNodes();
                         int paramCount = patternParams.getLength();
                         for (int cp = 0; cp < paramCount; cp++) {
@@ -142,40 +133,40 @@ public class XmlBankParser extends BankSmsParser {
                                 switch (parameterNode.getNodeName()){
                                     case NODE_MATCH:
                                         parameter = obtainPatternParameter(parameterNode);
-                                        operation.setTypePattern(parameter.patternStr);
+                                        smsPattern.setTypePattern(parameter.patternStr);
                                         break;
                                     case NODE_CARD_ID:
                                         parameter = obtainPatternParameter(parameterNode);
-                                        operation.setCardIdRex(parameter.patternStr, parameter.group);
-                                        operation.setDefCardId(getAttribute(parameterNode, ATTR_DEFAULT));
+                                        smsPattern.setCardIdRex(parameter.patternStr, parameter.group);
+                                        smsPattern.setDefCardId(getAttribute(parameterNode, ATTR_DEFAULT));
                                         break;
                                     case NODE_AMOUNT:
                                         parameter = obtainPatternParameter(parameterNode);
-                                        operation.setAmountRex(parameter.patternStr, parameter.group);
+                                        smsPattern.setAmountRex(parameter.patternStr, parameter.group);
                                         break;
                                     case NODE_DETAIL:
                                         parameter = obtainPatternParameter(parameterNode);
-                                        operation.setDetailRex(parameter.patternStr, parameter.group);
+                                        smsPattern.setDetailRex(parameter.patternStr, parameter.group);
                                         break;
-                                    case NODE_DEC_CHAR:
+                                    case NODE_DEC_DELIM_CHAR:
                                         String decChar = parameterNode.getFirstChild().getNodeValue();
-                                        operation.setDecChar(decChar);
+                                        smsPattern.setDecChar(decChar);
                                         break;
-                                    case NODE_DEC_GROUP_CAHR:
+                                    case NODE_DEC_GROUP_CHAR:
                                         String decGropChar = parameterNode.getFirstChild().getNodeValue();
-                                        operation.setDecDelim(decGropChar);
+                                        smsPattern.setDecDelimiter(decGropChar);
                                         break;
                                 }
                             }
                         }
-                        addOperationTemplate(operation);
+                        addSmsPattern(smsPattern);
                     }
                 }
             }
         }
     }
 
-    private static class PatternParameter{
+    private static class PatternParameter {
         String patternStr;
         int group;
     }
