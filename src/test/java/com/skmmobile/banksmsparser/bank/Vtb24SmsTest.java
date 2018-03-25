@@ -163,5 +163,21 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "59",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Karta *6070 Beznalichnoe popolnenie 1299.00 RUR 22.03.18 17:32 MSK Ostatok 1386.99 RUR",
+                "popolnenie",
+                "6070",
+                "1299",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Karta *6070 vydacha nalichnyh 1100.00 RUR 52, UL. SVOBODY 23.03.18 08:00 MSK Ostatok 55.99 RUR\n",
+                "cash_atm",
+                "6070",
+                "1100",
+                ""
+        );
     }
 }

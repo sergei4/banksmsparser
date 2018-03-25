@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/21 13:55</updated>
+    <updated>2018/03/25 10:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -421,6 +421,7 @@
         <system_sms bankId="sberbank"><![CDATA[Совершен вход в Ваш Сбербанк Онлайн.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Сообщение доставлено.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Формат уведомления.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[.*одобрена.*кредитная карта.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[.*время встречи с представителем.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[.*мы позвоним вам и сообщим ПИН-код.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[.*naznachena vstrecha po adresu.*]]></system_sms>
@@ -1337,7 +1338,7 @@
         OOO GLOBAL FUDS SANKT-PETERBU Russia
         Доступно 891.96 RUB-->
         <pattern category="expense">
-            <match><![CDATA[.*Покупка.*]]></match>
+            <match><![CDATA[Карта.*Покупка.*]]></match>
             <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Покупка ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
@@ -1358,6 +1359,27 @@
             <match><![CDATA[.*Перевод.*]]></match>
             <cardId group="0" default="pochtabank"><![CDATA[noname]]></cardId>
             <amount group="1"><![CDATA[Сумма ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Карта 4*8274
+        23.03.18 22:50
+        Получение наличных 16000.00 RUB
+        D. 30, KORP. 1, LIT. A, PR-KT SANKT-PETERBURG G Russia
+        Доступно 14660.28 RUB-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Карта.*Получение наличных.*]]></match>
+            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Получение наличных ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--POCHTABANK (pochtabank)
+        Карта 4*8274
+        23.03.18 17:22
+        Зачислено 30000.00 RUB
+        VISA MONEY TRANSFER Visa Direct Russia
+        Доступно 30660.28 RUB-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Карта.*Зачислено.*]]></match>
+            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="priorbank">
@@ -1473,6 +1495,12 @@
             <match><![CDATA[.*Provedena operaciya Note Acceptance.*]]></match>
             <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
             <amount group="1"><![CDATA[Provedena operaciya Note Acceptance (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--2018-03-21 19:36:47  Operaciya po kartochke 4**9744 na summu -1995.00KZT. Ostatok : 68994.31. Opisanie: TOO INTERTUR ASTANA-->
+        <pattern category="payment">
+            <match><![CDATA[.*Operaciya po kartochke.*]]></match>
+            <cardId group="1"><![CDATA[\s([\w\d][\*]+\d+)]]></cardId>
+            <amount group="1"><![CDATA[na summu -(\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="qiwi">
@@ -2130,6 +2158,18 @@
             <match><![CDATA[Karta.*oplata SMS-paketa.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[(\d*\.?\d{1,2}) RUR]]></amount>
+        </pattern>
+        <!--Karta *6070 Beznalichnoe popolnenie 1299.00 RUR 22.03.18 17:32 MSK Ostatok 1386.99 RUR-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Karta.*Beznalichnoe popolnenie.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Beznalichnoe popolnenie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *6070 vydacha nalichnyh 1100.00 RUR 52, UL. SVOBODY 23.03.18 08:00 MSK Ostatok 55.99 RUR-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Karta.*vydacha nalichnyh.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[vydacha nalichnyh (\d+\.\d{2})]]></amount>
         </pattern>
     </patterns>
 </content>

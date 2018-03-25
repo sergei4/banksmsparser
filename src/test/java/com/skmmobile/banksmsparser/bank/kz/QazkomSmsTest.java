@@ -84,5 +84,13 @@ public class QazkomSmsTest extends AbsXmlBankSmsTest {
                 "300",
                 ""
         );
+        checkBankSms(
+                parser,
+                "2018-03-21 19:36:47  Operaciya po kartochke 4**9744 na summu -1995.00KZT. Ostatok : 68994.31. Opisanie: TOO INTERTUR ASTANA",
+                "payment",
+                "4**9744",
+                "1995.00",
+                ""
+        );
     }
 }

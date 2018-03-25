@@ -52,5 +52,29 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "871.36",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Карта 4*8274 \n" +
+                        "23.03.18 22:50 \n" +
+                        "Получение наличных 16000.00 RUB  \n" +
+                        "D. 30, KORP. 1, LIT. A, PR-KT SANKT-PETERBURG G Russia \n" +
+                        "Доступно 14660.28 RUB",
+                "cash_atm",
+                "4*8274",
+                "16000",
+                ""
+        );
+        checkBankSms(
+                parser,
+                "Карта 4*8274 \n" +
+                        "23.03.18 17:22 \n" +
+                        "Зачислено 30000.00 RUB  \n" +
+                        "VISA MONEY TRANSFER Visa Direct Russia \n" +
+                        "Доступно 30660.28 RUB",
+                "zachislenie",
+                "4*8274",
+                "30000",
+                ""
+        );
     }
 }
