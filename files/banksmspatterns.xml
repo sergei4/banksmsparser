@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/25 10:50</updated>
+    <updated>2018/03/26 10:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -306,12 +306,14 @@
         <system_sms bankId="all"><![CDATA[.*(н|Н)икому не сообщайте код.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Код:\s+\d+.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Kod:\s+\d+.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[KOD avtorizacii.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[.*Ваша заявка на кредитную карту.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Вам отказано по заявке.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Ваш логин.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Для внесения в банкомате.*код.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Uspeshnaja otmena operacii.*]]></system_sms>
         <system_sms bankId="alfabank"><![CDATA[Vam vistavlen schet.*]]></system_sms>
+        <system_sms bankId="alfabank"><![CDATA[.*budet spisano.*]]></system_sms>
         <system_sms bankId="akbars"><![CDATA[Для входа в приложение Ак Барс Онлайн необходимо ввести код.*]]></system_sms>
         <system_sms bankId="akbars"><![CDATA[Отправьте.*в ответном SMS.*]]></system_sms>
         <system_sms bankId="avangard"><![CDATA[.*INTERNET-BANK VHOD.*]]></system_sms>
@@ -374,6 +376,7 @@
         <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
+        <system_sms bankId="raiffeisen_uk"><![CDATA[.*zmineno nomer mobilnogo telefonu.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[Привет.*]]></system_sms>
         <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
@@ -631,6 +634,18 @@
             <amount group="1"><![CDATA[NALICHNYE\s(\d*.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\d{2}:\d{2}:\d{2} (.*) OSTATOK]]></detail>
         </pattern>
+        <!--POPOLNENIE SCHETA 50.00 BYN KARTA #8626 DATA 07.02.2018 17:53:43 BR.511 CASH IN>MINSK>BY OSTATOK 50.00 BYN-->
+        <pattern category="popolnenie">
+            <match><![CDATA[POPOLNENIE SCHETA.*]]></match>
+            <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
+            <amount group="1"><![CDATA[POPOLNENIE SCHETA (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--CREDIT 15.00 BYN KARTA #3503 DATA 31.01.2018 15:43:43 PEREVOD>MINSK>BY OSTATOK 15.77 BYN-->
+        <pattern category="unknown">
+            <match><![CDATA[CREDIT.*]]></match>
+            <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
+            <amount group="1"><![CDATA[CREDIT (\d*.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="belbank">
         <!--ZACHISLENIE: 254.56 BYN KARTA #8686 DATA 01.02.2018 14:36:10-->
@@ -656,6 +671,12 @@
             <match><![CDATA[POPOLNENIE SCHETA.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[POPOLNENIE SCHETA: (\d+.\d{1,2})]]></amount>
+        </pattern>
+        <!--NALICHNYE: 5.00 BYN KARTA #8586 DATA 09.03.2018 15:09:45 BR.312/42 ATM>ZHLOBIN>BY OSTATOK 224.77 BYN-->
+        <pattern category="cash_atm">
+            <match><![CDATA[NALICHNYE.*]]></match>
+            <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[NALICHNYE: (\d+.\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="binbank">

@@ -44,5 +44,12 @@ public class BelbankSmsTest extends AbsXmlBankSmsTest {
                 "5",
                 ""
         );
+        checkBankSms(
+                "NALICHNYE: 5.00 BYN KARTA #8586 DATA 09.03.2018 15:09:45 BR.312/42 ATM>ZHLOBIN>BY OSTATOK 224.77 BYN",
+                "cash_atm",
+                "8586",
+                "5",
+                ""
+        );
     }
 }
