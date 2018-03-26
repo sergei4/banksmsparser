@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/26 10:35</updated>
+    <updated>2018/03/26 20:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -131,6 +131,8 @@
         <bank id="pochtabank">ПочтаБанк</bank>
         <bank id="karta_sovest">Совесть (QiwiБанк)</bank>
         <bank id="raiffeisen_uk">Райффайзенбанк АВАЛЬ (Украина)</bank>
+        <bank id="rnkb">РНКБ</bank>
+        <bank id="fortebank">ForteBank (Казахстан)</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -259,6 +261,8 @@
         <service_phone bankId="pochtabank">POCHTABANK,pochtabank</service_phone>
         <service_phone bankId="karta_sovest">6838</service_phone>
         <service_phone bankId="raiffeisen_uk">10901</service_phone>
+        <service_phone bankId="rnkb">RNCB</service_phone>
+        <service_phone bankId="fortebank">ForteBank</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -737,6 +741,21 @@
             <match><![CDATA[.*Poluchenie nalichnymi.*]]></match>
             <cardId group="1"><![CDATA[Karta: \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Poluchenie nalichnymi (\d*.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="fortebank">
+        <!--Postupilo 201073 KZT na schet #06334, ostatok 206 869.00 KZT. 20.03.2018 18:54. Platite kartoi I poluchaite cashback do 15%-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Postupilo.*]]></match>
+            <cardId group="1"><![CDATA[na schet \#(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Postupilo (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Pokupka 2 210.00 KZT CAFE IZBUSHKA, CashBack(1%) 22.10 KZT,  13.03.2018 21:24, karta ***1405, ostatok 75 243.99 KZT.-->
+        <pattern category="expense">
+            <match><![CDATA[Pokupka.*]]></match>
+            <cardId group="1"><![CDATA[karta \*+(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Pokupka ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
     <patterns bankId="gazprom">
@@ -1584,6 +1603,15 @@
             <match><![CDATA[.*na Vash rakhunok kartkovyi.*bulo zarakhovano.*]]></match>
             <cardId group="1"><![CDATA[rakhunok kartkovyi (\d+)]]></cardId>
             <amount group="1"><![CDATA[sumu (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="rnkb">
+        <!--Vydacha nalichnyh Karta:1234 summa:600,00 RUR  balans: 628,09 RUR ATM-1234 (vremya operatsii MSK 2018-03-26 08:57:32)-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Vydacha nalichnyh.*]]></match>
+            <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
+            <amount group="1"><![CDATA[summa:(\d*\,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
         </pattern>
     </patterns>
     <patterns bankId="rocketbank">
