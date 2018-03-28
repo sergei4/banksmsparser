@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/26 20:50</updated>
+    <updated>2018/03/28 11:15</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -416,6 +416,7 @@
         <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*не удалось пополнить.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена авторизации.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*отмена выдачи наличных.*]]></system_sms>
+        <system_sms bankId="sberbank"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*Внесите платеж.*чтобы не допустить просрочку.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*(отключен|изменен).*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*будет исполнен.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[Автоплатеж.*начислен налог.*]]></system_sms>

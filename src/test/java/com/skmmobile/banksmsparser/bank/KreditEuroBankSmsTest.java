@@ -34,5 +34,12 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 "500",
                 ""
         );
+        checkBankSms(
+                "Pokupka po karte #3466, schet nomer #2463 21.03.2018 19:27 Summa: 116.62 RUB MAGNIT MM SITRA. Platezhny limit: 5096.04 RUB",
+                "expense",
+                "#3466",
+                "116.62",
+                ""
+        );
     }
 }

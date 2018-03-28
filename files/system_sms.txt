@@ -201,3 +201,5 @@ RB AVAL: Vam zmineno nomer mobilnogo telefonu. Yakwo ne zminyuvaly -telefonuyte:
 Uvazhaemiy klient! Posle 16.03.2018 s Vashego scheta budet spisano 1190 rub za ezhegodnoe obsluzhivanie kreditnoj karty Visa Classic 4*4899
 
 KOD avtorizacii: cb40
+
+VISA9623 Внесите платеж 4918.55 RUR до 26-03-2018, чтобы не допустить просрочку. Для использования льготного периода внесите 72213.20 RUR. Подробности в мобильном приложении http://sberbank.ru/sms/h3/
