@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/28 11:15</updated>
+    <updated>2018/03/29 12:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -355,6 +355,13 @@
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
         <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Вход в Мобильный банк.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Вход в Интернет банк.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Карта.*Проверка карты.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Карта.*Бронирование.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[По вкладу.*применяются специальные условия.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[18 марта - выборы Президента Российской Федерации.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Во избежание возникновения просроченной задолженности.*]]></system_sms>
         <system_sms bankId="priorbank"><![CDATA[Оплата по кредиту.*до.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*(и|И)спользуйте этот код.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*(n|N)ikomu ne soobschajte.*]]></system_sms>
@@ -1420,6 +1427,12 @@
         <pattern category="zachislenie">
             <match><![CDATA[Карта.*Зачислено.*]]></match>
             <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Зачислено 20.00 р. на вклад 29130517. Сумма вклада 894.09 р. ПАО "Почта Банк"-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Зачислено.*на вклад.*]]></match>
+            <cardId group="1"><![CDATA[на вклад ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>

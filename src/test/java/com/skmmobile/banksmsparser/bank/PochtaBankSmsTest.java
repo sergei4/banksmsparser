@@ -76,5 +76,12 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "30000",
                 ""
         );
+        checkBankSms(
+                "Зачислено 20.00 р. на вклад 29130517. Сумма вклада 894.09 р. ПАО \"Почта Банк\"",
+                "zachislenie",
+                "29130517",
+                "20",
+                ""
+        );
     }
 }
