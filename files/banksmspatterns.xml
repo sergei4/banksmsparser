@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/29 12:05</updated>
+    <updated>2018/03/30 09:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -977,41 +977,22 @@
             <cardId group="1"><![CDATA[Ид.клиента: \*+(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
         </pattern>
-        <!--Poluchenie nalichnyh cherez bankomat
-        Data: 02/01 11:51
-        Karta: ****3504
-        Summa: 4900.00RUB
-        Komissiia: 0.00RUB
-        Dostupno: 421.64RUB
-        Terminal: A3410004,MINB,Gorkogo str. d.27a,Gorohivec,RU-->
-        <pattern category="cash_atm">
-            <match><![CDATA[Poluchenie nalichnyh cherez.*]]></match>
-            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
+        <!--Списание со счета 40817***372
+            Дата: 16/01 08:02
+            Сумма: 298.63RUB
+            Комиссия: 0.00RUB
+            Доступно: 5631.91RUB
+            Кредит: 15000.00RUB-->
+        <pattern category="payment">
+            <match><![CDATA[Списание со счета.*]]></match>
+            <cardId group="1"><![CDATA[счета ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
         </pattern>
-        <!--Postuplenie na kartu
-        Data: 30/12 09:20
-        Karta: ****3504
-        Summa: 5000.00RUB
-        Komissiia: 0.00RUB
-        Dostupno: 5321.64RUB
-        Terminal: 20000016,TRANSFER,MOSCOW,RU-->
-        <pattern category="popolnenie">
-            <match><![CDATA[Postuplenie na kartu.*]]></match>
-            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--Perevod cherez POS-terminal na kartu
-        Data: 17/01 21:50
-        Karta: ****3504
-        Summa: 26500.00RUB
-        Komissiia: 0.00RUB
-        Dostupno: 8800.66RUB
-        Terminal: 10000001,TINKOFF BANK CARD2CARD,MOSCOW,RU-->
-        <pattern category="perevod">
-            <match><![CDATA[Perevod cherez POS-terminal na kartu.*]]></match>
-            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
+        <!--07.02.18 40702810***063 IntBank Spisanie 10000RUB Doc 11-->
+        <pattern category="payment">
+            <match><![CDATA[.*Spisanie.*]]></match>
+            <cardId group="1"><![CDATA[\d\s([\d\*]+) IntBank]]></cardId>
+            <amount group="1"><![CDATA[Spisanie (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Pokupka tovara/uslugi
         Data: 10/01 15:58
@@ -1036,6 +1017,30 @@
             <match><![CDATA[Покупка товара/услуги.*]]></match>
             <cardId group="1"><![CDATA[Карта: \*+(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Predavtorizaciia
+            Data: 30/03 06:24
+            Karta: ****6206
+            Summa: 1000.00RUB
+            Komissiia: 0.00RUB
+            Dostupno: 3542.83RUB
+            Terminal: RU110076,LUKOIL.AZS 385 29S,ARHANGELSK,RU-->
+        <pattern category="expense">
+            <match><![CDATA[Predavtorizaciia.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*+(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Perevod cherez POS-terminal na kartu
+        Data: 17/01 21:50
+        Karta: ****3504
+        Summa: 26500.00RUB
+        Komissiia: 0.00RUB
+        Dostupno: 8800.66RUB
+        Terminal: 10000001,TINKOFF BANK CARD2CARD,MOSCOW,RU-->
+        <pattern category="perevod">
+            <match><![CDATA[Perevod cherez POS-terminal na kartu.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Перевод через Телебанк на счет 40817***372
         Дата: 15/01 13:32
@@ -1073,6 +1078,18 @@
             <cardId group="1"><![CDATA[schet ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Перевод между своими счетами
+        Дата: 26/02 20:52
+        Ид.клиента: ****0285
+        Сумма: 1000000.00RUB
+        Комиссия: 0.00RUB
+        Доступно: 0.00RUB
+        Терминал: TBank_v2-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод между своими счетами.*]]></match>
+            <cardId group="1"><![CDATA[Ид.клиента: \*+(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Zachislenie na schet 40817***539
         Data: 24/01 14:41
         Summa: 1568.00RUB
@@ -1094,22 +1111,41 @@
             <cardId group="1"><![CDATA[счет ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
         </pattern>
-        <!--Списание со счета 40817***372
-        Дата: 16/01 08:02
-        Сумма: 298.63RUB
-        Комиссия: 0.00RUB
-        Доступно: 5631.91RUB
-        Кредит: 15000.00RUB-->
-        <pattern category="payment">
-            <match><![CDATA[Списание со счета.*]]></match>
-            <cardId group="1"><![CDATA[счета ([\d\*]+)]]></cardId>
-            <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        <!--Postuplenie na kartu
+        Data: 30/12 09:20
+        Karta: ****3504
+        Summa: 5000.00RUB
+        Komissiia: 0.00RUB
+        Dostupno: 5321.64RUB
+        Terminal: 20000016,TRANSFER,MOSCOW,RU-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Postuplenie na kartu.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
-        <!--07.02.18 40702810***063 IntBank Spisanie 10000RUB Doc 11-->
-        <pattern category="payment">
-            <match><![CDATA[.*Spisanie.*]]></match>
-            <cardId group="1"><![CDATA[\d\s([\d\*]+) IntBank]]></cardId>
-            <amount group="1"><![CDATA[Spisanie (\d*\.?\d{1,2})]]></amount>
+        <!--Vnesenie nalichnyh cherez bankomat
+        Data: 14/03 19:23
+        Karta: ****4211
+        Summa: 2000.00RUB
+        Komissiia: 0.00RUB
+        Dostupno: 2000.00RUB
+        Terminal: F0040013,MINB,Ryazanskiy pr-t, 2,str. 2,Moscow,RU-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Vnesenie nalichnyh cherez bankomat.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Poluchenie nalichnyh cherez bankomat
+            Data: 02/01 11:51
+            Karta: ****3504
+            Summa: 4900.00RUB
+            Komissiia: 0.00RUB
+            Dostupno: 421.64RUB
+            Terminal: A3410004,MINB,Gorkogo str. d.27a,Gorohivec,RU-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Poluchenie nalichnyh cherez.*]]></match>
+            <cardId group="1"><![CDATA[Karta: \*+(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="mkb">

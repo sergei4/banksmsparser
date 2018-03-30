@@ -12,7 +12,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Platezh cherez Telebank v Gazprom Mezhregiongaz Tula. Gazosnabzhenie Data: 07/08 10:59 Id.klienta: ****0967 Summa: 260.89RUB Komissija: 0.00RUB Dostupno: 1789.46RUB Terminal: Mbank_01",
                 "payment",
                 "0967",
@@ -20,7 +19,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Platej cherez Telebank v MTS\n" +
                         "Data: 17/01 10:58\n" +
                         "Id.klienta: ****1889\n" +
@@ -34,7 +32,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Платеж через Телебанк в TELE2\n" +
                         "Дата: 25/01 11:18\n" +
                         "Ид.клиента: ****8305\n" +
@@ -48,7 +45,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Platej cherez Telebank v Vladimirskaya gorodskaya set\n" +
                         "Data: 10/01 11:16\n" +
                         "Id.klienta: ****9200\n" +
@@ -62,7 +58,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Poluchenie nalichnyh cherez bankomat\n" +
                         "Data: 02/01 11:51\n" +
                         "Karta: ****3504\n" +
@@ -76,7 +71,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Postuplenie na kartu\n" +
                         "Data: 30/12 09:20\n" +
                         "Karta: ****3504\n" +
@@ -90,7 +84,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Pokupka tovara/uslugi\n" +
                         "Data: 10/01 15:58\n" +
                         "Karta: ****3504\n" +
@@ -104,7 +97,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Покупка товара/услуги\n" +
                         "Дата: 04/02 14:32\n" +
                         "Карта: ****2518\n" +
@@ -118,7 +110,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Perevod cherez POS-terminal na kartu\n" +
                         "Data: 17/01 21:50\n" +
                         "Karta: ****3504\n" +
@@ -132,7 +123,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Перевод через Телебанк на счет 40817***372\n" +
                         "Дата: 15/01 13:32\n" +
                         "Ид.клиента: ****8305\n" +
@@ -146,7 +136,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Poluchenie nalichnyh cherez POS-terminal\n" +
                         "Data: 23/01 12:33\n" +
                         "Karta: ****3504\n" +
@@ -160,7 +149,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Zachislenie na schet 40817***539\n" +
                         "Data: 24/01 14:41\n" +
                         "Summa: 1568.00RUB\n" +
@@ -172,7 +160,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Perevod cherez Telebank na schet 40817***878\n" +
                         "Data: 28/01 11:43\n" +
                         "Id.klienta: ****1600\n" +
@@ -186,7 +173,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Списание со счета 40817***372\n" +
                         "Дата: 16/01 08:02\n" +
                         "Сумма: 298.63RUB\n" +
@@ -199,7 +185,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Зачисление на счет 40817***372\n" +
                         "Дата: 09/02 10:26\n" +
                         "Сумма: 716.23RUB\n" +
@@ -212,7 +197,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "07.02.18 40702810***063 IntBank Spisanie 10000RUB Doc 11",
                 "payment",
                 "40702810***063",
@@ -220,7 +204,6 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Перевод через Телебанк на карту ****6256\n" +
                         "Дата: 07/03 21:48\n" +
                         "Ид.клиента: ****8305\n" +
@@ -231,6 +214,45 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "perevod",
                 "6256",
                 "2300.00",
+                ""
+        );
+        checkBankSms(
+                "Predavtorizaciia\n" +
+                        "Data: 30/03 06:24\n" +
+                        "Karta: ****6206\n" +
+                        "Summa: 1000.00RUB\n" +
+                        "Komissiia: 0.00RUB\n" +
+                        "Dostupno: 3542.83RUB\n" +
+                        "Terminal: RU110076,LUKOIL.AZS 385 29S,ARHANGELSK,RU",
+                "expense",
+                "6206",
+                "1000",
+                ""
+        );
+        checkBankSms(
+                "Перевод между своими счетами\n" +
+                        "Дата: 26/02 20:52\n" +
+                        "Ид.клиента: ****0285\n" +
+                        "Сумма: 1000000.00RUB\n" +
+                        "Комиссия: 0.00RUB\n" +
+                        "Доступно: 0.00RUB\n" +
+                        "Терминал: TBank_v2\n",
+                "perevod",
+                "0285",
+                "1000000",
+                ""
+        );
+        checkBankSms(
+                "Vnesenie nalichnyh cherez bankomat\n" +
+                        "Data: 14/03 19:23\n" +
+                        "Karta: ****4211\n" +
+                        "Summa: 2000.00RUB\n" +
+                        "Komissiia: 0.00RUB\n" +
+                        "Dostupno: 2000.00RUB\n" +
+                        "Terminal: F0040013,MINB,Ryazanskiy pr-t, 2,str. 2,Moscow,RU",
+                "popolnenie",
+                "4211",
+                "2000",
                 ""
         );
     }
