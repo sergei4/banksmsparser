@@ -83,5 +83,40 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "1425",
                 ""
         );
+        checkBankSms(
+                "Оплата ES *2942; 07.03 14:07; OOO MIR VKUSA>NOVOSIBIRSK RU; 1 111,06 RUB; Остаток: 1 111,06 RUB",
+                "expense",
+                "ES *2942",
+                "1111.06",
+                "OOO MIR VKUSA>NOVOSIBIRSK RU"
+        );
+        checkBankSms(
+                "Оплата ES *0576; 02.04 09:53; TD MISTER SLOYKIN>PYATIGORSK RU; 95,00 RUB; Лимит: 93 904,99 RUB",
+                "expense",
+                "ES *0576",
+                "95",
+                "TD MISTER SLOYKIN>PYATIGORSK RU"
+        );
+        checkBankSms(
+                "Oplata VP *7325; 23.03 17:07; MAGNIT MK HANSTEN>SMOLENSK RU; 49,00 RUB; Ostatok: 5 744,36 RUB",
+                "expense",
+                "VP *7325",
+                "49",
+                "MAGNIT MK HANSTEN>SMOLENSK RU"
+        );
+        checkBankSms(
+                "Oplata VP *6975; 31.03 16:34; MAGNIT MM PODIUM>ZERNOGRAD RU; 2 262,99 RUB; Ostatok: 3 532,45 RUB",
+                "expense",
+                "VP *6975",
+                "2262.99",
+                "MAGNIT MM PODIUM>ZERNOGRAD RU"
+        );
+        checkBankSms(
+                "Perevod na kartu VP *9179; 28.03 18:31; MS VPP DEPOSIT FOR MTSBANK>MOSCOW RU; 49 000,00 RUB; Ostatok: 50 801,00 RUB\n",
+                "perevod",
+                "VP *9179",
+                "49000",
+                ""
+        );
     }
 }

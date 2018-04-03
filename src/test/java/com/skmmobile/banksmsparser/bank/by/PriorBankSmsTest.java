@@ -68,5 +68,19 @@ public class PriorBankSmsTest extends AbsXmlBankSmsTest {
                 "10.00",
                 ""
         );
+        checkBankSms(
+                "Priorbank. Karta 4***9285. 21-02-18 17:35:19. Popolnenie 260.00 BYN. BLR CASH-IN 502 BYR. Dostupno:260.17BYN Spravka: 80172899292",
+                "popolnenie",
+                "4***9285",
+                "260",
+                ""
+        );
+        checkBankSms(
+                "Priorbank. Karta 5***5243. 17-01-18 18:19:06. Nalichnye v kasse 650.00 BYN. BLR CBU 300 MOGILEV (PRK-2). Dostupno:542.63BYN ",
+                "cash_atm",
+                "5***5243",
+                "650",
+                ""
+        );
     }
 }

@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/03/30 09:05</updated>
+    <updated>2018/04/03 10:00</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -351,6 +351,7 @@
         <system_sms bankId="mtsbank"><![CDATA[.*платите просроченную задолженность.*]]></system_sms>
         <system_sms bankId="mtsbank"><![CDATA[Введите код.*]]></system_sms>
         <system_sms bankId="mtsbank"><![CDATA[Код.*никому не сообщайте\.]]></system_sms>
+        <system_sms bankId="mtsbank"><![CDATA[Vypolnen vhod v Internet-Banking.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Dlya vidnovlennya zvernitsja v kontakt-centr.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
@@ -363,6 +364,13 @@
         <system_sms bankId="pochtabank"><![CDATA[18 марта - выборы Президента Российской Федерации.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Во избежание возникновения просроченной задолженности.*]]></system_sms>
         <system_sms bankId="priorbank"><![CDATA[Оплата по кредиту.*до.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Priorbank.*M-kod.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Priorbank.*3D-Secure kod.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Priorbank.*Vasha karta.*aktivna.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Priorbank.*Prevyshen limit po summe operacij.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Money-back по Вашей кредитной карточке.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Ваша карточка.*готова.*]]></system_sms>
+        <system_sms bankId="priorbank"><![CDATA[Приорбанк.Запрос для разблокировки карты.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*(и|И)спользуйте этот код.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*(n|N)ikomu ne soobschajte.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[.*код подтверждения платежа.*]]></system_sms>
@@ -1256,12 +1264,23 @@
     </patterns>
     <patterns bankId="mtsbank">
         <!--Оплата VP *9707; 07.01 15:18; PYATEROCHKA 9114>EKATERINBURG RU; 699,25 RUB; Остаток: 655,74 RUB-->
+        <!--Оплата ES *2942; 07.03 14:07; OOO MIR VKUSA>NOVOSIBIRSK RU; 250,80 RUB; Остаток: 1 111,06 RUB-->
         <pattern category="expense">
             <match><![CDATA[Оплата.*]]></match>
-            <cardId group="0"><![CDATA[VP \*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[(\d*,?\d{1,2})\s[\w]*; Остаток]]></amount>
+            <cardId group="0"><![CDATA[(VP|ES) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Oplata VP *7325; 23.03 17:07; MAGNIT MK HANSTEN>SMOLENSK RU; 49,00 RUB; Ostatok: 5 744,36 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[Oplata.*]]></match>
+            <cardId group="0"><![CDATA[(VP|ES) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; Ostatok]]></amount>
+            <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Погашение задолженности 2600 RUR по карте 5337***4579. Остаток мин. платежа 0 RUR. www.mtsbank.ru-->
         <pattern category="payment">
@@ -1297,6 +1316,14 @@
             <match><![CDATA[Перевод на карту.*]]></match>
             <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Лимит|Остаток)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Perevod na kartu VP *9179; 28.03 18:31; MS VPP DEPOSIT FOR MTSBANK>MOSCOW RU; 49 000,00 RUB; Ostatok: 50 801,00 RUB-->
+        <pattern category="perevod">
+            <match><![CDATA[Perevod na kartu.*]]></match>
+            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -1509,6 +1536,18 @@
             <match><![CDATA[.*Nalichnye v bankomate.*]]></match>
             <cardId group="1"><![CDATA[Karta ([\*\d]+)]]></cardId>
             <amount group="1"><![CDATA[Nalichnye v bankomate (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Priorbank. Karta 4***9285. 21-02-18 17:35:19. Popolnenie 260.00 BYN. BLR CASH-IN 502 BYR. Dostupno:260.17BYN Spravka: 80172899292-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Popolnenie.*]]></match>
+            <cardId group="1"><![CDATA[Karta ([\*\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Priorbank. Karta 5***5243. 17-01-18 18:19:06. Nalichnye v kasse 650.00 BYN. BLR CBU 300 MOGILEV (PRK-2). Dostupno:542.63BYN-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Nalichnye v kasse.*]]></match>
+            <cardId group="1"><![CDATA[Karta ([\*\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Nalichnye v kasse (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="promsvyazbank">
