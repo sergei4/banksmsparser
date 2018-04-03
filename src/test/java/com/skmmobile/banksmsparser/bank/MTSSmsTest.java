@@ -118,5 +118,12 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "49000",
                 ""
         );
+        checkBankSms(
+                "Popolnenie VP *6975; 02.04 18:50; 25 000,00 RUB; Ostatok: 28 532,45 RUB\n",
+                "popolnenie",
+                "VP *6975",
+                "25000",
+                ""
+        );
     }
 }

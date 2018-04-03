@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/04/03 10:00</updated>
+    <updated>2018/04/03 17:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1301,6 +1301,14 @@
             <match><![CDATA[Пополнение.*]]></match>
             <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Popolnenie VP *6975; 02.04 18:50; 25 000,00 RUB; Ostatok: 28 532,45 RUB-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popolnenie.*]]></match>
+            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
