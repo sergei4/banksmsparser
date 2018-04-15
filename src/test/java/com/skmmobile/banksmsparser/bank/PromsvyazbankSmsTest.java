@@ -11,7 +11,6 @@ public class PromsvyazbankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Karta *2006: Pokupka 329.00 RUR; 16/01, 17:44;MOSCOW;PODRUZHKA.Dostupno 541.50 RUR.",
                 "expense",
                 "2006",
@@ -48,6 +47,20 @@ public class PromsvyazbankSmsTest extends AbsXmlBankSmsTest {
                 "cash_atm",
                 "8139",
                 "4700",
+                ""
+        );
+        checkBankSms(
+                "Karta *5131: Pokupka 5 471,00 RUR; 10/04, 20:29;Balashikha;FERMACH.Dostupno 5 199,35 RUR (v t.ch. kredit 5 199,35 RUR).",
+                "expense",
+                "5131",
+                "5471",
+                ""
+        );
+        checkBankSms(
+                "Karta *2006: Pokupka 1 298.12 RUR; 22/02, 19:05;MOSCOW;TVOE.Dostupno 78 897.16 RUR.",
+                "expense",
+                "2006",
+                "1298.12",
                 ""
         );
     }

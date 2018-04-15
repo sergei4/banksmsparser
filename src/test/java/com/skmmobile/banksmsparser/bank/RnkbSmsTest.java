@@ -17,5 +17,41 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
                 "600",
                 ""
         );
+        checkBankSms(
+                "Popolnenie, Karta:7999 summa:25.580,18 RUR  balans:25.580,58 RUR  (vremya \n" +
+                        "operatsii MSK 2018-04-06 15:05:42)",
+                "popolnenie",
+                "7999",
+                "25580.18",
+                ""
+        );
+        checkBankSms(
+                "Pokupka, Karta:6100 summa:665,81 RUR  balans:1.653,86 RUR AVTOMOJKA (vremya operatsii MSK 2018-04-07 18:58:32)",
+                "expense",
+                "6100",
+                "665.81",
+                ""
+        );
+        checkBankSms(
+                "Beznalichnyj perevod Karta:7999 summa:442,00 RUR  balans:9.558,40 RUR Transfer (vremya operatsii MSK 2018-03-30 13:10:07)",
+                "perevod",
+                "7999",
+                "442",
+                ""
+        );
+        checkBankSms(
+                "Списание по договору:03411504614 сумма:2000.00 RUR. ",
+                "payment",
+                "03411504614",
+                "2000",
+                ""
+        );
+        checkBankSms(
+                "Пополнение по договору:03411504614 сумма:20000.00 RUR. ",
+                "popolnenie",
+                "03411504614",
+                "20000",
+                ""
+        );
     }
 }

@@ -255,5 +255,18 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "2000",
                 ""
         );
+        checkBankSms(
+                "Perevod cherez Telebank na kartu ****6846\n" +
+                        "Data: 09/04 11:28\n" +
+                        "Id.klienta: ****8561\n" +
+                        "Summa: 850.00RUB\n" +
+                        "Komissiia: 50.00RUB\n" +
+                        "Dostupno: 5395.63RUB\n" +
+                        "Terminal: TBank?v2",
+                "perevod",
+                "6846",
+                "850",
+                ""
+        );
     }
 }

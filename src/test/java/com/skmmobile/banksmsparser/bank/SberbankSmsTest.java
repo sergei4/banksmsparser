@@ -437,5 +437,12 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "12000",
                 ""
         );
+        checkBankSms(
+                "VISA3913 11.04.18 12:12 покупка 283.96р PYATEROCHKA 5956 Баланс: 25547.05р",
+                "expense",
+                "VISA3913",
+                "283.96",
+                "PYATEROCHKA 5956"
+        );
     }
 }
