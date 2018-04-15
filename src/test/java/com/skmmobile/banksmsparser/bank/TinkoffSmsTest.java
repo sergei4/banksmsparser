@@ -188,5 +188,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "4212.66",
                 ""
         );
+        checkBankSms(
+                parser,
+                "Покупка 09.04.2018. Карта *0000. 1000.00 RUB. \"DELTA\". Доступно 1000.00 RUB",
+                "expense",
+                "0000",
+                "1000",
+                "\"DELTA\""
+        );
     }
 }

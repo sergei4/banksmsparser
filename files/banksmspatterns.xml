@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/04/15 15:10</updated>
+    <updated>2018/04/15 15:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -2128,10 +2128,11 @@
             <amount group="0"><![CDATA[(?<=Summa\s)(\d+\.\d{2})]]></amount>
             <detail group="2"><![CDATA[(RUB|USD|EUR).\s(.*)\.\s\d{2}\.\d{2}]]></detail>
         </pattern>
-        <!-- Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB-->
-        <!-- Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB-->
+        <!--Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB-->
+        <!--Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB-->
+        <!--Покупка 09.04.2018. Карта *0000. 000.00 RUB. "DELTA". Доступно 1000.00 RUB-->
         <pattern category="expense">
-            <match><![CDATA[Покупка. Карта \*\d{4}\.\s\d.*]]></match>
+            <match><![CDATA[Покупка[\.\s\d]+Карта \*\d{4}\.\s\d.*]]></match>
             <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
