@@ -4,6 +4,7 @@ import com.skmmobile.banksmsparser.bank.*;
 import com.skmmobile.banksmsparser.bank.by.BelapbSmsTest;
 import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.BelbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelgazprombankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.MTBankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.ParitetbankSmsTest;
 import com.skmmobile.banksmsparser.bank.by.PriorBankSmsTest;
@@ -294,6 +295,7 @@ public class BankParserTests extends Assert {
         new UkrsibbankSmsTest(xmlDocument).check();
         new RnkbSmsTest(xmlDocument).check();
         new FortebankSmsTest(xmlDocument).check();
+        new BelgazprombankSmsTest(xmlDocument).check();
     }
 }
 

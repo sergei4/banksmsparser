@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/04/15 15:35</updated>
+    <updated>2018/04/17 09:40</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -133,6 +133,7 @@
         <bank id="raiffeisen_uk">Райффайзенбанк АВАЛЬ (Украина)</bank>
         <bank id="rnkb">РНКБ</bank>
         <bank id="fortebank">ForteBank (Казахстан)</bank>
+        <bank id="belgazprombank">Белгазпромбанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -263,6 +264,7 @@
         <service_phone bankId="raiffeisen_uk">10901</service_phone>
         <service_phone bankId="rnkb">RNCB</service_phone>
         <service_phone bankId="fortebank">ForteBank</service_phone>
+        <service_phone bankId="belgazprombank">BELGAZPROM,belgazprombank</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -709,6 +711,9 @@
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
             <amount group="1"><![CDATA[NALICHNYE: (\d+.\d{1,2})]]></amount>
         </pattern>
+    </patterns>
+    <patterns bankId="belgazprombank">
+
     </patterns>
     <patterns bankId="binbank">
         <!--Покупка по карте: *8512 870.00 RUR Место KAZAN MYASNAYA KULINARIYA ITLE 06.12.17 21:23 Баланс: 5488.68 RUR i.binbank.ru-->
