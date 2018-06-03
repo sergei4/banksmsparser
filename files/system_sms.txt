@@ -265,3 +265,13 @@ V nastoyaschiy moment operaciya na 50.00 RUR 3553 ne mojet byt vypolnena. Dlya p
 Vhod v InternetBank.NIKOMU NE SOOBSCHAJTE PAROL': 879675. Sessiya#495466
 
 BelVEB Kod: 0249777 Generate sign  Opr.N:
+
+Vasha operatsija: 17.04.2018 10:41:08 Visa Fishka/0858 PORTMONE LTD*MBK§MOBIL vidkhylena: nevirno vvedeno dani. Telefonujte (044)4908888
+
+Vasha operatsija: 20.04.2018 12:55:54 VISA Gold/0152 GOOGLE *BOOM vidkhylena: ne vystachaje koshtiv. Dostupna suma: 12280.35 UAH
+
+Vasha operatsija verifikacii uspishna: 29.05.2018 00:48:26 Visa Fishka/3865: UBER BV
+
+Karta 414951******0742 actuvovana! Zminit PIN v bankomati abo kasi Banky. Nomer 3D Secure 0503892855. Yakwo ne zvertalus-tel:4908888, 0800500500, Vodafone 521
+
+Вы платите картой *4425. Никому не говорите этот код: 5346

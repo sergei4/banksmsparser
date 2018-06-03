@@ -1,5 +1,5 @@
 group 'com.skmmobile'
-version '1.0.2'
+version '1.0.3-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
@@ -61,6 +61,7 @@ publishing {
 
     publications {
         maven(MavenPublication) {
+            artifactId 'banksmsparser'
             from components.java
         }
     }

@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/04/17 09:40</updated>
+    <updated>2018/06/03 20:25</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -359,6 +359,7 @@
         <system_sms bankId="oschadbank"><![CDATA[.*Nikomu ne povidomliayte kod.*]]></system_sms>
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
         <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
+        <system_sms bankId="otkritie"><![CDATA[Вы платите картой.*Никому не говорите этот код.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Вход в Мобильный банк.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Вход в Интернет банк.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Карта.*Проверка карты.*]]></system_sms>
@@ -405,6 +406,9 @@
         <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
         <system_sms bankId="raiffeisen_uk"><![CDATA[.*zmineno nomer mobilnogo telefonu.*]]></system_sms>
+        <system_sms bankId="raiffeisen_uk"><![CDATA[Vasha operatsija.*vidkhylena.*]]></system_sms>
+        <system_sms bankId="raiffeisen_uk"><![CDATA[Vasha operatsija verifikacii uspishna.*]]></system_sms>
+        <system_sms bankId="raiffeisen_uk"><![CDATA[Karta[\s\d\*]*actuvovana.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[Привет.*]]></system_sms>
         <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
@@ -508,9 +512,10 @@
         <pattern category="expense">
             <match><![CDATA[.*\sPokupka\;.*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: (\d*\,?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Summa: ([\s\d]*\,?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Ostatok:\s[0-9,]*\s.*;\s([^;]*);]]></detail>
             <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app-->
         <!--**4228; Postupleniye; Summa: 1500 RUR; Ostatok: 1609,11 RUR; 28.02.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
@@ -1227,6 +1232,12 @@
             <amount group="1"><![CDATA[platezh na summu ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--MKB: 01.06.18 Вам начислен cashback 1678.26 RUB по карте *3481. Баланс 9091.13 RUB. Расплачивайтесь картой и зарабатывайте на покупках.-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Вам начислен cashback.*]]></match>
+            <cardId group="1"><![CDATA[Вам начислен cashback.*по карте \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Вам начислен cashback ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="mtbank">
         <!--KARTA:4177*5654
@@ -1435,11 +1446,25 @@
             <amount group="1"><![CDATA[Вы заплатили ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Платёж 1 570 р. в restoran BOCHKAR. Карта *8680. Доступно 68 882.03 р.-->
+        <pattern category="expense">
+            <match><![CDATA[Платёж.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Платёж ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Вы сняли 10 000 р. в банкомате CENTRAL OFFICE с карты *0988. Доступно 16 866.6 р.-->
         <pattern category="cash_atm">
             <match><![CDATA[Вы сняли.*]]></match>
             <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Вы сняли ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Снятие 4 400 р. Карта *8680. Доступно 107 902.7 р.-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Снятие.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Снятие ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--На карту *0988 зачислено 27 004.5 р. Доступно 27 004.5 р.-->
@@ -1452,7 +1477,7 @@
         <!--Карта *4013 Зачислено 6.00 RUR Деньги станут доступны в течение часа 24.02.18-->
         <pattern category="popolnenie">
             <match><![CDATA[Карта.*Зачислено.*]]></match>
-            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <cardId group="1"><![CDATA[Карта ([\*\d]+)]]></cardId>
             <amount group="1"><![CDATA[Зачислено ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -1461,6 +1486,13 @@
             <match><![CDATA[Вы внесли.*]]></match>
             <cardId group="1"><![CDATA[на карту \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Вы внесли ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Вы перевели 5 481 р. с карты *7237. Доступно 576.92 р.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Вы перевели.*]]></match>
+            <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Вы перевели ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
@@ -1771,16 +1803,29 @@
     </patterns>
     <patterns bankId="raiffeisen_uk">
         <!--Vasha operatsija: 28.02.2018 17:56:44 VISA Gold/6155 131.00 UAH McDonald's 041 dostupna suma 7031.24 UAH-->
+        <!--Vasha operatsija: 31.03.2018 17:46:00 MasterCard Unembossed/2768 3943.00 UAH OSTIN dostupna suma 28187.18 UAH-->
         <pattern category="unknown">
             <match><![CDATA[Vasha operatsija.*]]></match>
-            <cardId group="0"><![CDATA[(VISA|Visa) [\w\d\/]+]]></cardId>
-            <amount group="2"><![CDATA[(VISA|Visa) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+            <cardId group="0"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+]]></cardId>
+            <amount group="2"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Bezgotivkove zarakhuvannya: 25.03.2018 16:06:37 Mastercard Standard/8514 150.00 UAH RAIFFEISEN ONLINE UAH DCCC dostupna suma 5171.37 UAH-->
+        <pattern category="unknown">
+            <match><![CDATA[Bezgotivkove zarakhuvannya.*]]></match>
+            <cardId group="0"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+]]></cardId>
+            <amount group="2"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--28.02.2018 na Vash rakhunok kartkovyi 1219648400(UAH) bulo zarakhovano sumu 7090.26 UAH-->
         <pattern category="popolnenie">
             <match><![CDATA[.*na Vash rakhunok kartkovyi.*bulo zarakhovano.*]]></match>
             <cardId group="1"><![CDATA[rakhunok kartkovyi (\d+)]]></cardId>
             <amount group="1"><![CDATA[sumu (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Popovnennja sumy: 03.04.2018 09:52:10 Visa Fishka/6399 68.00 UAH v 03.04.2018T095210 P2PProg dostupna suma 12999.27 UAH-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popovnennja sumy.*]]></match>
+            <cardId group="0"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+]]></cardId>
+            <amount group="2"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rnkb">
