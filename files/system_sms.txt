@@ -275,3 +275,30 @@ Vasha operatsija verifikacii uspishna: 29.05.2018 00:48:26 Visa Fishka/3865: UBE
 Karta 414951******0742 actuvovana! Zminit PIN v bankomati abo kasi Banky. Nomer 3D Secure 0503892855. Yakwo ne zvertalus-tel:4908888, 0800500500, Vodafone 521
 
 Вы платите картой *4425. Никому не говорите этот код: 5346
+
+Открытие вклада Вклад "Накопительный" в рублях РФ
+Дата: 27/02 14:17
+Ид.клиента: ****0285
+Сумма: 500000.00RUB
+Комиссия: 0.00RUB
+Терминал: TBank_v2
+
+Otkrytie vklada Vklad "Klassicheskii" v rubliah
+Data: 14/04 12:27
+Id.klienta: ****8569
+Summa: 300000.00RUB
+Komissiia: 0.00RUB
+Terminal: Mbank_01
+
+Smena PIN
+Data: 09/02 18:22
+Karta: ****4211
+Komissiia: 0.00RUB
+Terminal: K0200002,MINB,Malaya Kalitnikovskaya str. d.7,Moscow,RU
+
+Розыгрыш призов, повышенный cashback, новые банковские продукты и полезные финансовые советы: подпишитесь на рассылку https://www.minbank.ru/sb/
+
+Оповещение по карте 5570 71** **** 3489 подключено
+
+По карте ****6206 можно проводить операции в Google Pay
+
