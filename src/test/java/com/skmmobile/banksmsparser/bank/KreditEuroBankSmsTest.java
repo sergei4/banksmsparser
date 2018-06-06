@@ -11,7 +11,6 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Na kartu MEGACARD #6277 postupilo 650.00RUR 20/02/18 19:53 Dostupniy limit:90009.10RUR",
                 "popolnenie",
                 "MEGACARD #6277",
@@ -19,7 +18,6 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Pokupka po karte MEGACARD #6277 21/02/18 19:26 Summa: 100.00RUB Ballov nachisleno: 1.00 Itogo balli MEGA: 274.75BB Dostupniy limit: 89909.10RUR MOSMETRO.RU AKRASNOPRE MOSCOW",
                 "expense",
                 "MEGACARD #6277",
@@ -27,7 +25,6 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Pokupka po karte #2013, schet nomer #1229 12.03.2018 08:57 Summa: 500.00 RUB Megafon. Platezhny limit: 13357.26 RUB",
                 "expense",
                 "#2013",
@@ -39,6 +36,13 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "#3466",
                 "116.62",
+                ""
+        );
+        checkBankSms(
+                "Na schet nomer * 2463 postupilo  10108.44 RUB 14.05 14:15 Platezhny limit: 15661.17 RUB",
+                "popolnenie",
+                "2463",
+                "10108.44",
                 ""
         );
     }

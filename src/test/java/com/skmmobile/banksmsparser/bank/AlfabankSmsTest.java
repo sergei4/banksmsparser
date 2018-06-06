@@ -82,7 +82,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
         );
         // BYN
         checkBankSms(
-                parser,
                 "Karta 5.3854\n" +
                         "Perevod (Spisanie)\n" +
                         "Uspeshno\n" +
@@ -97,7 +96,6 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Karta 5.3854\n" +
                         "Oplata tovarov/uslug\n" +
                         "Uspeshno\n" +
@@ -109,6 +107,20 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "5.3854",
                 "73.34",
+                ""
+        );
+        checkBankSms(
+                "Karta 4.4998\n" +
+                        "Vydacha nalichnyh\n" +
+                        "Uspeshno\n" +
+                        "Summa:25.00 BYN\n" +
+                        "Ostatok:372.58 BYN\n" +
+                        "Na vremya:21:19:44\n" +
+                        "BLR/MINSK/ATMIDEA HO12 ROKOSSOVSK\n" +
+                        "01.05.2018 21:19:44",
+                "cash_atm",
+                "4.4998",
+                "25",
                 ""
         );
     }

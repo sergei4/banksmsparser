@@ -12,12 +12,19 @@ public class BelgazprombankSmsTest extends AbsXmlBankSmsTest {
 
     @Override
     protected void smsTest() {
-//        checkBankSms(
-//                "OPLATA 1.76 BYN KARTA #1152 DATA 31.01.2018 15:14:08 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 0.00 BYN",
-//                "expense",
-//                "1152",
-//                "1.76",
-//                ""
-//        );
+        checkBankSms(
+                "Card7357; Oplata: 1 000,07 BYN; 15.04.18 19:02:41; SHOP \"SANTA-76\" BAPB,ZHLOBIN,BLR; Dostupno: 639,36 BYN",
+                "expense",
+                "Card7357",
+                "1000.07",
+                ""
+        );
+        checkBankSms(
+                "Card0428; Popolnenie scheta: 22,00 BYN; 13.04.18 12:04:07; BELGAZPROMBANK,MINSK,BLR; Dostupno: 979,57 BYN",
+                "popolnenie",
+                "Card0428",
+                "22",
+                ""
+        );
     }
 }
