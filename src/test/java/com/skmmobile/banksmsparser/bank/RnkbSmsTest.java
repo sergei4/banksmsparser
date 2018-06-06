@@ -11,14 +11,14 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                "Vydacha nalichnyh Karta:1234 summa:600,00 RUR  balans: 628,09 RUR ATM-1234 (vremya operatsii MSK 2018-03-26 08:57:32)",
+                "Vydacha nalichnyh Karta:1234 summa:1600.01 RUR  balans: 628,09 RUR ATM-1234 (vremya operatsii MSK 2018-03-26 08:57:32)",
                 "cash_atm",
                 "1234",
-                "600",
+                "1600.01",
                 ""
         );
         checkBankSms(
-                "Popolnenie, Karta:7999 summa:25.580,18 RUR  balans:25.580,58 RUR  (vremya \n" +
+                "Popolnenie, Karta:7999 summa:25580.18 RUR  balans:25.580,58 RUR  (vremya \n" +
                         "operatsii MSK 2018-04-06 15:05:42)",
                 "popolnenie",
                 "7999",
@@ -26,14 +26,14 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "Pokupka, Karta:6100 summa:665,81 RUR  balans:1.653,86 RUR AVTOMOJKA (vremya operatsii MSK 2018-04-07 18:58:32)",
+                "Pokupka, Karta:6100 summa:665.81 RUR  balans:1.653,86 RUR AVTOMOJKA (vremya operatsii MSK 2018-04-07 18:58:32)",
                 "expense",
                 "6100",
                 "665.81",
                 ""
         );
         checkBankSms(
-                "Beznalichnyj perevod Karta:7999 summa:442,00 RUR  balans:9.558,40 RUR Transfer (vremya operatsii MSK 2018-03-30 13:10:07)",
+                "Beznalichnyj perevod Karta:7999 summa:442.00 RUR  balans:9.558,40 RUR Transfer (vremya operatsii MSK 2018-03-30 13:10:07)",
                 "perevod",
                 "7999",
                 "442",

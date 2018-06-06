@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/06/05 08:50</updated>
+    <updated>2018/06/06 21:45</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1954,33 +1954,26 @@
         <pattern category="cash_atm">
             <match><![CDATA[Vydacha nalichnyh.*]]></match>
             <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
-            <amount group="1"><![CDATA[summa:(\d*\,?\d{1,2})]]></amount>
-            <decimal_char>,</decimal_char>
+            <amount group="1"><![CDATA[summa:(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Popolnenie, Karta:7999 summa:25.580,18 RUR  balans:25.580,58 RUR  (vremya
         operatsii MSK 2018-04-06 15:05:42)-->
         <pattern category="popolnenie">
             <match><![CDATA[Popolnenie.*]]></match>
             <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
-            <amount group="1"><![CDATA[summa:([\.\d]*\,?\d{1,2})]]></amount>
-            <decimal_char>,</decimal_char>
-            <decimal_group_char>.</decimal_group_char>
+            <amount group="1"><![CDATA[summa:([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Pokupka, Karta:6100 summa:665,81 RUR  balans:1.653,86 RUR AVTOMOJKA (vremya operatsii MSK 2018-04-07 18:58:32)-->
         <pattern category="expense">
             <match><![CDATA[Pokupka.*]]></match>
             <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
-            <amount group="1"><![CDATA[summa:([\.\d]*\,?\d{1,2})]]></amount>
-            <decimal_char>,</decimal_char>
-            <decimal_group_char>.</decimal_group_char>
+            <amount group="1"><![CDATA[summa:([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Beznalichnyj perevod Karta:7999 summa:442,00 RUR  balans:9.558,40 RUR Transfer (vremya operatsii MSK 2018-03-30 13:10:07)-->
         <pattern category="perevod">
             <match><![CDATA[Beznalichnyj perevod.*]]></match>
             <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
-            <amount group="1"><![CDATA[summa:([\.\d]*\,?\d{1,2})]]></amount>
-            <decimal_char>,</decimal_char>
-            <decimal_group_char>.</decimal_group_char>
+            <amount group="1"><![CDATA[summa:([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Списание по договору:03411504614 сумма:2000.00 RUR.-->
         <pattern category="payment">
