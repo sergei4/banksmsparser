@@ -39,5 +39,26 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "30000",
                 ""
         );
+        checkBankSms(
+                "VISA6681 Esepke alu/Zachislenie. 13950.00 KZT; Popolnenie kartochnogo scheta cherez platezhnyi terminal; 15.05.2018 10:34. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 25853.06",
+                "zachislenie",
+                "VISA6681",
+                "13950",
+                ""
+        );
+        checkBankSms(
+                "ECMC0399 Kolma-kol aksha beru/Vydacha nalichnyh. 13000.00 KZT; ATM 670 MAGAZIN AGROMAX; 04.03.2018 12:57. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 686.00 KZT\n",
+                "cash_atm",
+                "ECMC0399",
+                "13000",
+                ""
+        );
+        checkBankSms(
+                "VISA4866 Audarym zhoneltildi/otpravlen perevod. 100000.00 KZT; Postupleniye perevoda; 02.05.2018 10:39. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 98383.94 KZT",
+                "perevod",
+                "VISA4866",
+                "100000",
+                ""
+        );
     }
 }

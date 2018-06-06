@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/06/06 23:25</updated>
+    <updated>2018/06/06 23:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -922,23 +922,35 @@
             <cardId group="1"><![CDATA[^(\d+)\s]]></cardId>
             <amount group="1"><![CDATA[Popolnenie scheta. (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--VISA6681 Esepke alu/Zachislenie. 13950.00 KZT; Popolnenie kartochnogo scheta cherez platezhnyi terminal; 15.05.2018 10:34. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 25853.06-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Zachislenie.*]]></match>
+            <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
+            <amount group="1"><![CDATA[Zachislenie. (\d*.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA7074 Satyp alu/Pokupka. 1893.00 KZT; SHOP MAGNUM; 01.06.2018 17:58. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 5943.79 KZT; bonus:302.88-->
         <pattern category="expense">
             <match><![CDATA[.*Pokupka.*]]></match>
-            <cardId group="1"><![CDATA[^(VISA\d+)\s]]></cardId>
+            <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
             <amount group="1"><![CDATA[Pokupka. (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA7074 Esepten shygaru/Spisanie. 60095.00 KZT; Perevod na druguyu kartu; 05.06.2018 18:28. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 739143.32 KZT-->
         <pattern category="payment">
             <match><![CDATA[.*Spisanie.*]]></match>
-            <cardId group="1"><![CDATA[^(VISA\d+)\s]]></cardId>
+            <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
             <amount group="1"><![CDATA[Spisanie. (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA7074 Kolma-kol aksha beru/Vydacha nalichnyh. 30000.00 KZT; ATM 300 TRTS MAXIMA; 05.06.2018 17:44. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 799238.32 KZT-->
         <pattern category="cash_atm">
             <match><![CDATA[.*Vydacha nalichnyh.*]]></match>
-            <cardId group="1"><![CDATA[^(VISA\d+)\s]]></cardId>
+            <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
             <amount group="1"><![CDATA[Vydacha nalichnyh. (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--VISA4866 Audarym zhoneltildi/otpravlen perevod. 100000.00 KZT; Postupleniye perevoda; 02.05.2018 10:39. Kartadaghy kolzhetimdi soma/Dostupnaya summa po karte: 98383.94 KZT-->
+        <pattern category="perevod">
+            <match><![CDATA[.*otpravlen perevod.*]]></match>
+            <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
+            <amount group="1"><![CDATA[otpravlen perevod. (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="kaspibank">
