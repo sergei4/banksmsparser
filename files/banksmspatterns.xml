@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/06/06 23:35</updated>
+    <updated>2018/06/07 22:25</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -393,6 +393,7 @@
         <system_sms bankId="promsvyazbank"><![CDATA[.*vhod v internet-bank.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[Выполнен вход в систему.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[SMS.*Podtverdite operaciyu.*]]></system_sms>
+        <system_sms bankId="promsvyazbank"><![CDATA[Karta.*Otkaz v operacii Snyatie nalichnyh v bankomate.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[.*Otmena operacii.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
@@ -952,6 +953,9 @@
             <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
             <amount group="1"><![CDATA[otpravlen perevod. (\d*.?\d{1,2})]]></amount>
         </pattern>
+    </patterns>
+    <patterns bankId="karta_sovest">
+
     </patterns>
     <patterns bankId="kaspibank">
         <!--Покупка: 6707т
@@ -1877,24 +1881,78 @@
         </pattern>
         <!--Karta *2006: Perevod s karty na kartu - spisanie 10 000.00 RUR; 16/01, 11:14;PSBANK.RU;CARD2CARD PSB MOBILE.Dostupno 4 595.50 RUR.-->
         <pattern category="perevod">
-            <match><![CDATA[Karta.*Perevod s karty na kartu.*]]></match>
+            <match><![CDATA[Karta.*Perevod s karty na kartu - spisanie [\s\d]*\.\d+.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[spisanie ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Karta *2006: Perevod s karty na kartu - spisanie 10 000,00 RUR; 16/01, 11:14;PSBANK.RU;CARD2CARD PSB MOBILE.Dostupno 4 595.50 RUR.-->
+        <pattern category="perevod">
+            <match><![CDATA[Karta.*Perevod s karty na kartu - spisanie [\s\d]*\,\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[spisanie ([\d\s]*,?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
         <!--Kontrakt *3338: Zachislenie 34 500.00 RUR;2018-01-19.Dostupno 35 041.50 RUR.-->
         <pattern category="zachislenie">
-            <match><![CDATA[Kontrakt.*Zachislenie.*]]></match>
+            <match><![CDATA[Kontrakt.*Zachislenie [\s\d]*\.\d+.*]]></match>
             <cardId group="0"><![CDATA[Kontrakt \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Zachislenie ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Kontrakt *5340: Zachislenie 86 358,53 RUR;2018-04-28.Dostupno 101 648,53 RUR  (v t.ch. kredit 15 000,00 RUR).-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Kontrakt.*Zachislenie [\s\d]*\,\d+.*]]></match>
+            <cardId group="0"><![CDATA[Kontrakt \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Zachislenie ([\d\s]*,?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
         <!--Karta *8139: Snyatie nalichnyh v bankomate 4 700.00 RUR; 11/01, 19:09;SAMARA;ATM 10150168 304A KIRO.Dostupno 42.78 RUR.-->
         <pattern category="cash_atm">
-            <match><![CDATA[Karta.*Snyatie nalichnyh v bankomate.*]]></match>
+            <match><![CDATA[Karta.*Snyatie nalichnyh v bankomate [\s\d]*\.\d+.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Snyatie nalichnyh v bankomate ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Karta *8139: Snyatie nalichnyh v bankomate 4 700.00 RUR; 11/01, 19:09;SAMARA;ATM 10150168 304A KIRO.Dostupno 42.78 RUR.-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Karta.*Snyatie nalichnyh v bankomate [\s\d]*\,\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnyh v bankomate ([\d\s]*,?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Karta *5131: Vnesenie sredstv 2 793.97 RUR; 03/05, 13:47;MOSCOW;PSB-RETAIL 00777781.Dostupno 15 994,59 RUR (v t.ch. kredit 15 000,00 RUR).-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Karta.*Vnesenie sredstv [\s\d]*\.\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Vnesenie sredstv ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Karta *5131: Vnesenie sredstv 2 793,97 RUR; 03/05, 13:47;MOSCOW;PSB-RETAIL 00777781.Dostupno 15 994,59 RUR (v t.ch. kredit 15 000,00 RUR).-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Karta.*Vnesenie sredstv [\s\d]*\,\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Vnesenie sredstv ([\d\s]*,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Karta *5131: Beznalichnoe spisanie 68 000.00 RUR; 28/04, 15:29;MOSCOW;00887750.Dostupno 33 427,53 RUR (v t.ch. kredit 15 000,00 RUR).-->
+        <pattern category="unknown">
+            <match><![CDATA[Karta.*Beznalichnoe spisanie [\s\d]*\.\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Beznalichnoe spisanie ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Karta *5131: Beznalichnoe spisanie 68 000,00 RUR; 28/04, 15:29;MOSCOW;00887750.Dostupno 33 427,53 RUR (v t.ch. kredit 15 000,00 RUR).-->
+        <pattern category="unknown">
+            <match><![CDATA[Karta.*Beznalichnoe spisanie [\s\d]*\,\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Beznalichnoe spisanie ([\d\s]*,?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+            <decimal_char>,</decimal_char>
         </pattern>
     </patterns>
     <patterns bankId="qazkom">
@@ -2166,9 +2224,6 @@
             <amount group="1"><![CDATA[perevod ispolnen ([\d\,]*\.?\d{1,2})]]></amount>
             <decimal_group_char>,</decimal_group_char>
         </pattern>
-    </patterns>
-    <patterns bankId="karta_sovest">
-
     </patterns>
     <patterns bankId="sberbank">
         <!--VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р-->

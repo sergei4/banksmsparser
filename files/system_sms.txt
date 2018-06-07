@@ -302,3 +302,4 @@ Terminal: K0200002,MINB,Malaya Kalitnikovskaya str. d.7,Moscow,RU
 
 По карте ****6206 можно проводить операции в Google Pay
 
+Karta *2213: Otkaz v operacii Snyatie nalichnyh v bankomate 90 000,00 RUR;17/05, 07:57;MOSCOW;Alfa Iss 98 DMITROVSKO.
