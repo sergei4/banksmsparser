@@ -1,20 +1,12 @@
 package com.skmmobile.banksmsparser;
 
 import com.skmmobile.banksmsparser.bank.*;
-import com.skmmobile.banksmsparser.bank.by.BelapbSmsTest;
-import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.BelbankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.BelgazprombankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.MTBankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.ParitetbankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.PriorBankSmsTest;
-import com.skmmobile.banksmsparser.bank.by.SbsIbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.*;
 import com.skmmobile.banksmsparser.bank.kz.FortebankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.HalykbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.KaspibankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.QazkomSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.OschadbankSmsTest;
-
 import com.skmmobile.banksmsparser.bank.uk.RaiffeisenUkSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.UkrsibbankSmsTest;
 import org.junit.Assert;
@@ -22,11 +14,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import java.io.File;
-import java.io.FileReader;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class BankParserTests extends Assert {
 
@@ -233,7 +225,12 @@ public class BankParserTests extends Assert {
                 "Телебанк, денежные средства поступят на счет на следующий рабочий день. ");
 
         // загружаем данные из файла
-        File file = new File(ConstTests.SYSTEM_SMS);
+        checkFile(ConstTests.SYSTEM_SMS_ALL);
+        checkFile(ConstTests.SYSTEM_SMS_RAIFFEISEN);
+    }
+
+    private void checkFile(String fileName) throws IOException {
+        File file = new File(fileName);
         FileReader fileReader = new FileReader(file);
 
         StringBuilder cmdStrBuilder = new StringBuilder();
@@ -247,6 +244,8 @@ public class BankParserTests extends Assert {
         for(String sms: system_sms){
             isSystemSms(sms);
         }
+
+        fileReader.close();
     }
 
     @Test

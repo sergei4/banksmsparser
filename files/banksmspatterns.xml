@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/06/07 22:25</updated>
+    <updated>2018/06/08 09:10</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -308,6 +308,7 @@
         <system_sms bankId="all"><![CDATA[.*ОТКАЗ.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*(о|О)тказ.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*OTKAZ.*]]></system_sms>
+        <system_sms bankId="all"><![CDATA[Karta.*Otkaz.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*OTMENA.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[.*(н|Н)икому не сообщайте код.*]]></system_sms>
         <system_sms bankId="all"><![CDATA[Код:\s+\d+.*]]></system_sms>
@@ -393,7 +394,6 @@
         <system_sms bankId="promsvyazbank"><![CDATA[.*vhod v internet-bank.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[Выполнен вход в систему.*]]></system_sms>
         <system_sms bankId="promsvyazbank"><![CDATA[SMS.*Podtverdite operaciyu.*]]></system_sms>
-        <system_sms bankId="promsvyazbank"><![CDATA[Karta.*Otkaz v operacii Snyatie nalichnyh v bankomate.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[.*Otmena operacii.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Karta zabyta.*]]></system_sms>
         <system_sms bankId="qazkom"><![CDATA[Pervaya chast' koda.*]]></system_sms>
@@ -412,6 +412,9 @@
         <system_sms bankId="raiffeisen"><![CDATA[.*Kod dlya provedeniya tranzakcii.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Konfidencialno. Kod podtverzhdenija.*]]></system_sms>
         <system_sms bankId="raiffeisen"><![CDATA[Otmenena blokirovka sredstv.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[^Oplata.*liсevoy schet.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[^Popolnenie karty.*na.*]]></system_sms>
+        <system_sms bankId="raiffeisen"><![CDATA[^Popolnenie scheta.*na summu.*]]></system_sms>
         <system_sms bankId="raiffeisen_uk"><![CDATA[.*zmineno nomer mobilnogo telefonu.*]]></system_sms>
         <system_sms bankId="raiffeisen_uk"><![CDATA[Vasha operatsija.*vidkhylena.*]]></system_sms>
         <system_sms bankId="raiffeisen_uk"><![CDATA[Vasha operatsija verifikacii uspishna.*]]></system_sms>
@@ -544,7 +547,7 @@
         <!--5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
         <!--**9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
         <pattern category="cash_atm">
-            <match><![CDATA[.*Vydacha nalichnyh.*]]></match>
+            <match><![CDATA[.*Vydacha nalichnyh;.*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa: (\d*\,?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Ostatok:\s[0-9,]*\s.*;\s([^;]*);]]></detail>
@@ -2038,10 +2041,23 @@
         </pattern>
         <!--Karta *1118; Provedena tranzakcija: 3596 RUB; Data: 31/12/2017; OODJI Dostupny Ostatok: 135449.62 RUB. Raiffeisenbank-->
         <pattern category="expense">
-            <match><![CDATA[.*Provedena tranzakcija.*]]></match>
+            <match><![CDATA[Karta.*Provedena tranzakcija.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Provedena tranzakcija: (\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Data: [\d\/]+; (.*) Dostupny]]></detail>
+        </pattern>
+        <!--карта *6497; проведена транзакция: 310 RUB; дата: 30/04/2018; PIVNAYA 1 доступный остаток: 2886.77 RUB. raiffeisenbank-->
+        <pattern category="expense">
+            <match><![CDATA[карта.*проведена транзакция.*]]></match>
+            <cardId group="1"><![CDATA[карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[проведена транзакция: (\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[дата: [\d\/]+; (.*) доступный]]></detail>
+        </pattern>
+        <!--Karta *2665; Provedena operacija: 10605 RUR; RU/MOSCOW/RCONNECT C2C; Data: 2018-02-22; Dostupny Ostatok: 3485.56 RUR. Raiffeisenbank-->
+        <pattern category="payment">
+            <match><![CDATA[Karta.*Provedena operacija.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Provedena operacija: (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Zachislena zarplata 8869.18 RUR na schet *4849. Balans 55122.34 RUR. Raiffeisenbank-->
         <pattern category="zachislenie">
@@ -2055,11 +2071,35 @@
             <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
             <amount group="1"><![CDATA[Zachislenie summy (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Zachislen perevod 25000 RUR na schet *5842. Balans 32605.51 RUR. Raiffeisenbank-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Zachislen perevod.*]]></match>
+            <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Zachislen perevod (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Balans vashey karty *4180 popolnilsya 2018-02-10 na 11700 RUR. Dostupny ostatok: 18476.28 RUR. Raiffeisenbank-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Balans vashey karty.*popolnilsya.*]]></match>
+            <cardId group="1"><![CDATA[karty \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[popolnilsya.*na:? (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--баланс вашей карты *0015 пополнился 2018-05-13 на 3000 RUR. доступный остаток: 11938.27 RUR. raiffeisenbank-->
+        <pattern category="popolnenie">
+            <match><![CDATA[баланс вашей карты.*пополнился.*]]></match>
+            <cardId group="1"><![CDATA[карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[пополнился.*на:? (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *0853; Snyatie nalichnih: 6000 RUR; RUS/VORONEZH/GAZPROMBANK; Data: 2018-01-10; Dostupny Ostatok: 69636.73 RUR. Raiffeisenbank-->
         <pattern category="cash_atm">
             <match><![CDATA[.*Snyatie nalichnih.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Snyatie nalichnih: ?(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Spisan perevod 13000 RUR so scheta *9362. Balans 14469.82 RUR. Raiffeisenbank-->
+        <pattern category="perevod">
+            <match><![CDATA[Spisan perevod.*]]></match>
+            <cardId group="0"><![CDATA[scheta \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Spisan perevod (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="raiffeisen_uk">
