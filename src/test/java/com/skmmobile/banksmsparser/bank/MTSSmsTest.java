@@ -1,6 +1,5 @@
 package com.skmmobile.banksmsparser.bank;
 
-import com.skmmobile.banksmsparser.BankSmsParser;
 import org.w3c.dom.Document;
 
 public class MTSSmsTest extends AbsXmlBankSmsTest {
@@ -12,7 +11,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Оплата VP *9707; 07.01 15:18; PYATEROCHKA 9114>EKATERINBURG RU; 699,25 RUB; Остаток: 655,74 RUB",
                 "expense",
                 "VP *9707",
@@ -20,7 +18,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "PYATEROCHKA 9114>EKATERINBURG RU"
         );
         checkBankSms(
-                parser,
                 "Приход по счету карты VP *9707; 73,07 RUB; Остаток: 126,85 RUB",
                 "popolnenie",
                 "VP *9707",
@@ -28,7 +25,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "ПАО \"МТС-Банк\"уведомляет о переводе со счета 40817***3838 на карту 4042 XXXX XXXX 9707: 1,300.00 RUR; Остаток: 296,500.00 RUR; 06.01.2018 17:25",
                 "perevod",
                 "40817***3838",
@@ -36,7 +32,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Погашение задолженности 2600 RUR по карте 5337***4579. Остаток мин. платежа 0 RUR. www.mtsbank.ru",
                 "payment",
                 "5337***4579",
@@ -44,7 +39,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Перевод на карту ES *4579; 19.01 16:19; TINKOFF BANK CARD2CARD>MOSCOW RU; 2 600,00 RUB; Лимит: 30 652,47 RUB",
                 "perevod",
                 "ES *4579",
@@ -52,7 +46,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Приход по счету карты ES *0482; 1 000,00 RUB; Лимит: 25 969,53 RUB; Собственные средства: 0,00 RUB; Кредит: 25 969,53 RUB",
                 "popolnenie",
                 "ES *0482",
@@ -60,7 +53,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Пополнение VP *4629; 25.01 16:32; 2 800,00 RUB; Остаток: 3 301,00 RUB",
                 "popolnenie",
                 "VP *4629",
@@ -68,7 +60,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Перевод на карту VP *4192; 19.01 19:19; VISA MONEY TRANSFER>Visa Direct RU; 1 425,00 RUB; Остаток: 1 604,74 RUB",
                 "perevod",
                 "VP *4192",
@@ -76,7 +67,6 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Списание 1425 RUR с карты 4042***4192 в счет погашения по Договору МТСУФА259539/810/17. www.mtsbank.ru\n",
                 "payment",
                 "4042***4192",
@@ -123,6 +113,41 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "VP *6975",
                 "25000",
+                ""
+        );
+        checkBankSms(
+                "Oplata VP *7445; 09.07 13:31; A-3>A-3.RU RU; 412,92 RUB; Limit: 8 648,25 RUB",
+                "expense",
+                "VP *7445",
+                "412.92",
+                "A-3>A-3.RU RU"
+        );
+        checkBankSms(
+                "Oplata VP *7445; 04.07 11:26; TINKOFF*UTILITIES>MOSCOW RU; 1 629,31 RUB; Limit: 15 690,12 RUB",
+                "expense",
+                "VP *7445",
+                "1629.31",
+                "TINKOFF*UTILITIES>MOSCOW RU"
+        );
+        checkBankSms(
+                "Prihod po schetu karty VP *6975; 28,44 RUB; Ostatok: 2 858,63 RUB",
+                "popolnenie",
+                "VP *6975",
+                "28.44",
+                ""
+        );
+        checkBankSms(
+                "Перевод со счета 4081**4363 на карту *6975: 2000.00 RUR. ПАО \"МТС-Банк\"",
+                "perevod",
+                "*6975",
+                "2000",
+                ""
+        );
+        checkBankSms(
+                "Поступление на счет 4081**4363 8000.00 RUR от Куницын Е.В.; Остаток: 41572.71 RUR. ПАО \"МТС-Банк\"",
+                "popolnenie",
+                "4081**4363",
+                "8000",
                 ""
         );
     }

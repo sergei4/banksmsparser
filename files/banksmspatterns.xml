@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/06/08 09:10</updated>
+    <updated>2018/08/06 22:10</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1517,10 +1517,11 @@
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Oplata VP *7325; 23.03 17:07; MAGNIT MK HANSTEN>SMOLENSK RU; 49,00 RUB; Ostatok: 5 744,36 RUB-->
+        <!--Oplata VP *7445; 09.07 13:31; A-3>A-3.RU RU; 412,92 RUB; Limit: 8 648,25 RUB-->
         <pattern category="expense">
             <match><![CDATA[Oplata.*]]></match>
             <cardId group="0"><![CDATA[(VP|ES) \*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; Ostatok]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -1539,6 +1540,14 @@
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Prihod po schetu karty VP *6975; 28,44 RUB; Ostatok: 2 858,63 RUB-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Prihod po schetu karty.*]]></match>
+            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Пополнение VP *4629; 25.01 16:32; 2 800,00 RUB; Остаток: 3 301,00 RUB-->
         <pattern category="popolnenie">
             <match><![CDATA[Пополнение.*]]></match>
@@ -1554,6 +1563,12 @@
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Поступление на счет 4081**4363 8000.00 RUR от Куницын Е.В.; Остаток: 41572.71 RUR. ПАО "МТС-Банк"-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Поступление на счет [\d\*]+.*]]></match>
+            <cardId group="1"><![CDATA[Поступление на счет ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[[\d\*]+ ([\d]*.?\d{1,2})]]></amount>
         </pattern>
         <!--ПАО "МТС-Банк"уведомляет о переводе со счета 40817***3838 на карту 4042 XXXX XXXX 9707: 300.00 RUR; Остаток: 16,500.00 RUR; 06.01.2018 17:25-->
         <pattern category="perevod">
@@ -1577,6 +1592,12 @@
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Перевод со счета 4081**4363 на карту *6975: 2000.00 RUR. ПАО "МТС-Банк"-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод со счета.*на карту.*]]></match>
+            <cardId group="1"><![CDATA[на карту ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[на карту \*\d+: ([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Списание 1425 RUR с карты 4042***4192 в счет погашения по Договору МТСУФА259539/810/17. www.mtsbank.ru-->
         <pattern category="payment">
