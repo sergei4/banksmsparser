@@ -256,5 +256,40 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "1",
                 ""
         );
+        checkBankSms(
+                "*3164 Зачисление 26090р 30.08.18 09:26 Доступно 26090р",
+                "zachislenie",
+                "3164",
+                "26090",
+                ""
+        );
+        checkBankSms(
+                "*5818 Перевод 1500.1р BANK SPB IB 06.06.18 11:03:21 Доступно 6875.37р",
+                "perevod",
+                "5818",
+                "1500.1",
+                ""
+        );
+        checkBankSms(
+                "*7726 Получен перевод 0.1р PEREVOD MEZHDU KARTAMI 16.06.18 19:26:29 Доступно 75511.83р",
+                "popolnenie",
+                "7726",
+                "0.1",
+                ""
+        );
+        checkBankSms(
+                "*5563 Внесение 35000р GAZPROMBANK 24.06.18 13:46:16 Доступно 35056.89р",
+                "popolnenie",
+                "5563",
+                "35000",
+                ""
+        );
+        checkBankSms(
+                "*8641 Пополнение 4000р IPT GPB KAZAN 28.07.18 09:39:52",
+                "popolnenie",
+                "8641",
+                "4000",
+                ""
+        );
     }
 }

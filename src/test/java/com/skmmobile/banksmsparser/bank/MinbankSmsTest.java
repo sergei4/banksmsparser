@@ -1,6 +1,5 @@
 package com.skmmobile.banksmsparser.bank;
 
-import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
 import org.w3c.dom.Document;
 
 public class MinbankSmsTest extends AbsXmlBankSmsTest {
@@ -274,7 +273,7 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                         "TTK\n" +
                         "06/06 06:25 карта *8305\n" +
                         "Остаток 330.17RUB",
-                "expense",
+                "payment",
                 "8305",
                 "400",
                 ""
@@ -392,6 +391,81 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "3489",
                 "5526.44",
+                ""
+        );
+        checkBankSms(
+                "Покупка\n" +
+                        "Сумма 270RUB\n" +
+                        "RAZLIVNOJ MIR\n" +
+                        "10/08 19:06 карта *0556",
+                "expense",
+                "0556",
+                "270",
+                ""
+        );
+        checkBankSms(
+                "Vydacha\n" +
+                        "Summa 500RUB\n" +
+                        "A0430033\n" +
+                        "28/08 14:18 karta *5581\n" +
+                        "Ostatok 955.26RUB",
+                "cash_atm",
+                "5581",
+                "500",
+                ""
+        );
+        checkBankSms(
+                "Platej\n" +
+                        "Summa 294.70RUB\n" +
+                        "VKS\n" +
+                        "08/06 06:51 karta *9200\n" +
+                        "Ostatok 2709.37RUB",
+                "payment",
+                "9200",
+                "294.70",
+                ""
+        );
+        checkBankSms(
+                "Перевод на счет 40817*372\n" +
+                        "Сумма 1000RUB\n" +
+                        "Телебанк\n" +
+                        "10/07 13:59 карта *8305\n" +
+                        "Остаток 7896.11RUB",
+                "perevod",
+                "8305",
+                "1000",
+                ""
+        );
+        checkBankSms(
+                "Perevod na schet 40817*088\n" +
+                        "Summa 17.53RUB\n" +
+                        "Telebank\n" +
+                        "07/07 07:41 karta *7443\n" +
+                        "Ostatok 0RUB",
+                "perevod",
+                "7443",
+                "17.53",
+                ""
+        );
+        checkBankSms(
+                "Postuplenie\n" +
+                        "Summa 26000RUB\n" +
+                        "Telebank\n" +
+                        "26/07 16:16 karta *3615\n" +
+                        "Ostatok 34622.29RUB",
+                "zachislenie",
+                "3615",
+                "26000",
+                ""
+        );
+        checkBankSms(
+                "Выдача\n" +
+                        "Сумма 2000RUB\n" +
+                        "A0460033\n" +
+                        "13/08 11:24 карта *0556",
+                "cash_atm",
+                "0556",
+                "2000",
                 ""
         );
     }

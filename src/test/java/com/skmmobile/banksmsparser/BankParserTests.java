@@ -296,6 +296,7 @@ public class BankParserTests extends Assert {
         new FortebankSmsTest(xmlDocument).check();
         new BelgazprombankSmsTest(xmlDocument).check();
         new VozrogdenieSmsTest(xmlDocument).check();
+        new YandexmoneySmsTest(xmlDocument).check();
     }
 }
 

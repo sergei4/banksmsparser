@@ -60,5 +60,19 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "100000",
                 ""
         );
+        checkBankSms(
+                "2018-08-03 13:37:02 Operaciya po karte Retail 8888.00 KZT TOO DETSKIY MIR KZ 4**934 Dostupnaya summa:141885.93 KZT",
+                "expense",
+                "4**934",
+                "8888",
+                ""
+        );
+        checkBankSms(
+                "2018-07-24 01:24:28  Operaciya po kartochke 5**9835 na summu -300.00KZT. Ostatok : 11712.35. Opisanie: Client SMS Charge",
+                "payment",
+                "5**9835",
+                "300",
+                ""
+        );
     }
 }

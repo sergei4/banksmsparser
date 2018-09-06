@@ -305,3 +305,8 @@ Terminal: K0200002,MINB,Malaya Kalitnikovskaya str. d.7,Moscow,RU
 Karta *2213: Otkaz v operacii Snyatie nalichnyh v bankomate 90 000,00 RUR;17/05, 07:57;MOSCOW;Alfa Iss 98 DMITROVSKO.
 
 Karta *4664; Otkaz: nedostatochno sredstv; Summa: 59.00 RUB; Data: 12/03/2018; ITUNES.COM/BILL ITUNES.COM. Dostupny Ostatok: 40.75 RUB. Raiffeisenbank
+
+*1691 Отмена 250р OAO VYMPEL-KOMMUNIKAC 29.03.18 06:56 Доступно 120120.34р
+
+*7793 Izmenenie PIN GAZPROMBANK 18.04.18 13:55:39 Доступно 33344.66р
+Автоплатёж "ИНТЕРСВЯЗЬ" с карты VISA3245 на 400р будет исполнен 25.08.18. Комиссия 0.00р. Для отмены отправьте 22385 на номер 900.
