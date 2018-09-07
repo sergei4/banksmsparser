@@ -23,6 +23,7 @@
 * Тинкофф банк (TCS)
 * УБРиР (Уральский банк реконструкции и развития)
 * Челябинвестбанк
+* Homecredit
 * QIWI wallet 
 * RocketBank
 * UniCredit Bank

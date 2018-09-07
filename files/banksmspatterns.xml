@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/09/07 01:55</updated>
+    <updated>2018/09/07 09:40</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -101,7 +101,7 @@
         <!--<bank id="uralfd">Урал ФД</bank>-->
         <!--<bank id="florabank">Флора-Москва</bank>-->
         <bank id="akbars">АкБарс</bank>
-        <!--<bank id="homecredit">Хоум Кредит</bank>-->
+        <bank id="homecredit">Хоум Кредит</bank>
         <!--<bank id="bveb">БелВнешЭкономБанк</bank>-->
         <!--<bank id="belinvest">Белинвестбанк</bank>-->
         <!--<bank id="akibank">АКИБАНК</bank>-->
@@ -233,7 +233,7 @@
         <!--<service_phone bankId="uralfd">+79630133444,UralFD</service_phone>-->
         <!--<service_phone bankId="florabank">FLORABANK</service_phone>-->
         <service_phone bankId="akbars">3299,AKBARS</service_phone>
-        <!--<service_phone bankId="homecredit">HomeCredit</service_phone>-->
+        <service_phone bankId="homecredit">HomeCredit</service_phone>
         <!--<service_phone bankId="bveb">BVEB.BY</service_phone>-->
         <!--<service_phone bankId="belinvest">1240</service_phone>-->
         <!--<service_phone bankId="akibank">+79021121085,AKIBANK</service_phone>-->
@@ -626,9 +626,10 @@
             <amount group="1"><![CDATA[SMS Informirovanie -(\d+.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *7521. Pokupka 4381.00RUR.MOSCOW, TINKOFF BANK CARD2CARD. Zarezervirovano 4381.00RUR. 2018-03-06 16:30:40. Dostupno 0.00RUR.-->
+        <!--Karta*0799. Pokupka 84.00RUR. Kazan, IP NESTYAGIN I V. 18.06.18 17:16. Ostatok 19094.52RUR.-->
         <pattern category="expense">
             <match><![CDATA[Karta.*Pokupka.*]]></match>
-            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <cardId group="1"><![CDATA[Karta\s?\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Pokupka (\d+.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *4692. Vydacha v ATM 1600.00RUR.ZAINSK, ABB 37A NEFTYANIKOV PR.. Zarezervirovano 1600.00RUR. 2018-02-27 13:53:42. Dostupno 84.68RUR.-->
@@ -1028,6 +1029,8 @@
             <cardId group="1"><![CDATA[^([\w\d]+)\s]]></cardId>
             <amount group="1"><![CDATA[otpravlen perevod. (\d*.?\d{1,2})]]></amount>
         </pattern>
+    </patterns>
+    <patterns bankId="homecredit">
     </patterns>
     <patterns bankId="karta_sovest">
 
@@ -1650,17 +1653,19 @@
         <!--Оплата ES *2942; 07.03 14:07; OOO MIR VKUSA>NOVOSIBIRSK RU; 250,80 RUB; Остаток: 1 111,06 RUB-->
         <pattern category="expense">
             <match><![CDATA[Оплата.*]]></match>
-            <cardId group="0"><![CDATA[(VP|ES) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Oplata VP *7325; 23.03 17:07; MAGNIT MK HANSTEN>SMOLENSK RU; 49,00 RUB; Ostatok: 5 744,36 RUB-->
-        <!--Oplata VP *7445; 09.07 13:31; A-3>A-3.RU RU; 412,92 RUB; Limit: 8 648,25 RUB-->
+        <!--Oplata ES *7445; 09.07 13:31; A-3>A-3.RU RU; 412,92 RUB; Limit: 8 648,25 RUB-->
+        <!--Oplata EW *3586; 09.08 17:25; I LOVE SUSHI>Dubna RU; 567,00 RUB; Limit: 18 276,00 RUB-->
+        <!--Oplata VC *2481; 18.05 15:28; HVOSTUSHCI>KOROLEV RU; 293,80 RUB; Ostatok: 200,92 RUB-->
         <pattern category="expense">
             <match><![CDATA[Oplata.*]]></match>
-            <cardId group="0"><![CDATA[(VP|ES) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
@@ -1672,10 +1677,16 @@
             <cardId group="1"><![CDATA[по карте ([\d\*]*)]]></cardId>
             <amount group="1"><![CDATA[Погашение задолженности ([\d]*.?\d{1,2})]]></amount>
         </pattern>
+        <!--Списание комиссии 50 RUR за SMS-Банк-Инфо по карте *7737. МТС Банк-->
+        <pattern category="payment">
+            <match><![CDATA[Списание комиссии.*по карте.*]]></match>
+            <cardId group="1"><![CDATA[по карте ([\d\*]*)]]></cardId>
+            <amount group="1"><![CDATA[Списание комиссии ([\d]*.?\d{1,2})]]></amount>
+        </pattern>
         <!--Приход по счету карты VP *9707; 73,07 RUB; Остаток: 126,85 RUB-->
         <pattern category="popolnenie">
             <match><![CDATA[Приход по счету карты.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -1683,7 +1694,7 @@
         <!--Prihod po schetu karty VP *6975; 28,44 RUB; Ostatok: 2 858,63 RUB-->
         <pattern category="popolnenie">
             <match><![CDATA[Prihod po schetu karty.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -1691,7 +1702,7 @@
         <!--Пополнение VP *4629; 25.01 16:32; 2 800,00 RUB; Остаток: 3 301,00 RUB-->
         <pattern category="popolnenie">
             <match><![CDATA[Пополнение.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -1699,8 +1710,8 @@
         <!--Popolnenie VP *6975; 02.04 18:50; 25 000,00 RUB; Ostatok: 28 532,45 RUB-->
         <pattern category="popolnenie">
             <match><![CDATA[Popolnenie.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -1720,7 +1731,7 @@
         <!--Перевод на карту ES *4579; 19.01 16:19; TINKOFF BANK CARD2CARD>MOSCOW RU; 2 600,00 RUB; Лимит: 30 652,47 RUB-->
         <pattern category="perevod">
             <match><![CDATA[Перевод на карту.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
             <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Лимит|Остаток)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -1728,8 +1739,24 @@
         <!--Perevod na kartu VP *9179; 28.03 18:31; MS VPP DEPOSIT FOR MTSBANK>MOSCOW RU; 49 000,00 RUB; Ostatok: 50 801,00 RUB-->
         <pattern category="perevod">
             <match><![CDATA[Perevod na kartu.*]]></match>
-            <cardId group="0"><![CDATA[(ES|VP) \*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok)]]></amount>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Перевод с карты ES *7737; 28.04 11:24; TINKOFF BANK CARD2CARD>MOSCOW RU; 1 000,00 RUB; Остаток: 38 716,14 RUB-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод с карты.*]]></match>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Лимит|Остаток)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Perevod s karty VC *4154; 31.05 15:55; P2P ROSBANK>Moscow RU; 9 999,00 RUB; Ostatok: 88 272,65 RUB-->
+        <pattern category="perevod">
+            <match><![CDATA[Perevod s karty.*]]></match>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -1745,6 +1772,14 @@
             <cardId group="1"><![CDATA[с карты ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Списание ([\d\s]*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
+        </pattern>
+        <!--Nalichnye VC *4154; 02.06 13:16; 25 TRUDOVOY SLAVY STR>KRASNODAR RU; 5 000,00 RUB; Ostatok: 83 272,65 RUB-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Nalichnye.*]]></match>
+            <cardId group="0"><![CDATA[(VC|VP|ES|EW) \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
     <patterns bankId="oschadbank">

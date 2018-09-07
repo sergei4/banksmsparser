@@ -150,5 +150,89 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "8000",
                 ""
         );
+        checkBankSms(
+                "Oplata EW *3586; 09.08 17:25; I LOVE SUSHI>Dubna RU; 567,00 RUB; Limit: 18 276,00 RUB",
+                "expense",
+                "EW *3586",
+                "567",
+                "I LOVE SUSHI>Dubna RU"
+        );
+        checkBankSms(
+                "Оплата ES *0576; 04.08 17:56; GASTRANOMCHIK>PYATIGORSK RU; 168,00 RUB; Лимит: 119 678,27 RUB",
+                "expense",
+                "ES *0576",
+                "168",
+                "GASTRANOMCHIK>PYATIGORSK RU"
+        );
+        checkBankSms(
+                "Oplata VP *2092; 03.08 20:27; IP MIKHAJJLOVA S A>VSEVLZ RU; 145,00 RUB; Limit: 59 635,61 RUB",
+                "expense",
+                "VP *2092",
+                "145",
+                "IP MIKHAJJLOVA S A>VSEVLZ RU"
+        );
+        checkBankSms(
+                "Popolnenie VP *9136; 25.07 18:15; 100,00 RUB; Ostatok: 100,00 RUB",
+                "popolnenie",
+                "VP *9136",
+                "100",
+                ""
+        );
+        checkBankSms(
+                "Списание комиссии 50 RUR за SMS-Банк-Инфо по карте *7737. МТС Банк",
+                "payment",
+                "*7737",
+                "50",
+                ""
+        );
+        checkBankSms(
+                "Списание комиссии 50 RUR за SMS-Банк-Инфо по карте 5337***0955. www.mtsbank.ru\n",
+                "payment",
+                "5337***0955",
+                "50",
+                ""
+        );
+        checkBankSms(
+                "Oplata VC *2481; 18.05 15:28; HVOSTUSHCI>KOROLEV RU; 293,80 RUB; Ostatok: 200,92 RUB",
+                "expense",
+                "VC *2481",
+                "293.80",
+                "HVOSTUSHCI>KOROLEV RU"
+        );
+        checkBankSms(
+                "Perevod na kartu ES *8949; 20.07 19:57; SBOL>MOSCOW RU; 10 300,00 RUB; Limit: 10 303,02 RUB",
+                "perevod",
+                "ES *8949",
+                "10300.00",
+                ""
+        );
+        checkBankSms(
+                "Nalichnye VC *4154; 02.06 13:16; 25 TRUDOVOY SLAVY STR>KRASNODAR RU; 5 000,00 RUB; Ostatok: 83 272,65 RUB",
+                "cash_atm",
+                "VC *4154",
+                "5000",
+                ""
+        );
+        checkBankSms(
+                "Popolnenie VP *2601; 13.08 14:04; 3 000,00 RUB; Limit: 3 101,97 RUB",
+                "popolnenie",
+                "VP *2601",
+                "3000",
+                ""
+        );
+        checkBankSms(
+                "Перевод с карты ES *7737; 28.04 11:24; TINKOFF BANK CARD2CARD>MOSCOW RU; 1 000,00 RUB; Остаток: 38 716,14 RUB",
+                "perevod",
+                "ES *7737",
+                "1000",
+                ""
+        );
+        checkBankSms(
+                "Perevod s karty VC *4154; 31.05 15:55; P2P ROSBANK>Moscow RU; 9 999,00 RUB; Ostatok: 88 272,65 RUB",
+                "perevod",
+                "VC *4154",
+                "9999",
+                ""
+        );
     }
 }
