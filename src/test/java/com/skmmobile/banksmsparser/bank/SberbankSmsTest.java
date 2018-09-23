@@ -419,5 +419,26 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "66.56",
                 ""
         );
+        checkBankSms(
+                "VISA3027 22.09.18 08:01 Покупка 59р PRODUKTY AVERS Баланс: 1745.70р",
+                "expense",
+                "VISA3027",
+                "59",
+                "PRODUKTY AVERS"
+        );
+        checkBankSms(
+                "VISA6034 22.09.18 17:58 Покупка 2600р WILLABONG Баланс: 6985.92р",
+                "expense",
+                "VISA6034",
+                "2600",
+                "WILLABONG"
+        );
+        checkBankSms(
+                "Автоплатёж \"ЗАЩИТА СЕМЬЯ\" исполнен. Оплачено 620р с карты ECMC2587. Комиссия 0.00р. Следующий платёж 12.10.18.",
+                "payment",
+                "ECMC2587",
+                "620",
+                ""
+        );
     }
 }

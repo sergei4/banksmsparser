@@ -234,5 +234,12 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "9999",
                 ""
         );
+        checkBankSms(
+                "Oplata EW *3586; 20.08 15:15; \"KAFE STULYA\">DUBNA RU; 1 063,00 RUB; Limit: 15 501,20 RUB",
+                "expense",
+                "EW *3586",
+                "1063",
+                "\"KAFE STULYA\">DUBNA RU"
+        );
     }
 }

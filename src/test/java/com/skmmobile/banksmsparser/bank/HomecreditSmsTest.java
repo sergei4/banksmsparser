@@ -10,12 +10,12 @@ public class HomecreditSmsTest extends AbsXmlBankSmsTest {
 
     @Override
     protected void smsTest() {
-//        checkBankSms(
-//                "Карта 1139 07.01.2018 11:34 Покупка 1850.00 RUB. Доступно: 37203.74 RUR LUKOIL.AZS 87 59P CHUSOVOY",
-//                "expense",
-//                "1139",
-//                "1850.00",
-//                ""
-//        );
+        checkBankSms(
+                "Oplata: 250.00 RUR. Karta *8349 Compass Group Rus. 06.09.2018 12:49:17. Dostupno: 43959.57 RUR.",
+                "expense",
+                "8349",
+                "250",
+                ""
+        );
     }
 }

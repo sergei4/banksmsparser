@@ -123,5 +123,100 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "25",
                 ""
         );
+        checkBankSms(
+                "**7781 Pokupka Uspeshno Summa: 826,50 RUR Ostatok: 6 428,46 RUR RU/CHELYABINSK/OOO TD URALMYASTORG 16.09.2018 15:09:16",
+                "expense",
+                "7781",
+                "826.50",
+                "RU/CHELYABINSK/OOO TD URALMYASTORG"
+        );
+        checkBankSms(
+                "**7781 Vydacha nalichnyh Uspeshno Summa: 2 500 RUR Ostatok: 5 722,72 RUR RU/CHELYABINSK/Alfa Acq 21.09.2018 11:20:28",
+                "cash_atm",
+                "7781",
+                "2500",
+                "RU/CHELYABINSK/Alfa Acq"
+        );
+        checkBankSms(
+                "**9284 Vydacha nalichnyh Uspeshno Summa: 16 000 RUR Ostatok: 197,59 RUR RU/SANKT-PETERBURG/Alfa Iss 13.09.2018 21:08:29",
+                "cash_atm",
+                "9284",
+                "16000",
+                "RU/SANKT-PETERBURG/Alfa Iss"
+        );
+        checkBankSms(
+                "**6838 Pokupka Uspeshno Summa: 125 RUR Ostatok: 90,89 RUR RU/Kurgan/SZT - MAXIM 16.09.2018 11:20:22",
+                "expense",
+                "6838",
+                "125",
+                "RU/Kurgan/SZT - MAXIM"
+        );
+        checkBankSms(
+                "**2848 Postupleniye Summa: 8 000 RUR Ostatok: 11 779,66 RUR 16.09.2018 Podrobnosti v mobilnom banke alfabank.ru/app",
+                "popolnenie",
+                "2848",
+                "8000",
+                ""
+        );
+        checkBankSms(
+                "Karta 5.4668\n" +
+                        "Perevod (Postuplenie)\n" +
+                        "Uspeshno\n" +
+                        "Summa:100.00 BYN\n" +
+                        "Ostatok:98.01 BYN\n" +
+                        "Na vremya:14:46:56\n" +
+                        "BLR/ONLINE SERVICE/TRANSFERS AK AM\n" +
+                        "06.06.2018 14:46:56\n",
+                "popolnenie",
+                "5.4668",
+                "100.00",
+                ""
+        );
+        checkBankSms(
+                "Karta 4.6436\n" +
+                        "Postuplenie\n" +
+                        "Uspeshno\n" +
+                        "Summa:1773.46 BYN\n" +
+                        "Ostatok:1922.84 BYN\n" +
+                        "Na vremya:13:11:09\n" +
+                        "14.09.2018",
+                "popolnenie",
+                "4.6436",
+                "1773.46",
+                ""
+        );
+        checkBankSms(
+                "Karta 5.4512\n" +
+                        "Komissiya za Alfa-Check (opovescheniya po karte)\n" +
+                        "Uspeshno\n" +
+                        "Summa:2.00 BYN\n" +
+                        "Ostatok:1331.76 BYN\n" +
+                        "Na vremya:00:06:29\n" +
+                        "05.06.2018",
+                "payment",
+                "5.4512",
+                "2",
+                ""
+        );
+        checkBankSms(
+                "Karta 4.4932\n" +
+                        "Spisanie komissii za vypusk kartochki\n" +
+                        "Uspeshno\n" +
+                        "Summa:10.00 BYN\n" +
+                        "Ostatok:15.00 BYN\n" +
+                        "Na vremya:02:05:52\n" +
+                        "24.07.2018",
+                "payment",
+                "4.4932",
+                "10",
+                ""
+        );
+        checkBankSms(
+                "**5059; Oplata uslug; Uspeshno; Summa: 50 RUR; Ostatok: 403 RUR; RU/UFA/Alfa Iss; 17.07.2018 16:26:35",
+                "expense",
+                "5059",
+                "50",
+                "RU/UFA/Alfa Iss"
+        );
     }
 }

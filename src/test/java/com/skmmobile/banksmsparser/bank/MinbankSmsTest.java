@@ -468,5 +468,15 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "2000",
                 ""
         );
+        checkBankSms(
+                "Выдача\n" +
+                        "Сумма 9000RUB\n" +
+                        "A0460033\n" +
+                        "31/08 16:21 карта *0556",
+                "cash_atm",
+                "0556",
+                "9000",
+                ""
+        );
     }
 }
