@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/09/23 23:55</updated>
+    <updated>2018/09/25 23:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -929,6 +929,24 @@
             <match><![CDATA[.*Platezh;.*]]></match>
             <cardId group="0"><![CDATA[(MC|Card)\d{4}]]></cardId>
             <amount group="1"><![CDATA[Summa\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*8260 Платеж 320р Mobilniye Tele Sistemy 10.09.18 06:03:44 Доступно 54701.43р-->
+        <pattern category="payment">
+            <match><![CDATA[^\*\d+ Платеж.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Платеж (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*1480 Предавторизация 2500р POGASH. ZADOLJENNOSTI 22.06.18 19:49:35 Доступно 9588.08р-->
+        <pattern category="payment">
+            <match><![CDATA[^\*\d+ Предавторизация.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Предавторизация (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Списано с карты *3522; 08.06.2018; Погашение задолженности по кредиту.; Сумма платежа 7995.00RUR. Подробнее по тел. *0701  (Услуга доступна абонентам TELE2, МОТИВ, МТС, Билайн и Мегафон), 88001000089. Звонок на территории РФ бесплатный. Банк ГПБ (АО).-->
+        <pattern category="payment">
+            <match><![CDATA[Списано с карты.*Погашение задолженности по кредиту.*]]></match>
+            <cardId group="1"><![CDATA[Списано с карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[умма платежа (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card8381; Oplata; Summa 559 RUR; 17.12.17 09:19:32; MONETKA; dostupno: 1790.52 RUR-->
         <pattern category="expense">
@@ -2529,17 +2547,18 @@
     </patterns>
     <patterns bankId="sberbank">
         <!--VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р-->
+        <!--ECMC8040 25.09.18 19:10 Оплата 100р MEGAFON URAL Баланс: 192.96р-->
         <pattern category="expense">
-            <match><![CDATA[.*оплата \d.*]]></match>
+            <match><![CDATA[.*плата \d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[оплата[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[плата[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--VISA4993: оплата услуг 250р Megafon (9261393521)-->
         <pattern category="expense">
-            <match><![CDATA[.*оплата услуг \d.*]]></match>
+            <match><![CDATA[.*плата услуг \d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[оплата[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[плата[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--MIR-3075 13.12.17 17:39 покупка 1200р VNUKOVO.AIRLINES AEROP Баланс: 1276.46р-->
         <!--VISA3027 22.09.18 08:01 Покупка 59р PRODUKTY AVERS Баланс: 1745.70р-->
@@ -2572,9 +2591,9 @@
         </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="cash_atm">
-            <match><![CDATA[.*выдача[\D]+\d.*(ATM|OSB).*]]></match>
+            <match><![CDATA[.*ыдача[\D]+\d.*(ATM|OSB).*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[выдача[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ыдача[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
         </pattern>
         <!--VISA0000: перевод 400р. на карту получателя ВЕРОНИКА АЛЕКСАНДРОВНА П. выполнен. Подробнее в выписке по карте http://sberbank.ru/sms/h2/-->

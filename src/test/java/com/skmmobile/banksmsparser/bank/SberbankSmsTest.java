@@ -440,5 +440,26 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "620",
                 ""
         );
+        checkBankSms(
+                "ECMC8040 25.09.18 19:10 Оплата 100р MEGAFON URAL Баланс: 192.96р",
+                "expense",
+                "ECMC8040",
+                "100",
+                "MEGAFON URAL"
+        );
+        checkBankSms(
+                "ECMC7183 25.09.18 11:43 Выдача 900р ATM 270311 Баланс: 377.11р",
+                "cash_atm",
+                "ECMC7183",
+                "900",
+                "ATM 270311"
+        );
+        checkBankSms(
+                "ECMC1296 25.09.18 09:49 Оплата 4760р Баланс: 9144.75р",
+                "expense",
+                "ECMC1296",
+                "4760",
+                "indefinite"
+        );
     }
 }
