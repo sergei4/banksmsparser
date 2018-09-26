@@ -136,6 +136,7 @@
         <bank id="belgazprombank">Белгазпромбанк</bank>
         <bank id="yandexmoney">Яндекс.Деньги</bank>
         <bank id="devoncredit">DevonCredit</bank>
+        <bank id="vostbank">Восточный банк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -269,6 +270,7 @@
         <service_phone bankId="belgazprombank">BELGAZPROM,belgazprombank</service_phone>
         <service_phone bankId="yandexmoney">1960</service_phone>
         <service_phone bankId="devoncredit">DevonCredit</service_phone>
+        <service_phone bankId="vostbank">7394</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -2957,6 +2959,9 @@
             <cardId group="1"><![CDATA[Баланс карты (\d+)]]></cardId>
             <amount group="1"><![CDATA[увеличен на (\d*\.?\d{1,2})]]></amount>
         </pattern>
+    </patterns>
+    <patterns bankId="vostbank">
+
     </patterns>
     <patterns bankId="vozrogdenie">
         <!--Pokupka, Summa:531.70 RUR, Karta:2..7728, Data:03.06.18, Inf:BURGER KING 0129, Kod:181879. Dostupno:22780.27 RUR-->

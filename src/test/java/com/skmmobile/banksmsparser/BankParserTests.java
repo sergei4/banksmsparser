@@ -299,6 +299,7 @@ public class BankParserTests extends Assert {
         new YandexmoneySmsTest(xmlDocument).check();
         new HomecreditSmsTest(xmlDocument).check();
         new DevonCreditSmsTest(xmlDocument).check();
+        new VostbankSmsTest(xmlDocument).check();
     }
 }
 
