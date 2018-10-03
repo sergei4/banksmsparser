@@ -461,5 +461,12 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "4760",
                 "indefinite"
         );
+        checkBankSms(
+                "VISA4854 30.09.18 19:54 Оплата 390р Баланс: 37925.46р",
+                "expense",
+                "VISA4854",
+                "390",
+                "indefinite"
+        );
     }
 }

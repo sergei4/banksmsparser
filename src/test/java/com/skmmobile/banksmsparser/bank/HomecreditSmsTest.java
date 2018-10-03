@@ -17,5 +17,19 @@ public class HomecreditSmsTest extends AbsXmlBankSmsTest {
                 "250",
                 ""
         );
+        checkBankSms(
+                "Snyatie nalichnyh: 3000.00 RUR. Karta *8119. Dostupno: 9320.86 RUR. +74957858222",
+                "cash_atm",
+                "8119",
+                "3000",
+                ""
+        );
+        checkBankSms(
+                "Spisanie:59.00 RUR za SMS-paket. Karta *8349",
+                "payment",
+                "8349",
+                "59.00",
+                ""
+        );
     }
 }

@@ -300,6 +300,7 @@ public class BankParserTests extends Assert {
         new HomecreditSmsTest(xmlDocument).check();
         new DevonCreditSmsTest(xmlDocument).check();
         new VostbankSmsTest(xmlDocument).check();
+        new SovcombankSmsTest(xmlDocument).check();
     }
 }
 

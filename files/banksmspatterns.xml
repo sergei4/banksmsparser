@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/09/25 23:05</updated>
+    <updated>2018/10/03 11:30</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -137,6 +137,7 @@
         <bank id="yandexmoney">Яндекс.Деньги</bank>
         <bank id="devoncredit">DevonCredit</bank>
         <bank id="vostbank">Восточный банк</bank>
+        <bank id="sovcombank">Совкомбанк</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -908,7 +909,24 @@
         </pattern>
     </patterns>
     <patterns bankId="devoncredit">
-
+        <!--*0633 Oplata 72r
+        Ostatok 31619.16r
+        ZELENAYA ROSHCHA 13
+        18:05 23.09-->
+        <pattern category="payment">
+            <match><![CDATA[^\*\d+ Oplata.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Oplata (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*0633 Popolnenie perevodom na kartu 300r
+        Ostatok 31919.16r
+        mib.devoncredit.ru
+        04:40 24.09-->
+        <pattern category="popolnenie">
+            <match><![CDATA[^\*\d+ Popolnenie perevodom na kartu.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie perevodom na kartu (\d*.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="fortebank">
         <!--Postupilo 201073 KZT na schet #06334, ostatok 206 869.00 KZT. 20.03.2018 18:54. Platite kartoi I poluchaite cashback do 15%-->
@@ -1116,6 +1134,18 @@
             <match><![CDATA[Oplata.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Oplata: ([\s\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Snyatie nalichnyh: 3000.00 RUR. Karta *8119. Dostupno: 9320.86 RUR. +74957858222-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Snyatie nalichnyh.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnyh: ([\s\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Spisanie:59.00 RUR za SMS-paket. Karta *8349-->
+        <pattern category="payment">
+            <match><![CDATA[Spisanie.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Spisanie:([\s\d]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="karta_sovest">
@@ -2418,6 +2448,12 @@
             <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
             <amount group="1"><![CDATA[summa:(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Vydacha nalichnykh Karta:7999 summa:2000.00 RUR balans:11200.41 RUR  ATM-4661 18-10-02 14:01:20-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Vydacha nalichnykh.*]]></match>
+            <cardId group="1"><![CDATA[Karta:(\d+)]]></cardId>
+            <amount group="1"><![CDATA[summa:(\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Popolnenie, Karta:7999 summa:25.580,18 RUR  balans:25.580,58 RUR  (vremya
         operatsii MSK 2018-04-06 15:05:42)-->
         <pattern category="popolnenie">
@@ -2744,6 +2780,9 @@
             <cardId group="2"><![CDATA[Karta\s(4|5).(\d{4})\s]]></cardId>
             <amount group="1"><![CDATA[Credit \+(\d*\.?\d{1,2})]]></amount>
         </pattern>
+    </patterns>
+    <patterns bankId="sovcombank">
+
     </patterns>
     <patterns bankId="tinkoff">
         <!-- Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru-->

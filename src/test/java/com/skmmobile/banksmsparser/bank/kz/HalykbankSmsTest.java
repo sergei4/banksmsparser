@@ -74,5 +74,20 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "300",
                 ""
         );
+        //Todo: Нужно разобрать
+//        checkBankSms(
+//                "2018-10-02 19:03:12 Operaciya po karte Snyatie nalichnyh 20000.00 KZT ATM 1071 IP KHABIBULLIN 400303**4108 Dostupnaya summa: 284994.98 KZT",
+//                "cash_atm",
+//                "400303**4108",
+//                "20000",
+//                ""
+//        );
+//        checkBankSms(
+//                "2018-10-02 04:51:01 Popolnenie 285000.00 KZT K**824 Dostupnaya summa:304994.98 KZT",
+//                "payment",
+//                "5**9835",
+//                "300",
+//                ""
+//        );
     }
 }

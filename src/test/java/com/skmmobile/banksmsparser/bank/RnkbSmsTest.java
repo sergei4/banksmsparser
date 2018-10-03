@@ -53,5 +53,13 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
                 "20000",
                 ""
         );
+        checkBankSms(
+                "Vydacha nalichnykh Karta:7999 summa:2000.00 RUR balans:11200.41 RUR \n" +
+                        "ATM-4661 18-10-02 14:01:20",
+                "cash_atm",
+                "7999",
+                "2000",
+                ""
+        );
     }
 }
