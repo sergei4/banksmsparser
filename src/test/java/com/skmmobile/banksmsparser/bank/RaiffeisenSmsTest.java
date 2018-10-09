@@ -138,5 +138,12 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "13000",
                 ""
         );
+        checkBankSms(
+                "Karta *8104. Pokupka 20 RUR. ARPS.PRO. Balans 48885.88 RUR. 2018-10-09",
+                "expense",
+                "8104",
+                "20",
+                "ARPS.PRO"
+        );
     }
 }

@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/10/03 11:30</updated>
+    <updated>2018/10/10 00:25</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -2346,10 +2346,17 @@
     <patterns bankId="raiffeisen">
         <!--Karta *5884;Pokupka:780 RUR; RUS/MOSCOW/KINOMAX; Data: 2018-01-02;Dostupny Ostatok: 44452.19RUR. Raiffeisenbank-->
         <pattern category="expense">
-            <match><![CDATA[.*Pokupka.*]]></match>
+            <match><![CDATA[.*; Pokupka.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Pokupka:\s?(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[; (?!Pokupka)(.*); Data]]></detail>
+        </pattern>
+        <!--Karta *8104. Pokupka 20 RUR. ARPS.PRO. Balans 48885.88 RUR. 2018-10-09-->
+        <pattern category="expense">
+            <match><![CDATA[.*\. Pokupka.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Pokupka ?(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\. (?!Pokupka)(.*)\. Balans]]></detail>
         </pattern>
         <!--Karta *1118; Provedena tranzakcija: 3596 RUB; Data: 31/12/2017; OODJI Dostupny Ostatok: 135449.62 RUB. Raiffeisenbank-->
         <pattern category="expense">
