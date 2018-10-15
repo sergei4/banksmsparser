@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/10/10 00:25</updated>
+    <updated>2018/10/15 23:25</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -2382,6 +2382,12 @@
         <pattern category="zachislenie">
             <match><![CDATA[Zachislena zarplata.*]]></match>
             <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Zachislena zarplata (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Schet *6470. Zachislena zarplata 56885.05 RUR. Balans 105065.03 RUR.-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.* Zachislena zarplata.*]]></match>
+            <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
             <amount group="1"><![CDATA[Zachislena zarplata (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Zachislenie summy 52978.4 RUR s deposita na schet *0123. Balans 0 RUR. Raiffeisenbank-->

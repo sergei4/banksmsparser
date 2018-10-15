@@ -145,5 +145,12 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "20",
                 "ARPS.PRO"
         );
+        checkBankSms(
+                "Schet *6470. Zachislena zarplata 56885.05 RUR. Balans 105065.03 RUR.",
+                "zachislenie",
+                "Schet *6470",
+                "56885.05",
+                ""
+        );
     }
 }
