@@ -1,5 +1,5 @@
 group 'com.skmmobile'
-version '1.0.3-SNAPSHOT'
+version '1.3'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
@@ -55,7 +55,11 @@ task sourceJar(type: Jar) {
 publishing {
     repositories {
         maven {
-            url rootProject.ext.uploadConfig.marverRepo
+            url version.contains("SNAPSHOT") ? rootProject.ext.maven.snapshot : rootProject.ext.maven.release
+            credentials {
+                username rootProject.ext.maven.user
+                password rootProject.ext.maven.pwd
+            }
         }
     }
 
