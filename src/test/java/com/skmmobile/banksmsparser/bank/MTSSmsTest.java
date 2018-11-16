@@ -241,5 +241,75 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "1063",
                 "\"KAFE STULYA\">DUBNA RU"
         );
+        checkBankSms(
+                "Oplata *2594; 13.11 18:50; OAO CPPC>Moscow RU; 22,00 RUB; Ostatok: 1 487,72 RUB",
+                "expense",
+                "*2594",
+                "22",
+                "OAO CPPC>Moscow RU"
+        );
+        checkBankSms(
+                "Оплата    *1955; 08.11 20:57; HOFF KAZAN>KAZAN RU; 2 697,00 RUB; Остаток: 1 400,56 RUB",
+                "expense",
+                "*1955",
+                "2697",
+                "HOFF KAZAN>KAZAN RU"
+        );
+        checkBankSms(
+                "Пополнение    *1955; 08.11 20:46; 700,00 RUB; Остаток: 4 097,56 RUB",
+                "popolnenie",
+                "*1955",
+                "700",
+                ""
+        );
+        checkBankSms(
+                "Perevod s karty MR *7191; 09.10 08:07; TRANSF OWN>MOSCOW RU; 2 000,00 RUB; Ostatok: 350,44 RUB",
+                "perevod",
+                "MR *7191",
+                "2000",
+                ""
+        );
+        checkBankSms(
+                "Prihod po schetu karty MR *7191; 12 000,00 RUB; Ostatok: 12 350,44 RUB",
+                "popolnenie",
+                "MR *7191",
+                "12000",
+                ""
+        );
+        checkBankSms(
+                "Perevod s karty *4809; 13.11 07:34; MC VPP PAYMENT FROM MTSBANK>MOSCOW RU; 2 045,00 RUB; Ostatok: 3 192,04 RUB",
+                "perevod",
+                "*4809",
+                "2045",
+                ""
+        );
+        checkBankSms(
+                "Perevod na kartu *4809; 10.11 04:19; TRANSF OTHER>MOSCOW RU; 400,00 RUB; Ostatok: 5 386,04 RUB",
+                "perevod",
+                "*4809",
+                "400",
+                ""
+        );
+        checkBankSms(
+                "Popolnenie *6187; 08.11 19:42; 5 000,00 RUB; Ostatok: 5 032,93 RUB",
+                "popolnenie",
+                "*6187",
+                "5000",
+                ""
+        );
+        checkBankSms(
+                "Списание со счета 4081**2523 3000.00 RUR в пользу Баранова В.А.; Остаток: 41970.87 RUR. ПАО \"МТС-Банк\"",
+                "payment",
+                "4081**2523",
+                "3000",
+                ""
+        );
+        checkBankSms(
+                "Светлана Викторовна, на карту *4809 зачислен кэшбэк за предыдущую неделю: 54.23 RUR. Приятных выходных! Ваш МТС Банк",
+                "popolnenie",
+                "*4809",
+                "54.23",
+                ""
+        );
     }
 }

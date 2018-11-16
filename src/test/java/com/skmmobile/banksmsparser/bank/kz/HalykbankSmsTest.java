@@ -74,20 +74,82 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "300",
                 ""
         );
-        //Todo: Нужно разобрать
-//        checkBankSms(
-//                "2018-10-02 19:03:12 Operaciya po karte Snyatie nalichnyh 20000.00 KZT ATM 1071 IP KHABIBULLIN 400303**4108 Dostupnaya summa: 284994.98 KZT",
-//                "cash_atm",
-//                "400303**4108",
-//                "20000",
-//                ""
-//        );
-//        checkBankSms(
-//                "2018-10-02 04:51:01 Popolnenie 285000.00 KZT K**824 Dostupnaya summa:304994.98 KZT",
-//                "payment",
-//                "5**9835",
-//                "300",
-//                ""
-//        );
+        checkBankSms(
+                "2018-11-15 23:05:04 Pokupka 10945.00 KZT PINTA BAR&GRILL MEGA 377514**8930 Ostatok 358448.28 Go! bonus 682.11",
+                "expense",
+                "377514**8930",
+                "10945.00",
+                ""
+        );
+        checkBankSms(
+                "2018-11-14 17:41:07 Snyatie nalichnyh 10000.00 KZT ATM 1777 ALMATY KCELL 377514**8930 Ostatok 385483.28 KZT Go! bonus 682.11\n",
+                "cash_atm",
+                "377514**8930",
+                "10000",
+                ""
+        );
+        checkBankSms(
+                "2018-11-09 00:00:00 Popolnenie 286328.00 KZT K**041 Dostupnaya summa:287709.56 KZT",
+                "popolnenie",
+                "K**041",
+                "286328",
+                ""
+        );
+        checkBankSms(
+                "2018-11-12 22:41:04 Operaciya po karte CH Debit 23095.00 KZT P2P HB3 INNER 3D 4**744 Dostupnaya summa:164664.56 KZT",
+                "popolnenie",
+                "4**744",
+                "23095",
+                ""
+        );
+        checkBankSms(
+                "2018-10-19 13:10:27 Operaciya po karte Pokupka 126.24 GEL ROMPETROL (KAKHETI HIGHW 410799**9398 Dostupnaya summa: 389595.42\n",
+                "expense",
+                "410799**9398",
+                "126.24",
+                ""
+        );
+        checkBankSms(
+                "2018-10-03 16:00:06 Operaciya po karte Perevod na kartu 1600.00 KZT P2P HB TO OWN CARD 440563**0769 Dostupnaya summa: 514195.46 KZT",
+                "perevod",
+                "440563**0769",
+                "1600",
+                ""
+        );
+        checkBankSms(
+                "2018-10-25 19:38:51 Operaciya po karte Pokupka 6850.00 KZT LA TARTIN LLP 410799**9398 Dostupnaya summa: 379032.45",
+                "expense",
+                "410799**9398",
+                "6850",
+                ""
+        );
+        checkBankSms(
+                "2018-09-12 13:14:44 Operaciya po karte Snyatie nalichnyh 15000.00 KZT ATM 487 TTS RIO 400303**7816 Dostupnaya summa: 66791.00 KZT",
+                "cash_atm",
+                "400303**7816",
+                "15000",
+                ""
+        );
+        checkBankSms(
+                "2018-10-28 07:57:40 Snyatie nalichnyh 1000.00 KZT ATM 1025 ASAR SHOP 410799**9398 Ostakok 340209.45 KZT",
+                "cash_atm",
+                "410799**9398",
+                "1000",
+                ""
+        );
+        checkBankSms(
+                "2018-10-05 15:01:06 Operaciya po karte CH Payment 20000.00 KZT P2P HB TO OWN CARD 5**516 Dostupnaya summa:22848.36 KZT",
+                "payment",
+                "5**516",
+                "20000",
+                ""
+        );
+        checkBankSms(
+                "2018-10-08 10:23:18 Operaciya po karte ATM 10000.00 KZT ATM 871 AYAN PASSAZH 5**569 Dostupnaya summa:4562.74 KZT\n",
+                "cash_atm",
+                "5**569",
+                "10000",
+                ""
+        );
     }
 }

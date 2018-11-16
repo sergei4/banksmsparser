@@ -317,3 +317,7 @@ Karta *4664; Otkaz: nedostatochno sredstv; Summa: 59.00 RUB; Data: 12/03/2018; I
 SMS-код: PB65
 
 Яндекс.Деньги: новый штраф ГИБДД на 250.00 руб. clck.ru/EMcxc
+
+Код 2321 для входа в МТС Банк Онлайн.
+
+Vipusk karty *2504; 09.11 13:10; Google Pay; Karta dobavlena
