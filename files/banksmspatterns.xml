@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2018/11/16 11:45</updated>
+    <updated>2018/12/27 00:10</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -252,7 +252,7 @@
         <!--<service_phone bankId="mosoblbank">MOSOBLBANK</service_phone>-->
         <!--<service_phone bankId="prominvest">PROMINVEST</service_phone>-->
         <service_phone bankId="oschadbank">Oschadbank</service_phone>
-        <service_phone bankId="kaspibank">KaspiBank,KaspiGold</service_phone>
+        <service_phone bankId="kaspibank">KaspiBank,KaspiGold,Kaspi Gold</service_phone>
         <service_phone bankId="halykbank">5959,7111</service_phone>
         <service_phone bankId="qazkom">7000</service_phone>
         <service_phone bankId="belarusbank">ASB</service_phone>
@@ -2765,9 +2765,15 @@
         </pattern>
         <!--VISA0000 10.12.17 оплата Мобильного банка за 10/12/2017-09/01/2018 60р Баланс: 00000.00р-->
         <pattern category="service_pay">
-            <match><![CDATA[.*оплата\sМобильного\sбанка.*]]></match>
+            <match><![CDATA[.*оплата Мобильного банка.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="2"><![CDATA[(\/\d{4}\s)(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--MAES3569 25.12.18 мобильный банк за 25.12-24.01 30р Баланс: 81124.96р-->
+        <pattern category="service_pay">
+            <match><![CDATA[.*мобильный банк за.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="2"><![CDATA[(\-\d{2}\.\d{2}\s)(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA2020 21.12.17 06:23 оплата годового обслуживания карты 150р Баланс: 112.14р-->
         <pattern category="service_pay">

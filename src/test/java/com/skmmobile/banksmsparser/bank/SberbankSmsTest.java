@@ -468,5 +468,12 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "390",
                 "indefinite"
         );
+        checkBankSms(
+                "MAES3569 25.12.18 мобильный банк за 25.12-24.01 30р Баланс: 81124.96р",
+                "service_pay",
+                "MAES3569",
+                "30",
+                ""
+        );
     }
 }
