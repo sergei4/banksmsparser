@@ -61,5 +61,33 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
                 "2000",
                 ""
         );
+        checkBankSms(
+                "Vydacha nalichnykh karta:6129 summa:1900.00 RUR balans:3072.32 RUR 19-02-27 12:01:30",
+                "cash_atm",
+                "6129",
+                "1900.00",
+                ""
+        );
+        checkBankSms(
+                "Beznalichnyy perevod Karta:6129 summa:1005.24 RUR balans:14057.45 RUR Transfer 19-01-22 20:16:24",
+                "perevod",
+                "6129",
+                "1005.24",
+                ""
+        );
+        checkBankSms(
+                "Zachislenie zarplaty Karta:6129 summa:5220.00 RUR balans:9532.24 RUR 000000000000401000000611783271 19-02-20 13:20:24",
+                "zachislenie",
+                "6129",
+                "5220.00",
+                ""
+        );
+        checkBankSms(
+                "Perevod denezhnykh sredstv po kartam Banka Karta:6129 summa:13500.00 RUR balans:15518.70 RUR CURR=RUR 19-01-30 15:37:02",
+                "perevod",
+                "6129",
+                "13500",
+                ""
+        );
     }
 }

@@ -145,10 +145,17 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "2018-10-08 10:23:18 Operaciya po karte ATM 10000.00 KZT ATM 871 AYAN PASSAZH 5**569 Dostupnaya summa:4562.74 KZT\n",
+                "2018-10-08 10:23:18 Operaciya po karte ATM 10000.00 KZT ATM 871 AYAN PASSAZH 5**569 Dostupnaya summa:4562.74 KZT",
                 "cash_atm",
                 "5**569",
                 "10000",
+                ""
+        );
+        checkBankSms(
+                "2019-02-28 16:14:03 Operaciya po karte Платеж на Deposit HB 10000.00 KZT платеж на депозит HB K**274 Dostupnaya summa:12218.75 KZT",
+                "payment",
+                "K**274",
+                "10000.00",
                 ""
         );
     }
