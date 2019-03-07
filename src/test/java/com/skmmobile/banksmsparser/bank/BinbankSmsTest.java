@@ -80,5 +80,12 @@ public class BinbankSmsTest extends AbsXmlBankSmsTest {
                 "3126.08",
                 ""
         );
+        checkBankSms(
+                "Karta MC *1304 popolnena na 3488,00 RUR. Dostupno vsego 8822,00 RUR. AO BINBANK Digital Telefon 8 800 200 50 75",
+                "popolnenie",
+                "MC *1304",
+                "3488",
+                ""
+        );
     }
 }

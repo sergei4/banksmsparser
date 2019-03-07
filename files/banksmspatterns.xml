@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/03/03 13:20</updated>
+    <updated>2019/03/07 11:10</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -380,6 +380,9 @@
         <system_sms bankId="oschadbank"><![CDATA[.*Vy uspishno uvijshly do WEB\(Mobile\)-bankingu.*]]></system_sms>
         <system_sms bankId="otkritie"><![CDATA[Vhod v bank-klient.*]]></system_sms>
         <system_sms bankId="otkritie"><![CDATA[Вы платите картой.*Никому не говорите этот код.*]]></system_sms>
+        <system_sms bankId="otkritie"><![CDATA[Вы зашли в Бинбанк online.*]]></system_sms>
+        <system_sms bankId="otkritie"><![CDATA[.*НИКОМУ НЕ ГОВОРИТЕ ЭТОТ КОД.*]]></system_sms>
+        <system_sms bankId="otkritie"><![CDATA[.*СМС-код.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Вход в Мобильный банк.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Вход в Интернет банк.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Карта.*Проверка карты.*]]></system_sms>
@@ -866,9 +869,10 @@
             <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta VISA *3872 popolnena na 3126,08 RUR. Dostupno vsego 13222,20 RUR. BINBANK Telefon 8 800 200 50 75-->
+        <!--Karta MC *1304 popolnena na 3488,00 RUR. Dostupno vsego 8822,00 RUR. AO BINBANK Digital Telefon 8 800 200 50 75-->
         <pattern category="popolnenie">
             <match><![CDATA[Karta.*popolnena.*]]></match>
-            <cardId group="0"><![CDATA[VISA \*\d+]]></cardId>
+            <cardId group="0"><![CDATA[(VISA|MC) \*\d+]]></cardId>
             <amount group="1"><![CDATA[popolnena na (\d*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
         </pattern>
@@ -2052,6 +2056,20 @@
             <amount group="1"><![CDATA[Платёж ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Покупка по карте: *1304 49.00 р. Место G.CO HELPPAY# GOOGLE*SKM  Баланс: 1397.09 р. i.binbank.ru-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка по карте.*]]></match>
+            <cardId group="1"><![CDATA[по карте: \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\*\d+ ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Pokupka po karte: *1304 72.80 r. Mesto SANKT-PETERBU PEREKRESTOK  Balans: 17414.05 r. i.binbank.ru-->
+        <pattern category="expense">
+            <match><![CDATA[Pokupka po karte.*]]></match>
+            <cardId group="1"><![CDATA[po karte: \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\*\d+ ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Вы сняли 10 000 р. в банкомате CENTRAL OFFICE с карты *0988. Доступно 16 866.6 р.-->
         <pattern category="cash_atm">
             <match><![CDATA[Вы сняли.*]]></match>
@@ -2087,8 +2105,15 @@
             <amount group="1"><![CDATA[Вы внесли ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Вам перевели  14 200 р. на карту *3686. Доступно 120 232.33 р.-->
+        <pattern category="poplnenie">
+            <match><![CDATA[Вам перевели.*]]></match>
+            <cardId group="1"><![CDATA[на карту \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Вам перевели ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Вы перевели 5 481 р. с карты *7237. Доступно 576.92 р.-->
-        <pattern category="popolnenie">
+        <pattern category="payment">
             <match><![CDATA[Вы перевели.*]]></match>
             <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Вы перевели ([\d\s]+\.?\d{1,2})]]></amount>

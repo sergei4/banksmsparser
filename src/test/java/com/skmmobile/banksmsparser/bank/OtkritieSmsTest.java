@@ -75,7 +75,7 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 "Вы перевели 5 481 р. с карты *7237. Доступно 576.92 р.",
-                "popolnenie",
+                "payment",
                 "7237",
                 "5481",
                 ""
@@ -99,6 +99,27 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "4460*2368",
                 "22.89",
+                ""
+        );
+        checkBankSms(
+                "Покупка по карте: *1304 49.00 р. Место G.CO HELPPAY# GOOGLE*SKM  Баланс: 1397.09 р. i.binbank.ru",
+                "expense",
+                "1304",
+                "49",
+                ""
+        );
+        checkBankSms(
+                "Вам перевели  14 199 р. на карту *3686. Доступно 50 660.71 р.\n",
+                "poplnenie",
+                "3686",
+                "14199",
+                ""
+        );
+        checkBankSms(
+                "Pokupka po karte: *1304 72.80 r. Mesto SANKT-PETERBU PEREKRESTOK  Balans: 17414.05 r. i.binbank.ru",
+                "expense",
+                "1304",
+                "72.80",
                 ""
         );
     }
