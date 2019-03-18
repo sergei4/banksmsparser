@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/03/07 11:10</updated>
+    <updated>2019/03/19 01:10</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -2112,11 +2112,32 @@
             <amount group="1"><![CDATA[Вам перевели ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Карта MC *1304 пополнена на 5348 р.. Доступно всего 5348,07 р..  Телефон 8 800 200 50 75-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Карта.*пополнена на.*]]></match>
+            <cardId group="1"><![CDATA[Карта ((VISA|MC) \*\d+)]]></cardId>
+            <amount group="1"><![CDATA[пополнена на ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--Вы перевели 5 481 р. с карты *7237. Доступно 576.92 р.-->
         <pattern category="payment">
             <match><![CDATA[Вы перевели.*]]></match>
             <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Вы перевели ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Списание с карты *1304 900 р. Место S.-PETERBURG Alfa Iss 24A KOLOMYAZS  Баланс: 3487.18 р. i.binbank.ru-->
+        <pattern category="payment">
+            <match><![CDATA[Списание с карты.*]]></match>
+            <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\*\d+ ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Перевод с карты *1304 на счет 531 р. . Баланс: 4817.07 р.. i.binbank.ru-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод с карты.*на счет.*]]></match>
+            <cardId group="1"><![CDATA[с карты \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[на счет ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
@@ -2131,9 +2152,59 @@
     <patterns bankId="pochtabank">
         <!--Счёт договора 20770680 пополнен на 11000.00р. Баланс 11157.56р.-->
         <pattern category="popolnenie">
-            <match><![CDATA[Счёт договора.*пополнен.*]]></match>
+            <match><![CDATA[Счёт договора.*пополнен на.*]]></match>
             <cardId group="1"><![CDATA[Счёт договора ([\d]+)]]></cardId>
             <amount group="1"><![CDATA[пополнен на ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Счёт договора 22806795. Пополнение на 3204.74р. Доступно 3228.53р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Счёт договора.*Пополнение на.*]]></match>
+            <cardId group="1"><![CDATA[Счёт договора ([\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение на ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Операция выполнена 14.04.2018 12:45.
+            Внесение наличных на счет в Почта Банке.
+            Сумма 1000.00 руб.
+            Подробнее my.pochtabank.ru. ПАО "Почта Банк"-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Внесение наличных на счет.*]]></match>
+            <cardId group="0" default="pochtabank"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Сумма ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--По карте  08.04.2018 08:27 пополнение счёта на сумму 500.00 руб. ПАО "Почта Банк"-->
+        <pattern category="popolnenie">
+            <match><![CDATA[По карте.*пополнение счёта.*]]></match>
+            <cardId group="0" default="pochtabank_card"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[на сумму ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--По договору  12.03.2018 19:47 пополнение счёта на сумму 5000.00 руб. ПАО "Почта Банк"-->
+        <pattern category="popolnenie">
+            <match><![CDATA[По договору.*пополнение счёта.*]]></match>
+            <cardId group="0" default="pochtabank_account"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[на сумму ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--POCHTABANK (pochtabank)
+            Карта 4*8274
+            23.03.18 17:22
+            Зачислено 30000.00 RUB
+            VISA MONEY TRANSFER Visa Direct Russia
+            Доступно 30660.28 RUB-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Карта.*Зачислено.*]]></match>
+            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Зачислено 20.00 р. на вклад 29130517. Сумма вклада 894.09 р. ПАО "Почта Банк"-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Зачислено.*на вклад.*]]></match>
+            <cardId group="1"><![CDATA[на вклад ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--По договору 22968660 выплачены проценты 4.84 р. за Март 2018.-->
+        <pattern category="zachislenie">
+            <match><![CDATA[По договору.*выплачены проценты.*]]></match>
+            <cardId group="1"><![CDATA[По договору ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[выплачены проценты ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
         <!--Карта 4*8274
         12.03.18 12:19
@@ -2189,51 +2260,6 @@
             <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Получение наличных ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
-        <!--POCHTABANK (pochtabank)
-        Карта 4*8274
-        23.03.18 17:22
-        Зачислено 30000.00 RUB
-        VISA MONEY TRANSFER Visa Direct Russia
-        Доступно 30660.28 RUB-->
-        <pattern category="zachislenie">
-            <match><![CDATA[Карта.*Зачислено.*]]></match>
-            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
-            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--Зачислено 20.00 р. на вклад 29130517. Сумма вклада 894.09 р. ПАО "Почта Банк"-->
-        <pattern category="zachislenie">
-            <match><![CDATA[Зачислено.*на вклад.*]]></match>
-            <cardId group="1"><![CDATA[на вклад ([\d\*]+)]]></cardId>
-            <amount group="1"><![CDATA[Зачислено ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--По договору 22968660 выплачены проценты 4.84 р. за Март 2018.-->
-        <pattern category="zachislenie">
-            <match><![CDATA[По договору.*выплачены проценты.*]]></match>
-            <cardId group="1"><![CDATA[По договору ([\d\*]+)]]></cardId>
-            <amount group="1"><![CDATA[выплачены проценты ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--Операция выполнена 14.04.2018 12:45.
-        Внесение наличных на счет в Почта Банке.
-        Сумма 1000.00 руб.
-        Подробнее my.pochtabank.ru. ПАО "Почта Банк"-->
-        <pattern category="popolnenie">
-            <match><![CDATA[.*Внесение наличных на счет.*]]></match>
-            <cardId group="0" default="pochtabank"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[Сумма ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--По карте  08.04.2018 08:27 пополнение счёта на сумму 500.00 руб. ПАО "Почта Банк"-->
-        <pattern category="popolnenie">
-            <match><![CDATA[По карте.*пополнение счёта.*]]></match>
-            <cardId group="0" default="pochtabank_card"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[на сумму ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-        <!--По договору  12.03.2018 19:47 пополнение счёта на сумму 5000.00 руб. ПАО "Почта Банк"-->
-        <pattern category="popolnenie">
-            <match><![CDATA[По договору.*пополнение счёта.*]]></match>
-            <cardId group="0" default="pochtabank_account"><![CDATA[noname]]></cardId>
-            <amount group="1"><![CDATA[на сумму ([\d]+\.?\d{1,2})]]></amount>
-        </pattern>
-
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->

@@ -122,5 +122,26 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "72.80",
                 ""
         );
+        checkBankSms(
+                "Списание с карты *1304 900 р. Место S.-PETERBURG Alfa Iss 24A KOLOMYAZS  Баланс: 3487.18 р. i.binbank.ru",
+                "payment",
+                "1304",
+                "900",
+                ""
+        );
+        checkBankSms(
+                "Карта MC *1304 пополнена на 5348 р.. Доступно всего 5348,07 р..  Телефон 8 800 200 50 75",
+                "popolnenie",
+                "MC *1304",
+                "5348",
+                ""
+        );
+        checkBankSms(
+                "Перевод с карты *1304 на счет 531 р. . Баланс: 4817.07 р.. i.binbank.ru",
+                "perevod",
+                "1304",
+                "531",
+                ""
+        );
     }
 }

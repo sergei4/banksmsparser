@@ -132,5 +132,12 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "3531.19",
                 ""
         );
+        checkBankSms(
+                "Счёт договора 22806795. Пополнение на 3204.74р. Доступно 3228.53р",
+                "popolnenie",
+                "22806795",
+                "3204.74",
+                ""
+        );
     }
 }
