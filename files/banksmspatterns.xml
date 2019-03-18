@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/03/19 01:10</updated>
+    <updated>2019/03/19 01:40</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -964,8 +964,9 @@
             <amount group="1"><![CDATA[Платеж (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--*1480 Предавторизация 2500р POGASH. ZADOLJENNOSTI 22.06.18 19:49:35 Доступно 9588.08р-->
+        <!--*7259 19:10 Предавторизация 115р taximaxim.ru Доступно 21832.88р-->
         <pattern category="payment">
-            <match><![CDATA[^\*\d+ Предавторизация.*]]></match>
+            <match><![CDATA[^\*\d+.*Предавторизация.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Предавторизация (\d*.?\d{1,2})]]></amount>
         </pattern>
@@ -997,14 +998,16 @@
             <detail group="1"><![CDATA[\:\d{2};\s([^;]*);]]></detail>
         </pattern>
         <!--*5818 -423р MAGAZIN GORIZONT 01.03.18 13:46 Доступно 7323.53р-->
+        <!--*9428 12:18 -3323р SPISANIE PO KREDITU Доступно 1809.86р-->
         <pattern category="expense">
-            <match><![CDATA[^\*\d+ -\d.*]]></match>
-            <cardId group="1"><![CDATA[^\*(\d+) -\d+]]></cardId>
-            <amount group="1"><![CDATA[^\*\d+ -(\d*.?\d{1,2})]]></amount>
+            <match><![CDATA[\*\d+( [\d\:]+)? -\d.*]]></match>
+            <cardId group="1"><![CDATA[\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[\*\d+[\s\d\:]* -(\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--*3164 Покупка 528р VERNYY 01.06.18 17:59:50 Доступно 14798.44р-->
+        <!--*8980 20:19 Покупка 809.24р PYATEROCHKA 4096 Доступно 1000 р-->
         <pattern category="expense">
-            <match><![CDATA[^\*\d+ Покупка.*]]></match>
+            <match><![CDATA[^\*\d+.*Покупка.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Покупка (\d*.?\d{1,2})]]></amount>
         </pattern>
@@ -1020,6 +1023,12 @@
             <match><![CDATA[^\*\d+ Наличные.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Наличные (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*0621 13:02 Снятие 800р GAZPROMBANK Доступно 164259.39р-->
+        <pattern category="cash_atm">
+            <match><![CDATA[^\*\d+.*Снятие.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Снятие (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card5621;Card1691;CUP Standard;Card1963;Card9047; 10.01.18 12:52:12; Zachislenie; 21162.48 RUR; dostupno: 46786.71 RUR-->
         <pattern category="zachislenie">
@@ -1059,8 +1068,9 @@
             <amount group="1"><![CDATA[Получен перевод (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--*5563 Внесение 35000р GAZPROMBANK 24.06.18 13:46:16 Доступно 35056.89р-->
+        <!--*7259 15:00 Внесение 50000р GAZPROMBANK Доступно 50205.52р-->
         <pattern category="popolnenie">
-            <match><![CDATA[^\*\d+ Внесение.*]]></match>
+            <match><![CDATA[^\*\d+.*Внесение.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Внесение (\d*.?\d{1,2})]]></amount>
         </pattern>
@@ -1078,8 +1088,9 @@
             <amount group="1"><![CDATA[Summa\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--*5818 Перевод 1500р BANK SPB IB 06.06.18 11:03:21 Доступно 6875.37р-->
+        <!--*7259 15:36 Перевод 1517р VTB PJSC Доступно 48688.52р-->
         <pattern category="perevod">
-            <match><![CDATA[^\*\d+ Перевод.*]]></match>
+            <match><![CDATA[^\*\d+.*Перевод.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Перевод (\d*.?\d{1,2})]]></amount>
         </pattern>

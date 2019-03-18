@@ -312,5 +312,54 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "7995.00",
                 ""
         );
+        checkBankSms(
+                "*8980 20:19 Покупка 809.24р PYATEROCHKA 4096 Доступно 1000 р",
+                "expense",
+                "8980",
+                "809.24",
+                ""
+        );
+        checkBankSms(
+                "*7259 15:00 Внесение 50000р GAZPROMBANK Доступно 50205.52р",
+                "popolnenie",
+                "7259",
+                "50000",
+                ""
+        );
+        checkBankSms(
+                "*7259 15:36 Перевод 1517р VTB PJSC Доступно 48688.52р",
+                "perevod",
+                "7259",
+                "1517",
+                ""
+        );
+        checkBankSms(
+                "*7259 19:10 Предавторизация 115р taximaxim.ru Доступно 21832.88р",
+                "payment",
+                "7259",
+                "115",
+                ""
+        );
+        checkBankSms(
+                "*0621 13:02 Снятие 800р GAZPROMBANK Доступно 164259.39р",
+                "cash_atm",
+                "0621",
+                "800",
+                ""
+        );
+        checkBankSms(
+                "*9428 12:18 -3323р SPISANIE PO KREDITU Доступно 1809.86р",
+                "expense",
+                "9428",
+                "3323",
+                ""
+        );
+        checkBankSms(
+                "*1844 15:11 -329.99р YARCHE Доступно 538.08р Использовано 105461.92р",
+                "expense",
+                "1844",
+                "329.99",
+                ""
+        );
     }
 }
