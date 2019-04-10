@@ -108,5 +108,19 @@ public class PromsvyazbankSmsTest extends AbsXmlBankSmsTest {
                 "68000",
                 ""
         );
+        checkBankSms(
+                "Karta *5131: Vnesenie 21 000.00 RUR;15:26;MOSCOW;PSB-RETAIL 00777782.Dostupno ....",
+                "popolnenie",
+                "5131",
+                "21000",
+                ""
+        );
+        checkBankSms(
+                "Karta *5131: Snyatie v ATM 22 700.00 RUR;15:34;Moscow;Promsvyazbank.Dostupno ...",
+                "cash_atm",
+                "5131",
+                "22700",
+                ""
+        );
     }
 }

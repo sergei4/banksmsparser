@@ -469,10 +469,45 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "indefinite"
         );
         checkBankSms(
-                "MAES3569 25.12.18 мобильный банк за 25.12-24.01 30р Баланс: 81124.96р",
+                "MAES7066 01.03.19 мобильный банк за 28.02-30.03 30р Баланс: 231.21р",
                 "service_pay",
-                "MAES3569",
+                "MAES7066",
                 "30",
+                ""
+        );
+        checkBankSms(
+                "MAES4005 13:40 Зачисление 2272р Баланс: 2711.13р Перейти в историю уведомлений sberbank.ru/sms/n/",
+                "zachislenie",
+                "MAES4005",
+                "2272",
+                ""
+        );
+        checkBankSms(
+                "VISA9843 00:58 Зачисление зарплаты 26863.66р Баланс: 27363.66р",
+                "zachislenie",
+                "VISA9843",
+                "26863.66",
+                ""
+        );
+        checkBankSms(
+                "VISA2396 12:56 Зачисление пенсии 5500р Баланс: 20667.13р",
+                "zachislenie",
+                "VISA2396",
+                "5500",
+                ""
+        );
+        checkBankSms(
+                "ECMC8878 10:21 Зачисление 35000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/",
+                "zachislenie",
+                "ECMC8878",
+                "35000",
+                "ATM 10117373"
+        );
+        checkBankSms(
+                "VISA4570: пополнение Копилки на \"Сберегательный счет\" на 177.4руб.",
+                "popolnenie",
+                "VISA4570",
+                "177.4",
                 ""
         );
     }

@@ -152,5 +152,41 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "56885.05",
                 ""
         );
+        checkBankSms(
+                "Карта *9622. Покупка 1370.07 RUR. VKUSVILL 875_2. Balans 13975.15 RUR. 2019-02-05",
+                "expense",
+                "9622",
+                "1370.07",
+                "VKUSVILL 875_2"
+        );
+        // Ukraine
+        checkBankSms(
+                "Vasha operatsija: 23.03.2019 16:27:58 VISA Gold/3306 98.00 UAH McDonald's 077 dostupna suma",
+                "expense",
+                "VISA Gold/3306",
+                "98",
+                ""
+        );
+        checkBankSms(
+                "05.04.2019 na rakhunok 1120814700(UAH) zarakhovano 13845.30 UAH",
+                "popolnenie",
+                "1120814700",
+                "13845.30",
+                ""
+        );
+        checkBankSms(
+                "Vasha operatsija: 04.03.2019 08:58:23 Visa Gold/1792 66.56 UAH Silpo dostupna suma 2706.77 UAH",
+                "expense",
+                "Visa Gold/1792",
+                "66.56",
+                ""
+        );
+        checkBankSms(
+                "Vasha operatsija: 03.02.2019 11:21:40 Mastercard Instant/5619 146.30 UAH SHOP ATB PR199 dostupna suma 9709.70 UAH",
+                "expense",
+                "Mastercard Instant/5619",
+                "146.30",
+                ""
+        );
     }
 }

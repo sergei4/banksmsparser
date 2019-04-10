@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/03/19 01:40</updated>
+    <updated>2019/04/10 18:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -20,6 +20,7 @@
         <operation name="service_pay">Комиссии, оплата интернет-банка и пр.</operation>
     </operations>
     <banks>
+        <bank id="fakebank">FakeBank</bank>
         <bank id="tinkoff">Тинькофф</bank>
         <bank id="alfabank">Альфа-Банк</bank>
         <bank id="sberbank">Сбербанк России</bank>
@@ -138,6 +139,7 @@
         <bank id="devoncredit">DevonCredit</bank>
         <bank id="vostbank">Восточный банк</bank>
         <bank id="sovcombank">Совкомбанк</bank>
+        <bank id="roundbank">RoundBank</bank>
     </banks>
     <bank_phones>
         <phone bankId="tinkoff">Tinkoff</phone>
@@ -155,6 +157,7 @@
         <phone bankId="minbank">6462</phone>
         <phone bankId="sbsibank">SBSIBANK.BY</phone>
         <!--Начиная с v2-->
+        <service_phone bankId="fakebank">+16505556789,6505551212</service_phone>
         <service_phone bankId="tinkoff">Tinkoff,tinkoff</service_phone>
         <service_phone bankId="sberbank">900,+79262000900,+79165723900,+79219039831,SBERBANK</service_phone>
         <service_phone bankId="alfabank">+79037672265,2265,Alfa-Bank</service_phone>
@@ -272,6 +275,7 @@
         <service_phone bankId="yandexmoney">1960</service_phone>
         <service_phone bankId="devoncredit">DevonCredit</service_phone>
         <service_phone bankId="vostbank">7394</service_phone>
+        <service_phone bankId="roundbank">5555</service_phone>
     </bank_phones>
     <system>
         <system_sms bankId="all"><![CDATA[.*(к|Карта).*активирована.*]]></system_sms>
@@ -441,6 +445,7 @@
         <system_sms bankId="rosselhoz"><![CDATA[Кредит на любые цели.*]]></system_sms>
         <system_sms bankId="rnkb"><![CDATA[V nastoyaschiy moment operaciya.*ne mojet byt vypolnena.*]]></system_sms>
         <system_sms bankId="rnkb"><![CDATA[Vhod v InternetBank.*Sessiya.*]]></system_sms>
+        <system_sms bankId="rnkb"><![CDATA[Вы открываете Клиентскую сессию.*]]></system_sms>
         <system_sms bankId="rsb"><![CDATA[Внесите платеж.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(в|В)ыполнена оплата услуги.*]]></system_sms>
         <system_sms bankId="sberbank"><![CDATA[.*(д|Д)ля.*отправьте (SMS|sms|СМС|смс).*]]></system_sms>
@@ -497,7 +502,8 @@
         <system_sms bankId="tinkoff"><![CDATA[Отказ.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Отказ.*Недостаточно средств]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Отмена.*]]></system_sms>
-        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod!.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot kod.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Никому не говорите код.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Nikomu ne govorite etot SMS-kod.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Otkaz.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Spasibo, chto vybrali nas.*]]></system_sms>
@@ -534,6 +540,43 @@
         <system_sms bankId="vtb24"><![CDATA[VTB24-Online: Obrabotano rasporyazhenie.*]]></system_sms>
         <system_sms bankId="vtb24"><![CDATA[Яндекс.Деньги: новый штраф ГИБДД.*]]></system_sms>
     </system>
+    <patterns bankId="fakebank">
+        <!--5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
+        <!--**1175; Pokupka; Uspeshno; Summa: 155 RUR; Ostatok: 412,55 RUR; RU/Chelyabinsk/VKUSNYE PRODUKTY; 28.02.2018 15:32:35-->
+        <pattern category="expense">
+            <match><![CDATA[.*\sPokupka\;.*]]></match>
+            <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\,?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[Ostatok:\s[0-9,]*\s.*;\s([^;]*);]]></detail>
+            <decimal_char>,</decimal_char>
+        </pattern>
+        <!--5*9857; Postupleniye; Summa: 1300,00 RUR; Ostatok: 137482,27 RUR; 03.12.2017; Otkrojte schet 'Semejnyj' v mobil'nom banke https://alfabank.ru/app-->
+        <!--**4228; Postupleniye; Summa: 1500 RUR; Ostatok: 1609,11 RUR; 28.02.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
+        <!--**7897; Postupleniye; Summa: 1 010 RUR; Ostatok: 1 253,43 RUR; 20.03.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Postupleniye\;.*]]></match>
+            <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: ([\d\s]*\,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!-- Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02-->
+        <pattern category="perevod">
+            <match><![CDATA[Spisanie so scheta.*]]></match>
+            <cardId group="1"><![CDATA[Spisanie\sso\sscheta\s(.*)\sna]]></cardId>
+            <amount group="1"><![CDATA[na summu\s(.*)\sRUR]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
+        <!--**9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Vydacha nalichnyh.*]]></match>
+            <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa: (\d*\,?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[Ostatok:\s[0-9,]*\s.*;\s([^;]*);]]></detail>
+            <decimal_char>,</decimal_char>
+        </pattern>
+    </patterns>
     <patterns bankId="alfabank">
         <!--5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
         <!--**1175; Pokupka; Uspeshno; Summa: 155 RUR; Ostatok: 412,55 RUR; RU/Chelyabinsk/VKUSNYE PRODUKTY; 28.02.2018 15:32:35-->
@@ -1007,8 +1050,8 @@
         <!--*3164 Покупка 528р VERNYY 01.06.18 17:59:50 Доступно 14798.44р-->
         <!--*8980 20:19 Покупка 809.24р PYATEROCHKA 4096 Доступно 1000 р-->
         <pattern category="expense">
-            <match><![CDATA[^\*\d+.*Покупка.*]]></match>
-            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <match><![CDATA[\*?\d+.*Покупка.*]]></match>
+            <cardId group="1"><![CDATA[\*?(\d+)]]></cardId>
             <amount group="1"><![CDATA[Покупка (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card8381; Snyatie nalichnih; Summa 14900 RUR; 14.12.17 13:23:35; GAZPROMBANK; dostupno: 11599.23 RUR-->
@@ -1225,6 +1268,12 @@
             <match><![CDATA[Spisanie.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Spisanie:([\s\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Popolnenie: 29000.00 RUR. Karta *3681. Otpravitel' perevoda HOMENKO IRINA. 11.03.2019 11:51:52.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popolnenie.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie: ([\s\d]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="karta_sovest">
@@ -1475,9 +1524,18 @@
         Доступно: 661.57RUB
         Терминал: 20002101,YM*AliExpress,Moscow,RU-->
         <pattern category="expense">
-            <match><![CDATA[Предавторизация.*]]></match>
+            <match><![CDATA[Предавторизация Дата.*]]></match>
             <cardId group="1"><![CDATA[Карта: \*+(\d+)]]></cardId>
             <amount group="1"><![CDATA[Сумма: (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Предавторизация
+        Сумма 223.25RUB
+        ROSTELECOM
+        13/02 10:42 карта *0556-->
+        <pattern category="expense">
+            <match><![CDATA[Предавторизация Сумма.*карта.*]]></match>
+            <cardId group="1"><![CDATA[карта \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Сумма (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Perevod cherez POS-terminal na kartu
         Data: 17/01 21:50
@@ -1739,6 +1797,20 @@
             <amount group="1"><![CDATA[POKUPKA: ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--MKB: 30.12.2018 21:24 5*7409 ПОКУПКА: 1 725.57 RUB KARUSEL. баланс: 1 403.14 RUB.-->
+        <pattern category="expense">
+            <match><![CDATA[.*ПОКУПКА:.*]]></match>
+            <cardId group="0"><![CDATA[\d\*\d{4}(?=\sПОКУПКА)]]></cardId>
+            <amount group="1"><![CDATA[ПОКУПКА: ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Карта*1311 Покупка 60.00р APTEKA Баланс 3695.86р-->
+        <pattern category="expense">
+            <match><![CDATA[.*Покупка.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*\d+]]></cardId>
+            <amount group="1"><![CDATA[Покупка ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
         <!--MKB: 11.01.2018 03:37 5*3758 SPISANIE: 3 895.95 RUB MCBA. Balance: 240 359.15. Blokirovka kart - SMS "All" na +79037672667-->
         <pattern category="payment">
             <match><![CDATA[.*SPISANIE:.*]]></match>
@@ -1751,6 +1823,13 @@
             <match><![CDATA[.*POPOLNENIE:.*]]></match>
             <cardId group="0"><![CDATA[\d\*\d{4}(?=\sPOPOLNENIE)]]></cardId>
             <amount group="1"><![CDATA[POPOLNENIE: ([\d\s]+\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Карта*1311 Пополнение 30030.00р Баланс 33725.86р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*Пополнение.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*\d+]]></cardId>
+            <amount group="1"><![CDATA[Пополнение ([\d\s]+\.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--MKB: 13.02.2018 16:20 4*2800 NALICHNIE: 50 000.00 RUB ATM 983 MKB 810. Balance: 13 616.24 RUB. Blokirovka kart - SMS "All" na +79037672667-->
@@ -1831,16 +1910,17 @@
             <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
             <amount group="1"><![CDATA[NALICHNYE (\d*.?\d{1,2})]]></amount>
         </pattern>
-        <!--KARTA:5351*1199
-        05/02/18 18:46
-        PEREVOD 20.00 BYN
-        P2P MTBANK, PEREVOD, MINSK
-        OSTATOK 36.08 BYN
+        <!--KARTA:5351*3796
+        29/03/19 17:43
+        PEREVOD 1 100.00 BYN
+        P2P_MTBANK, PEREVOD, MINSK
+        OSTATOK 1 100.36 BYN
         Spr.:5099999-->
         <pattern category="perevod">
             <match><![CDATA[KARTA.*PEREVOD.*]]></match>
             <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
-            <amount group="1"><![CDATA[PEREVOD (\d*.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[PEREVOD ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
     <patterns bankId="mtsbank">
@@ -2117,7 +2197,7 @@
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Вам перевели  14 200 р. на карту *3686. Доступно 120 232.33 р.-->
-        <pattern category="poplnenie">
+        <pattern category="popolnenie">
             <match><![CDATA[Вам перевели.*]]></match>
             <cardId group="1"><![CDATA[на карту \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Вам перевели ([\d\s]+\.?\d{1,2})]]></amount>
@@ -2376,7 +2456,14 @@
             <amount group="1"><![CDATA[Snyatie nalichnyh v bankomate ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
-        <!--Karta *8139: Snyatie nalichnyh v bankomate 4 700.00 RUR; 11/01, 19:09;SAMARA;ATM 10150168 304A KIRO.Dostupno 42.78 RUR.-->
+        <!--Karta *5131: Snyatie v ATM 22 700.00 RUR;15:34;Moscow;Promsvyazbank.Dostupno ...-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Karta.*Snyatie v ATM [\s\d]*\.\d+.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Snyatie v ATM ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Karta *8139: Snyatie nalichnyh v bankomate 4 700,00 RUR; 11/01, 19:09;SAMARA;ATM 10150168 304A KIRO.Dostupno 42.78 RUR.-->
         <pattern category="cash_atm">
             <match><![CDATA[Karta.*Snyatie nalichnyh v bankomate [\s\d]*\,\d+.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
@@ -2385,10 +2472,11 @@
             <decimal_char>,</decimal_char>
         </pattern>
         <!--Karta *5131: Vnesenie sredstv 2 793.97 RUR; 03/05, 13:47;MOSCOW;PSB-RETAIL 00777781.Dostupno 15 994,59 RUR (v t.ch. kredit 15 000,00 RUR).-->
+        <!--Karta *5131: Vnesenie 21 000.00 RUR;15:26;MOSCOW;PSB-RETAIL 00777782.Dostupno ....-->
         <pattern category="popolnenie">
-            <match><![CDATA[Karta.*Vnesenie sredstv [\s\d]*\.\d+.*]]></match>
+            <match><![CDATA[Karta.*Vnesenie[\w\s]+[\s\d]*\.\d+.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
-            <amount group="1"><![CDATA[Vnesenie sredstv ([\d\s]*.?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[Vnesenie( sredstv)? ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Karta *5131: Vnesenie sredstv 2 793,97 RUR; 03/05, 13:47;MOSCOW;PSB-RETAIL 00777781.Dostupno 15 994,59 RUR (v t.ch. kredit 15 000,00 RUR).-->
@@ -2503,6 +2591,13 @@
             <amount group="1"><![CDATA[Pokupka ?(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[\. (?!Pokupka)(.*)\. Balans]]></detail>
         </pattern>
+        <!--Карта *9622. Покупка 1370.07 RUR. VKUSVILL 875_2. Balans 13975.15 RUR. 2019-02-05-->
+        <pattern category="expense">
+            <match><![CDATA[.*\. Покупка.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Покупка ?(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[\. (?!Покупка)(.*)\. Balans]]></detail>
+        </pattern>
         <!--Karta *1118; Provedena tranzakcija: 3596 RUB; Data: 31/12/2017; OODJI Dostupny Ostatok: 135449.62 RUB. Raiffeisenbank-->
         <pattern category="expense">
             <match><![CDATA[Karta.*Provedena tranzakcija.*]]></match>
@@ -2571,8 +2666,21 @@
             <cardId group="0"><![CDATA[scheta \*\d+]]></cardId>
             <amount group="1"><![CDATA[Spisan perevod (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!-- Ukraine -->
+        <!--Vasha operatsija: 23.03.2019 16:27:58 VISA Gold/3306 98.00 UAH McDonald's 077 dostupna suma-->
+        <pattern category="expense">
+            <match><![CDATA[Vasha operatsija.*]]></match>
+            <cardId group="0"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+]]></cardId>
+            <amount group="2"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--05.04.2019 na rakhunok 1120814700(UAH) zarakhovano 13845.30 UAH-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*na rakhunok.*zarakhovano.*]]></match>
+            <cardId group="1"><![CDATA[rakhunok (\d+)]]></cardId>
+            <amount group="1"><![CDATA[zarakhovano (\d*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
-    <patterns bankId="raiffeisen_uk">
+    <patterns bankId="raiffeisen_uk" depricated="true">
         <!--Vasha operatsija: 28.02.2018 17:56:44 VISA Gold/6155 131.00 UAH McDonald's 041 dostupna suma 7031.24 UAH-->
         <!--Vasha operatsija: 31.03.2018 17:46:00 MasterCard Unembossed/2768 3943.00 UAH OSTIN dostupna suma 28187.18 UAH-->
         <pattern category="unknown">
@@ -2597,6 +2705,12 @@
             <match><![CDATA[Popovnennja sumy.*]]></match>
             <cardId group="0"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+]]></cardId>
             <amount group="2"><![CDATA[(VISA|Visa|MasterCard|Mastercard) [\w\d\/]+ (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--05.04.2019 na rakhunok 1120814700(UAH) zarakhovano 13845.30 UAH-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*na rakhunok.*zarakhovano.*]]></match>
+            <cardId group="1"><![CDATA[rakhunok (\d+)]]></cardId>
+            <amount group="1"><![CDATA[zarakhovano (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rnkb">
@@ -2696,6 +2810,12 @@
             <cardId group="1"><![CDATA[Schet (\w\*\d+)]]></cardId>
             <amount group="1"><![CDATA[Popolnenie (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Счет L*683: Пополнение 91357.38 RUB; Доступно: 91357.38 RUB; 10/04/19. Подробнее http://rosbank.ru/app.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Счет.*Пополнение.*]]></match>
+            <cardId group="1"><![CDATA[Счет (\w\*\d+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta **1234.Proizvedeno snjatie 100.00 RUR v ATM. ATM 751689 3 KOLLONTAY. Ostatok: 1765.77 RUR. 25/01/18.-->
         <pattern category="cash_atm">
             <match><![CDATA[Karta.*Proizvedeno sn(j|y)atie.*]]></match>
@@ -2752,12 +2872,33 @@
             <amount group="1"><![CDATA[выдача наличных ([\d\,]*\.?\d{1,2})]]></amount>
             <decimal_group_char>,</decimal_group_char>
         </pattern>
+        <!--RSHB 23/03 16:53:35 ATM vydacha nalichnykh 3,000.00 RUR odobr. karta *1309 ATM 5920 SARATOV RU-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*vydacha nalichnykh.*]]></match>
+            <cardId group="1"><![CDATA[karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[vydacha nalichnykh ([\d\,]*\.?\d{1,2})]]></amount>
+            <decimal_group_char>,</decimal_group_char>
+        </pattern>
         <!--RSHB 14/01 00:00:18 perevod ispolnen 5,227.97 RUR s karty *3692 na kartu *6329-->
         <pattern category="perevod">
             <match><![CDATA[.*perevod.*s karty.*na kartu.*]]></match>
             <cardId group="1"><![CDATA[s karty \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[perevod ispolnen ([\d\,]*\.?\d{1,2})]]></amount>
             <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--RSHB 24/01 10:46 perevod prinyat k ispolneniyu 300.00 RUR so scheta *2285 na schet *2225. Komissiya 0.00 RUR-->
+        <pattern category="perevod">
+            <match><![CDATA[.*perevod.*so scheta.*na schet.*]]></match>
+            <cardId group="1"><![CDATA[so scheta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[k ispolneniyu ([\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+    </patterns>
+    <patterns bankId="roundbank">
+        <!--Покупка на сумму 253.34 RUB MAGNIT MM ETKARA, RU 10.02.19 15:40. Карта ***5466. Доступно: 1836.61 RUB.-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка.*]]></match>
+            <cardId group="1"><![CDATA[Карта \*+(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Покупка на сумму ([\d]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="sberbank">
@@ -2784,19 +2925,23 @@
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р-->
+        <!--ECMC8878 10:21 Зачисление 35000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/-->
         <pattern category="zachislenie">
-            <match><![CDATA[.*зачисление\s\d.*ATM.*]]></match>
+            <match><![CDATA[.*ачисление\s\d.*ATM.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[зачисление[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ачисление[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
         <!--VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р-->
         <!--MAES0515 11.12.17 12:24 зачисление пенсии 10471.91р Баланс: 12934.80р-->
         <!--VISA0000 20.12.17 08:47 зачисление зарплаты 00000.00р Баланс: 00000.00р-->
+        <!--MAES4005 13:40 Зачисление 2272р Баланс: 2711.13р Перейти в историю уведомлений sberbank.ru/sms/n/-->
+        <!--VISA9843 00:58 Зачисление зарплаты 26863.66р Баланс: 27363.66р-->
+        <!--VISA2396 12:56 Зачисление пенсии 5500р Баланс: 20667.13р-->
         <pattern category="zachislenie">
-            <match><![CDATA[.*зачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
+            <match><![CDATA[.*ачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[зачисление[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ачисление[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р-->
         <pattern category="zachislenie">
@@ -2919,7 +3064,7 @@
         <pattern category="popolnenie">
             <match><![CDATA[.*пополнение Копилки.*]]></match>
             <cardId group="0"><![CDATA[(\*|MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[на сумму ([\d\s]*\.?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[на( сумму)? ([\d\s]*\.?\d{1,2})руб]]></amount>
         </pattern>
         <!--MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р-->
         <pattern category="payment">
@@ -3021,6 +3166,13 @@
             <match><![CDATA[Оплата. Карта.*]]></match>
             <cardId group="1"><![CDATA[Карта \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[\d{4}. (\d*.?\d{1,2})\s]]></amount>
+        </pattern>
+        <!--Операция. Карта *2084. 28153 RUB. W.QIWI.RU. Доступно 595.1 RUB-->
+        <pattern category="payment">
+            <match><![CDATA[Операция.*]]></match>
+            <cardId group="1"><![CDATA[Карта\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
+            <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
         </pattern>
         <!-- Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru-->
         <pattern category="perevod">

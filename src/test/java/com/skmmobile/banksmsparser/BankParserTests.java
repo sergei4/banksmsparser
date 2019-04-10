@@ -1,7 +1,45 @@
 package com.skmmobile.banksmsparser;
 
-import com.skmmobile.banksmsparser.bank.*;
-import com.skmmobile.banksmsparser.bank.by.*;
+import com.skmmobile.banksmsparser.bank.AkbarsSmsTest;
+import com.skmmobile.banksmsparser.bank.AlfabankSmsTest;
+import com.skmmobile.banksmsparser.bank.AvangardSmsTest;
+import com.skmmobile.banksmsparser.bank.BinbankSmsTest;
+import com.skmmobile.banksmsparser.bank.ChelinvestSmsTest;
+import com.skmmobile.banksmsparser.bank.DevonCreditSmsTest;
+import com.skmmobile.banksmsparser.bank.GazpromSmsTest;
+import com.skmmobile.banksmsparser.bank.HomecreditSmsTest;
+import com.skmmobile.banksmsparser.bank.KartaSovestSmsTest;
+import com.skmmobile.banksmsparser.bank.KreditEuroBankSmsTest;
+import com.skmmobile.banksmsparser.bank.MKBSmsTest;
+import com.skmmobile.banksmsparser.bank.MTSSmsTest;
+import com.skmmobile.banksmsparser.bank.MinbankSmsTest;
+import com.skmmobile.banksmsparser.bank.OtkritieSmsTest;
+import com.skmmobile.banksmsparser.bank.PochtaBankSmsTest;
+import com.skmmobile.banksmsparser.bank.PromsvyazbankSmsTest;
+import com.skmmobile.banksmsparser.bank.QiwiSmsTest;
+import com.skmmobile.banksmsparser.bank.RaiffeisenSmsTest;
+import com.skmmobile.banksmsparser.bank.RnkbSmsTest;
+import com.skmmobile.banksmsparser.bank.RocketBankSmsTest;
+import com.skmmobile.banksmsparser.bank.RosbankSmsTest;
+import com.skmmobile.banksmsparser.bank.RosselhozSmsTest;
+import com.skmmobile.banksmsparser.bank.RoundbankSmsTest;
+import com.skmmobile.banksmsparser.bank.SberbankSmsTest;
+import com.skmmobile.banksmsparser.bank.SovcombankSmsTest;
+import com.skmmobile.banksmsparser.bank.TinkoffSmsTest;
+import com.skmmobile.banksmsparser.bank.UbrrSmsTest;
+import com.skmmobile.banksmsparser.bank.UnicreditSmsTest;
+import com.skmmobile.banksmsparser.bank.VostbankSmsTest;
+import com.skmmobile.banksmsparser.bank.VozrogdenieSmsTest;
+import com.skmmobile.banksmsparser.bank.Vtb24SmsTest;
+import com.skmmobile.banksmsparser.bank.YandexmoneySmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelapbSmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelarusbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.BelgazprombankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.MTBankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.ParitetbankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.PriorBankSmsTest;
+import com.skmmobile.banksmsparser.bank.by.SbsIbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.FortebankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.HalykbankSmsTest;
 import com.skmmobile.banksmsparser.bank.kz.KaspibankSmsTest;
@@ -301,6 +339,7 @@ public class BankParserTests extends Assert {
         new DevonCreditSmsTest(xmlDocument).check();
         new VostbankSmsTest(xmlDocument).check();
         new SovcombankSmsTest(xmlDocument).check();
+        new RoundbankSmsTest(xmlDocument).check();
     }
 }
 

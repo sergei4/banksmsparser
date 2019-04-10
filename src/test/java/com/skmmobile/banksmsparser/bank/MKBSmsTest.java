@@ -59,5 +59,26 @@ public class MKBSmsTest extends AbsXmlBankSmsTest {
                 "1678.26",
                 ""
         );
+        checkBankSms(
+                "Карта*1686 Пополнение 15660.00р Баланс 22624.28р",
+                "popolnenie",
+                "Карта*1686",
+                "15660",
+                ""
+        );
+        checkBankSms(
+                "Карта*3444 Покупка 273.00р KFC XL MYTISCHI Баланс 47361.02р",
+                "expense",
+                "Карта*3444",
+                "273",
+                ""
+        );
+        checkBankSms(
+                "MKB: 30.12.2018 21:24 5*7409 ПОКУПКА: 1 725.57 RUB KARUSEL. баланс: 1 403.14 RUB. ",
+                "expense",
+                "5*7409",
+                "1725.57",
+                ""
+        );
     }
 }

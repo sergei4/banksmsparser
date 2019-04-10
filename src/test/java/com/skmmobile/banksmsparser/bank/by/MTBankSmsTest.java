@@ -1,7 +1,6 @@
 package com.skmmobile.banksmsparser.bank.by;
 
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
-
 import org.w3c.dom.Document;
 
 public class MTBankSmsTest extends AbsXmlBankSmsTest {
@@ -13,7 +12,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "KARTA:4177*5654\n" +
                         "16/01/18 13:52\n" +
                         "OPLATA 6.48 BYN\n" +
@@ -26,7 +24,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "KARTA:5351*1179\n" +
                         "05/12/17 20:05\n" +
                         "OPLATA 479.00 BYN\n" +
@@ -41,7 +38,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999",
                 "service_pay",
                 "5351*7458",
@@ -57,7 +53,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "KARTA:5351*3320\n" +
                         "18/01/18 16:01\n" +
                         "POPOLNENIE 50.00 BYN\n" +
@@ -70,7 +65,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "HALVA 5351*1179 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
                 "service_pay",
                 "5351*1179",
@@ -78,7 +72,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "ZP KARTA 4177*5654 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
                 "service_pay",
                 "4177*5654",
@@ -86,7 +79,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "KORONA 5351*4690 16/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 19.90 BYN Spravka 5099999",
                 "service_pay",
                 "5351*4690",
@@ -94,7 +86,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "KARTA:4649*7095\n" +
                         "18/01/18 21:51\n" +
                         "NALICHNYE 200.00 BYN\n" +
@@ -107,16 +98,27 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "KARTA:5351*1199\n" +
                         "05/02/18 18:46\n" +
-                        "PEREVOD 20.00 BYN\n" +
+                        "PEREVOD 20.01 BYN\n" +
                         "P2P MTBANK, PEREVOD, MINSK\n" +
                         "OSTATOK 36.08 BYN\n" +
                         "Spr.:5099999",
                 "perevod",
                 "5351*1199",
-                "20.00",
+                "20.01",
+                ""
+        );
+        checkBankSms(
+                "KARTA:5351*3796\n" +
+                        "29/03/19 17:43\n" +
+                        "PEREVOD 1 100.36 BYN\n" +
+                        "P2P_MTBANK, PEREVOD, MINSK\n" +
+                        "OSTATOK 1 100.36 BYN\n" +
+                        "Spr.:5099999",
+                "perevod",
+                "5351*3796",
+                "1100.36",
                 ""
         );
     }

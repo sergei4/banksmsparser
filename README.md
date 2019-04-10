@@ -28,6 +28,7 @@
 * Homecredit
 * QIWI wallet 
 * RocketBank
+* RoundBank
 * UniCredit Bank
 
 Список банков (Украина):

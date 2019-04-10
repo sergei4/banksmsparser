@@ -31,5 +31,12 @@ public class HomecreditSmsTest extends AbsXmlBankSmsTest {
                 "59.00",
                 ""
         );
+        checkBankSms(
+                "Popolnenie: 29000.00 RUR. Karta *3681. Otpravitel' perevoda HOMENKO IRINA. 11.03.2019 11:51:52.",
+                "popolnenie",
+                "3681",
+                "29000",
+                ""
+        );
     }
 }

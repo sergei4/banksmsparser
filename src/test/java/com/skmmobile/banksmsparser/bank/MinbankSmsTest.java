@@ -478,5 +478,16 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "9000",
                 ""
         );
+        checkBankSms(
+                "Предавторизация\n" +
+                        "Сумма 223.25RUB\n" +
+                        "ROSTELECOM\n" +
+                        "13/02 10:42 карта *0556\n" +
+                        "\n",
+                "expense",
+                "0556",
+                "223.25",
+                ""
+        );
     }
 }

@@ -186,5 +186,19 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "500",
                 ""
         );
+        checkBankSms(
+                "Операция. Карта *2084. 213.42 RUB. WEBMONEY.RU. Доступно 4357.04 RUB",
+                "payment",
+                "2084",
+                "213.42",
+                "WEBMONEY.RU"
+        );
+        checkBankSms(
+                "Покупка. Карта *2921. 900 RUB. REGISTRATURA. Доступно 12 RUB",
+                "expense",
+                "2921",
+                "900",
+                "REGISTRATURA"
+        );
     }
 }

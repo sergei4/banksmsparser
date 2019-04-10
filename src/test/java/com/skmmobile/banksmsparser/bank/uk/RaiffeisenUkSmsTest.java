@@ -3,6 +3,7 @@ package com.skmmobile.banksmsparser.bank.uk;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
 import org.w3c.dom.Document;
 
+@Deprecated
 public class RaiffeisenUkSmsTest extends AbsXmlBankSmsTest {
 
     public RaiffeisenUkSmsTest(Document xmlDocument) {
@@ -58,6 +59,13 @@ public class RaiffeisenUkSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "Visa Fishka/6399",
                 "68",
+                ""
+        );
+        checkBankSms(
+                "25.01.2019 na rakhunok 1014426400(UAH) zarakhovano 640.00 UAH. Uvaga! Z 01.02.2019 vsi SMS vid Banku budut z nomeru - Raiffeisen. Detali na www.aval.ua",
+                "popolnenie",
+                "1014426400",
+                "640.00",
                 ""
         );
     }

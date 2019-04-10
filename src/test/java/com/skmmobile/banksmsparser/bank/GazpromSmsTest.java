@@ -361,5 +361,12 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "329.99",
                 ""
         );
+        checkBankSms(
+                "6202 Покупка 2362.81р PYATEROCHKA 4096 17.01 18:53 Доступно",
+                "expense",
+                "6202",
+                "2362.81",
+                ""
+        );
     }
 }

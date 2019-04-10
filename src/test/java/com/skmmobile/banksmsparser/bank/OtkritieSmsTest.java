@@ -110,7 +110,7 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
         );
         checkBankSms(
                 "Вам перевели  14 199 р. на карту *3686. Доступно 50 660.71 р.\n",
-                "poplnenie",
+                "popolnenie",
                 "3686",
                 "14199",
                 ""
@@ -141,6 +141,27 @@ public class OtkritieSmsTest extends AbsXmlBankSmsTest {
                 "perevod",
                 "1304",
                 "531",
+                ""
+        );
+        checkBankSms(
+                "Покупка по карте: *6111 1002.43 р. Место MOSCOW PYATEROCHKA 8104  Баланс: 160838.89 р. i.binbank.ru",
+                "expense",
+                "6111",
+                "1002.43",
+                ""
+        );
+        checkBankSms(
+                "Вам перевели 340 р. на карту *0366. Доступно 394.72 р.",
+                "popolnenie",
+                "0366",
+                "340",
+                ""
+        );
+        checkBankSms(
+                "Pokupka po karte: *6111 192.08 r. Mesto MOSCOW EVALAR NA ZUBOVSKOM  Balans: 163612.32 r. i.binbank.ru",
+                "expense",
+                "6111",
+                "192.08",
                 ""
         );
     }
