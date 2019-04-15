@@ -3,6 +3,7 @@ package com.skmmobile.banksmsparser;
 import com.skmmobile.banksmsparser.bank.AkbarsSmsTest;
 import com.skmmobile.banksmsparser.bank.AlfabankSmsTest;
 import com.skmmobile.banksmsparser.bank.AvangardSmsTest;
+import com.skmmobile.banksmsparser.bank.BankRossiaSmsTest;
 import com.skmmobile.banksmsparser.bank.BinbankSmsTest;
 import com.skmmobile.banksmsparser.bank.ChelinvestSmsTest;
 import com.skmmobile.banksmsparser.bank.DevonCreditSmsTest;
@@ -340,6 +341,7 @@ public class BankParserTests extends Assert {
         new VostbankSmsTest(xmlDocument).check();
         new SovcombankSmsTest(xmlDocument).check();
         new RoundbankSmsTest(xmlDocument).check();
+        new BankRossiaSmsTest(xmlDocument).check();
     }
 }
 

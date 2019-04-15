@@ -368,5 +368,12 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "2362.81",
                 ""
         );
+        checkBankSms(
+                "*5236 11:46 +10000р GAZPROMBANK Доступно 10979.72р",
+                "popolnenie",
+                "5236",
+                "10000",
+                ""
+        );
     }
 }

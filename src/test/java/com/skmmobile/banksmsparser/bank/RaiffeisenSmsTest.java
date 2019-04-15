@@ -159,6 +159,13 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "1370.07",
                 "VKUSVILL 875_2"
         );
+        checkBankSms(
+                "Schet *9561. Zachislen perevod 400.00 RUB.",
+                "zachislenie",
+                "Schet *9561",
+                "400",
+                ""
+        );
         // Ukraine
         checkBankSms(
                 "Vasha operatsija: 23.03.2019 16:27:58 VISA Gold/3306 98.00 UAH McDonald's 077 dostupna suma",

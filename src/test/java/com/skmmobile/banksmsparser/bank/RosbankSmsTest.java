@@ -66,5 +66,12 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "19261",
                 ""
         );
+        checkBankSms(
+                "Счет C*957: Списание   11085.54 RUB; Доступно: 692710.28 RUB; 14/04/19. Подробнее http://rosbank.ru/app.",
+                "payment",
+                "C*957",
+                "11085.54",
+                ""
+        );
     }
 }

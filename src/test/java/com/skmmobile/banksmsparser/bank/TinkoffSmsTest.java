@@ -152,13 +152,6 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "Покупка. Бесконтактная оплата. 785.9 RUB. PYATEROCHKA. Доступно 32504.63 RUB",
-                "expense",
-                "tinkoff",
-                "785.9",
-                ""
-        );
-        checkBankSms(
                 "Регулярная покупка. Карта *9771. 4212.66 RUB. iHerb. Доступно 6983.56 RUB",
                 "payment",
                 "9771",
@@ -199,6 +192,35 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "2921",
                 "900",
                 "REGISTRATURA"
+        );
+        //No-account transactions
+        checkBankSms(
+                "Покупка. Бесконтактная оплата. 785.9 RUB. PYATEROCHKA. Доступно 32504.63 RUB",
+                "expense",
+                "tinkoff",
+                "785.9",
+                ""
+        );
+        checkBankSms(
+                "Платеж. Счет RUB. 500 RUB. GIBDD. Баланс 7499.96 RUB",
+                "expense",
+                "tinkoff",
+                "500",
+                ""
+        );
+        checkBankSms(
+                "Пополнение. Счет RUB. 257 RUB. Саранчук Алексей. Доступно 1765.06 RUB",
+                "popolnenie",
+                "tinkoff",
+                "257",
+                ""
+        );
+        checkBankSms(
+                "Перевод. Счет RUB. 500.01 RUB. Баланс 6999.96 RUB",
+                "perevod",
+                "tinkoff",
+                "500.01",
+                ""
         );
     }
 }

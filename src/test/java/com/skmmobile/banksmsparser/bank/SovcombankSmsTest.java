@@ -10,6 +10,12 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
 
     @Override
     protected void smsTest() {
-
+        checkBankSms(
+                "Халва оплата 204 p OTVEDAJ, Ros баланс 135142.81 http://scb.im/hva",
+                "expense",
+                "halva",
+                "204",
+                ""
+        );
     }
 }

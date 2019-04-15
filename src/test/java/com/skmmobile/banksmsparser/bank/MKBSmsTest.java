@@ -80,5 +80,12 @@ public class MKBSmsTest extends AbsXmlBankSmsTest {
                 "1725.57",
                 ""
         );
+        checkBankSms(
+                "Карта*1686 Наличные 3000.00р Alfa Iss 66A ENTUZIAST Баланс 15587.79р",
+                "cash_atm",
+                "Карта*1686",
+                "3000.00",
+                ""
+        );
     }
 }
