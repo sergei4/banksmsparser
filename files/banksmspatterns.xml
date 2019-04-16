@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/04/16 01:00</updated>
+    <updated>2019/04/16 22:15</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -2287,6 +2287,12 @@
             <match><![CDATA[По договору.*пополнение счёта.*]]></match>
             <cardId group="0" default="pochtabank_account"><![CDATA[noname]]></cardId>
             <amount group="1"><![CDATA[на сумму ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Пополнение от Пенсионного Фонда РФ на 12018.87р. Доступно 12018.87р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Пополнение от Пенсионного Фонда РФ.*]]></match>
+            <cardId group="0" default="pochtabank_account"><![CDATA[noname]]></cardId>
+            <amount group="1"><![CDATA[Пополнение от Пенсионного Фонда РФ на ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
         <!--POCHTABANK (pochtabank)
             Карта 4*8274

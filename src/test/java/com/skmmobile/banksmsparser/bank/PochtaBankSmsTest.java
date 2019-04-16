@@ -139,5 +139,12 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "3204.74",
                 ""
         );
+        checkBankSms(
+                "Пополнение от Пенсионного Фонда РФ на 12018.87р. Доступно 12018.87р",
+                "popolnenie",
+                "pochtabank_account",
+                "12018.87",
+                ""
+        );
     }
 }
