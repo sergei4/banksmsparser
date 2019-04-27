@@ -73,5 +73,12 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "11085.54",
                 ""
         );
+        checkBankSms(
+                "S karty **3548 perevedeno 20000.00 RUR.P2P ROSBANK. Spisano 20300.00 RUR. Ostatok:5618.41 RUR 24.04.19",
+                "perevod",
+                "3548",
+                "20300",
+                ""
+        );
     }
 }

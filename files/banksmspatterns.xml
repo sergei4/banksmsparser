@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/04/16 22:15</updated>
+    <updated>2019/04/27 10:45</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -445,6 +445,7 @@
         <system_sms bankId="rocketbank"><![CDATA[.*код для подтверждения.*]]></system_sms>
         <system_sms bankId="rocketbank"><![CDATA[Привет.*]]></system_sms>
         <system_sms bankId="rosbank"><![CDATA[.*Operacija rezervirovanija za pokupku.*otmenena.*]]></system_sms>
+        <system_sms bankId="rosbank"><![CDATA[.*vedite poluchennyj kod.*]]></system_sms>
         <system_sms bankId="rosselhoz"><![CDATA[Кредит на любые цели.*]]></system_sms>
         <system_sms bankId="rnkb"><![CDATA[V nastoyaschiy moment operaciya.*ne mojet byt vypolnena.*]]></system_sms>
         <system_sms bankId="rnkb"><![CDATA[Vhod v InternetBank.*Sessiya.*]]></system_sms>
@@ -766,7 +767,23 @@
         </pattern>
     </patterns>
     <patterns bankId="bankrossia">
-
+        <!--25.04.2019
+        Сч *26719
+        Зачисление 17600 р-->
+        <pattern category="zachislenie">
+            <match><![CDATA[.*Сч.*ачисление.*]]></match>
+            <cardId group="0"><![CDATA[Сч \*\d+]]></cardId>
+            <amount group="1"><![CDATA[ачисление ([\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--10:15 21.04.19
+        МИР5493
+        Покупка 55 р
+        BULOCHNAYA 9-->
+        <pattern category="expense">
+            <match><![CDATA[.*окупка.*]]></match>
+            <cardId group="0"><![CDATA[МИР\d+]]></cardId>
+            <amount group="1"><![CDATA[окупка ([\d]*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="belapb">
         <!--OPLATA 1.76 BYN KARTA #1152 DATA 31.01.2018 15:14:08 BAPB - OPLATA USLUG>MINSK>BY OSTATOK 0.00 BYN-->
@@ -1262,25 +1279,25 @@
         <pattern category="expense">
             <match><![CDATA[Oplata.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Oplata: ([\s\d]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Oplata: ([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Snyatie nalichnyh: 3000.00 RUR. Karta *8119. Dostupno: 9320.86 RUR. +74957858222-->
         <pattern category="cash_atm">
             <match><![CDATA[Snyatie nalichnyh.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Snyatie nalichnyh: ([\s\d]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Snyatie nalichnyh: ([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Spisanie:59.00 RUR za SMS-paket. Karta *8349-->
         <pattern category="payment">
             <match><![CDATA[Spisanie.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Spisanie:([\s\d]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Spisanie:\s?([\d]*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Popolnenie: 29000.00 RUR. Karta *3681. Otpravitel' perevoda HOMENKO IRINA. 11.03.2019 11:51:52.-->
         <pattern category="popolnenie">
             <match><![CDATA[Popolnenie.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Popolnenie: ([\s\d]*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[Popolnenie: ([\d]*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="karta_sovest">
@@ -2638,6 +2655,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Provedena operacija: (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Schet *7015. Spisan platezh po kreditu 6630.07 RUR. Balans 126.97 RUR.-->
+        <pattern category="payment">
+            <match><![CDATA[Schet.*Spisan platezh po kreditu.*]]></match>
+            <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Spisan platezh po kreditu (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Zachislena zarplata 8869.18 RUR na schet *4849. Balans 55122.34 RUR. Raiffeisenbank-->
         <pattern category="zachislenie">
             <match><![CDATA[Zachislena zarplata.*]]></match>
@@ -2859,6 +2882,12 @@
             <match><![CDATA[Счет.*Списание.*]]></match>
             <cardId group="1"><![CDATA[Счет (\w\*\d+)]]></cardId>
             <amount group="1"><![CDATA[Списание\s+(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--S karty **3548 perevedeno 20000.00 RUR.P2P ROSBANK. Spisano 20300.00 RUR. Ostatok:5618.41 RUR 24.04.19-->
+        <pattern category="perevod">
+            <match><![CDATA[S karty.*perevedeno.*pisano.*]]></match>
+            <cardId group="1"><![CDATA[karty \*\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[pisano (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rosselhoz">

@@ -38,5 +38,12 @@ public class HomecreditSmsTest extends AbsXmlBankSmsTest {
                 "29000",
                 ""
         );
+        checkBankSms(
+                "Spisanie: 46.00 RUR. Karta *7857. 26.04.2019 08:28:27. Dostupno: 164458.97 RUR.",
+                "payment",
+                "7857",
+                "46",
+                ""
+        );
     }
 }

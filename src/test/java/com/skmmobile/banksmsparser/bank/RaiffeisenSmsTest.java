@@ -166,6 +166,13 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "400",
                 ""
         );
+        checkBankSms(
+                "Schet *7015. Spisan platezh po kreditu 6630.07 RUR. Balans 126.97 RUR.",
+                "payment",
+                "Schet *7015",
+                "6630.07",
+                ""
+        );
         // Ukraine
         checkBankSms(
                 "Vasha operatsija: 23.03.2019 16:27:58 VISA Gold/3306 98.00 UAH McDonald's 077 dostupna suma",
