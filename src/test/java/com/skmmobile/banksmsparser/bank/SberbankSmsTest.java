@@ -510,5 +510,27 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "177.4",
                 ""
         );
+        checkBankSms(
+                "ECMC9405 11:34 перечисление 300000р ZACHISLENIE KREDITA Баланс: 300000р",
+                "popolnenie",
+                "ECMC9405",
+                "300000",
+                ""
+        );
+        checkBankSms(
+                "ECMC2263 14:58 Зачисление по договору займа 171350.27р Баланс: 177933.50р",
+                "zachislenie",
+                "ECMC2263",
+                "171350.27",
+                ""
+        );
+        checkBankSms(
+                "ECMC8878 08:45 НАТАЛЬЯ ЮРЬЕВНА А. перевел(а) вам 10000.00р\n" +
+                        "Баланс: 10021.89р\n",
+                "perevod",
+                "ECMC8878",
+                "10000.00",
+                ""
+        );
     }
 }

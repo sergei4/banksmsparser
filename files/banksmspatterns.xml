@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/04/27 10:45</updated>
+    <updated>2019/05/08 12:00</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -359,6 +359,7 @@
         <system_sms bankId="gazprom"><![CDATA[Telecard.*OTMENA;.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Telecard.*ZAPROS BALANSA;.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[.*Izmenenie PIN GAZPROMBANK.*]]></system_sms>
+        <system_sms bankId="homecredit"><![CDATA[Code\: \d+.*]]></system_sms>
         <system_sms bankId="kaspibank"><![CDATA[Оплата покупок в интернете с карты закрыта.*]]></system_sms>
         <system_sms bankId="kaspibank"><![CDATA[Kaspi Депозит.*Продление.*]]></system_sms>
         <system_sms bankId="krediteuropabank"><![CDATA[Vipiska po karte.*]]></system_sms>
@@ -2142,7 +2143,7 @@
         Balance=8,646.80 UAH
         Detali www.oschadbank.ua/ib-->
         <pattern category="popolnenie">
-            <match><![CDATA[.*Zarakhuvannia na rakhunok.*]]></match>
+            <match><![CDATA[.*Zarakhuvannia.*]]></match>
             <cardId group="1"><![CDATA[Acnt:([\d-]+)]]></cardId>
             <amount group="1"><![CDATA[Sum:[-\+]?([\d\,]*.?\d{1,2})]]></amount>
             <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
@@ -3051,6 +3052,12 @@
             <amount group="1"><![CDATA[на сумму (\d*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
         </pattern>
+        <!--ECMC8878 08:45 НАТАЛЬЯ ЮРЬЕВНА А. перевел(а) вам 10000.00р Баланс: 10021.89р-->
+        <pattern category="perevod">
+            <match><![CDATA[.*перевел\(а\) вам.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[вам (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р-->
         <pattern category="service_pay">
             <match><![CDATA[.*плата за выписку\/запрос баланса.*]]></match>
@@ -3114,6 +3121,12 @@
             <amount group="1"><![CDATA[сумму ([\d\s]*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
         </pattern>
+        <!--MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р-->
+        <pattern category="payment">
+            <match><![CDATA[.*погашение кредита.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[погашение кредита (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA4812 19.12.17 возврат покупки 126.07р YM*AE Баланс: 316.31р-->
         <pattern category="vozvrat">
             <match><![CDATA[.*возврат покупки.*]]></match>
@@ -3127,11 +3140,11 @@
             <cardId group="0"><![CDATA[(\*|MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="2"><![CDATA[на( сумму)? ([\d\s]*\.?\d{1,2})руб]]></amount>
         </pattern>
-        <!--MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р-->
-        <pattern category="payment">
-            <match><![CDATA[.*погашение кредита.*]]></match>
+        <!--ECMC9405 11:34 перечисление 300000р ZACHISLENIE KREDITA Баланс: 300000р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*еречисление \d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[погашение кредита (\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[еречисление[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="sbsibank">

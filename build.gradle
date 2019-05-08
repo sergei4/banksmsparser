@@ -36,7 +36,13 @@ remotes {
     }
 }
 
-def desResource  = rootProject.ext.uploadConfig.resFolder
+def desResource = rootProject.ext.uploadConfig.resFolder
+
+task increaseDate {
+    doLast {
+
+    }
+}
 
 task uploadXmlOnServer {
     group = "extentional"

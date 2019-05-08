@@ -1,6 +1,5 @@
 package com.skmmobile.banksmsparser.bank.uk;
 
-import com.skmmobile.banksmsparser.BankSmsParser;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
 import org.w3c.dom.Document;
 
@@ -13,7 +12,6 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "04.01.18 19:38\n" +
                         "Card:5167-6111\n" +
                         "Sum:-5,526.49 UAH\n" +
@@ -26,7 +24,6 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "PO DEPOZYTU N 12345678 VYPLACHENO VIDSOTKI U SUMI 100.00 UAH. DOVIDKA 0800210800",
                 "popolnenie",
                 "12345678",
@@ -34,7 +31,6 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "DEPOZYT N 12345678 POPOVNENO NA SUMU 5,000.12 UAH. DOVIDKA 0800210800",
                 "popolnenie",
                 "12345678",
@@ -42,7 +38,6 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "11.01.2018 \n" +
                         "Acnt:130-262545-56\n" +
                         "Sum:8,455.67 UAH \n" +
@@ -55,11 +50,22 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Z DEPOZYTU N148713013 ZNYATO SUMU 8455.67 UAH. DOVIDKA 0800210800",
                 "unknown",
                 "148713013",
                 "8455.67",
+                ""
+        );
+        checkBankSms(
+                "07.05.2019 \n" +
+                        "Acnt:240-262065-50\n" +
+                        "Sum:471.42 UAH \n" +
+                        "Zarakhuvannia koshtiv \n" +
+                        "Balance=819.70 UAH\n" +
+                        "Detali www.oschadbank.ua/ib",
+                "popolnenie",
+                "240-262065-50",
+                "471.42",
                 ""
         );
     }

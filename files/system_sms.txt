@@ -335,3 +335,5 @@ Vipusk karty *2504; 09.11 13:10; Google Pay; Karta dobavlena
 Никому не говорите код 3075! Вы создаете автоплатеж.
 
 ROSBANK. Vvedite poluchennyj kod 598942 dlya podtverzhdeniya operacii. Ne soobschaite nikomu, vkluchaya sotrudnika Banka.
+
+Code: 3272. Platezh: 4598.64 RUR. Irina Anatol'evna H.
