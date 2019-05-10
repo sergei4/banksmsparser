@@ -5,7 +5,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,21 +69,10 @@ public class XmlBankParser extends BankSmsParser {
         return result;
     }
 
-    public static Map<String, String> obtainBankPhoneMap(Document document){
-        Map<String, String> phoneMap = new HashMap<>();
+    public static void obtainBankPhoneMap(Map<String, String>phoneMap, Document document){
         NodeList bankList;
-        int count = 0;
-        // версия 1
-//        bankList = document.getElementsByTagName(NODE_PHONE);
-//        count = bankList.getLength();
-//        for (int i = 0; i < count; i++) {
-//            String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
-//            String phone = bankList.item(i).getFirstChild().getNodeValue();
-//            phoneMap.put(phone, bankId);
-//        }
-        // версия 2
         bankList = document.getElementsByTagName(NODE_SERVICE_PHONE);
-        count = bankList.getLength();
+        int count = bankList.getLength();
         for (int i = 0; i < count; i++) {
             String bankId = getAttribute(bankList.item(i), ATTR_BANK_ID);
             String phoneStr = bankList.item(i).getFirstChild().getNodeValue();
@@ -92,7 +80,6 @@ public class XmlBankParser extends BankSmsParser {
             for(String phone: phoneList)
                 phoneMap.put(phone, bankId);
         }
-        return phoneMap;
     }
 
     public static List<String> obtainSystemSmsPatternList(Document document) {

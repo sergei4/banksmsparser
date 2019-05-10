@@ -7,15 +7,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 public class SmsXmlFileTests extends Assert{
 
@@ -49,7 +47,8 @@ public class SmsXmlFileTests extends Assert{
         assertTrue("Шаблон не содержит данных", ids.size() > 0);
 
         System.out.println("\nСписок телефонов:");
-        Map<String, String> phones = XmlBankParser.obtainBankPhoneMap(xmlDocument);
+        Map<String, String> phones = new HashMap<>();
+        XmlBankParser.obtainBankPhoneMap(phones, xmlDocument);
         for(String phone: phones.keySet())
             System.out.println(phone + ": " + phones.get(phone));
 
