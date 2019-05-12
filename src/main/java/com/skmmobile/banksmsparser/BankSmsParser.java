@@ -12,11 +12,12 @@ import java.util.regex.Pattern;
 public class BankSmsParser {
     private static String TAG = "BankSmsParser";
 
+    @Deprecated
     public static final String CATEGORY_EXPENSE = "expense";
 
     private final Set<Operation> operationSet = new HashSet<>();
 
-    private static String wrapEscape(String src){
+    private static String wrapEscape(String src) {
         char[] chars = src.toCharArray();
         int size = chars.length;
         StringBuilder result = new StringBuilder();
@@ -24,9 +25,9 @@ public class BankSmsParser {
             char c = chars[i];
             if (c == '\n' | c == '\r') {
                 result.append(" ");
-            }
-            else
+            } else {
                 result.append(c);
+            }
         }
         return result.toString();
     }
@@ -39,7 +40,7 @@ public class BankSmsParser {
         return "indefinite";
     }
 
-    public int getOperationCount(){
+    public int getOperationCount() {
         return operationSet.size();
     }
 
@@ -55,9 +56,9 @@ public class BankSmsParser {
                     if (m.find()) {
                         //App.SystemLog(TAG, "account: " + m.group());
                         result.cardIdStr = m.group(operation.cardIdRexGroup);
-                    }
-                    else
+                    } else {
                         result.cardIdStr = operation.defCardId;
+                    }
                 }
                 if (operation.amountRex != null) {
                     m = operation.amountRex.matcher(text);
@@ -65,16 +66,15 @@ public class BankSmsParser {
                         //App.SystemLog(TAG, "amount: " + m.group());
                         try {
                             String src = m.group(operation.amountRexGroup);
-                            src = operation.decDelim.equals("")? src : src.replace(operation.decDelim, "");
+                            src = operation.decDelim.equals("") ? src : src.replace(operation.decDelim, "");
                             src = src.replace(operation.decChar, ".");
                             result.amount = new BigDecimal(src);
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             result.amount = BigDecimal.ZERO;
                         }
-                    }
-                    else
+                    } else {
                         result.amount = BigDecimal.ZERO;
+                    }
                 }
                 if (operation.dateRex != null) {
                     m = operation.dateRex.matcher(text);
@@ -85,20 +85,19 @@ public class BankSmsParser {
                 if (operation.detailRex != null) {
                     m = operation.detailRex.matcher(text);
                     if (m.find()) {
-                        //App.SystemLog(TAG, "location: " + m.group());
                         result.details = m.group(operation.detailRexGroup);
-                    }
-                    else
+                    } else {
                         result.details = "indefinite";
+                    }
                 }
             }
         }
 
         if (result != null && (result.cardIdStr.equals(Operation.INDEFINITE_CARD_ID) | result.amount.compareTo(BigDecimal.ZERO) == 0)) {
             return null;
-        }
-        else
+        } else {
             return result;
+        }
     }
 
     public static class Result {
@@ -135,10 +134,10 @@ public class BankSmsParser {
         @Override
         public String toString() {
             return getClass().getSimpleName() + ": "
-                    + "type: "     + type
-                    + " cardId: "  + (cardIdStr != null ? cardIdStr : "indefinite")
-                    + " amount: "  + (amount == null ? "indefinite" : amount.toPlainString())
-                    + " date: "    + (date != null ? date.toString() : "indefinite")
+                    + "type: " + type
+                    + " cardId: " + (cardIdStr != null ? cardIdStr : "indefinite")
+                    + " amount: " + (amount == null ? "indefinite" : amount.toPlainString())
+                    + " date: " + (date != null ? date.toString() : "indefinite")
                     + " details: " + (details != null ? details : "indefinite")
                     ;
         }
@@ -215,6 +214,7 @@ public class BankSmsParser {
 
     // Шаблоны системных sms для исключения
     private static final List<String> systemSmsTemplate = new ArrayList<>();
+
     static {
         systemSmsTemplate.add("Задолженность по налогу.*");
         systemSmsTemplate.add("Vhod v Tinkoff.ru.*");
@@ -223,7 +223,7 @@ public class BankSmsParser {
         systemSmsTemplate.add("(Сбербанк Онлайн).*(перевел).*");
     }
 
-    public static void initSystemSms(List<String> list){
+    public static void initSystemSms(List<String> list) {
         systemSmsTemplate.clear();
         systemSmsTemplate.addAll(list);
     }
@@ -241,12 +241,13 @@ public class BankSmsParser {
 
     /**
      * Проверка, что в наборе нет одинаковых шаблонов
+     *
      * @return
      */
-    public boolean check(){
+    public boolean check() {
         Set<String> matches = new HashSet<>();
-        for(Operation op: operationSet){
-            if(matches.contains(op.typeRex.pattern()))
+        for (Operation op : operationSet) {
+            if (matches.contains(op.typeRex.pattern()))
                 return false;
             matches.add(op.typeRex.pattern());
         }
