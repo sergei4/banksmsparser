@@ -17,5 +17,12 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
                 "204",
                 ""
         );
+        checkBankSms(
+                "Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva",
+                "popolnenie",
+                "halva",
+                "5000",
+                ""
+        );
     }
 }

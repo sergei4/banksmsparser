@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/05/08 12:00</updated>
+    <updated>2019/05/12 10:15</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -3189,6 +3189,12 @@
             <match><![CDATA[Халва оплата.*]]></match>
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[Халва оплата (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Халва пополнена.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[Халва пополнена (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="tinkoff">
