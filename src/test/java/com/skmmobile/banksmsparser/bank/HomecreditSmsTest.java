@@ -45,5 +45,12 @@ public class HomecreditSmsTest extends AbsXmlBankSmsTest {
                 "46",
                 ""
         );
+        checkBankSms(
+                "Popolnenie: 3376,14 RUB. Schet 423*16768.",
+                "popolnenie",
+                "Schet 423*16768",
+                "3376.14",
+                ""
+        );
     }
 }

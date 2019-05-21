@@ -121,5 +121,17 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "1100.36",
                 ""
         );
+        checkBankSms(
+                "KARTA 535104******3796\n" +
+                        "2019-05-16 17:59:23\n" +
+                        "OPLATA 9.13BYN\n" +
+                        "SHOP \"DOMASHNIY\" BAPB    LOGOYSK      BY\n" +
+                        "OSTATOK 555.19BYN\n" +
+                        "Spr.:5099999",
+                "expense",
+                "535104******3796",
+                "9.13",
+                ""
+        );
     }
 }

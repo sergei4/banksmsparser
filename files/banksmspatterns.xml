@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/05/12 10:15</updated>
+    <updated>2019/05/22 00:30</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -514,6 +514,7 @@
         <system_sms bankId="tinkoff"><![CDATA[Spasibo, chto vybrali nas.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vash bonus po aktsii.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vhod v Tinkoff.ru.*]]></system_sms>
+        <system_sms bankId="tinkoff"><![CDATA[Вход в Tinkoff.ru.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vypiska.*Tinkoff.ru]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Vypolnena regulyarnaya operatsiya.*]]></system_sms>
         <system_sms bankId="tinkoff"><![CDATA[Zavtra budet vypolnena regulyarnaya operatsiya.*]]></system_sms>
@@ -1131,7 +1132,7 @@
         </pattern>
         <!--*7726 Получен перевод 3000р PEREVOD MEZHDU KARTAMI 16.06.18 19:26:29 Доступно 75511.83р-->
         <pattern category="popolnenie">
-            <match><![CDATA[^\*\d+ Получен перевод.*]]></match>
+            <match><![CDATA[^\*\d+.*Получен перевод.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Получен перевод (\d*.?\d{1,2})]]></amount>
         </pattern>
@@ -1296,9 +1297,16 @@
         </pattern>
         <!--Popolnenie: 29000.00 RUR. Karta *3681. Otpravitel' perevoda HOMENKO IRINA. 11.03.2019 11:51:52.-->
         <pattern category="popolnenie">
-            <match><![CDATA[Popolnenie.*]]></match>
+            <match><![CDATA[Popolnenie.*Karta.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Popolnenie: ([\d]*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Popolnenie: 3376,14 RUB. Schet 423*16768.-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Popolnenie.*Schet.*]]></match>
+            <cardId group="0"><![CDATA[Schet [\d\*]+]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie: ([\d]*\,?\d{1,2})]]></amount>
+            <decimal_char>,</decimal_char>
         </pattern>
     </patterns>
     <patterns bankId="karta_sovest">
@@ -1901,7 +1909,7 @@
         Spr.:5099999-->
         <pattern category="expense">
             <match><![CDATA[KARTA.*OPLATA.*]]></match>
-            <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
+            <cardId group="1"><![CDATA[KARTA:?\s?([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[OPLATA (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999-->
@@ -3138,13 +3146,19 @@
         <pattern category="popolnenie">
             <match><![CDATA[.*пополнение Копилки.*]]></match>
             <cardId group="0"><![CDATA[(\*|MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="2"><![CDATA[на( сумму)? ([\d\s]*\.?\d{1,2})руб]]></amount>
+            <amount group="2"><![CDATA[на( сумму)? ([\d\s]*\.?\d{1,2})р]]></amount>
         </pattern>
         <!--ECMC9405 11:34 перечисление 300000р ZACHISLENIE KREDITA Баланс: 300000р-->
         <pattern category="popolnenie">
             <match><![CDATA[.*еречисление \d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[еречисление[\D]+(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Перевод 545.00р от АЛЕКСЕЙ ЛЕОНИДОВИЧ А.Баланс: VISA5887 3108.57р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[^.еревод.*от.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="sbsibank">

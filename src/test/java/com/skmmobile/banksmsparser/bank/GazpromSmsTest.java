@@ -375,5 +375,12 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "10000",
                 ""
         );
+        checkBankSms(
+                "*1004 17:01 Получен перевод 110р PEREVOD MEZHDU KARTAMI Доступно 63869.33р",
+                "popolnenie",
+                "1004",
+                "110",
+                ""
+        );
     }
 }

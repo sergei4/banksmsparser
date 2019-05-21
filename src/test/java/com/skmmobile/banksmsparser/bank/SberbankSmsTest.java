@@ -532,5 +532,20 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "10000.00",
                 ""
         );
+        checkBankSms(
+                "VISA2750: пополнение Копилки на \"Сберегательный счет\" на 35.66р",
+                "popolnenie",
+                "VISA2750",
+                "35.66",
+                ""
+        );
+        checkBankSms(
+                "Перевод 545.00р от АЛЕКСЕЙ ЛЕОНИДОВИЧ А.\n" +
+                        "Баланс: VISA5887 3108.57р",
+                "popolnenie",
+                "VISA5887",
+                "545",
+                ""
+        );
     }
 }
