@@ -339,3 +339,5 @@ ROSBANK. Vvedite poluchennyj kod 598942 dlya podtverzhdeniya operacii. Ne soobsc
 Code: 3272. Platezh: 4598.64 RUR. Irina Anatol'evna H.
 
 Вход в Tinkoff.ru в 06:46 18.05.2019. Если не вы, звоните 88005551010
+
+Списание 1400.00р в GosUslugi, код 094472 держите в тайне

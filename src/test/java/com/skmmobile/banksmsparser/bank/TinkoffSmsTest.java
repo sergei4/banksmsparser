@@ -209,10 +209,10 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "Пополнение. Счет RUB. 257 RUB. Саранчук Алексей. Доступно 1765.06 RUB",
+                "Пополнение. Счет RUB. 15000 RUB. Элекснет. Баланс -1026.57 RUB",
                 "popolnenie",
                 "tinkoff",
-                "257",
+                "15000",
                 ""
         );
         checkBankSms(

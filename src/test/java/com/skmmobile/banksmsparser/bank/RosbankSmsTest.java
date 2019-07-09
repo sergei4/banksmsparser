@@ -80,5 +80,19 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "20300",
                 ""
         );
+        checkBankSms(
+                "Karta **0895: ATM Ulitsa Dvortsovaya Dom vnesena summa 22000.00 (RUR). Zachisleno 22000.00 (RUR). Ostatok: 23856.08; 19.06.19",
+                "cash_atm",
+                "0895",
+                "22000",
+                ""
+        );
+        checkBankSms(
+                "Karta **0895.Pokupka na summu 1300.00 RUR.IB.ROSBANK.RU >. Spisano 1300.00 RUR.Ostatok:18022.77 RUR 21.06.19",
+                "expense",
+                "0895",
+                "1300",
+                ""
+        );
     }
 }

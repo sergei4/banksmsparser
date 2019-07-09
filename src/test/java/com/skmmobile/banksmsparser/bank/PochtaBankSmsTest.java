@@ -146,5 +146,34 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "12018.87",
                 ""
         );
+        checkBankSms(
+                "VISA5125\n" +
+                        "19:31\n" +
+                        "Oplata 776.97RUB\n" +
+                        "PEREKRESTOK\n" +
+                        "Balans 56776.61RUB",
+                "expense",
+                "VISA5125",
+                "776.97",
+                ""
+        );
+        checkBankSms(
+                "VISA5125\n" +
+                        "12:34\n" +
+                        "Оплата 154.00RUB\n" +
+                        "STOLOVAYA\n" +
+                        "Баланс 29519.63RUB",
+                "expense",
+                "VISA5125",
+                "154.00",
+                ""
+        );
+        checkBankSms(
+                "Карта 4*8100. Пополнение на 11000.00 руб",
+                "popolnenie",
+                "4*8100",
+                "11000",
+                ""
+        );
     }
 }

@@ -382,5 +382,12 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "110",
                 ""
         );
+        checkBankSms(
+                "8681 16:44 Снятие 10000р D. 2A, UL. SOVETSKOI KONS Доступно 68480.37р",
+                "cash_atm",
+                "8681",
+                "10000",
+                ""
+        );
     }
 }

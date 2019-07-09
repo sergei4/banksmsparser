@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/05/22 00:30</updated>
+    <updated>2019/07/10 00:50</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -403,6 +403,7 @@
         <system_sms bankId="pochtabank"><![CDATA[Почта Банк.*сообщите сотруднику код.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[Пролонгирован вклад.*]]></system_sms>
         <system_sms bankId="pochtabank"><![CDATA[.*заявка на кредит предварительно одобрена.*]]></system_sms>
+        <system_sms bankId="pochtabank"><![CDATA[Списание.*код.*]]></system_sms>
         <system_sms bankId="priorbank"><![CDATA[Оплата по кредиту.*до.*]]></system_sms>
         <system_sms bankId="priorbank"><![CDATA[Priorbank.*M-kod.*]]></system_sms>
         <system_sms bankId="priorbank"><![CDATA[Priorbank.*3D-Secure kod.*]]></system_sms>
@@ -1094,8 +1095,8 @@
         </pattern>
         <!--*0621 13:02 Снятие 800р GAZPROMBANK Доступно 164259.39р-->
         <pattern category="cash_atm">
-            <match><![CDATA[^\*\d+.*Снятие.*]]></match>
-            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <match><![CDATA[^\*?\d+.*Снятие.*]]></match>
+            <cardId group="1"><![CDATA[^\*?(\d+)]]></cardId>
             <amount group="1"><![CDATA[Снятие (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card5621;Card1691;CUP Standard;Card1963;Card9047; 10.01.18 12:52:12; Zachislenie; 21162.48 RUR; dostupno: 46786.71 RUR-->
@@ -2124,11 +2125,22 @@
         Balance=5,526.49 UAH
         Detali-->
         <pattern category="unknown">
-            <match><![CDATA[.*Card.*Sum.*]]></match>
+            <match><![CDATA[.*Card:\d{4}\-\d{4}.*Sum.*]]></match>
             <cardId group="1"><![CDATA[Card:([\d-]+)]]></cardId>
             <amount group="1"><![CDATA[Sum:[-\+]?([\d\,]*.?\d{1,2})]]></amount>
-            <!--<detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>-->
             <decimal_group_char>,</decimal_group_char>
+        </pattern>
+        <!--18.06.19 11:27
+        Card:4-334*
+        Sum:1 000.00 UAH
+        BRANCH 10020-0450
+        Balance=1 001.38 UAH
+        Detali www.oschadbank.ua/ib-->
+        <pattern category="unknown">
+            <match><![CDATA[.*Card:\d{1}\-.*Sum.*]]></match>
+            <cardId group="1"><![CDATA[Card:([\d-]+)]]></cardId>
+            <amount group="1"><![CDATA[Sum:[-\+]?([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--PO DEPOZYTU N 00000000 VYPLACHENO VIDSOTKI U SUMI 00.00 UAH. DOVIDKA 0800210800-->
         <pattern category="popolnenie">
@@ -2320,6 +2332,12 @@
             <cardId group="0" default="pochtabank_account"><![CDATA[noname]]></cardId>
             <amount group="1"><![CDATA[Пополнение от Пенсионного Фонда РФ на ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Карта 4*8100. Пополнение на 11000.00 руб-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Карта.*Пополнение на .*]]></match>
+            <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение на ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
         <!--POCHTABANK (pochtabank)
             Карта 4*8274
             23.03.18 17:22
@@ -2396,6 +2414,26 @@
             <match><![CDATA[Карта.*Получение наличных.*]]></match>
             <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Получение наличных ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--VISA5125
+        19:31
+        Oplata 776.97RUB
+        PEREKRESTOK
+        Balans 56776.61RUB-->
+        <pattern category="expense">
+            <match><![CDATA[.*Oplata.*]]></match>
+            <cardId group="0"><![CDATA[VISA\d+]]></cardId>
+            <amount group="1"><![CDATA[Oplata ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--VISA5125
+        12:34
+        Оплата 154.00RUB
+        STOLOVAYA
+        Баланс 29519.63RUB-->
+        <pattern category="expense">
+            <match><![CDATA[.*Оплата.*]]></match>
+            <cardId group="0"><![CDATA[VISA\d+]]></cardId>
+            <amount group="1"><![CDATA[Оплата ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="priorbank">
@@ -2718,6 +2756,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Snyatie nalichnih: ?(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Karta *1427. Snyatie nalichnyh 1000.00 RUB. RU/ANAPA/RBA ATM 27811. Balans 1055.41 RUB. 05.06.2019-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Snyatie nalichnyh.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnyh (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Spisan perevod 13000 RUR so scheta *9362. Balans 14469.82 RUR. Raiffeisenbank-->
         <pattern category="perevod">
             <match><![CDATA[Spisan perevod.*]]></match>
@@ -2857,8 +2901,9 @@
     </patterns>
     <patterns bankId="rosbank">
         <!--Karta **0368.Sovershena pokupka na summu 1000.00 RUR. YOTA. Ostatok: 2482.77 RUR. 18/01/18.-->
+        <!--Karta **0895.Pokupka na summu 1300.00 RUR.IB.ROSBANK.RU >. Spisano 1300.00 RUR.Ostatok:18022.77 RUR 21.06.19-->
         <pattern category="expense">
-            <match><![CDATA[Karta.*Sovershena pokupka.*]]></match>
+            <match><![CDATA[Karta.*okupka na summu.*]]></match>
             <cardId group="1"><![CDATA[Karta \*\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[na summu (\d*\.?\d{1,2})]]></amount>
         </pattern>
@@ -2897,6 +2942,12 @@
             <match><![CDATA[S karty.*perevedeno.*pisano.*]]></match>
             <cardId group="1"><![CDATA[karty \*\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[pisano (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta **0895: ATM Ulitsa Dvortsovaya Dom vnesena summa 22000.00 (RUR). Zachisleno 22000.00 (RUR). Ostatok: 23856.08; 19.06.19-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Karta.*achisleno.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[achisleno (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rosselhoz">

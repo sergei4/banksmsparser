@@ -202,5 +202,13 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "146.30",
                 ""
         );
+        checkBankSms(
+                "Karta *1427. Snyatie nalichnyh 1000.00 RUB. RU/ANAPA/RBA ATM 27811. Balans 1055.41 RUB. 05.06.2019",
+                "cash_atm",
+                "1427",
+                "1000",
+                ""
+        );
+
     }
 }

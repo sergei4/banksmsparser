@@ -68,5 +68,28 @@ public class OschadbankSmsTest extends AbsXmlBankSmsTest {
                 "471.42",
                 ""
         );
+        checkBankSms(
+                "23.06.19 08:59 \n" +
+                        "Card:5-228* \n" +
+                        "Sum:-4 150.00 UAH BRANCH 10020-055\n" +
+                        "Balance=1 024.14 UAH\n" +
+                        "Detali: www.oschadbank.ua/ib",
+                "unknown",
+                "5-228",
+                "4150.00",
+                ""
+        );
+        checkBankSms(
+                "18.06.19 11:27 \n" +
+                        "Card:4-334* \n" +
+                        "Sum:1 000.00 UAH \n" +
+                        "BRANCH 10020-0450 \n" +
+                        "Balance=1 001.38 UAH  \n" +
+                        "Detali www.oschadbank.ua/ib",
+                "unknown",
+                "4-334",
+                "1000.00",
+                ""
+        );
     }
 }
