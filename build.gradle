@@ -36,7 +36,8 @@ remotes {
     }
 }
 
-def desResource = rootProject.ext.uploadConfig.resFolder
+def xmlFile = "files/banksmspatterns.xml"
+def desFolder = rootProject.ext.uploadConfig.resFolder
 
 task increaseDate {
     doLast {
@@ -49,7 +50,7 @@ task uploadXmlOnServer {
     doLast {
         ssh.run {
             session(remotes.webServer) {
-                put from: file("files/banksmspatterns.xml"), into: desResource
+                put from: file(xmlFile), into: desFolder
             }
         }
     }

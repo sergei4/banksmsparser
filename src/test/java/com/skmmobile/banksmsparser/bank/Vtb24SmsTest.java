@@ -164,5 +164,33 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "1426.18",
                 "indefinite"
         );
+        checkBankSms(
+                "Karta *0333: Oplata 643 RUB;STOLOVAYA;15.07.2019 12:24,dostupno 6785.69 RUB",
+                "expense",
+                "0333",
+                "643",
+                "indefinite"
+        );
+        checkBankSms(
+                "Karta *0333: Oplata 52.5 RUB;SOCIALNAYA APTEKA 70;15.07.2019 08:45,dostupno 1477.19 RUB",
+                "expense",
+                "0333",
+                "52.5",
+                "indefinite"
+        );
+        checkBankSms(
+                "Karta *3732: snyatie 2000 RUB;D. 5, SH. GOLOVINSKOE;15.07.2019 15:07,dostupno 34735.57 RUB",
+                "cash_atm",
+                "3732",
+                "2000",
+                ""
+        );
+        checkBankSms(
+                "Schet *0745: spisanie 40 RUB;poluchatel Mitrohina Natalya Nikolaevna; 18.07.2019 18:24;dostupno 33485.85 RUB",
+                "payment",
+                "Schet *0745",
+                "40",
+                ""
+        );
     }
 }
