@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/07/19 10:45</updated>
+    <updated>2019/08/23 11:35</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -3255,11 +3255,23 @@
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[Халва оплата (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--ХАЛВА оплата 250 BandaFit Fit Баланс 117867.79 https://scb.im/hva-->
+        <pattern category="expense">
+            <match><![CDATA[ХАЛВА оплата.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[ХАЛВА оплата (\d*.?\d{1,2})]]></amount>
+        </pattern>
         <!--Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
         <pattern category="popolnenie">
             <match><![CDATA[Халва пополнена.*]]></match>
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[Халва пополнена (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--ХАЛВА пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
+        <pattern category="popolnenie">
+            <match><![CDATA[ХАЛВА пополнена.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[ХАЛВА пополнена (\d*.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="tinkoff">

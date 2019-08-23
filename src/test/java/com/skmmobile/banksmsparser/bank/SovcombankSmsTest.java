@@ -24,5 +24,19 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
                 "5000",
                 ""
         );
+        checkBankSms(
+                "ХАЛВА оплата 250 BandaFit Fit Баланс 117867.79 https://scb.im/hva",
+                "expense",
+                "halva",
+                "250",
+                ""
+        );
+        checkBankSms(
+                "ХАЛВА пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva",
+                "popolnenie",
+                "halva",
+                "5000",
+                ""
+        );
     }
 }
