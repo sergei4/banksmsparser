@@ -45,5 +45,12 @@ public class KreditEuroBankSmsTest extends AbsXmlBankSmsTest {
                 "10108.44",
                 ""
         );
+        checkBankSms(
+                "Pokupka po karte MEGACARD # 6277 17/01/20 17:47 Summa: 179.00 RUB Bally +: 1.79 Bally MEGA: 2020.22 BB Dostupniy limit: 56017.92 RUB YANDEX.TAXI MOSCOW",
+                "expense",
+                "MEGACARD # 6277",
+                "179",
+                ""
+        );
     }
 }

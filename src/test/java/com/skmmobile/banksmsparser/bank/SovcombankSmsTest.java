@@ -38,5 +38,19 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
                 "5000",
                 ""
         );
+        checkBankSms(
+                "ХАЛВА оплата 843 3DI MMR-DELI Баланс 45215.88 https://scb.im/hva",
+                "expense",
+                "halva",
+                "843",
+                ""
+        );
+        checkBankSms(
+                "ХАЛВА погашено 2000.00 р. Платеж по графику рассрочки внесен целиком",
+                "payment",
+                "halva",
+                "2000",
+                ""
+        );
     }
 }

@@ -25,5 +25,20 @@ public class FortebankSmsTest extends AbsXmlBankSmsTest {
                 "2210",
                 ""
         );
+        checkBankSms(
+                "Vnesenie nalichnih 15 000.00 KZT adres ATM 2965 RCI URP TEMIRLAN, SHYMKENT, 06.01.2020 17:29, karta ***9166, ostatok 503 390.99 KZT",
+                "popolnenie",
+                "9166",
+                "15000",
+                ""
+        );
+//TODO: doesn't support 2 currency operations
+//        checkBankSms(
+//                "06.01.2020 14:18. Na kartu ***9166 sdelan perevod 2 000.00 RUB s karti ***8335. Ostatok 488 390.99 KZT.",
+//                "perevod",
+//                "9166",
+//                "2000",
+//                ""
+//        );
     }
 }

@@ -11,7 +11,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Счёт договора 20770680 пополнен на 11000.00р. Баланс 11157.56р.",
                 "popolnenie",
                 "20770680",
@@ -19,7 +18,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Карта 4*8274 \n" +
                         "12.03.18 12:19 \n" +
                         "Покупка 155.00 RUB  \n" +
@@ -31,7 +29,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Операция выполнена 04.03.2018 17:44.\n" +
                         "Платеж Yota.\n" +
                         "Сумма 550.00 руб.\n" +
@@ -42,7 +39,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Операция выполнена 10.03.2018 19:38.\n" +
                         "Перевод в СЕВЕРО-ЗАПАДНОЕ ГУ БАНКА РОССИ, ГБДОУ детский сад 113 комбинированного вида Московского района СПб л/с 0591153.\n" +
                         "Сумма 871.36 руб.\n" +
@@ -53,7 +49,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Карта 4*8274 \n" +
                         "23.03.18 22:50 \n" +
                         "Получение наличных 16000.00 RUB  \n" +
@@ -65,7 +60,6 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Карта 4*8274 \n" +
                         "23.03.18 17:22 \n" +
                         "Зачислено 30000.00 RUB  \n" +
@@ -173,6 +167,13 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "4*8100",
                 "11000",
+                ""
+        );
+        checkBankSms(
+                "Договор 44853115. Пополнение на 1486.00р. Доступно 118687.51р",
+                "popolnenie",
+                "44853115",
+                "1486",
                 ""
         );
     }

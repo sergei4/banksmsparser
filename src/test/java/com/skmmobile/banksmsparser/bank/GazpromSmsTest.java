@@ -389,5 +389,12 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "10000",
                 ""
         );
+        checkBankSms(
+                "*3647 Оплата 579.85р MAGNIT MM ZOLOTILSCHIK Доступно 926р",
+                "expense",
+                "3647",
+                "579.85",
+                ""
+        );
     }
 }

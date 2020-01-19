@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2019/08/23 11:35</updated>
+    <updated>2020/01/19 12:00</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -351,6 +351,7 @@
         <system_sms bankId="binbank"><![CDATA[Vy zashli v Binbank online.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*Введите код.*]]></system_sms>
         <system_sms bankId="chelinvest"><![CDATA[InvestPay.*код входа.*]]></system_sms>
+        <system_sms bankId="fortebank"><![CDATA[ВНИМАНИЕ\! НИКОМУ НЕ ГОВОРИТЕ КОД.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Вы совершаете интернет-платеж.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[^[\s\*\d]+.*Запрос баланса.*]]></system_sms>
         <system_sms bankId="gazprom"><![CDATA[Перевод по произвольным реквизитам.*код авторизации.*]]></system_sms>
@@ -1018,6 +1019,13 @@
             <amount group="1"><![CDATA[Pokupka ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
+        <!--Vnesenie nalichnih 15 000.00 KZT adres ATM 2965 RCI URP TEMIRLAN, SHYMKENT, 06.01.2020 17:29, karta ***9166, ostatok 503 390.99 KZT-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Vnesenie nalichnih.*]]></match>
+            <cardId group="1"><![CDATA[karta \*+(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Vnesenie nalichnih ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
     </patterns>
     <patterns bankId="gazprom">
         <!--Telecard; Card9284; Platezh; Summa 1000 RUR; 15.01.18 11:26:50; GAZPROMBANK; dostupno: 13089.42 RUR-->
@@ -1076,9 +1084,15 @@
         <!--*3164 Покупка 528р VERNYY 01.06.18 17:59:50 Доступно 14798.44р-->
         <!--*8980 20:19 Покупка 809.24р PYATEROCHKA 4096 Доступно 1000 р-->
         <pattern category="expense">
-            <match><![CDATA[\*?\d+.*Покупка.*]]></match>
+            <match><![CDATA[^\*?\d+.*Покупка.*]]></match>
             <cardId group="1"><![CDATA[\*?(\d+)]]></cardId>
             <amount group="1"><![CDATA[Покупка (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*7836 Оплата 609р ROSTELECOM Доступно 105391р-->
+        <pattern category="expense">
+            <match><![CDATA[^\*?\d+.*Оплата.*]]></match>
+            <cardId group="1"><![CDATA[\*?(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Оплата (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card8381; Snyatie nalichnih; Summa 14900 RUR; 14.12.17 13:23:35; GAZPROMBANK; dostupno: 11599.23 RUR-->
         <pattern category="cash_atm">
@@ -1423,9 +1437,10 @@
         </pattern>
         <!--Pokupka po karte MEGACARD #6277 21/02/18 19:26 Summa: 100.00RUB Ballov nachisleno: 1.00 Itogo balli MEGA: 274.75BB Dostupniy limit: 89909.10RUR MOSMETRO.RU AKRASNOPRE MOSCOW-->
         <!--Pokupka po karte #2013, schet nomer #1229 12.03.2018 08:57 Summa: 500.00 RUB Megafon. Platezhny limit: 13357.26 RUB-->
+        <!--Pokupka po karte MEGACARD # 6277 17/01/20 17:47 Summa: 179.00 RUB Bally +: 1.79 Bally MEGA: 2020.22 BB Dostupniy limit: 56017.92 RUB YANDEX.TAXI MOSCOW-->
         <pattern category="expense">
             <match><![CDATA[Pokupka po karte.*]]></match>
-            <cardId group="1"><![CDATA[po karte ([\w\s]*\#\d{4})]]></cardId>
+            <cardId group="1"><![CDATA[po karte ([\w\s]*\#\s?\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa: (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
@@ -2338,6 +2353,12 @@
             <cardId group="1"><![CDATA[Карта ([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[Пополнение на ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Договор 44853115. Пополнение на 1486.00р. Доступно 118687.51р-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Договор.*Пополнение на .*]]></match>
+            <cardId group="1"><![CDATA[Договор ([\d\*]+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение на ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
         <!--POCHTABANK (pochtabank)
             Карта 4*8274
             23.03.18 17:22
@@ -2708,6 +2729,12 @@
             <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
             <amount group="1"><![CDATA[Spisan platezh po kreditu (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Карта *6946. Операция 58.20 RUB. STOLOVAYA. Баланс 17229.84 RUB. 20.12.2019-->
+        <pattern category="payment">
+            <match><![CDATA[Карта.* (О|о)перация.*]]></match>
+            <cardId group="0"><![CDATA[Карта \*\d+]]></cardId>
+            <amount group="1"><![CDATA[перация (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Zachislena zarplata 8869.18 RUR na schet *4849. Balans 55122.34 RUR. Raiffeisenbank-->
         <pattern category="zachislenie">
             <match><![CDATA[Zachislena zarplata.*]]></match>
@@ -2737,6 +2764,12 @@
             <match><![CDATA[Schet.*Zachislen perevod.*]]></match>
             <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
             <amount group="1"><![CDATA[Zachislen perevod (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *7666. Zachisleno 1500.00 RUB. Balans 4204.73 RUB. 18.01.2020-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Karta.*Zachisleno.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Zachisleno (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Balans vashey karty *4180 popolnilsya 2018-02-10 na 11700 RUR. Dostupny ostatok: 18476.28 RUR. Raiffeisenbank-->
         <pattern category="popolnenie">
@@ -3117,6 +3150,12 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[вам (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Сбер.счёт *3473 16:17 Перевод 525р Баланс: 5000,79р-->
+        <pattern category="perevod">
+            <match><![CDATA[Сбер.счёт \*\d{4}.*еревод.*]]></match>
+            <cardId group="0"><![CDATA[Сбер.счёт \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р-->
         <pattern category="service_pay">
             <match><![CDATA[.*плата за выписку\/запрос баланса.*]]></match>
@@ -3259,7 +3298,13 @@
         <pattern category="expense">
             <match><![CDATA[ХАЛВА оплата.*]]></match>
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
-            <amount group="1"><![CDATA[ХАЛВА оплата (\d*.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ХАЛВА оплата (\d*.?\d{1,2})\s]]></amount>
+        </pattern>
+        <!--ХАЛВА погашено 2000.00 р. Платеж по графику рассрочки внесен целиком-->
+        <pattern category="payment">
+            <match><![CDATA[ХАЛВА погашено.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[ХАЛВА погашено (\d*.?\d{1,2})\s]]></amount>
         </pattern>
         <!--Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
         <pattern category="popolnenie">

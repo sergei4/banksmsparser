@@ -15,7 +15,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-// загрузка файла на сервер
 apply plugin: 'org.hidetake.ssh'
 
 buildscript {
@@ -24,20 +23,23 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.hidetake:gradle-ssh-plugin:2.9.0'
+        classpath 'org.hidetake:gradle-ssh-plugin:2.10.1'
     }
 }
 
+def props = new Properties()
+file("local.properties").withInputStream { props.load(it) }
+
 remotes {
     webServer {
-        host = rootProject.ext.uploadConfig.host
-        user = rootProject.ext.uploadConfig.user
-        password = rootProject.ext.uploadConfig.pwd
+        host = props."upload.host"
+        user = props."upload.usr"
+        password = props."upload.pwd"
     }
 }
 
 def xmlFile = "files/banksmspatterns.xml"
-def desFolder = rootProject.ext.uploadConfig.resFolder
+def desFolder = props."upload.resFolder"
 
 task increaseDate {
     doLast {
@@ -63,11 +65,9 @@ task sourceJar(type: Jar) {
 publishing {
     repositories {
         maven {
-            url version.contains("SNAPSHOT") ? rootProject.ext.maven.snapshot : rootProject.ext.maven.release
-            credentials {
-                username rootProject.ext.maven.user
-                password rootProject.ext.maven.pwd
-            }
+            url version.contains("SNAPSHOT") ? props."maven.repository" + "-SNAPHOT": props."maven.repository"
+            credentials.username props."maven.usr"
+            credentials.password props."maven.pwd"
         }
     }
 

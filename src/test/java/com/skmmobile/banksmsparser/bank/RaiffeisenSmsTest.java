@@ -209,6 +209,19 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "1000",
                 ""
         );
-
+        checkBankSms(
+                "Karta *7666. Zachisleno 1500.00 RUB. Balans 4204.73 RUB. 18.01.2020",
+                "zachislenie",
+                "7666",
+                "1500",
+                ""
+        );
+        checkBankSms(
+                "Карта *6946. Операция 58.20 RUB. STOLOVAYA. Баланс 17229.84 RUB. 20.12.2019",
+                "payment",
+                "Карта *6946",
+                "58.20",
+                ""
+        );
     }
 }
