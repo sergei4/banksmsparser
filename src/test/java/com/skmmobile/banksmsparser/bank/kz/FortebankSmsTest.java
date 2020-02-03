@@ -32,6 +32,14 @@ public class FortebankSmsTest extends AbsXmlBankSmsTest {
                 "15000",
                 ""
         );
+        checkBankSms(
+                "Snyatie nalichnih 10 000.00 KZT adres A-29056 RKO 299913, 21.01.2020 12:56, karta ***9166 , ostatok 321 975.47 KZT, v tom chisle KL 321 975.47 KZT.\n" +
+                        "https://forte.travel/tours#/",
+                "cash_atm",
+                "9166",
+                "10000",
+                ""
+        );
 //TODO: doesn't support 2 currency operations
 //        checkBankSms(
 //                "06.01.2020 14:18. Na kartu ***9166 sdelan perevod 2 000.00 RUB s karti ***8335. Ostatok 488 390.99 KZT.",

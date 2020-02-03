@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2020/01/19 12:00</updated>
+    <updated>2020/02/03 11:05</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1024,6 +1024,13 @@
             <match><![CDATA[Vnesenie nalichnih.*]]></match>
             <cardId group="1"><![CDATA[karta \*+(\d+)]]></cardId>
             <amount group="1"><![CDATA[Vnesenie nalichnih ([\d\s]*.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+        </pattern>
+        <!--Snyatie nalichnih 10 000.00 KZT adres A-29056 RKO 299913, 21.01.2020 12:56, karta ***9166 , ostatok 321 975.47 KZT, v tom chisle KL 321 975.47 KZT.-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Snyatie nalichnih.*]]></match>
+            <cardId group="1"><![CDATA[karta \*+(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnih ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
         </pattern>
     </patterns>
