@@ -1256,8 +1256,14 @@
         </pattern>
         <!--2018-11-09 00:00:00 Popolnenie 286328.00 KZT K**041 Dostupnaya summa:287709.56 KZT-->
         <pattern category="popolnenie">
-            <match><![CDATA[.*\d Popolnenie \d+.*]]></match>
+            <match><![CDATA[.*\d Popolnenie \d+.*Dostupnaya summa.*]]></match>
             <cardId group="1"><![CDATA[([\w\d\*]+) Dostupnaya summa]]></cardId>
+            <amount group="1"><![CDATA[Popolnenie (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--00:00 Popolnenie 172754.00 KZT *2327 Ostatok 173641.59-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*\d Popolnenie \d+.*Ostatok.*]]></match>
+            <cardId group="1"><![CDATA[([\w\d\*]+) Ostatok]]></cardId>
             <amount group="1"><![CDATA[Popolnenie (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Operaciya po karte CH Debit 74000.00 KZT P2P HB TO OWN CARD 4**769 Dostupnaya summa:65675.19 KZT-->
@@ -1752,6 +1758,16 @@
         Ostatok 34622.29RUB-->
         <pattern category="zachislenie">
             <match><![CDATA[Postuplenie Summa.*karta.*]]></match>
+            <cardId group="1"><![CDATA[karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Summa (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Vyplata posobiia
+        Summa xxxxx.xxRUB
+        ROSKAZNA from NSPK
+        21/02 12:56 karta *2710
+        Ostatok xxxxxx.xxRUB-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Vyplata posobiia.*karta.*]]></match>
             <cardId group="1"><![CDATA[karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa (\d*\.?\d{1,2})]]></amount>
         </pattern>

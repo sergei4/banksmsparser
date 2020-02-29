@@ -489,5 +489,16 @@ public class MinbankSmsTest extends AbsXmlBankSmsTest {
                 "223.25",
                 ""
         );
+        checkBankSms(
+                "Vyplata posobiia\n" +
+                        "Summa 223.25RUB\n" +
+                        "ROSKAZNA from NSPK\n" +
+                        "21/02 12:56 karta *2710\n" +
+                        "Ostatok 223.25RUB",
+                "zachislenie",
+                "2710",
+                "223.25",
+                ""
+        );
     }
 }

@@ -65,7 +65,7 @@ task sourceJar(type: Jar) {
 publishing {
     repositories {
         maven {
-            url version.contains("SNAPSHOT") ? props."maven.repository" + "-SNAPHOT": props."maven.repository"
+            url version.contains("SNAPSHOT") ? props."maven.repository.snaphot" : props."maven.repository"
             credentials.username props."maven.usr"
             credentials.password props."maven.pwd"
         }

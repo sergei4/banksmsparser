@@ -158,5 +158,12 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "10000.00",
                 ""
         );
+        checkBankSms(
+                "00:00 Popolnenie 172754.00 KZT *2327 Ostatok 173641.59",
+                "popolnenie",
+                "*2327",
+                "172754",
+                ""
+        );
     }
 }
