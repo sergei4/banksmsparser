@@ -94,5 +94,19 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 "1300",
                 ""
         );
+        checkBankSms(
+                "Karta**6194 FGBOU VO RANHIGS 122.00 RUB. Ostatok 9855.34 RUB",
+                "unknown",
+                "6194",
+                "122",
+                ""
+        );
+        checkBankSms(
+                "Karta**6194 LENINA 9 1260.00 RUB. Ostatok 9977.34 RUB",
+                "unknown",
+                "6194",
+                "1260",
+                ""
+        );
     }
 }

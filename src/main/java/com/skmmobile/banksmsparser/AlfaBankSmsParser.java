@@ -15,7 +15,7 @@ public class AlfaBankSmsParser extends BankSmsParser {
     public AlfaBankSmsParser() {
         Operation operation;
         // 5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17
-        operation = new Operation(BankSmsParser.CATEGORY_EXPENSE);
+        operation = new Operation("expense");
         operation.setTypePattern(".*\\sPokupka\\;.*");
         operation.setCardIdRex("(?<=(4|5)\\*)\\d{4}");
         operation.setAmountRex("Summa:\\s(\\d+\\,\\d{2})",1 );

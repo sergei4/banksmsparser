@@ -165,5 +165,12 @@ public class HalykbankSmsTest extends AbsXmlBankSmsTest {
                 "172754",
                 ""
         );
+        checkBankSms(
+                "16:54 Пополнение в терминале: 1000.00KZT, карта *7046. Доступно 1031.00KZT",
+                "popolnenie",
+                "*7046",
+                "1000",
+                ""
+        );
     }
 }

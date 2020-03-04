@@ -1,7 +1,5 @@
 package com.skmmobile.banksmsparser;
 
-import org.w3c.dom.Document;
-
 /**
  * Статический шаблон для обработки смс банка Tinkoff.
  * шаблоны перенесены в xml
@@ -18,7 +16,7 @@ public class TinkoffSmsParser extends BankSmsParser {
     public TinkoffSmsParser() {
         Operation operation;
         // Pokupka. Karta *9930. Summa 167.90 RUB. PYATEROCHKA, CHELYABINSK. 05.12.2017 16:20. Dostupno 41711.07 RUB. Tinkoff.ru
-        operation = new Operation(CATEGORY_EXPENSE);
+        operation = new Operation("expense");
         operation.setTypePattern("Pokupka.*");
         operation.setCardIdRex("(?<=(Karta\\s\\*))\\d{4}");
         operation.setAmountRex("(?<=Summa\\s)(\\d+\\.\\d{2})");
@@ -27,7 +25,7 @@ public class TinkoffSmsParser extends BankSmsParser {
 
         // Покупка. Карта *0380. 126 RUB. YANDEX.GOODS. Баланс 22601 RUB
         // Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB
-        operation = new Operation(CATEGORY_EXPENSE);
+        operation = new Operation("expense");
         operation.setTypePattern("Покупка.*");
         operation.setCardIdRex("(?<=(Карта\\s\\*))\\d{4}");
         operation.setAmountRex("\\d{4}.\\s(\\d*.?\\d{1,2})\\s", 1);

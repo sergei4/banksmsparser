@@ -223,5 +223,12 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "58.20",
                 ""
         );
+        checkBankSms(
+                "Schet *4806. Spisan perevod 3812.00 RUB. Balans 246.20 RUB.",
+                "perevod",
+                "Schet *4806",
+                "3812",
+                ""
+        );
     }
 }

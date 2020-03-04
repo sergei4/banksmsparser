@@ -72,6 +72,7 @@ public class BankParserTests extends Assert {
         Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
         // Загружаем системные смс
         BankSmsParser.initSystemSms(XmlBankParser.obtainSystemSmsPatternList(xmlDocument));
+        Context.LOGGER = new ConsoleLogger();
     }
 
     @Test

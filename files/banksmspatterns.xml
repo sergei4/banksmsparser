@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>2020/02/03 11:05</updated>
+    <updated>{$update_date}</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -1266,6 +1266,12 @@
             <cardId group="1"><![CDATA[([\w\d\*]+) Ostatok]]></cardId>
             <amount group="1"><![CDATA[Popolnenie (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--16:54 Пополнение в терминале: 1000.00KZT, карта *7046. Доступно 1031.00KZT-->
+        <pattern category="popolnenie">
+            <match><![CDATA[.*\d Пополнение в терминале:.*]]></match>
+            <cardId group="1"><![CDATA[карта ([\*\d]+)]]></cardId>
+            <amount group="1"><![CDATA[Пополнение в терминале: (\d*.?\d{1,2})]]></amount>
+        </pattern>
         <!--Operaciya po karte CH Debit 74000.00 KZT P2P HB TO OWN CARD 4**769 Dostupnaya summa:65675.19 KZT-->
         <pattern category="popolnenie">
             <match><![CDATA[.*Operaciya po karte CH Debit \d+.*]]></match>
@@ -1946,18 +1952,30 @@
         MTB INTERNET POS, PR. PARTIZANSKIY 6A, MINSK
         OSTATOK 19.75 BYN
         Spr.:5099999-->
+        <!--KARTA 5*6339
+        2019-12-15 04:30:02
+        OPLATA 2.00 BYN
+        MTB INTERNET POS / MINSK / BY
+        OSTATOK 188.59 BYN
+        Spr.:5099999-->
         <pattern category="expense">
             <match><![CDATA[KARTA.*OPLATA.*]]></match>
             <cardId group="1"><![CDATA[KARTA:?\s?([\d\*]+)]]></cardId>
             <amount group="1"><![CDATA[OPLATA (\d*.?\d{1,2})]]></amount>
         </pattern>
+
         <!--PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999-->
         <!--HALVA 5351*1179 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999-->
         <!--ZP KARTA 4177*5654 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999-->
         <!--KORONA 5351*4690 16/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 19.90 BYN Spravka 5099999-->
+        <!--KARTA: 5*5291
+        2020-03-02 22:30:45
+        PLATA ZA OBSLUZHIVANIE KARTY:
+        SPISANO 2.50 BYN
+        Spr.:5099999-->
         <pattern category="service_pay">
             <match><![CDATA[.*PLATA ZA.*]]></match>
-            <cardId group="2"><![CDATA[(KORONA|PAYOKAY|HALVA|ZP KARTA) (\d{4}\*\d{4})]]></cardId>
+            <cardId group="2"><![CDATA[(KORONA|PAYOKAY|HALVA|ZP KARTA|KARTA:) (\d+\*\d{4})]]></cardId>
             <amount group="1"><![CDATA[SPISANO (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Uvazhaemyj klient! Na Vash schet BY75MTBK*******6349 postupilo 7,61 BYN. Vash MTBank!-->
@@ -1978,6 +1996,28 @@
             <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
             <amount group="1"><![CDATA[POPOLNENIE (\d*.?\d{1,2})]]></amount>
         </pattern>
+        <!--KARTA 5*5291
+        2020-02-26 15:37:39
+        ZACHISLENIE PEREVOD 100.00 BYN
+        P2PMTBANK / MINSK / BY
+        OSTATOK 100.73 BYN
+        Spr.:5099999-->
+        <pattern category="popolnenie">
+            <match><![CDATA[KARTA.*ZACHISLENIE PEREVOD.*]]></match>
+            <cardId group="1"><![CDATA[KARTA (\d+\*\d{4})]]></cardId>
+            <amount group="1"><![CDATA[ZACHISLENIE PEREVOD (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--KARTA 5*5291
+        2020-02-13 17:24:00
+        SPISANIE PEREVOD 5.00 BYN
+        P2PMTBANK / MINSK / BY
+        OSTATOK 55.86 BYN
+        Spr.:5099999-->
+        <pattern category="payment">
+            <match><![CDATA[KARTA.*SPISANIE PEREVOD.*]]></match>
+            <cardId group="1"><![CDATA[KARTA (\d+\*\d{4})]]></cardId>
+            <amount group="1"><![CDATA[SPISANIE PEREVOD (\d*.?\d{1,2})]]></amount>
+        </pattern>
         <!--KARTA:4649*7095
         18/01/18 21:51
         NALICHNYE 200.00 BYN
@@ -1996,7 +2036,7 @@
         OSTATOK 1 100.36 BYN
         Spr.:5099999-->
         <pattern category="perevod">
-            <match><![CDATA[KARTA.*PEREVOD.*]]></match>
+            <match><![CDATA[KARTA:.*PEREVOD.*]]></match>
             <cardId group="1"><![CDATA[KARTA:(\d{4}\*\d{4})]]></cardId>
             <amount group="1"><![CDATA[PEREVOD ([\d\s]*.?\d{1,2})]]></amount>
             <decimal_group_char> </decimal_group_char>
@@ -2824,6 +2864,12 @@
             <cardId group="0"><![CDATA[scheta \*\d+]]></cardId>
             <amount group="1"><![CDATA[Spisan perevod (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Schet *4806. Spisan perevod 3812.00 RUB. Balans 246.20 RUB.-->
+        <pattern category="perevod">
+            <match><![CDATA[Schet.*Spisan perevod.*]]></match>
+            <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[Spisan perevod (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!-- Ukraine -->
         <!--Vasha operatsija: 23.03.2019 16:27:58 VISA Gold/3306 98.00 UAH McDonald's 077 dostupna suma-->
         <pattern category="expense">
@@ -3004,6 +3050,12 @@
             <match><![CDATA[Karta.*achisleno.*]]></match>
             <cardId group="1"><![CDATA[Karta \*\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[achisleno (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta**6194 FGBOU VO RANHIGS 122.00 RUB. Ostatok 9855.34 RUB-->
+        <pattern category="unknown">
+            <match><![CDATA[Karta\*\*\d{4}.*]]></match>
+            <cardId group="1"><![CDATA[Karta\*\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[(?<!Ostatok) (\d*\.?\d{1,2}) RUB]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="rosselhoz">
@@ -3615,6 +3667,15 @@
             <amount group="1"><![CDATA[Oplata\s(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[.*;\s(.*);\s\d]]></detail>
         </pattern>
+        <!--Oplata 1072.00 RUB
+        Karta *1247 Lenta LLC
+        Balans 28732.62 RUB 12:01
+        vtb.ru/app-->
+        <pattern category="expense">
+            <match><![CDATA[Oplata.*Karta.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Oplata (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *9950 Pokupka, 75.00 RUR .PEKARNYA NA KANTEMIRO 16.01.18 20:21 MSK Ostatok 11105.62 RUR-->
         <pattern category="expense">
             <match><![CDATA[Karta.*Pokupka.*]]></match>
@@ -3627,6 +3688,15 @@
             <match><![CDATA[Karta.*vnesenie.*]]></match>
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[vnesenie\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Vnesenie 29000.00 RUB
+        Karta *1247 D. 17, KORP. 1, LIT. A, UL. HA
+        Balans 29804.62 RUB 11:33
+        vtb.ru/app-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Vnesenie.*Karta.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[nesenie (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *1020: spisanie 600.00 RUR; 35, MYASNITSKAYA; 14.12.2017 16:43, dostupno 620.00 RUR-->
         <!--Karta *1020: spisanie 100.00 RUR; W.QIWI.RU; 20.12.2017 14:22, dostupno 100.00 RUR.-->

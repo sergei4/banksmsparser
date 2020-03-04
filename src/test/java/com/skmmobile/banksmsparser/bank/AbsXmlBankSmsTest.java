@@ -18,6 +18,10 @@ public abstract class AbsXmlBankSmsTest extends Assert{
         this.parser = XmlBankParser.obtain(xmlDocument, bankName);
     }
 
+    protected void checkBankSms(String smsText, String type, String cardId, String amountStr){
+        checkBankSms(parser, smsText, type, cardId, amountStr, "");
+    }
+
     protected void checkBankSms(String smsText, String type, String cardId, String amountStr, String details){
         checkBankSms(parser, smsText, type, cardId, amountStr, details);
     }

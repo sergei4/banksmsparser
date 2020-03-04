@@ -23,7 +23,7 @@ public class SberbankSmsParser extends BankSmsParser {
         addOperationTemplate(operation);
 
         // VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р
-        operation = new Operation(CATEGORY_EXPENSE);
+        operation = new Operation("expense");
         operation.setTypePattern(".*оплата\\s\\d.*");
         operation.setCardIdRex("(MIR-|VISA|MAES|ORPS|ECMC)\\d{4}");
         operation.setAmountRex("(?<=оплата\\s)\\d*\\.?\\d{1,2}");
@@ -31,7 +31,7 @@ public class SberbankSmsParser extends BankSmsParser {
         addOperationTemplate(operation);
 
         // MIR-3075 13.12.17 17:39 покупка 1200р VNUKOVO.AIRLINES AEROP Баланс: 1276.46р
-        operation = new Operation(CATEGORY_EXPENSE);
+        operation = new Operation("expense");
         operation.setTypePattern(".*покупка\\s\\d.*");
         operation.setCardIdRex("(MIR-|VISA|MAES|ORPS|ECMC)\\d{4}");
         operation.setAmountRex("(?<=покупка\\s)\\d*\\.?\\d{1,2}");

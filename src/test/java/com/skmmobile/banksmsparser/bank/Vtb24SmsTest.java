@@ -192,5 +192,23 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "40",
                 ""
         );
+        checkBankSms(
+                "Oplata 1072.00 RUB\n" +
+                        "Karta *1247 Lenta LLC\n" +
+                        "Balans 28732.62 RUB 12:01\n" +
+                        "vtb.ru/app",
+                "expense",
+                "1247",
+                "1072",
+                "");
+        checkBankSms(
+                "Vnesenie 29000.00 RUB\n" +
+                        "Karta *1247 D. 17, KORP. 1, LIT. A, UL. HA\n" +
+                        "Balans 29804.62 RUB 11:33\n" +
+                        "vtb.ru/app",
+                "popolnenie",
+                "1247",
+                "29000",
+                "");
     }
 }

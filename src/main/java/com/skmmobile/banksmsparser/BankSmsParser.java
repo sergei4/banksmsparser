@@ -12,9 +12,6 @@ import java.util.regex.Pattern;
 public class BankSmsParser {
     private static String TAG = "BankSmsParser";
 
-    @Deprecated
-    public static final String CATEGORY_EXPENSE = "expense";
-
     private final Set<Operation> operationSet = new HashSet<>();
 
     private static String wrapEscape(String src) {
@@ -47,8 +44,10 @@ public class BankSmsParser {
     public Result parseSms(String text1) {
         String text = wrapEscape(text1);
         Result result = null;
+        Operation curOperation = null;
         for (Operation operation : operationSet) {
             if (operation.typeRex.matcher(text).matches()) {
+                curOperation = operation;
                 result = new Result(operation.type);
                 Matcher m;
                 if (operation.cardIdRex != null) {
@@ -94,6 +93,15 @@ public class BankSmsParser {
         }
 
         if (result != null && (result.cardIdStr.equals(Operation.INDEFINITE_CARD_ID) | result.amount.compareTo(BigDecimal.ZERO) == 0)) {
+            Context.LOGGER.debug(text);
+
+            Context.LOGGER.debug("pattern:" + curOperation.typeRex.pattern());
+            Context.LOGGER.debug(curOperation.cardIdRex != null ? "cardId: " + curOperation.cardIdRex.pattern() + "; group=" + curOperation.cardIdRexGroup : "cardId: no pattern!!!");
+            Context.LOGGER.debug(curOperation.amountRex != null ? "amount: " + curOperation.amountRex.pattern() + "; group=" + curOperation.amountRexGroup : "amount: no pattern!!!");
+            Context.LOGGER.debug(curOperation.dateRex != null ? "date: " + curOperation.dateRex.pattern() + "; group=" + curOperation.dateRexGroup : "date: no pattern!!!");
+            Context.LOGGER.debug(curOperation.detailRex != null ? "details: " + curOperation.detailRex.pattern() + "; group=" + curOperation.detailRexGroup : "details: no pattern!!!");
+
+            Context.LOGGER.debug("out: " + result.toString());
             return null;
         } else {
             return result;

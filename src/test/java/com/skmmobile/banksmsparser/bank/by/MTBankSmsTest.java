@@ -21,8 +21,7 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "4177*5654",
                 "6.48",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA:5351*1179\n" +
                         "05/12/17 20:05\n" +
@@ -35,23 +34,20 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "5351*1179",
                 "479",
-                ""
-        );
+                "");
         checkBankSms(
                 "PAYOKAY 5351*7458 04/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 2.50 BYN Spravka 5099999",
                 "service_pay",
                 "5351*7458",
                 "2.50",
-                ""
-        );
+                "");
         checkBankSms(
                 parser,
                 "Uvazhaemyj klient! Na Vash schet BY75MTBK*******6349 postupilo 7,61 BYN. Vash MTBank!",
                 "popolnenie",
                 "BY75MTBK*******6349",
                 "7.61",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA:5351*3320\n" +
                         "18/01/18 16:01\n" +
@@ -62,29 +58,25 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "popolnenie",
                 "5351*3320",
                 "50.00",
-                ""
-        );
+                "");
         checkBankSms(
                 "HALVA 5351*1179 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
                 "service_pay",
                 "5351*1179",
                 "1.80",
-                ""
-        );
+                "");
         checkBankSms(
                 "ZP KARTA 4177*5654 31/01/2018 PLATA ZA SMS-UVEDOMLENIYA: SPISANO 1.80 BYN Spravka 5099999",
                 "service_pay",
                 "4177*5654",
                 "1.80",
-                ""
-        );
+                "");
         checkBankSms(
                 "KORONA 5351*4690 16/01/2018 PLATA ZA OBSLUZHIVANIE KARTY: SPISANO 19.90 BYN Spravka 5099999",
                 "service_pay",
                 "5351*4690",
                 "19.90",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA:4649*7095\n" +
                         "18/01/18 21:51\n" +
@@ -95,8 +87,7 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "cash_atm",
                 "4649*7095",
                 "200.00",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA:5351*1199\n" +
                         "05/02/18 18:46\n" +
@@ -107,8 +98,7 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "perevod",
                 "5351*1199",
                 "20.01",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA:5351*3796\n" +
                         "29/03/19 17:43\n" +
@@ -119,8 +109,7 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "perevod",
                 "5351*3796",
                 "1100.36",
-                ""
-        );
+                "");
         checkBankSms(
                 "KARTA 535104******3796\n" +
                         "2019-05-16 17:59:23\n" +
@@ -131,7 +120,55 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "535104******3796",
                 "9.13",
-                ""
-        );
+                "");
+        checkBankSms(
+                "KARTA 535104******3796\n" +
+                        "2019-05-16 17:59:23\n" +
+                        "OPLATA 9.13BYN\n" +
+                        "SHOP \"DOMASHNIY\" BAPB    LOGOYSK      BY\n" +
+                        "OSTATOK 555.19BYN\n" +
+                        "Spr.:5099999",
+                "expense",
+                "535104******3796",
+                "9.13");
+        checkBankSms(
+                "KARTA: 5*5291\n" +
+                        "2020-03-02 22:30:45\n" +
+                        "PLATA ZA OBSLUZHIVANIE KARTY:\n" +
+                        "SPISANO 2.50 BYN\n" +
+                        "Spr.:5099999",
+                "service_pay",
+                "5*5291",
+                "2.50");
+        checkBankSms(
+                "KARTA 5*5291\n" +
+                        "2020-02-14 08:40:22\n" +
+                        "ZACHISLENIE PEREVOD 100.00 BYN\n" +
+                        "P2PMTBANK / MINSK / BY\n" +
+                        "OSTATOK 122.59 BYN\n" +
+                        "Spr.:5099999",
+                "popolnenie",
+                "5*5291",
+                "100");
+        checkBankSms(
+                "KARTA 5*5291\n" +
+                        "2020-02-13 17:24:00\n" +
+                        "SPISANIE PEREVOD 5.00 BYN\n" +
+                        "P2PMTBANK / MINSK / BY\n" +
+                        "OSTATOK 55.86 BYN\n" +
+                        "Spr.:5099999",
+                "payment",
+                "5*5291",
+                "5");
+        checkBankSms(
+                "KARTA 5*6339\n" +
+                        "2019-12-15 04:30:02\n" +
+                        "OPLATA 2.00 BYN\n" +
+                        "MTB INTERNET POS / MINSK / BY\n" +
+                        "OSTATOK 188.59 BYN\n" +
+                        "Spr.:5099999",
+                "expense",
+                "5*6339",
+                "2");
     }
 }

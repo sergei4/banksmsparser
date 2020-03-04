@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 group 'com.skmmobile'
 version '1.4.0'
 
@@ -38,22 +40,35 @@ remotes {
     }
 }
 
-def xmlFile = "files/banksmspatterns.xml"
+def srcXmlFile = "files/banksmspatterns.xml"
+def outXmlFile = "$buildDir/files/banksmspatterns.xml"
 def desFolder = props."upload.resFolder"
 
-task increaseDate {
-    doLast {
+task updateDate {
+    copy {
+        from srcXmlFile
+        into "$buildDir/files"
+        def datePlaceholder='\\{\\$update_date\\}'
+        def date = new Date()
+        def dateFormatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+        dateFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Yekaterinburg"));
 
+        filter { line -> line.replaceAll(datePlaceholder, dateFormatter.format(date)) }
     }
+
 }
 
-task uploadXmlOnServer {
-    group = "extentional"
+task uploadXmlOnServer(dependsOn: updateDate) {
+    group = "delivery"
     doLast {
-        ssh.run {
-            session(remotes.webServer) {
-                put from: file(xmlFile), into: desFolder
+        if (file(outXmlFile).exists()) {
+            ssh.run {
+                session(remotes.webServer) {
+                    put from: file(outXmlFile), into: desFolder
+                }
             }
+        } else {
+            throw new RuntimeException("banksmspatterns.xml file doesn't exist in build directory")
         }
     }
 }
