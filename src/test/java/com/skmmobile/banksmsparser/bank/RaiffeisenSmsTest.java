@@ -230,5 +230,12 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "3812",
                 ""
         );
+        checkBankSms(
+                "Karta *8104. Spisano 50000.00 RUB. TINKOFF BANK CARD2CARD. Balans 34482.87 RUB. 05.03.2020",
+                "payment",
+                "8104",
+                "50000",
+                ""
+        );
     }
 }

@@ -210,5 +210,23 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "1247",
                 "29000",
                 "");
+        checkBankSms(
+                "Spisanie 1000.00 RUB\n" +
+                        "Karta *0977 CARD2CARD VK.COM\n" +
+                        "Balans 13027.76 RUB 09:07\n" +
+                        "vtb.ru/app",
+                "payment",
+                "0977",
+                "1000",
+                "");
+        checkBankSms(
+                "Postuplenie zarabotnoy plati\n" +
+                        "4350.00 RUB schet *3815\n" +
+                        "Balans 4350.00 RUB 16:20\n" +
+                        "vtb.ru/app",
+                "popolnenie",
+                "schet *3815",
+                "4350",
+                "");
     }
 }
