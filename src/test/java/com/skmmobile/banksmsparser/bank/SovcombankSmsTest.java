@@ -52,5 +52,12 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
                 "2000",
                 ""
         );
+        checkBankSms(
+                "*0137 оплата 366 р.  LENTA, SANKT Баланс 3652.28 https://scb.im/hva",
+                "expense",
+                "0137",
+                "366",
+                ""
+        );
     }
 }

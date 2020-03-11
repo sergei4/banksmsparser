@@ -898,6 +898,14 @@
             <decimal_group_char> </decimal_group_char>
             <decimal_char>,</decimal_char>
         </pattern>
+        <!--Card7566; Snyatie nalichnykh: 50,00 BYN; 08.03.20 11:04:06; ,GRODNO,BY; MCC: 6011; Dostupno: 226,76 BYN-->
+        <pattern category="cash_atm">
+            <match><![CDATA[.*Snyatie nalichnykh.*]]></match>
+            <cardId group="0"><![CDATA[(MC|Card)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[Snyatie nalichnykh: ([\d\s]*\,?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
+            <decimal_char>,</decimal_char>
+        </pattern>
     </patterns>
     <patterns bankId="binbank">
         <!--Покупка по карте: *8512 870.00 RUR Место KAZAN MYASNAYA KULINARIYA ITLE 06.12.17 21:23 Баланс: 5488.68 RUR i.binbank.ru-->
@@ -3373,7 +3381,13 @@
         <pattern category="expense">
             <match><![CDATA[Халва оплата.*]]></match>
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
-            <amount group="1"><![CDATA[Халва оплата (\d*.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[оплата (\d*.?\d{1,2})]]></amount>
+        </pattern>
+        <!--*0137 оплата 366 р.  LENTA, SANKT Баланс 3652.28 https://scb.im/hva-->
+        <pattern category="expense">
+            <match><![CDATA[^\*\d+ оплата.*]]></match>
+            <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[оплата (\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--ХАЛВА оплата 250 BandaFit Fit Баланс 117867.79 https://scb.im/hva-->
         <pattern category="expense">
