@@ -3720,6 +3720,15 @@
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[pisanie (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Spisano 3000.00 RUB
+        Schet *8067 poluchatel AO "DOM.RF".
+        Balans 1684.74 RUB 07:19
+        vtb.ru/app-->
+        <pattern category="payment">
+            <match><![CDATA[Spisano.*Schet.*]]></match>
+            <cardId group="0"><![CDATA[Schet \*\d+]]></cardId>
+            <amount group="1"><![CDATA[pisano (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *0755: umenshen balans scheta na 59.00 RUR; dostupno 162009.54 RUR (v tom chisle kreditnie sredstva 162009.54 RUR). Uchet rashodov http://p.vtb24.ru/smartc-->
         <pattern category="payment">
             <match><![CDATA[Karta.*umenshen balans scheta.*]]></match>
@@ -3770,9 +3779,13 @@
         4350.00 RUB schet *3815
         Balans 4350.00 RUB 16:20
         vtb.ru/app-->
+        <!--Postuplenie 10589.50 RUB
+        Schet *1362 ot UFK po Kirovskoy oblasti (GU-K
+        Balans 22080.23 RUB 15:57
+        vtb.ru/app-->
         <pattern category="popolnenie">
-            <match><![CDATA[Postuplenie.*schet.*]]></match>
-            <cardId group="0"><![CDATA[schet \*\d+]]></cardId>
+            <match><![CDATA[Postuplenie.*chet.*]]></match>
+            <cardId group="0"><![CDATA[(s|S)chet \*\d+]]></cardId>
             <amount group="1"><![CDATA[ostuplenie[\w\s][^\d]*(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *0755: zachislenie 9205.00 RUR; 35, MIYASNITSKAYA; 28.12.2017 12:13, dostupno 160988.72 RUR (v tom chisle kred. 160988.72 RUR).-->
@@ -3810,6 +3823,15 @@
             <match><![CDATA[Karta.*vydacha nalichnyh.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[vydacha nalichnyh (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Snyatie 10000.00 RUB
+        Karta *9111 D. 101, UL. KARLA MARKSA
+        Balans 79.89 RUB 10:13
+        vtb.ru/app-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Snyatie.*Karta.*]]></match>
+            <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[nyatie (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="yandexmoney">

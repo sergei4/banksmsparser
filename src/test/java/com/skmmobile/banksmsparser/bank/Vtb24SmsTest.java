@@ -228,5 +228,32 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "schet *3815",
                 "4350",
                 "");
+        checkBankSms(
+                "Snyatie 10000.00 RUB\n" +
+                        "Karta *9111 D. 101, UL. KARLA MARKSA\n" +
+                        "Balans 79.89 RUB 10:13\n" +
+                        "vtb.ru/app",
+                "cash_atm",
+                "9111",
+                "10000",
+                "");
+        checkBankSms(
+                "Spisano 3000.00 RUB\n" +
+                        "Schet *8067 poluchatel AO \"DOM.RF\".\n" +
+                        "Balans 1684.74 RUB 07:19\n" +
+                        "vtb.ru/app",
+                "payment",
+                "Schet *8067",
+                "3000",
+                "");
+        checkBankSms(
+                "Postuplenie 10589.50 RUB\n" +
+                        "Schet *1362 ot UFK po Kirovskoy oblasti (GU-K\n" +
+                        "Balans 22080.23 RUB 15:57\n" +
+                        "vtb.ru/app",
+                "popolnenie",
+                "Schet *1362",
+                "10589.50",
+                "");
     }
 }
