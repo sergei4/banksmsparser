@@ -48,7 +48,7 @@ task updateDate {
     copy {
         from srcXmlFile
         into "$buildDir/files"
-        def datePlaceholder='\\{\\$update_date\\}'
+        def datePlaceholder='\\$\\{update_date\\}'
         def date = new Date()
         def dateFormatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
         dateFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Yekaterinburg"));

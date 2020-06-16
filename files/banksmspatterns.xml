@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>{$update_date}</updated>
+    <updated>${update_date}</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -589,10 +589,11 @@
         <!--5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
         <!--**1175; Pokupka; Uspeshno; Summa: 155 RUR; Ostatok: 412,55 RUR; RU/Chelyabinsk/VKUSNYE PRODUKTY; 28.02.2018 15:32:35-->
         <!--**7781 Pokupka Uspeshno Summa: 826,50 RUR Ostatok: 6 428,46 RUR RU/CHELYABINSK/OOO TD URALMYASTORG 16.09.2018 15:09:16-->
+        <!--**6289 Pokupkа Uspeshnо Summа: 7 491,84 RUR Ostаtоk: 14 357,67 RUR RU/TОMSK/МY.ENSВ.TOМSK.RU 15.05.2020 10:32:32-->
         <pattern category="expense">
-            <match><![CDATA[[\d\*].*Pokupka.*]]></match>
+            <match><![CDATA[[\d\*].*okupk(a|а).*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: ([\s\d]*\,?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[Summ(a|а): ([\s\d]*\,?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Ostatok: [0-9,\s]*RUR;? ([^;]*).? \d{2}\.\d{2}\.\d{4}]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
