@@ -3697,6 +3697,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Oplata (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Оплата 1569.00р Карта*3658 OVOSHHI-FRUKTY Баланс 9530.17р 08:55-->
+        <pattern category="expense">
+            <match><![CDATA[Оплата.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[плата (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *9950 Pokupka, 75.00 RUR .PEKARNYA NA KANTEMIRO 16.01.18 20:21 MSK Ostatok 11105.62 RUR-->
         <pattern category="expense">
             <match><![CDATA[Karta.*Pokupka.*]]></match>
@@ -3833,6 +3839,12 @@
             <match><![CDATA[Snyatie.*Karta.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[nyatie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Снятие 6000.00р Карта*9111 Molodoy Gvardii Баланс 4067.19р 12:40-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Снятие.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[нятие (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="yandexmoney">
