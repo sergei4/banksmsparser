@@ -267,5 +267,11 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "Карта*9111",
                 "6000",
                 "");
+        checkBankSms(
+                "Списание 2550.00р Карта*7038 Card2Card Баланс 12679.12р 21:44",
+                "payment",
+                "Карта*7038",
+                "2550",
+                "");
     }
 }

@@ -3727,6 +3727,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[pisanie (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Списание 2550.00р Карта*7038 Card2Card Баланс 12679.12р 21:44-->
+        <pattern category="payment">
+            <match><![CDATA[Списание.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[писание (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Spisano 3000.00 RUB
         Schet *8067 poluchatel AO "DOM.RF".
         Balans 1684.74 RUB 07:19
