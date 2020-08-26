@@ -3769,6 +3769,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[nesenie (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Внесение 1000.00р Карта*9764 D. 66V, UL. KRA Баланс 78984.03р 09:49-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Внесение.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[несение (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
         <!--Schet *4135: postuplenie 190.00 RUB; perevod 25.12.2017 06:43:33; dostupno 227.66 RUB (sobstv. sredstva: 227.66 RUB). http://p.vtb24.ru/smartb-->
         <pattern category="popolnenie">

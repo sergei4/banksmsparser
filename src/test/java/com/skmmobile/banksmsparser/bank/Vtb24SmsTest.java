@@ -273,5 +273,11 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "Карта*7038",
                 "2550",
                 "");
+        checkBankSms(
+                "Внесение 1000.00р Карта*9764 D. 66V, UL. KRA Баланс 78984.03р 09:49",
+                "popolnenie",
+                "Карта*9764",
+                "1000",
+                "");
     }
 }
