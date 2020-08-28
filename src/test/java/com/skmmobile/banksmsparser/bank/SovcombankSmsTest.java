@@ -59,5 +59,12 @@ public class SovcombankSmsTest extends AbsXmlBankSmsTest {
                 "366",
                 ""
         );
+        checkBankSms(
+                "ХАЛВА списано 250 р. Баланс 126552.06 р. https://scb.im/hva",
+                "payment",
+                "halva",
+                "250",
+                ""
+        );
     }
 }

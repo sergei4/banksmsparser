@@ -3402,6 +3402,12 @@
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[ХАЛВА погашено (\d*.?\d{1,2})\s]]></amount>
         </pattern>
+        <!--ХАЛВА списано 250 р. Баланс 126552.06 р. https://scb.im/hva-->
+        <pattern category="payment">
+            <match><![CDATA[ХАЛВА списано.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[ХАЛВА списано (\d*.?\d{1,2})\s]]></amount>
+        </pattern>
         <!--Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
         <pattern category="popolnenie">
             <match><![CDATA[Халва пополнена.*]]></match>
