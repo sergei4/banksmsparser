@@ -3193,6 +3193,12 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[перечисление процентов\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Visa Classic9410 12.08.20 зачислен перевод 24000.00р из Тинькофф Банк от МИХАИЛ СЕРГЕЕВИЧ Е.-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Visa.*зачислен перевод.*]]></match>
+            <cardId group="0"><![CDATA[Visa \w+\d{4}]]></cardId>
+            <amount group="1"><![CDATA[зачислен перевод (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="cash_atm">
             <match><![CDATA[.*ыдача[\D]+\d.*(ATM|OSB).*]]></match>
