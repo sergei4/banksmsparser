@@ -3024,6 +3024,12 @@
             <cardId group="1"><![CDATA[Karta \*\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[na summu (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Karta*6194 Pokupka 207.00 RUB. IP KHAYTMATOV. Ostatok 20082.03 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[Karta\*\d+.*okupka.*]]></match>
+            <cardId group="0"><![CDATA[Karta\*\d+]]></cardId>
+            <amount group="1"><![CDATA[okupka (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Schet A*891: Popolnenie 9082.00 RUB; Dostupno: 10042.19 RUB; 19/01/18-->
         <pattern category="popolnenie">
             <match><![CDATA[Schet.*Popolnenie.*]]></match>
