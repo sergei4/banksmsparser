@@ -9,7 +9,7 @@
 -->
 <content>
     <version>2</version>
-    <updated>{$update_date}</updated>
+    <updated>${update_date}</updated>
     <operations>
         <operation name="unknown">Неизвестная операция</operation>
         <operation name="expense">Расход, покупка, оплата товара</operation>
@@ -589,10 +589,11 @@
         <!--5*9857; Pokupka; Uspeshno; Summa: 110,00 RUR; Ostatok: 137372,27 RUR; RU/CHELYABINSK/SOKOL FIT DER NOVOE PO; 04.12.2017 13:33:17-->
         <!--**1175; Pokupka; Uspeshno; Summa: 155 RUR; Ostatok: 412,55 RUR; RU/Chelyabinsk/VKUSNYE PRODUKTY; 28.02.2018 15:32:35-->
         <!--**7781 Pokupka Uspeshno Summa: 826,50 RUR Ostatok: 6 428,46 RUR RU/CHELYABINSK/OOO TD URALMYASTORG 16.09.2018 15:09:16-->
+        <!--**6289 Pokupkа Uspeshnо Summа: 7 491,84 RUR Ostаtоk: 14 357,67 RUR RU/TОMSK/МY.ENSВ.TOМSK.RU 15.05.2020 10:32:32-->
         <pattern category="expense">
-            <match><![CDATA[[\d\*].*Pokupka.*]]></match>
+            <match><![CDATA[[\d\*].*okupk(a|а).*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[Summa: ([\s\d]*\,?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[Summ(a|а): ([\s\d]*\,?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[Ostatok: [0-9,\s]*RUR;? ([^;]*).? \d{2}\.\d{2}\.\d{4}]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -3023,10 +3024,10 @@
             <cardId group="1"><![CDATA[Karta \*\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[na summu (\d*\.?\d{1,2})]]></amount>
         </pattern>
-        <!--Karta*6194 Pokupka 1440.00 RUB. KRASTOTA I ZDOROVE. Ostatok 1359.28 RUB-->
+        <!--Karta*6194 Pokupka 207.00 RUB. IP KHAYTMATOV. Ostatok 20082.03 RUB-->
         <pattern category="expense">
-            <match><![CDATA[Karta\*\d{4}.*okupka.*]]></match>
-            <cardId group="1"><![CDATA[Karta\*(\d+)]]></cardId>
+            <match><![CDATA[Karta\*\d+.*okupka.*]]></match>
+            <cardId group="0"><![CDATA[Karta\*\d+]]></cardId>
             <amount group="1"><![CDATA[okupka (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Schet A*891: Popolnenie 9082.00 RUB; Dostupno: 10042.19 RUB; 19/01/18-->
@@ -3197,6 +3198,12 @@
             <match><![CDATA[.*перечисление процентов.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[перечисление процентов\s(\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Visa Classic9410 12.08.20 зачислен перевод 24000.00р из Тинькофф Банк от МИХАИЛ СЕРГЕЕВИЧ Е.-->
+        <pattern category="zachislenie">
+            <match><![CDATA[Visa.*зачислен перевод.*]]></match>
+            <cardId group="0"><![CDATA[Visa \w+\d{4}]]></cardId>
+            <amount group="1"><![CDATA[зачислен перевод (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97.45р-->
         <pattern category="cash_atm">
@@ -3406,6 +3413,12 @@
             <match><![CDATA[ХАЛВА погашено.*]]></match>
             <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
             <amount group="1"><![CDATA[ХАЛВА погашено (\d*.?\d{1,2})\s]]></amount>
+        </pattern>
+        <!--ХАЛВА списано 250 р. Баланс 126552.06 р. https://scb.im/hva-->
+        <pattern category="payment">
+            <match><![CDATA[ХАЛВА списано.*]]></match>
+            <cardId group="0" default="halva"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[ХАЛВА списано (\d*.?\d{1,2})\s]]></amount>
         </pattern>
         <!--Халва пополнена 5000 р баланс 5138.33 Подробнее http://scb.im/hva-->
         <pattern category="popolnenie">
@@ -3702,6 +3715,12 @@
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Oplata (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Оплата 1569.00р Карта*3658 OVOSHHI-FRUKTY Баланс 9530.17р 08:55-->
+        <pattern category="expense">
+            <match><![CDATA[Оплата.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[плата (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *9950 Pokupka, 75.00 RUR .PEKARNYA NA KANTEMIRO 16.01.18 20:21 MSK Ostatok 11105.62 RUR-->
         <pattern category="expense">
             <match><![CDATA[Karta.*Pokupka.*]]></match>
@@ -3725,6 +3744,12 @@
             <match><![CDATA[Spisanie.*Karta.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[pisanie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Списание 2550.00р Карта*7038 Card2Card Баланс 12679.12р 21:44-->
+        <pattern category="payment">
+            <match><![CDATA[Списание.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[писание (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Spisano 3000.00 RUB
         Schet *8067 poluchatel AO "DOM.RF".
@@ -3761,6 +3786,12 @@
             <match><![CDATA[Vnesenie.*Karta.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[nesenie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Внесение 1000.00р Карта*9764 D. 66V, UL. KRA Баланс 78984.03р 09:49-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Внесение.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[несение (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Schet *3318: postuplenie zarabotnoy plati 9200.00 RUB; 20.12.2017 19:38:07; Dostupno 9886.55 RUB. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
         <!--Schet *4135: postuplenie 190.00 RUB; perevod 25.12.2017 06:43:33; dostupno 227.66 RUB (sobstv. sredstva: 227.66 RUB). http://p.vtb24.ru/smartb-->
@@ -3838,6 +3869,12 @@
             <match><![CDATA[Snyatie.*Karta.*]]></match>
             <cardId group="1"><![CDATA[Karta \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[nyatie (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Снятие 6000.00р Карта*9111 Molodoy Gvardii Баланс 4067.19р 12:40-->
+        <pattern category="cash_atm">
+            <match><![CDATA[Снятие.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[нятие (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="yandexmoney">

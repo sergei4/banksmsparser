@@ -255,5 +255,29 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "Schet *1362",
                 "10589.50",
                 "");
+        checkBankSms(
+                "Оплата 255.00р Карта*2862 OOO MANKHETTEN Баланс 1785.00р 13:01",
+                "expense",
+                "Карта*2862",
+                "255.00",
+                "");
+        checkBankSms(
+                "Снятие 6000.00р Карта*9111 Molodoy Gvardii Баланс 4067.19р 12:40",
+                "cash_atm",
+                "Карта*9111",
+                "6000",
+                "");
+        checkBankSms(
+                "Списание 2550.00р Карта*7038 Card2Card Баланс 12679.12р 21:44",
+                "payment",
+                "Карта*7038",
+                "2550",
+                "");
+        checkBankSms(
+                "Внесение 1000.00р Карта*9764 D. 66V, UL. KRA Баланс 78984.03р 09:49",
+                "popolnenie",
+                "Карта*9764",
+                "1000",
+                "");
     }
 }

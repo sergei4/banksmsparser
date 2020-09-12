@@ -218,5 +218,12 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "50",
                 "RU/UFA/Alfa Iss"
         );
+        checkBankSms(
+                "**6952 Рokupkа Uspeshno Summа: 252 RUR Ostаtok: 54 361,17 RUR RU/Кrasnodar/YАGОDKА Zadоljеn.: 47 788 RUR 14.05.2020 20:44:41",
+                "expense",
+                "6952",
+                "252",
+                "indefinite"
+        );
     }
 }

@@ -561,5 +561,12 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "32.44",
                 ""
         );
+        checkBankSms(
+                "Visa Classic9410 12.08.20 зачислен перевод 24000.00р из Тинькофф Банк от МИХАИЛ СЕРГЕЕВИЧ Е.",
+                "zachislenie",
+                "Visa Classic9410",
+                "24000",
+                ""
+        );
     }
 }

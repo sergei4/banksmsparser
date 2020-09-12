@@ -109,10 +109,10 @@ public class RosbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "Karta*6194 Pokupka 1440.00 RUB. KRASTOTA I ZDOROVE. Ostatok 1359.28 RUB",
+                "Karta*6194 Pokupka 207.00 RUB. IP KHAYTMATOV. Ostatok 20082.03 RUB",
                 "expense",
-                "6194",
-                "1440",
+                "Karta*6194",
+                "207",
                 ""
         );
     }
