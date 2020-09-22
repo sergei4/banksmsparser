@@ -225,5 +225,12 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "252",
                 "indefinite"
         );
+        checkBankSms(
+                "Платеж по кредиту 11.09.2020, сумма 15500.00 RUR. 10.09 остаток на счете 1336.00RUR. Внесите 14164.00RUR",
+                "payment",
+                "alfa-bank",
+                "15500",
+                ""
+        );
     }
 }

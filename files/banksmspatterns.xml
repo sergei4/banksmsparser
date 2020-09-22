@@ -668,6 +668,12 @@
             <cardId group="1"><![CDATA[Karta ([\d\.]+)]]></cardId>
             <amount group="1"><![CDATA[Summa:(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Платеж по кредиту 11.09.2020, сумма 15500.00 RUR. 10.09 остаток на счете 1336.00RUR. Внесите 14164.00RUR-->
+        <pattern category="payment">
+            <match><![CDATA[Платеж по кредиту.*]]></match>
+            <cardId group="0" default="alfa-bank"><![CDATA[nocard]]></cardId>
+            <amount group="1"><![CDATA[сумма (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta 5.3854
         Perevod (Spisanie)
         Uspeshno
@@ -855,7 +861,7 @@
         <pattern category="zachislenie">
             <match><![CDATA[ZACHISLENIE.*]]></match>
             <cardId group="1"><![CDATA[KARTA \#(\d+)]]></cardId>
-            <amount group="1"><![CDATA[ZACHISLENIE: (\d+.\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ZACHISLENIE.*: (\d+.\d{1,2})]]></amount>
         </pattern>
         <!--CREDIT: 1.00 BYN KARTA #8586 DATA 29.01.2018 18:42:43 BR.312 CASH IN>ZHLOBIN>BY OSTATOK 673.80 BYN-->
         <pattern category="payment">
@@ -1136,10 +1142,11 @@
             <amount group="1"><![CDATA[Zachislenie; (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--*3164 Зачисление 26090р 30.08.18 09:26 Доступно 26090р-->
+        <!--*3792 Зачисление зарплаты 9302.44р Доступно 24228.22р-->
         <pattern category="zachislenie">
             <match><![CDATA[^\*\d+ Зачисление.*]]></match>
             <cardId group="1"><![CDATA[^\*(\d+)]]></cardId>
-            <amount group="1"><![CDATA[Зачисление (\d*.?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[Зачисление ([а-я]* )?(\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--Telecard; Card9284; Cash-in; Summa 2000 RUR; 17.01.18 14:00:05; GAZPROMBANK; dostupno: 3164.42 RUR-->
         <pattern category="popolnenie">
@@ -2995,6 +3002,12 @@
             <cardId group="1"><![CDATA[arta:(\d+)]]></cardId>
             <amount group="1"><![CDATA[summa:([\d]*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Operatsii po vkladam: Karta: 4241 summa: 500.00 RUR Balans 524.61 RUR Zachislenie summy vklada 20-09-09 10:38:44-->
+        <pattern category="unknown">
+            <match><![CDATA[Operatsii po vkladam.*]]></match>
+            <cardId group="1"><![CDATA[arta: (\d+)]]></cardId>
+            <amount group="1"><![CDATA[summa: ([\d]*\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="rocketbank">
         <!-- −10 руб.
@@ -3751,6 +3764,12 @@
             <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[писание (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Списано 20000.00р Счет*7747 внут.перевод Баланс 11024.04р 20:33-->
+        <pattern category="payment">
+            <match><![CDATA[Списано.*Счет.*]]></match>
+            <cardId group="0"><![CDATA[Счет\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[писано (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Spisano 3000.00 RUB
         Schet *8067 poluchatel AO "DOM.RF".
         Balans 1684.74 RUB 07:19
@@ -3805,6 +3824,12 @@
             <match><![CDATA[Karta.*Popolnenie.*]]></match>
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Popolnenie, (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Поступление 20000.00р Счет*4115 Баланс 275273.51р 20:33-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Поступление.*Счет.*]]></match>
+            <cardId group="0"><![CDATA[Счет\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[Поступление (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *6634: 27.12 16:28 postuplenie zarabotnoy plati11000.00 RUR. Dostupno 11196.4 RUR. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
         <pattern category="popolnenie">

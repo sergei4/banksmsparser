@@ -396,5 +396,19 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "579.85",
                 ""
         );
+        checkBankSms(
+                "*3792 Зачисление зарплаты 9302.44р Доступно 24228.22р",
+                "zachislenie",
+                "3792",
+                "9302.44",
+                ""
+        );
+        checkBankSms(
+                "*4186 Зачисление кэшбэк 511р Доступно 898.27р",
+                "zachislenie",
+                "4186",
+                "511",
+                ""
+        );
     }
 }

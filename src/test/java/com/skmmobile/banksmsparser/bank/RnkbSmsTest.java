@@ -89,5 +89,12 @@ public class RnkbSmsTest extends AbsXmlBankSmsTest {
                 "13500",
                 ""
         );
+        checkBankSms(
+                "Operatsii po vkladam: Karta: 4241 summa: 500.00 RUR Balans 524.61 RUR Zachislenie summy vklada 20-09-09 10:38:44",
+                "unknown",
+                "4241",
+                "500",
+                ""
+        );
     }
 }
