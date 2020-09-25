@@ -48,6 +48,8 @@ import com.skmmobile.banksmsparser.bank.kz.QazkomSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.OschadbankSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.RaiffeisenUkSmsTest;
 import com.skmmobile.banksmsparser.bank.uk.UkrsibbankSmsTest;
+import com.skmmobile.banksmsparser.parser.SystemSmsValidator;
+import com.skmmobile.banksmsparser.xml.XmlBankParserFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,8 +63,11 @@ import java.io.IOException;
 
 public class BankParserTests extends Assert {
 
-    private void isSystemSms(String text){
-        Assert.assertTrue("Не удалось распознать служебное смс:\n" + text, BankSmsParser.isSystemBankSms(text));
+    private XmlBankParserFactory xmlBankParserFactory;
+    private SmsTypeValidator systemSmsValidator;
+
+    private void isSystemSms(String text) {
+        Assert.assertTrue("Не удалось распознать служебное смс:\n" + text, systemSmsValidator.validate(text));
     }
 
     @Before
@@ -71,17 +76,13 @@ public class BankParserTests extends Assert {
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
         // Загружаем системные смс
-        BankSmsParser.initSystemSms(XmlBankParser.obtainSystemSmsPatternList(xmlDocument));
+        xmlBankParserFactory = new XmlBankParserFactory(xmlDocument);
+        systemSmsValidator = new SystemSmsValidator(xmlBankParserFactory.createSystemSmsPatternList());
         Context.LOGGER = new ConsoleLogger();
     }
 
     @Test
-    public void XmlIsSystemSmsTest() throws Exception {
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse (new File(ConstTests.BANK_SMS_XML));
-        BankSmsParser.initSystemSms(XmlBankParser.obtainSystemSmsPatternList(xmlDocument));
-
+    public void SystemSmsTest() throws Exception {
         isSystemSms("Задолженность по налогу на транспорт");
         isSystemSms("Vhod v Tinkoff.ru uspeshno vypolnen");
         isSystemSms("Вход в Сбербанк Онлайн для Android 19:32 02.12.17");
@@ -120,11 +121,11 @@ public class BankParserTests extends Assert {
         isSystemSms("ECMC9886 28.12.17 07:19 отмена авторизации 939р Баланс: 972.03р");
         isSystemSms(
                 "UVAGA! Nikomu ne povidomliayte kod 1353 dlya perekazu mizh vashymy kartkamy.\n" +
-                "Detali www.oschadbank.ua/ib");
+                        "Detali www.oschadbank.ua/ib");
         isSystemSms(
                 "08.01.18 18:19:39 \n" +
-                "Vitaemo! Vy uspishno uvijshly do WEB(Mobile)-bankingu.\n" +
-                "Detali 0800210800");
+                        "Vitaemo! Vy uspishno uvijshly do WEB(Mobile)-bankingu.\n" +
+                        "Detali 0800210800");
         isSystemSms("Михаил Сергеевич, новый автомобиль ждет Вас! Получите 2407000р. в кредит под 11.8%, ежемесячный платеж 42234р. Или воспользуйтесь 10% скидкой на новое авто по одной из программ: \"Первый\" или \"Семейный\"! Подробнее: https://goo.gl/hsguxq АО ЮниКредит Банк. 88007002636");
         isSystemSms("Nikomu ne govorite etot SMS-kod: 8867. Vy vhodite v mobil'niy bank 11:24 12.01.2018 IP217.118.93.160. Esli vhod proizvodite ne vy, pozvonite v bank: 88005551010");
         isSystemSms("Ваше кодовое слово изменено. Если изменения вносили не вы, перезвоните нам: 88005551010. Tinkoff.ru");
@@ -281,7 +282,7 @@ public class BankParserTests extends Assert {
         }
 
         String[] system_sms = cmdStrBuilder.toString().split("\n\n");
-        for(String sms: system_sms){
+        for (String sms : system_sms) {
             isSystemSms(sms);
         }
 
@@ -289,60 +290,56 @@ public class BankParserTests extends Assert {
     }
 
     @Test
-    public void MainSmsParserTest() throws Exception {
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document xmlDocument = docBuilder.parse(new File(ConstTests.BANK_SMS_XML));
-
+    public void MainSmsParserTest() {
         // Проверка банков
-        new TinkoffSmsTest(xmlDocument).check();
-        new SberbankSmsTest(xmlDocument).check();
-        new AlfabankSmsTest(xmlDocument).check();
-        new Vtb24SmsTest(xmlDocument).check();
-        new GazpromSmsTest(xmlDocument).check();
-        new QiwiSmsTest(xmlDocument).check();
-        new MinbankSmsTest(xmlDocument).check();
-        new SbsIbankSmsTest(xmlDocument).check();
-        new UbrrSmsTest(xmlDocument).check();
-        new BinbankSmsTest(xmlDocument).check();
-        new RaiffeisenSmsTest(xmlDocument).check();
-        new MTSSmsTest(xmlDocument).check();
-        new UnicreditSmsTest(xmlDocument).check();
-        new OschadbankSmsTest(xmlDocument).check();
-        new KaspibankSmsTest(xmlDocument).check();
-        new HalykbankSmsTest(xmlDocument).check();
-        new QazkomSmsTest(xmlDocument).check();
-        new BelarusbankSmsTest(xmlDocument).check();
-        new PriorBankSmsTest(xmlDocument).check();
-        new MTBankSmsTest(xmlDocument).check();
-        new OtkritieSmsTest(xmlDocument).check();
-        new MKBSmsTest(xmlDocument).check();
-        new RosbankSmsTest(xmlDocument).check();
-        new RosselhozSmsTest(xmlDocument).check();
-        new PromsvyazbankSmsTest(xmlDocument).check();
-        new RocketBankSmsTest(xmlDocument).check();
-        new ChelinvestSmsTest(xmlDocument).check();
-        new AvangardSmsTest(xmlDocument).check();
-        new BelbankSmsTest(xmlDocument).check();
-        new BelapbSmsTest(xmlDocument).check();
-        new ParitetbankSmsTest(xmlDocument).check();
-        new KreditEuroBankSmsTest(xmlDocument).check();
-        new AkbarsSmsTest(xmlDocument).check();
-        new PochtaBankSmsTest(xmlDocument).check();
-        new KartaSovestSmsTest(xmlDocument).check();
-        new RaiffeisenUkSmsTest(xmlDocument).check();
-        new UkrsibbankSmsTest(xmlDocument).check();
-        new RnkbSmsTest(xmlDocument).check();
-        new FortebankSmsTest(xmlDocument).check();
-        new BelgazprombankSmsTest(xmlDocument).check();
-        new VozrogdenieSmsTest(xmlDocument).check();
-        new YandexmoneySmsTest(xmlDocument).check();
-        new HomecreditSmsTest(xmlDocument).check();
-        new DevonCreditSmsTest(xmlDocument).check();
-        new VostbankSmsTest(xmlDocument).check();
-        new SovcombankSmsTest(xmlDocument).check();
-        new RoundbankSmsTest(xmlDocument).check();
-        new BankRossiaSmsTest(xmlDocument).check();
+        new TinkoffSmsTest(xmlBankParserFactory).check();
+        new SberbankSmsTest(xmlBankParserFactory).check();
+        new AlfabankSmsTest(xmlBankParserFactory).check();
+        new Vtb24SmsTest(xmlBankParserFactory).check();
+        new GazpromSmsTest(xmlBankParserFactory).check();
+        new QiwiSmsTest(xmlBankParserFactory).check();
+        new MinbankSmsTest(xmlBankParserFactory).check();
+        new SbsIbankSmsTest(xmlBankParserFactory).check();
+        new UbrrSmsTest(xmlBankParserFactory).check();
+        new BinbankSmsTest(xmlBankParserFactory).check();
+        new RaiffeisenSmsTest(xmlBankParserFactory).check();
+        new MTSSmsTest(xmlBankParserFactory).check();
+        new UnicreditSmsTest(xmlBankParserFactory).check();
+        new OschadbankSmsTest(xmlBankParserFactory).check();
+        new KaspibankSmsTest(xmlBankParserFactory).check();
+        new HalykbankSmsTest(xmlBankParserFactory).check();
+        new QazkomSmsTest(xmlBankParserFactory).check();
+        new BelarusbankSmsTest(xmlBankParserFactory).check();
+        new PriorBankSmsTest(xmlBankParserFactory).check();
+        new MTBankSmsTest(xmlBankParserFactory).check();
+        new OtkritieSmsTest(xmlBankParserFactory).check();
+        new MKBSmsTest(xmlBankParserFactory).check();
+        new RosbankSmsTest(xmlBankParserFactory).check();
+        new RosselhozSmsTest(xmlBankParserFactory).check();
+        new PromsvyazbankSmsTest(xmlBankParserFactory).check();
+        new RocketBankSmsTest(xmlBankParserFactory).check();
+        new ChelinvestSmsTest(xmlBankParserFactory).check();
+        new AvangardSmsTest(xmlBankParserFactory).check();
+        new BelbankSmsTest(xmlBankParserFactory).check();
+        new BelapbSmsTest(xmlBankParserFactory).check();
+        new ParitetbankSmsTest(xmlBankParserFactory).check();
+        new KreditEuroBankSmsTest(xmlBankParserFactory).check();
+        new AkbarsSmsTest(xmlBankParserFactory).check();
+        new PochtaBankSmsTest(xmlBankParserFactory).check();
+        new KartaSovestSmsTest(xmlBankParserFactory).check();
+        new RaiffeisenUkSmsTest(xmlBankParserFactory).check();
+        new UkrsibbankSmsTest(xmlBankParserFactory).check();
+        new RnkbSmsTest(xmlBankParserFactory).check();
+        new FortebankSmsTest(xmlBankParserFactory).check();
+        new BelgazprombankSmsTest(xmlBankParserFactory).check();
+        new VozrogdenieSmsTest(xmlBankParserFactory).check();
+        new YandexmoneySmsTest(xmlBankParserFactory).check();
+        new HomecreditSmsTest(xmlBankParserFactory).check();
+        new DevonCreditSmsTest(xmlBankParserFactory).check();
+        new VostbankSmsTest(xmlBankParserFactory).check();
+        new SovcombankSmsTest(xmlBankParserFactory).check();
+        new RoundbankSmsTest(xmlBankParserFactory).check();
+        new BankRossiaSmsTest(xmlBankParserFactory).check();
     }
 }
 

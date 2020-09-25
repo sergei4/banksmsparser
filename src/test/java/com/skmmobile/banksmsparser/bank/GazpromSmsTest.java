@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class GazpromSmsTest extends AbsXmlBankSmsTest {
 
-    public GazpromSmsTest(Document xmlDocument) {
-        super("gazprom", xmlDocument);
+    public GazpromSmsTest(SmsParserFactory smsParserFactory) {
+        super("gazprom", smsParserFactory);
     }
 
     @Override
@@ -39,7 +39,6 @@ public class GazpromSmsTest extends AbsXmlBankSmsTest {
                 "YALYA"
         );
         checkBankSms(
-                parser,
                 "Telecard; Card1745; Oplata; Summa 1 RUR; 22.12.17 08:36:33; YALYA; dostupno: 5953.47 RUR; ispolzovano: 64046.53 RUR",
                 "expense",
                 "Card1745",

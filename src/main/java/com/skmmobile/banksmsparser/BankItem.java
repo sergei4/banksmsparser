@@ -1,9 +1,5 @@
 package com.skmmobile.banksmsparser;
 
-/**
- * Структура для описания банка
- */
-
 public class BankItem {
     private String id;
     private String name;

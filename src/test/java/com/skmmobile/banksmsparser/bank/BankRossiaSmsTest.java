@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class BankRossiaSmsTest extends AbsXmlBankSmsTest {
 
-    public BankRossiaSmsTest(Document xmlDocument) {
-        super("bankrossia", xmlDocument);
+    public BankRossiaSmsTest(SmsParserFactory smsParserFactory) {
+        super("bankrossia", smsParserFactory);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.skmmobile.banksmsparser.bank.uk;
 
+import com.skmmobile.banksmsparser.SmsParserFactory;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
-import org.w3c.dom.Document;
 
 @Deprecated
 public class RaiffeisenUkSmsTest extends AbsXmlBankSmsTest {
 
-    public RaiffeisenUkSmsTest(Document xmlDocument) {
-        super("raiffeisen_uk", xmlDocument);
+    public RaiffeisenUkSmsTest(SmsParserFactory smsParserFactory) {
+        super("raiffeisen_uk", smsParserFactory);
     }
 
     @Override

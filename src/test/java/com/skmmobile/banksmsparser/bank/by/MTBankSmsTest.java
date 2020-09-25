@@ -1,12 +1,12 @@
 package com.skmmobile.banksmsparser.bank.by;
 
+import com.skmmobile.banksmsparser.SmsParserFactory;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
-import org.w3c.dom.Document;
 
 public class MTBankSmsTest extends AbsXmlBankSmsTest {
 
-    public MTBankSmsTest(Document xmlDocument) {
-        super("mtbank", xmlDocument);
+    public MTBankSmsTest(SmsParserFactory smsParserFactory) {
+        super("mtbank", smsParserFactory);
     }
 
     @Override
@@ -42,7 +42,6 @@ public class MTBankSmsTest extends AbsXmlBankSmsTest {
                 "2.50",
                 "");
         checkBankSms(
-                parser,
                 "Uvazhaemyj klient! Na Vash schet BY75MTBK*******6349 postupilo 7,61 BYN. Vash MTBank!",
                 "popolnenie",
                 "BY75MTBK*******6349",

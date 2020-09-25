@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class RoundbankSmsTest extends AbsXmlBankSmsTest {
 
-    public RoundbankSmsTest(Document xmlDocument) {
-        super("roundbank", xmlDocument);
+    public RoundbankSmsTest(SmsParserFactory smsParserFactory) {
+        super("roundbank", smsParserFactory);
     }
 
     @Override

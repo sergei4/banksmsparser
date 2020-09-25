@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class UnicreditSmsTest extends AbsXmlBankSmsTest {
 
-    public UnicreditSmsTest(Document xmlDocument) {
-        super("unicreditbank", xmlDocument);
+    public UnicreditSmsTest(SmsParserFactory smsParserFactory) {
+        super("unicreditbank", smsParserFactory);
     }
 
     @Override

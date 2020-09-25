@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class DevonCreditSmsTest extends AbsXmlBankSmsTest {
 
-    public DevonCreditSmsTest(Document xmlDocument) {
-        super("devoncredit", xmlDocument);
+    public DevonCreditSmsTest(SmsParserFactory smsParserFactory) {
+        super("devoncredit", smsParserFactory);
     }
 
     @Override

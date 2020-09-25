@@ -1,17 +1,16 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class UbrrSmsTest extends AbsXmlBankSmsTest {
 
-    public UbrrSmsTest(Document xmlDocument) {
-        super("ubrr", xmlDocument);
+    public UbrrSmsTest(SmsParserFactory smsParserFactory) {
+        super("ubrr", smsParserFactory);
     }
 
     @Override
     protected void smsTest() {
         checkBankSms(
-                parser,
                 "Pokupka \n" +
                         "4301****2661 \n" +
                         "Summa: 314.00 RUB \n" +
@@ -25,7 +24,6 @@ public class UbrrSmsTest extends AbsXmlBankSmsTest {
                 "GAZPROMNEFT AZS 100     > "
         );
         checkBankSms(
-                parser,
                 "Popolnenie karty \n" +
                         "4301****9962 \n" +
                         "Summa: 5500.00 RUB \n" +
@@ -38,7 +36,6 @@ public class UbrrSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Vydacha nalichnyh \n" +
                         "4301****2661 \n" +
                         "Summa: 40000.00 RUB \n" +
@@ -51,29 +48,13 @@ public class UbrrSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "Zachislenie zarabotnoy platy na schet 40817****0904 8600 rur. tel:88001000200 internet-bank: i.ubrr.ru",
                 "zachislenie",
                 "40817****0904",
                 "8600",
                 ""
         );
-//        checkBankSms(
-//                parser,
-//                "!Izmenenie ostatka \n" +
-//                        "07.02.18 16:11 \n" +
-//                        "schet: \n" +
-//                        "42301810****1850 \n" +
-//                        "dostupno: \n" +
-//                        "20389.52 RUB \n" +
-//                        "(+20065.65 RUB)",
-//                "zachislenie",
-//                "40817****0904",
-//                "8600",
-//                ""
-//        );
         checkBankSms(
-                parser,
                 "Покупка\n" +
                         "2200*7800\n" +
                         "Сумма 349.40 р\n" +

@@ -1,12 +1,12 @@
 package com.skmmobile.banksmsparser.bank.kz;
 
+import com.skmmobile.banksmsparser.SmsParserFactory;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
-import org.w3c.dom.Document;
 
 public class FortebankSmsTest extends AbsXmlBankSmsTest {
 
-    public FortebankSmsTest(Document xmlDocument) {
-        super("fortebank", xmlDocument);
+    public FortebankSmsTest(SmsParserFactory smsParserFactory) {
+        super("fortebank", smsParserFactory);
     }
 
     @Override

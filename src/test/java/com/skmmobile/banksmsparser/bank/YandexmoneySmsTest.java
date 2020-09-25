@@ -1,11 +1,11 @@
 package com.skmmobile.banksmsparser.bank;
 
-import org.w3c.dom.Document;
+import com.skmmobile.banksmsparser.SmsParserFactory;
 
 public class YandexmoneySmsTest extends AbsXmlBankSmsTest {
 
-    public YandexmoneySmsTest(Document xmlDocument) {
-        super("yandexmoney", xmlDocument);
+    public YandexmoneySmsTest(SmsParserFactory smsParserFactory) {
+        super("yandexmoney", smsParserFactory);
     }
 
     @Override

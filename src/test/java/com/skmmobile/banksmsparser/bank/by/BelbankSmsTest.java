@@ -1,12 +1,12 @@
 package com.skmmobile.banksmsparser.bank.by;
 
+import com.skmmobile.banksmsparser.SmsParserFactory;
 import com.skmmobile.banksmsparser.bank.AbsXmlBankSmsTest;
-import org.w3c.dom.Document;
 
 public class BelbankSmsTest extends AbsXmlBankSmsTest {
 
-    public BelbankSmsTest(Document xmlDocument) {
-        super("belbank", xmlDocument);
+    public BelbankSmsTest(SmsParserFactory smsParserFactory) {
+        super("belbank", smsParserFactory);
     }
 
     @Override
@@ -43,7 +43,6 @@ public class BelbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                parser,
                 "ZACHISLENIE PENSII (POSOBIYA): 324.57 BYN KARTA #0068 DATA 17.09.2020 15:17:15 OSTATOK 385.61 BYN",
                 "zachislenie",
                 "0068",
