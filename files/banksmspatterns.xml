@@ -259,7 +259,7 @@
         <service_phone bankId="kaspibank">KaspiBank,KaspiGold,Kaspi Gold</service_phone>
         <service_phone bankId="halykbank">5959,7111</service_phone>
         <service_phone bankId="qazkom">7000</service_phone>
-        <service_phone bankId="belarusbank">ASB</service_phone>
+        <service_phone bankId="belarusbank">ASB,asb.by</service_phone>
         <service_phone bankId="mtbank">MTBank,MTBANK</service_phone>
         <service_phone bankId="rosbank">Rosbank</service_phone>
         <service_phone bankId="rocketbank">RocketBank,ROCKETBANK,rocketbank</service_phone>
@@ -827,7 +827,7 @@
         <pattern category="zachislenie">
             <match><![CDATA[ZACHISLENIE.*]]></match>
             <cardId group="1"><![CDATA[KARTA #(\d+)]]></cardId>
-            <amount group="1"><![CDATA[ZACHISLENIE\s(\d*.?\d{1,2})]]></amount>
+            <amount group="2"><![CDATA[ZACHISLENIE ([A-z,\s]*)?(\d*.?\d{1,2})]]></amount>
         </pattern>
         <!--OPLATA 123.45 BYN KARTA #1234 DATA 01.01.2018 10:30:30 PARIKMAHERSKAYZ"DEVORA"BAPB>GOMEL>BY OSTATOK 0.00 BYN-->
         <pattern category="expense">

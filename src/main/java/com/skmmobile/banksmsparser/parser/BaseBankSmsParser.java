@@ -66,6 +66,8 @@ public class BaseBankSmsParser implements BankSmsParser {
             Context.LOGGER.debug(curOperation.dateRex != null ? "date: " + curOperation.dateRex.pattern() + "; group=" + curOperation.dateRexGroup : "date: no pattern!!!");
             Context.LOGGER.debug(curOperation.detailRex != null ? "details: " + curOperation.detailRex.pattern() + "; group=" + curOperation.detailRexGroup : "details: no pattern!!!");
 
+            Context.LOGGER.debug(String.format("type: %s, cardId: %s, amount: %s, details: %s", curOperation.type, cardId, amount, details));
+
             return null;
         }
 

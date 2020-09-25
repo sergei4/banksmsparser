@@ -46,5 +46,12 @@ public class BelarusbankSmsTest extends AbsXmlBankSmsTest {
                 "15",
                 ""
         );
+        checkBankSms(
+                "ZACHISLENIE NA SCHET 427.84 BYN KARTA #1090 DATA 16.09.2020 13:13:50 OSTATOK 435.10 BYN",
+                "zachislenie",
+                "1090",
+                "427.84",
+                ""
+        );
     }
 }
