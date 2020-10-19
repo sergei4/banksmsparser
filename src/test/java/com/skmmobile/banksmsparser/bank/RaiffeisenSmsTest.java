@@ -237,5 +237,12 @@ public class RaiffeisenSmsTest extends AbsXmlBankSmsTest {
                 "50000",
                 ""
         );
+        checkBankSms(
+                "Karta *3933. Operaciya 500.00 RUB. TELE-2. Balans 744.82 RUB.",
+                "payment",
+                "Karta *3933",
+                "500",
+                ""
+        );
     }
 }

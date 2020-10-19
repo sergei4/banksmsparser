@@ -176,5 +176,16 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "1486",
                 ""
         );
+        checkBankSms(
+                "MIR8943\n" +
+                        "13:15\n" +
+                        "Oplata 110.00 RUB\n" +
+                        "KAFE\n" +
+                        "Balans 722.26 RUB",
+                "expense",
+                "MIR8943",
+                "110",
+                ""
+        );
     }
 }

@@ -3,7 +3,7 @@ package com.skmmobile.banksmsparser.parser;
 import com.skmmobile.banksmsparser.BankSmsParser;
 import com.skmmobile.banksmsparser.Context;
 import com.skmmobile.banksmsparser.SmsTextNormalizer;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.util.Date;

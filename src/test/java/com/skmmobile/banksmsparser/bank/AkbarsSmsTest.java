@@ -59,5 +59,12 @@ public class AkbarsSmsTest extends AbsXmlBankSmsTest {
                 "84",
                 ""
         );
+        checkBankSms(
+                "Karta*0799. Retail 3457.85RUR. KAZAN, USLUGI TATARSTAN RU. 15.10.20 09:43. Ostatok 4651.20RUR. Detali akbars.ru/abol/",
+                "expense",
+                "0799",
+                "3457.85",
+                ""
+        );
     }
 }

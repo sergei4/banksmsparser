@@ -756,6 +756,12 @@
             <cardId group="1"><![CDATA[Karta\s?\*(\d+)]]></cardId>
             <amount group="1"><![CDATA[Pokupka (\d+.?\d{1,2})]]></amount>
         </pattern>
+        <!--Karta*0799. Retail 3457.85RUR. KAZAN, USLUGI TATARSTAN RU. 15.10.20 09:43. Ostatok 4651.20RUR. Detali akbars.ru/abol/-->
+        <pattern category="expense">
+            <match><![CDATA[Karta.*Retail.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s?\*(\d+)]]></cardId>
+            <amount group="1"><![CDATA[Retail (\d+.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *4692. Vydacha v ATM 1600.00RUR.ZAINSK, ABB 37A NEFTYANIKOV PR.. Zarezervirovano 1600.00RUR. 2018-02-27 13:53:42. Dostupno 84.68RUR.-->
         <pattern category="cash_atm">
             <match><![CDATA[Karta.*Vydacha v ATM.*]]></match>
@@ -2522,7 +2528,7 @@
         Balans 56776.61RUB-->
         <pattern category="expense">
             <match><![CDATA[.*Oplata.*]]></match>
-            <cardId group="0"><![CDATA[VISA\d+]]></cardId>
+            <cardId group="0"><![CDATA[(VISA|MIR)\d+]]></cardId>
             <amount group="1"><![CDATA[Oplata ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA5125
@@ -2819,6 +2825,12 @@
             <match><![CDATA[Карта.* (О|о)перация.*]]></match>
             <cardId group="0"><![CDATA[Карта \*\d+]]></cardId>
             <amount group="1"><![CDATA[перация (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Karta *3933. Operaciya 500.00 RUB. TELE-2. Balans 744.82 RUB.-->
+        <pattern category="payment">
+            <match><![CDATA[Karta.*peraciya.*]]></match>
+            <cardId group="0"><![CDATA[Karta \*\d+]]></cardId>
+            <amount group="1"><![CDATA[peraciya (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Zachislena zarplata 8869.18 RUR na schet *4849. Balans 55122.34 RUR. Raiffeisenbank-->
         <pattern category="zachislenie">
@@ -3831,6 +3843,12 @@
             <cardId group="0"><![CDATA[Счет\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Поступление (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Зарплата 49286.25р Счет *0352 Баланс 64570.60р 14:04-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Зарплата.*Счет.*]]></match>
+            <cardId group="0"><![CDATA[Счет\s?\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[арплата (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *6634: 27.12 16:28 postuplenie zarabotnoy plati11000.00 RUR. Dostupno 11196.4 RUR. Vipiska po karte v VTB24-Online p.vtb24.ru/mob-->
         <pattern category="popolnenie">
             <match><![CDATA[Karta.*postuplenie.*]]></match>
@@ -3856,11 +3874,23 @@
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[zachislenie[\w\s][^\d]*(\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--Зачисление 789.18р Карта*3523 35 MYASNITSKAYA Баланс 70000р 19:16-->
+        <pattern category="popolnenie">
+            <match><![CDATA[Зачисление.*Карта.*]]></match>
+            <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[ачисление (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--Karta *2658: uvelichen balans scheta na 12.65 RUR; dostupno 50.69 RUR (v tom chisle kreditnie sredstva 50.69 RUR). Uchet rashodov http://p.vtb24.ru/smartc-->
         <pattern category="popolnenie">
             <match><![CDATA[Karta.*uvelichen balans scheta.*]]></match>
             <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[uvelichen balans scheta na (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Uvelichen balans scheta 49.99 RUB Karta *9111 Balans 519.83 RUB-->
+        <pattern category="popolnenie">
+            <match><![CDATA[^Uvelichen balans scheta.*]]></match>
+            <cardId group="1"><![CDATA[Karta\s\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[balans scheta (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Karta *7398: snyatie 900.00 RUB; D. 26, PR-KT SHAHTEROV; 24.12.2017 09:52, dostupno 3407.44 RUB (sobstv. sredstva 3407.44 ).-->
         <pattern category="cash_atm">
@@ -3900,6 +3930,12 @@
             <match><![CDATA[Снятие.*Карта.*]]></match>
             <cardId group="0"><![CDATA[Карта\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[нятие (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--Перевод 250.00р Счет*0352 МТС Mobile.  Баланс 48192.62р 17:33-->
+        <pattern category="perevod">
+            <match><![CDATA[Перевод.*Счет.*]]></match>
+            <cardId group="0"><![CDATA[Счет\*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
         </pattern>
     </patterns>
     <patterns bankId="yandexmoney">

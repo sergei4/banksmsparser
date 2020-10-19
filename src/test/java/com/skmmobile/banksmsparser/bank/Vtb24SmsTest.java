@@ -290,5 +290,29 @@ public class Vtb24SmsTest extends AbsXmlBankSmsTest {
                 "Счет*4115",
                 "20000",
                 "");
+        checkBankSms(
+                "Зачисление 789.18р Карта*3523 35 MYASNITSKAYA Баланс 70000р 19:16",
+                "popolnenie",
+                "Карта*3523",
+                "789.18",
+                "");
+        checkBankSms(
+                "Зарплата 49286.25р Счет *0352 Баланс 64570.60р 14:04",
+                "popolnenie",
+                "Счет *0352",
+                "49286.25",
+                "");
+        checkBankSms(
+                "Перевод 250.00р Счет*0352 МТС Mobile.  Баланс 48192.62р 17:33",
+                "perevod",
+                "Счет*0352",
+                "250",
+                "");
+        checkBankSms(
+                "Uvelichen balans scheta 49.99 RUB Karta *9111 Balans 519.83 RUB",
+                "popolnenie",
+                "9111",
+                "49.99",
+                "");
     }
 }
