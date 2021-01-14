@@ -2071,7 +2071,7 @@
         <pattern category="expense">
             <match><![CDATA[Оплата.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Остаток|Лимит)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -2081,10 +2081,12 @@
         <!--Oplata EW *3586; 09.08 17:25; I LOVE SUSHI>Dubna RU; 567,00 RUB; Limit: 18 276,00 RUB-->
         <!--Oplata VC *2481; 18.05 15:28; HVOSTUSHCI>KOROLEV RU; 293,80 RUB; Ostatok: 200,92 RUB-->
         <!--Oplata *2594; 13.11 18:50; OAO CPPC>Moscow RU; 22,00 RUB; Ostatok: 1 487,72 RUB-->
+        <!--Oplata *3017 06.01 04:52 TRAKTIR 220,00 RUB Ostatok: 14 376,31 RUB-->
+        <!--Oplata *3017 21.12 18:32 PYATEROCHKA 9113 408,94 RUB Ostatok: 8 056,23 RUB-->
         <pattern category="expense">
             <match><![CDATA[Oplata.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
+            <amount group="1"><![CDATA[((\s\d{1,3}){1,4},?\d{1,2})\s[\w]*;? (Ostatok|Limit)]]></amount>
             <detail group="1"><![CDATA[\:\d{2};\s(.*);\s\d]]></detail>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
@@ -2114,7 +2116,7 @@
         <pattern category="popolnenie">
             <match><![CDATA[Prihod po schetu karty.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Ostatok|Limit)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Ostatok|Limit)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2123,7 +2125,7 @@
         <pattern category="popolnenie">
             <match><![CDATA[Пополнение.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Остаток|Лимит)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Остаток|Лимит)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2132,7 +2134,7 @@
         <pattern category="popolnenie">
             <match><![CDATA[Popolnenie.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2159,7 +2161,7 @@
         <pattern category="perevod">
             <match><![CDATA[Перевод на карту.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Лимит|Остаток)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Лимит|Остаток)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2168,7 +2170,7 @@
         <pattern category="perevod">
             <match><![CDATA[Perevod na kartu.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2176,7 +2178,7 @@
         <pattern category="perevod">
             <match><![CDATA[Перевод с карты.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Лимит|Остаток)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Лимит|Остаток)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2185,7 +2187,7 @@
         <pattern category="perevod">
             <match><![CDATA[Perevod s karty.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -2212,7 +2214,7 @@
         <pattern category="cash_atm">
             <match><![CDATA[Nalichnye.*]]></match>
             <cardId group="0"><![CDATA[((VC|VP|ES|EW|MR) )?\*\d{4}]]></cardId>
-            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*; (Limit|Ostatok)]]></amount>
+            <amount group="1"><![CDATA[([\d\s]*,?\d{1,2})\s[\w]*;? (Limit|Ostatok)]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
@@ -3373,10 +3375,18 @@
         </pattern>
         <!--Перевод 545.00р от АЛЕКСЕЙ ЛЕОНИДОВИЧ А.Баланс: VISA5887 3108.57р-->
         <pattern category="popolnenie">
-            <match><![CDATA[^.еревод.*от.*]]></match>
+            <match><![CDATA[^.еревод.*от.*аланс.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
         </pattern>
+
+<!--        &lt;!&ndash;Перевод 15000р от АНТОН МИХАЙЛОВИЧ С.&ndash;&gt;-->
+<!--        <pattern category="popolnenie">-->
+<!--            <match><![CDATA[^.еревод.*\.(?!\bБаланс\b).*]]></match>-->
+<!--            <cardId group="0" default="sberbank"><![CDATA[nocard]]></cardId>-->
+<!--            <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>-->
+<!--        </pattern>-->
+
     </patterns>
     <patterns bankId="sbsibank">
         <!--Karta 4.5614 22.12.2017 15:53:16 Retail -10.52 BYN REST. "PAPARATS-KVETKA"BP MINSK BLR OK. Dostupno 45.86 BYN-->

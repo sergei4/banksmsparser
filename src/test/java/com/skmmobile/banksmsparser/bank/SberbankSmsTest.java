@@ -568,5 +568,26 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "24000",
                 ""
         );
+//        checkBankSms(
+//                "Перевод 15000р от АНТОН МИХАЙЛОВИЧ С.",
+//                "popolnenie",
+//                "sberbank",
+//                "15000",
+//                ""
+//        );
+//        checkBankSms(
+//                "Перевод 1.5р от АНТОН МИХАЙЛОВИЧ С.",
+//                "popolnenie",
+//                "sberbank",
+//                "1.5",
+//                ""
+//        );
+        checkBankSms(
+                "VISA6606 18:32 Оплата 450р Баланс: 19390.66р",
+                "expense",
+                "VISA6606",
+                "450",
+                "indefinite"
+        );
     }
 }

@@ -311,5 +311,12 @@ public class MTSSmsTest extends AbsXmlBankSmsTest {
                 "54.23",
                 ""
         );
+        checkBankSms(
+                "Oplata *3017 21.12 18:32 PYATEROCHKA 9113 408,94 RUB Ostatok: 8 056,23 RUB",
+                "expense",
+                "*3017",
+                "408.94",
+                "indefinite"
+        );
     }
 }
