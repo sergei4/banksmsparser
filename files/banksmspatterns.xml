@@ -611,19 +611,19 @@
         <!--**4228; Postupleniye; Summa: 1500 RUR; Ostatok: 1609,11 RUR; 28.02.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
         <!--**7897; Postupleniye; Summa: 1 010 RUR; Ostatok: 1 253,43 RUR; 20.03.2018; Podrobnosti v mobilnom banke alfabank.ru/app-->
         <!--**2848 Postupleniye Summa: 8 000 RUR Ostatok: 11 779,66 RUR 16.09.2018 Podrobnosti v mobilnom banke alfabank.ru/app-->
+        <!--**6289 Рostupleniyе Summa: 20 000 RUR Оstatоk: 22 063,99 RUR 15.05.2020 Podrobnosti v mobilnom banke alfabank.ru/app-->
         <pattern category="popolnenie">
-            <match><![CDATA[[\d\*].*Postupleniye.*]]></match>
+            <match><![CDATA[[\d\*].*(Postupleniye|Рostupleniyе).*]]></match>
             <cardId group="1"><![CDATA[[\d\*]\*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[Summa: ([\d\s]*\,?\d{1,2})]]></amount>
             <decimal_char>,</decimal_char>
             <decimal_group_char> </decimal_group_char>
         </pattern>
-        <!-- Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02-->
+        <!-- Spisanie so scheta 408*32167 na summu 1500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02-->
         <pattern category="perevod">
             <match><![CDATA[Spisanie so scheta.*]]></match>
             <cardId group="1"><![CDATA[Spisanie\sso\sscheta\s(.*)\sna]]></cardId>
             <amount group="1"><![CDATA[na summu\s(.*)\sRUR]]></amount>
-            <decimal_group_char>,</decimal_group_char>
         </pattern>
         <!--5*9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->
         <!--**9857; Vydacha nalichnyh; Uspeshno; Summa: 25200,00 RUR; Ostatok: 42843,16 RUR; RU/CHELYABINSK/Alfa Acq; 18.12.2017 11:48:45-->

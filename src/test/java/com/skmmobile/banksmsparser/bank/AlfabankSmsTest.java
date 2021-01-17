@@ -53,7 +53,7 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "Spisanie so scheta 408*32167 na summu 1,500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02",
+                "Spisanie so scheta 408*32167 na summu 1500.00 RUR, poluchatel platezha 408*32255; 04.12.2017 21:28:02",
                 "perevod",
                 "408*32167",
                 "1500",
@@ -230,6 +230,13 @@ public class AlfabankSmsTest extends AbsXmlBankSmsTest {
                 "payment",
                 "alfa-bank",
                 "15500",
+                ""
+        );
+        checkBankSms(
+                "**6289 Рostupleniyе Summa: 20 000 RUR Оstatоk: 22 063,99 RUR 15.05.2020 Podrobnosti v mobilnom banke alfabank.ru/app",
+                "popolnenie",
+                "6289",
+                "20000",
                 ""
         );
     }
