@@ -589,5 +589,19 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "450",
                 "indefinite"
         );
+        checkBankSms(
+                "VISA7448 03:11 мобильный банк 60р Баланс: 0р",
+                "service_pay",
+                "VISA7448",
+                "60",
+                ""
+        );
+        checkBankSms(
+                "MIR-9757 02:16 Оплата годового обслуживания карты 450р Баланс: 53479.43р",
+                "service_pay",
+                "MIR-9757",
+                "450",
+                ""
+        );
     }
 }
