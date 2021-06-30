@@ -603,5 +603,12 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "450",
                 ""
         );
+        checkBankSms(
+                "VISA6323 00:23 Списание 60р Ежемесячная плата за услугу \"Уведомления\" (Мобильный банк) Баланс: 659529.83р",
+                "service_pay",
+                "VISA6323",
+                "60",
+                ""
+        );
     }
 }

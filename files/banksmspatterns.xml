@@ -3315,6 +3315,12 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[плата годового обслуживания карты (\d*\.?\d{1,2})]]></amount>
         </pattern>
+        <!--VISA6323 00:23 Списание 60р Ежемесячная плата за услугу "Уведомления" (Мобильный банк) Баланс: 659529.83р-->
+        <pattern category="service_pay">
+            <match><![CDATA[.*жемесячная плата за услугу.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[Списание (\d*\.?\d{1,2})]]></amount>
+        </pattern>
         <!--VISA0000. Списание в сумме 2 923.55 RUR с карт.счета в погашение Вашего долга по другой карте. 2017-12-18 00:00:00-->
         <pattern category="payment">
             <match><![CDATA[.*погашение Вашего долга по другой карте.*]]></match>
