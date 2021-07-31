@@ -193,6 +193,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "900",
                 "REGISTRATURA"
         );
+        checkBankSms(
+                "Покупка, карта *3143. 236.49 RUB. MAGNIT MM NOR. Доступно 79826.74 RUB",
+                "expense",
+                "3143",
+                "236.49",
+                "MAGNIT MM NOR"
+        );
         //No-account transactions
         checkBankSms(
                 "Покупка. Бесконтактная оплата. 785.9 RUB. PYATEROCHKA. Доступно 32504.63 RUB",
