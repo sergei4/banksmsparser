@@ -3240,10 +3240,11 @@
             <detail group="1"><![CDATA[р\s(.*)(?=\s(Б|б)аланс)]]></detail>
         </pattern>
         <!--VISA0000: перевод 400р. на карту получателя ВЕРОНИКА АЛЕКСАНДРОВНА П. выполнен. Подробнее в выписке по карте http://sberbank.ru/sms/h2/-->
+        <!--MIR-5181 15:48 Перевод 700р от Анастасия Сергеевна Л. Баланс: 888.48р-->
         <pattern category="perevod">
-            <match><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*перевод.*]]></match>
+            <match><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}.*еревод.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[перевод\s(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[еревод\s(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--Сбербанк Онлайн. С Вашей карты **** 2374 произведен перевод на счет № 40702810838040021360 на сумму 1000,00 RUB.-->
         <pattern category="perevod">
@@ -3318,6 +3319,12 @@
         <!--VISA6323 00:23 Списание 60р Ежемесячная плата за услугу "Уведомления" (Мобильный банк) Баланс: 659529.83р-->
         <pattern category="service_pay">
             <match><![CDATA[.*жемесячная плата за услугу.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[Списание (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--VISA7964 24.09.21 00:19 Списание 60р. Услуга «Уведомления» (Мобильный банк) оплачена до 24.10.21. Баланс: 606.24р.-->
+        <pattern category="service_pay">
+            <match><![CDATA[.*Услуга «Уведомления».*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[Списание (\d*\.?\d{1,2})]]></amount>
         </pattern>
