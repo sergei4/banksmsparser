@@ -631,5 +631,26 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "60",
                 ""
         );
+        checkBankSms(
+                "VISA4805 18:32 Покупка по СБП 698р CoolСlever Баланс: 1773.30р",
+                "expense",
+                "VISA4805",
+                "698",
+                "CoolСlever"
+        );
+        checkBankSms(
+                "ПЛАТ.СЧЕТ*1389 12:20 перевод 2000р Баланс: 85453р",
+                "perevod",
+                "ПЛАТ.СЧЕТ*1389",
+                "2000",
+                ""
+        );
+        checkBankSms(
+                "ПЛАТ.СЧЕТ*1389 10:25 Зачисление зарплаты 91953р Баланс: 95453р",
+                "zachislenie",
+                "ПЛАТ.СЧЕТ*1389",
+                "91953",
+                ""
+        );
     }
 }

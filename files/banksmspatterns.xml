@@ -2543,6 +2543,16 @@
             <cardId group="0"><![CDATA[VISA\d+]]></cardId>
             <amount group="1"><![CDATA[Оплата ([\d]+\.?\d{1,2})]]></amount>
         </pattern>
+        <!--VISA1590
+        10:01
+        682.00 RUB
+        SAMOKAT
+        Balans 367.28 RUB-->
+        <pattern category="unknown">
+            <match><![CDATA[.*\d{2}\:\d{2}\s\d+\.\d+.*]]></match>
+            <cardId group="0"><![CDATA[VISA\d+]]></cardId>
+            <amount group="1"><![CDATA[\d{2}\:\d{2} ([\d]+\.?\d{1,2})]]></amount>
+        </pattern>
     </patterns>
     <patterns bankId="priorbank">
         <!--Priorbank. Karta 4***7241. 13-01-18 18:26:08. Oplata 61.71 BYN. BLR GIPPO TRADE CENTRE. Dostupno:123.91BYN Spravka: 80172899292-->
@@ -3201,6 +3211,13 @@
             <amount group="1"><![CDATA[окупка[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
         </pattern>
+        <!--VISA4805 18:32 Покупка по СБП 698р CoolСlever Баланс: 1773.30р-->
+        <pattern category="expense">
+            <match><![CDATA[.*окупка по СБП \d.*]]></match>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <amount group="1"><![CDATA[окупка по СБП[\D]+(\d*\.?\d{1,2})]]></amount>
+            <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
+        </pattern>
         <!--VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р-->
         <!--ECMC8878 10:21 Зачисление 35000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/-->
         <pattern category="zachislenie">
@@ -3215,9 +3232,10 @@
         <!--MAES4005 13:40 Зачисление 2272р Баланс: 2711.13р Перейти в историю уведомлений sberbank.ru/sms/n/-->
         <!--VISA9843 00:58 Зачисление зарплаты 26863.66р Баланс: 27363.66р-->
         <!--VISA2396 12:56 Зачисление пенсии 5500р Баланс: 20667.13р-->
+        <!--ПЛАТ.СЧЕТ*1389 10:25 Зачисление зарплаты 91953р Баланс: 95453р-->
         <pattern category="zachislenie">
             <match><![CDATA[.*ачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
-            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
+            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC|ПЛАТ\.СЧЕТ\*)\d{4}]]></cardId>
             <amount group="1"><![CDATA[ачисление[\D]+(\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р-->
@@ -3284,6 +3302,12 @@
         <pattern category="perevod">
             <match><![CDATA[Сбер.счёт \*\d{4}.*еревод.*]]></match>
             <cardId group="0"><![CDATA[Сбер.счёт \*\d{4}]]></cardId>
+            <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
+        </pattern>
+        <!--ПЛАТ.СЧЕТ*1389 12:20 перевод 2000р Баланс: 85453р-->
+        <pattern category="perevod">
+            <match><![CDATA[ПЛАТ\.СЧЕТ\*\d{4}.*еревод.*]]></match>
+            <cardId group="0"><![CDATA[ПЛАТ\.СЧЕТ\*\d{4}]]></cardId>
             <amount group="1"><![CDATA[еревод (\d*\.?\d{1,2})]]></amount>
         </pattern>
         <!--VISA0000  19.12.17 08:42 плата за выписку/запрос баланса 3р Баланс: 473.45р-->

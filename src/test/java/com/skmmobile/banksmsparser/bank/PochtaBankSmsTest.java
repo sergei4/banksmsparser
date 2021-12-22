@@ -187,5 +187,16 @@ public class PochtaBankSmsTest extends AbsXmlBankSmsTest {
                 "110",
                 ""
         );
+        checkBankSms(
+                "VISA1590\n" +
+                        "10:01\n" +
+                        "682.00 RUB\n" +
+                        "SAMOKAT\n" +
+                        "Balans 367.28 RUB",
+                "unknown",
+                "VISA1590",
+                "682.00",
+                ""
+        );
     }
 }
