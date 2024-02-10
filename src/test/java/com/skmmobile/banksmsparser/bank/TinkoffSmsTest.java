@@ -229,5 +229,12 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "500.01",
                 ""
         );
+        checkBankSms(
+                "Покупка, карта *7133. 120,37 RUB. LENTA-114. Доступно 58483,96 RUB",
+                "expense",
+                "7133",
+                "120.37",
+                ""
+        );
     }
 }

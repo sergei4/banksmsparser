@@ -3529,6 +3529,13 @@
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
         </pattern>
+        <!--Покупка, карта *7133. 120,37 RUB. LENTA-114. Доступно 58483,96 RUB-->
+        <pattern category="expense">
+            <match><![CDATA[Покупка([\s\d\.]+)?(.|,) (К|к)арта \*\d{4}\. (\d)*\,+.*]]></match>
+            <cardId group="1"><![CDATA[арта \*(\d{4})]]></cardId>
+            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
+            <decimal_char>,</decimal_char>
+        </pattern>
         <!--Покупка. Карта *0380. Сумма 195 RUB. PROFKOSMETIK. 29.12.2017 14:44. Доступно 1455.03 RUB. Tinkoff.ru-->
         <pattern category="expense">
             <match><![CDATA[Покупка.*Сумма.*]]></match>

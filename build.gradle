@@ -14,18 +14,20 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation ("junit:junit:4.13.1")
 }
 
 apply plugin: 'org.hidetake.ssh'
 
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
 
     dependencies {
-        classpath 'org.hidetake:gradle-ssh-plugin:2.10.1'
+        classpath 'org.hidetake:core:2.11.2'
     }
 }
 
