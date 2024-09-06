@@ -3194,8 +3194,9 @@
         <pattern category="expense">
             <match><![CDATA[.*плата \d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[плата[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[плата[\D]+([\s\d]*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--VISA4993: оплата услуг 250р Megafon (9261393521)-->
         <pattern category="expense">
@@ -3217,15 +3218,10 @@
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
             <amount group="1"><![CDATA[окупка по СБП[\D]+(\d*\.?\d{1,2})]]></amount>
             <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
+
         </pattern>
         <!--VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р-->
         <!--ECMC8878 10:21 Зачисление 35000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/-->
-        <pattern category="zachislenie">
-            <match><![CDATA[.*ачисление\s\d.*ATM.*]]></match>
-            <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[ачисление[\D]+(\d*\.?\d{1,2})]]></amount>
-            <detail group="1"><![CDATA[р\s(.*)\sБаланс]]></detail>
-        </pattern>
         <!--VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р-->
         <!--MAES0515 11.12.17 12:24 зачисление пенсии 10471.91р Баланс: 12934.80р-->
         <!--VISA0000 20.12.17 08:47 зачисление зарплаты 00000.00р Баланс: 00000.00р-->
@@ -3234,9 +3230,10 @@
         <!--VISA2396 12:56 Зачисление пенсии 5500р Баланс: 20667.13р-->
         <!--ПЛАТ.СЧЕТ*1389 10:25 Зачисление зарплаты 91953р Баланс: 95453р-->
         <pattern category="zachislenie">
-            <match><![CDATA[.*ачисление\s\d*[^\s]*\s(?!ATM).*]]></match>
+            <match><![CDATA[.*ачисление\s\d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC|ПЛАТ\.СЧЕТ\*)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[ачисление[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[ачисление[\D]+([\s\d]*\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--MAES3781 07.01.18 08:05 перечисление процентов 277.41р Баланс: 15070.45р-->
         <pattern category="zachislenie">
@@ -3363,7 +3360,8 @@
         <pattern category="payment">
             <match><![CDATA[.*списание\s\d.*]]></match>
             <cardId group="0"><![CDATA[(MIR-|VISA|MAES|ORPS|ECMC)\d{4}]]></cardId>
-            <amount group="1"><![CDATA[списание[\D]+(\d*\.?\d{1,2})]]></amount>
+            <amount group="1"><![CDATA[списание[\D]+([\s\d]*\.?\d{1,2})]]></amount>
+            <decimal_group_char> </decimal_group_char>
         </pattern>
         <!--Исполнение Автоплатежа "ТВ" прошло успешно. Ваш счет на сумму 185 руб. с карты ECMC7471 оплачен. Комиссия составила 0.00 руб. Дата следующего платежа 19.01.18-->
         <pattern category="payment">
