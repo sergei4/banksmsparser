@@ -159,7 +159,7 @@
         <phone bankId="sbsibank">SBSIBANK.BY</phone>
         <!--Начиная с v2-->
         <service_phone bankId="fakebank">+16505556789,6505551212</service_phone>
-        <service_phone bankId="tinkoff">Tinkoff,tinkoff</service_phone>
+        <service_phone bankId="tinkoff">Tinkoff,tinkoff,T-Bank,Ваш Тинькофф,+79954763060</service_phone>
         <service_phone bankId="sberbank">900,+79262000900,+79165723900,+79219039831,SBERBANK</service_phone>
         <service_phone bankId="alfabank">+79037672265,2265,Alfa-Bank</service_phone>
         <service_phone bankId="vtb24">+00004,+79104353500,5211,VTB24,BankVTB,VTB</service_phone>
