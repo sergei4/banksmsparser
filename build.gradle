@@ -5,10 +5,9 @@ version '1.4.0'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
-apply plugin: 'org.hidetake.ssh'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
@@ -17,6 +16,8 @@ repositories {
 dependencies {
     testImplementation ("junit:junit:4.13.1")
 }
+
+apply plugin: 'org.hidetake.ssh'
 
 buildscript {
     repositories {
