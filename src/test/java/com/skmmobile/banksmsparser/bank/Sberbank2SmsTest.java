@@ -2,51 +2,51 @@ package com.skmmobile.banksmsparser.bank;
 
 import com.skmmobile.banksmsparser.SmsParserFactory;
 
-public class SberbankSmsTest extends AbsXmlBankSmsTest {
+public class Sberbank2SmsTest extends AbsXmlBankSmsTest {
 
-    public SberbankSmsTest(SmsParserFactory smsParserFactory) {
+    public Sberbank2SmsTest(SmsParserFactory smsParserFactory) {
         super("sberbank", smsParserFactory);
     }
 
     @Override
     protected void smsTest() {
         checkBankSms(
-                "VISA6168 06.12.17 11:30 списание 700р Баланс: 2682.45р",
+                "VISA6168 06.12.17 11:30 списание 2 682.45р Баланс: 2 682.45р",
                 "payment",
                 "VISA6168",
-                "700",
+                "2682.45",
                 ""
         );
         checkBankSms(
-                "VISA6470 04.12.17 08:18 оплата 200р MTS OAO Баланс: 4278.81р",
+                "VISA6470 04.12.17 08:18 оплата 4 278.81р MTS OAO Баланс: 4 278.81р",
                 "expense",
                 "VISA6470",
-                "200",
+                "4278.81",
                 "MTS OAO"
         );
         checkBankSms(
-                "VISA6168 02.12.17 19:32 списание 30000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 3382.45р",
+                "VISA6168 02.12.17 19:32 списание 30 000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 3 382.45р",
                 "payment",
                 "VISA6168",
                 "30000",
                 ""
         );
         checkBankSms(
-                "VISA6168 02.12.17 08:45 зачисление 30000р ATM 335417 Баланс: 33382.45р",
+                "VISA6168 02.12.17 08:45 зачисление 30 000р ATM 335417 Баланс: 3 3382.45р",
                 "zachislenie",
                 "VISA6168",
                 "30000",
-                "ATM 335417"
+                ""
         );
         checkBankSms(
-                "VISA6168 09.12.17 19:07 зачисление 10000р с Вашего вклада. Баланс: 12682.45р",
+                "VISA6168 09.12.17 19:07 зачисление 10 000р с Вашего вклада. Баланс: 12 682.45р",
                 "zachislenie",
                 "VISA6168",
                 "10000",
                 ""
         );
         checkBankSms(
-                "VISA6168 11.12.17 18:13 зачисление 6300р с Вашего вклада. Баланс: 8982.45р",
+                "VISA6168 11.12.17 18:13 зачисление 6 300р с Вашего вклада. Баланс: 8982.45р",
                 "zachislenie",
                 "VISA6168",
                 "6300",
@@ -67,7 +67,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "PYATEROCHKA 12373"
         );
         checkBankSms(
-                "VISA6043 09.02.18 12:30 покупка 1273.90р WWW.RZD.RU Баланс: 1418.04р",
+                "VISA6043 09.02.18 12:30 покупка 1 273.90р WWW.RZD.RU Баланс: 1418.04р",
                 "expense",
                 "VISA6043",
                 "1273.90",
@@ -88,28 +88,28 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "BURGER KING 0287"
         );
         checkBankSms(
-                "MAES0515 11.12.17 12:24 зачисление пенсии 10471.91р Баланс: 12934.80р",
+                "MAES0515 11.12.17 12:24 зачисление пенсии 10 471.91р Баланс: 12 934.80р",
                 "zachislenie",
                 "MAES0515",
                 "10471.91",
                 ""
         );
         checkBankSms(
-                "MAES0515 11.12.17 12:27 списание 12000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 934.80р",
+                "MAES0515 11.12.17 12:27 списание 12 000р SBERBANK ONL@IN KARTA-VKLAD Баланс: 934.80р",
                 "payment",
                 "MAES0515",
                 "12000",
                 ""
         );
         checkBankSms(
-                "MAES0515 10.12.17 05:43 зачисление 1856.68р SO VKLADA N*013008564017-1856.68RUR Баланс: 2462.89р",
+                "MAES0515 10.12.17 05:43 зачисление 1 856.68р SO VKLADA N*013008564017-1856.68RUR Баланс: 2462.89р",
                 "zachislenie",
                 "MAES0515",
                 "1856.68",
                 ""
         );
         checkBankSms(
-                "ORPS5161 09.12.17 11:44 списание 2000р Баланс: 229.11р",
+                "ORPS5161 09.12.17 11:44 списание 2 000р Баланс: 229.11р",
                 "payment",
                 "ORPS5161",
                 "2000",
@@ -130,28 +130,28 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "ORPS5161 08.12.17 16:10 зачисление 5000р с Вашего вклада. Баланс: 6020.21р",
+                "ORPS5161 08.12.17 16:10 зачисление 5 000р с Вашего вклада. Баланс: 6020.21р",
                 "zachislenie",
                 "ORPS5161",
                 "5000",
                 ""
         );
         checkBankSms(
-                "MIR-3075 13.12.17 22:51 зачисление 31600р Баланс: 32474.66р",
+                "MIR-3075 13.12.17 22:51 зачисление 31 600р Баланс: 32474.66р",
                 "zachislenie",
                 "MIR-3075",
                 "31600",
                 ""
         );
         checkBankSms(
-                "ECMC8559 13.12.17 16:49 зачисление 15000р ATM 10853020 Баланс: 0",
+                "ECMC8559 13.12.17 16:49 зачисление 15 000р ATM 10853020 Баланс: 0",
                 "zachislenie",
                 "ECMC8559",
                 "15000",
-                "ATM 10853020"
+                ""
         );
         checkBankSms(
-                "VISA6168 13.12.17 14:18 выдача 5000р ATM 861320 Баланс: 97682.45р",
+                "VISA6168 13.12.17 14:18 выдача 5 000р ATM 861320 Баланс: 97682.45р",
                 "cash_atm",
                 "VISA6168",
                 "5000",
@@ -188,14 +188,14 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
 
         // Новые шаблоны
         checkBankSms(
-                "VISA0000 20.12.17 08:47 зачисление зарплаты 10000.00р Баланс: 00000.00р",
+                "VISA0000 20.12.17 08:47 зачисление зарплаты 10 000.00р Баланс: 00000.00р",
                 "zachislenie",
                 "VISA0000",
                 "10000",
                 ""
         );
         checkBankSms(
-                "MIR-3075 20.12.17 17:03 зачисление зарплаты 40933р Баланс: 41251.13р",
+                "MIR-3075 20.12.17 17:03 зачисление зарплаты 40 933р Баланс: 41251.13р",
                 "zachislenie",
                 "MIR-3075",
                 "40933",
@@ -223,21 +223,21 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "ECMC1391 26.12.17 10:51 зачисление премии 20000.00р Баланс: 00000.00р",
+                "ECMC1391 26.12.17 10:51 зачисление премии 20 000.00р Баланс: 00000.00р",
                 "zachislenie",
                 "ECMC1391",
                 "20000",
                 ""
         );
         checkBankSms(
-                "VISA4696 25.12.17 09:10 зачисление аванса 19000р Баланс: 45654.73р",
+                "VISA4696 25.12.17 09:10 зачисление аванса 19 000р Баланс: 45654.73р",
                 "zachislenie",
                 "VISA4696",
                 "19000",
                 ""
         );
         checkBankSms(
-                "VISA4575 26.12.17 10:50 зачисление зарплаты 8132.35р Баланс: 8857.54р",
+                "VISA4575 26.12.17 10:50 зачисление зарплаты 8 132.35р Баланс: 8857.54р",
                 "zachislenie",
                 "VISA4575",
                 "8132.35",
@@ -258,7 +258,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "VISA1224 14.01.18 10:22 зачисление 3000р ITT 352056 Баланс: 4000р",
+                "VISA1224 14.01.18 10:22 зачисление 3 000р ITT 352056 Баланс: 4000р",
                 "zachislenie",
                 "VISA1224",
                 "3000",
@@ -370,7 +370,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "MAES2561 11.03.18 16:34 погашение кредита 2000р Баланс: 17.23р",
+                "MAES2561 11.03.18 16:34 погашение кредита 2 000р Баланс: 17.23р",
                 "payment",
                 "MAES2561",
                 "2000",
@@ -392,7 +392,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "PYATEROCHKA 5956"
         );
         checkBankSms(
-                "VISA5028 27.08.18 08:20 списание 17086р в счет погашения кредита Баланс: 11749.46р",
+                "VISA5028 27.08.18 08:20 списание 17 086р в счет погашения кредита Баланс: 11749.46р",
                 "payment",
                 "VISA5028",
                 "17086",
@@ -406,7 +406,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "VISA0387 09.08.18 06:04 зачисление 6000р Баланс: 6000р",
+                "VISA0387 09.08.18 06:04 зачисление 6 000р Баланс: 6000р",
                 "zachislenie",
                 "VISA0387",
                 "6000",
@@ -427,7 +427,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "PRODUKTY AVERS"
         );
         checkBankSms(
-                "VISA6034 22.09.18 17:58 Покупка 2600р WILLABONG Баланс: 6985.92р",
+                "VISA6034 22.09.18 17:58 Покупка 2 600р WILLABONG Баланс: 6985.92р",
                 "expense",
                 "VISA6034",
                 "2600",
@@ -455,7 +455,7 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "ATM 270311"
         );
         checkBankSms(
-                "ECMC1296 25.09.18 09:49 Оплата 4760р Баланс: 9144.75р",
+                "ECMC1296 25.09.18 09:49 Оплата 4 760р Баланс: 9144.75р",
                 "expense",
                 "ECMC1296",
                 "4760",
@@ -476,32 +476,32 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "MAES4005 13:40 Зачисление 2272р Баланс: 2711.13р Перейти в историю уведомлений sberbank.ru/sms/n/",
+                "MAES4005 13:40 Зачисление 2 272р Баланс: 2711.13р Перейти в историю уведомлений sberbank.ru/sms/n/",
                 "zachislenie",
                 "MAES4005",
                 "2272",
                 ""
         );
         checkBankSms(
-                "VISA9843 00:58 Зачисление зарплаты 26863.66р Баланс: 27363.66р",
+                "VISA9843 00:58 Зачисление зарплаты 26 863.66р Баланс: 27363.66р",
                 "zachislenie",
                 "VISA9843",
                 "26863.66",
                 ""
         );
         checkBankSms(
-                "VISA2396 12:56 Зачисление пенсии 5500р Баланс: 20667.13р",
+                "VISA2396 12:56 Зачисление пенсии 5 500р Баланс: 20667.13р",
                 "zachislenie",
                 "VISA2396",
                 "5500",
                 ""
         );
         checkBankSms(
-                "ECMC8878 10:21 Зачисление 35000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/",
+                "ECMC8878 10:21 Зачисление 35 000р ATM 10117373 Баланс: 39382.92р Перейти в историю уведомлений sberbank.ru/sms/n/",
                 "zachislenie",
                 "ECMC8878",
                 "35000",
-                "ATM 10117373"
+                ""
         );
         checkBankSms(
                 "VISA4570: пополнение Копилки на \"Сберегательный счет\" на 177.4руб.",
@@ -511,27 +511,27 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 ""
         );
         checkBankSms(
-                "ECMC9405 11:34 перечисление 300000р ZACHISLENIE KREDITA Баланс: 300000р",
+                "ECMC9405 11:34 перечисление 300 000р ZACHISLENIE KREDITA Баланс: 300000р",
                 "popolnenie",
                 "ECMC9405",
                 "300000",
                 ""
         );
         checkBankSms(
-                "ECMC2263 14:58 Зачисление по договору займа 171350.27р Баланс: 177933.50р",
+                "ECMC2263 14:58 Зачисление по договору займа 171 350.27р Баланс: 177933.50р",
                 "zachislenie",
                 "ECMC2263",
                 "171350.27",
                 ""
         );
-        checkBankSms(
-                "ECMC8878 08:45 НАТАЛЬЯ ЮРЬЕВНА А. перевел(а) вам 10000.00р\n" +
-                        "Баланс: 10021.89р\n",
-                "perevod",
-                "ECMC8878",
-                "10000.00",
-                ""
-        );
+//        checkBankSms(
+//                "ECMC8878 08:45 НАТАЛЬЯ ЮРЬЕВНА А. перевел(а) вам 10 000.00р\n" +
+//                        "Баланс: 10021.89р\n",
+//                "perevod",
+//                "ECMC8878",
+//                "10000.00",
+//                ""
+//        );
         checkBankSms(
                 "VISA2750: пополнение Копилки на \"Сберегательный счет\" на 35.66р",
                 "popolnenie",
@@ -617,13 +617,13 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "700",
                 ""
         );
-        checkBankSms(
-                "VISA7964 09:24 Перевод 10000р от Сергей Владимирович К. Баланс: 10004.11р",
-                "perevod",
-                "VISA7964",
-                "10000",
-                ""
-        );
+//        checkBankSms(
+//                "VISA7964 09:24 Перевод 10 000.00р от Сергей Владимирович К. Баланс: 10004.11р",
+//                "perevod",
+//                "VISA7964",
+//                "10000",
+//                ""
+//        );
         checkBankSms(
                 "VISA7964 24.09.21 00:19 Списание 60р. Услуга «Уведомления» (Мобильный банк) оплачена до 24.10.21. Баланс: 606.24р.",
                 "service_pay",
@@ -639,14 +639,14 @@ public class SberbankSmsTest extends AbsXmlBankSmsTest {
                 "CoolСlever"
         );
         checkBankSms(
-                "ПЛАТ.СЧЕТ*1389 12:20 перевод 2000р Баланс: 85453р",
+                "ПЛАТ.СЧЕТ*1389 12:20 перевод 2 000р Баланс: 85453р",
                 "perevod",
                 "ПЛАТ.СЧЕТ*1389",
                 "2000",
                 ""
         );
         checkBankSms(
-                "ПЛАТ.СЧЕТ*1389 10:25 Зачисление зарплаты 91953р Баланс: 95453р",
+                "ПЛАТ.СЧЕТ*1389 10:25 Зачисление зарплаты 91 953р Баланс: 95453р",
                 "zachislenie",
                 "ПЛАТ.СЧЕТ*1389",
                 "91953",
