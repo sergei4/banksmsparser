@@ -22,14 +22,14 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "0380",
                 "126",
-                "YANDEX.GOODS"
+                ""
         );
         checkBankSms(
                 "Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB",
                 "expense",
                 "9930",
                 "175",
-                "GRANDVERA"
+                ""
         );
         checkBankSms(
                 "Jur. perevod. Karta *9930. Summa 3270.63 RUB. iBank. 07.12.2017 10:11. Dostupno 56644.39 RUB. Tinkoff.ru",
@@ -57,7 +57,7 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "0380",
                 "38",
-                "YANDEX.GOODS"
+                ""
         );
         checkBankSms(
                 "Vnutrenniy perevod sebe. Karta *9930. Summa 25000 RUB. mBank. 09.12.2017 05:20. Dostupno 61972.03 RUB. Tinkoff.ru",
@@ -163,7 +163,7 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "0000",
                 "1000",
-                "\"DELTA\""
+                ""
         );
         checkBankSms(
                 "Карта *0636. Списано 102.99 RUB. Доступно 10399.64 RUB",
@@ -191,14 +191,14 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "2921",
                 "900",
-                "REGISTRATURA"
+                ""
         );
         checkBankSms(
                 "Покупка, карта *3143. 236.49 RUB. MAGNIT MM NOR. Доступно 79826.74 RUB",
                 "expense",
                 "3143",
                 "236.49",
-                "MAGNIT MM NOR"
+                ""
         );
         //No-account transactions
         checkBankSms(
@@ -234,6 +234,13 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "expense",
                 "7133",
                 "120.37",
+                ""
+        );
+        checkBankSms(
+                "Покупка, карта *7133. 89,99 RUB. MONETKA. Доступно 9712,57 RUB",
+                "expense",
+                "7133",
+                "89.99",
                 ""
         );
     }

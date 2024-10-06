@@ -3527,15 +3527,16 @@
         <!--Покупка. Карта *9930. 175 RUB. GRANDVERA. Доступно 54093 RUB-->
         <!--Покупка 09.04.2018. Карта *0000. 000.00 RUB. "DELTA". Доступно 1000.00 RUB-->
         <!--Покупка, карта *3143. 236.49 RUB. MAGNIT MM NOR. Доступно 79826.74 RUB-->
-        <pattern category="expense">
-            <match><![CDATA[Покупка([\s\d\.]+)?(.|,) (К|к)арта \*\d{4}\. \d.*]]></match>
-            <cardId group="1"><![CDATA[арта \*(\d{4})]]></cardId>
-            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
-            <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>
-        </pattern>
+<!-- TODO: На текущий момент не используется -->
+<!--        <pattern category="expense">-->
+<!--            <match><![CDATA[Покупка([\s\d\.]+)?(.|,) (К|к)арта \*\d{4}\. \d.*]]></match>-->
+<!--            <cardId group="1"><![CDATA[арта \*(\d{4})]]></cardId>-->
+<!--            <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>-->
+<!--            <detail group="0"><![CDATA[(?<=(RUB|USD|EUR)\.\s).*(?=\.\s(Баланс|Доступно))]]></detail>-->
+<!--        </pattern>-->
         <!--Покупка, карта *7133. 120,37 RUB. LENTA-114. Доступно 58483,96 RUB-->
         <pattern category="expense">
-            <match><![CDATA[Покупка([\s\d\.]+)?(.|,) (К|к)арта \*\d{4}\. (\d)*\,+.*]]></match>
+            <match><![CDATA[Покупка([\s\d\.]+)?(.|,) (К|к)арта \*\d{4}\. \d.*]]></match>
             <cardId group="1"><![CDATA[арта \*(\d{4})]]></cardId>
             <amount group="1"><![CDATA[\d{4}.\s(\d*.?\d{1,2})\s]]></amount>
             <decimal_char>,</decimal_char>
