@@ -37,7 +37,7 @@ remotes {
     webServer {
         host = props."upload.host"
         user = props."upload.usr"
-        password = props."upload.pwd"
+        identity = file(props."upload.id_file")
     }
 }
 

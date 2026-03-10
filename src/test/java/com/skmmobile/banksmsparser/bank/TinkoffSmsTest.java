@@ -243,5 +243,17 @@ public class TinkoffSmsTest extends AbsXmlBankSmsTest {
                 "89.99",
                 ""
         );
+        checkBankSms(
+                "Покупка, счет карты *7090. 381,77 ₽. PYATEROCHK. Доступно 4931,79 ₽",
+                "expense",
+                "7090",
+                "381.77"
+        );
+        checkBankSms(
+                "Покупка, счет карты *7133. 59,99 ₽. YARCHE. Доступно 4768,59 ₽",
+                "expense",
+                "7133",
+                "59.99"
+        );
     }
 }
